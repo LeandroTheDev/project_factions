@@ -1,0 +1,18 @@
+UI_PTBR = {
+	UI_Text_LabelFaction = "Facção: "
+	UI_Text_SafehouseClaim = "Conquistar"
+	UI_Text_SafehouseCapture = "Capturar"
+	UI_Text_SafehouseView = "Olhar"
+	UI_Text_SafehouseEmpty = "Safehouse Vazia"
+	UI_Text_SafehouseNotALeader = "Você não é o lider da facção"
+	UI_Text_SafehousePointsAvailable = "Conquistar custará %1 ponto (Disponivel: %2)"
+	UI_Text_SafehouseNotEnoughPoints = "Precisa de mais pontos para conquistar (Disponivel: %1 / %2)"
+	UI_Text_SafehouseNameTooLongShort = "Titulo da Safehouse precisa ter 3-30 caracteres."
+	UI_Text_SafehouseUnderAttack = "<RED> [ALERTA] Safehouse '%1' sob ataque!"
+	UI_Text_SafehouseIsBeingCaptured = "<RED> [ALERTA] Safehouse '%1' capturando!"
+	UI_Text_SafehouseWasLost = "<RED> [INFO] Safehouse '%1' foi capturada pelo inimigo!"
+	UI_Text_SafehouseWasCaptured = "<RED> [INFO] Safehouse capturada '%1' com sucesso!"
+	UI_Text_SafehouseNotTimeCapture = "Não está na hora ainda"
+	UI_Text_SafehouseCapturing = "Capturando..."
+	UI_Text_SafehouseProgress = "Captura em progresso"
+}
