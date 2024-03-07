@@ -1,0 +1,21 @@
+Sandbox_EN = {
+    Sandbox_FactionsEconomy = "Factions Economy",
+    Sandbox_FactionsEconomy_PointsFrequency = "Frequency Points",
+
+    Sandbox_PointsFrequency = "Award Frequency",
+    Sandbox_PointsFrequency_option1 = "Disabled",
+    Sandbox_PointsFrequency_option2 = "Every Ten Minutes",
+    Sandbox_PointsFrequency_option3 = "Every Hour",
+    Sandbox_PointsFrequency_option4 = "Every Day",
+
+    Sandbox_FactionsEconomy_PointsPerTick = "Points Per Tick",
+
+    Sandbox_LootBox = "Loot Box",
+    Sandbox_LootBox_itemTable0   = "Items in the Loot Box(Ammo)",
+	Sandbox_LootBox_itemTable1   = "Items in the Loot Box(Clothes)",
+	Sandbox_LootBox_itemTable2   = "Items in the Loot Box(Melee)",
+	Sandbox_LootBox_itemTable3   = "Items in the Loot Box(Weapon)",
+	Sandbox_LootBox_itemTable4   = "Items in the Loot Box(Attachment)",
+	Sandbox_LootBox_itemTable5   = "Items in the Loot Box(Clip)",
+    Sandbox_LootBox_itemTable6   = "Items in the Loot Box(Special Weapon)",
+}

@@ -1,0 +1,72 @@
+VERSION = 1,
+
+option FactionsEconomy.PointsFrequency
+{
+    type = enum,
+    numValues = 4,
+    default = 3,
+
+    page = FactionsEconomy,
+    translation = FactionsEconomy_PointsFrequency
+}
+
+option FactionsEconomy.PointsPerTick
+{
+    type = integer,
+    min = 0,
+    max = 2147483647,
+    default = 10,
+
+    page = FactionsEconomy,
+    translation = FactionsEconomy_PointsPerTick,
+}
+
+option FactionsEconomy.itemTable0
+{
+	type = string,
+    default = Base.Baseball/1/Base.Shovel/1,
+	page = LootBox,
+    translation = LootBox_itemTable0,
+}
+option FactionsEconomy.itemTable1
+{
+	type = string,
+    default = Base.Baseball/1/Base.Shovel/1,
+	page = LootBox,
+    translation = LootBox_itemTable1,
+}
+option FactionsEconomy.itemTable2
+{
+	type = string,
+    default = Base.Baseball/1/Base.Shovel/1,
+	page = LootBox,
+    translation = LootBox_itemTable2,
+}
+option FactionsEconomy.itemTable3
+{
+	type = string,
+    default = Base.Baseball/1/Base.Shovel/1,
+	page = LootBox,
+    translation = LootBox_itemTable3,
+}
+option FactionsEconomy.itemTable4
+{
+	type = string,
+    default = Base.Baseball/1/Base.Shovel/1,
+	page = LootBox,
+    translation = LootBox_itemTable4,
+}
+option FactionsEconomy.itemTable5
+{
+	type = string,
+    default = Base.Baseball/1/Base.Shovel/1,
+	page = LootBox,
+    translation = LootBox_itemTable5,
+}
+option FactionsEconomy.itemTable6
+{
+	type = string,
+    default = Base.Baseball/1/Base.Shovel/1,
+	page = LootBox,
+    translation = LootBox_itemTable6,
+}

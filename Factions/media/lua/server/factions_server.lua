@@ -14,61 +14,20 @@ factions.End = 21
 factions.Days = {};
 factions.ResetData = false;
 
--- Simple read the FactionsSettings file
+-- Simple read the Sandbox options
 factions.readOptions = function()
-	local reader = getFileReader("FactionsSettings.ini", false);
-	if reader then
-		local n = 1;
-		local line = reader:readLine();
-		while line do
-			local option = line:trim():ssplit('=');
-			if option[1] == "TimeToEnableCapture" then
-				local status, value = pcall(tonumber, option[2]);
-				if status and value then
-					factions.Start = value;
-				end
-			elseif option[1] == "TimeToDisableCapture" then
-				local status, value = pcall(tonumber, option[2]);
-				if status and value then
-					factions.End = value;
-				end
-			elseif option[1] == "DaysOfWeek" then
-				FW.Days = {};
-				local days = option[2]:ssplit(',');
-				for i = 1, #days do
-					local status, value = pcall(tonumber, days[i]);
-					if status and value then
-						value = math.floor(value);
-						if value == 7 then value = 0 end
-						if value > -1 and value < 7 then
-							table.insert(factions.Days, value);
-						end
-					end
-				end
-			elseif option[1] == "Timezone" then
-				local status, value = pcall(tonumber, option[2]);
-				if status and value then
-					factions.Timezone = value;
-				end
-			end
-			line = reader:readLine();
-			n = n + 1;
-		end
-		return true;
+	factions.Start = SandboxVars.Factions.TimeToEnableCapture;
+	factions.End = SandboxVars.Factions.TimeToDisableCapture;
+	factions.Timezone = SandboxVars.Factions.Timezone;
+	local stringDays = SandboxVars.Factions.DaysOfWeek;
+	-- Swipe the days into a variable
+	for day in string.gmatch(stringDays, "%d+") do
+		-- Get the day number
+		local dayNumber = tonumber(day);
+		table.insert(factions.Days, dayNumber);
 	end
-end
 
--- Initializes the factions functions
-factions.init = function()
-	if factions.readOptions() then
-		local writer = getFileWriter("FactionsSettings.ini", false, false);
-		writer:write("TimeToEnableCapture=20\r\n");
-		writer:write("TimeToDisableCapture=21\r\n");
-		writer:write("DaysOfWeek=1,2,3,4,5,6,7\r\n");
-		writer:write("Timezone=false\r\n");
-		writer:close();
-		print("[Factions] NO CONFIG FOUND! Created new file, consider restarting the server after changed the CONFIGS");
-	end
+	print("[Factions] Fully Started")
 end
 
 -- Returns a boolean based on the parameter actualDay and enabled Days from factions
@@ -317,22 +276,29 @@ Events.OnClientCommand.Add(function(module, command, player, args)
 	end
 end)
 
-Events.EveryTenMinutes.Add(function()
-	if factions.checkIfCaptureIsEnabled() then
-		getSandboxOptions():set("ConstructionBonusPoints", 2)
-		local players = getOnlinePlayers()
-		-- Update sandbox to all players
-		for i = players:size() - 1, 0, -1 do
-			local player = players:get(i);
-			sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 2 });
+-- Increase building life while not in capture
+if SandboxVars.Factions.IncreaseConstructionLife then
+	Events.EveryTenMinutes.Add(function()
+		if factions.checkIfCaptureIsEnabled() then
+			getSandboxOptions():set("ConstructionBonusPoints", 2)
+			local players = getOnlinePlayers()
+			-- Update sandbox to all players
+			for i = players:size() - 1, 0, -1 do
+				local player = players:get(i);
+				sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 2 });
+			end
+		else
+			getSandboxOptions():set("ConstructionBonusPoints", 5)
+			local players = getOnlinePlayers()
+			-- Update sandbox to all players
+			for i = players:size() - 1, 0, -1 do
+				local player = players:get(i);
+				sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 5 });
+			end
 		end
-	else
-		getSandboxOptions():set("ConstructionBonusPoints", 5)
-		local players = getOnlinePlayers()
-		-- Update sandbox to all players
-		for i = players:size() - 1, 0, -1 do
-			local player = players:get(i);
-			sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 5 });
-		end
-	end
-end)
+	end)
+end
+
+-- Read Options on start
+Events.OnGameStart.Add(factions.readOptions()); -- Singleplayer
+Events.OnServerStarted.Add(factions.readOptions()); -- Multiplayer

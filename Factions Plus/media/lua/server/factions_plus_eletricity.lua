@@ -29,7 +29,7 @@ if SandboxVars.FactionsPlus.EnableWaterLightCycle then
 				printerHandler = "on";
 			end
 		end
-		local stringDays = FactionsPlus.WaterLightCycle;
+		local stringDays = SandboxVars.FactionsPlus.WaterLightCycle;
 		-- Swipe the days into a variable
 		for day in string.gmatch(stringDays, "%d+") do
 			-- Get the day number

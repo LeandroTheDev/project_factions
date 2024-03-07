@@ -1,0 +1,15 @@
+Recipe_EN = {
+	Recipe_Open_LootBoxAmmo = "Open Loot Box(Ammo)",
+	Recipe_Open_LootBoxClothes  = "Open Loot Box(Clothes)",
+	Recipe_Open_LootBoxMelee = "Open Loot Box(Bladed Weapon)",
+	Recipe_Open_LootBoxWeapon = "Open Loot Box(Fire Weapon)",
+	Recipe_Open_LootBoxAttachment = "Open Loot Box(Mods)",
+	Recipe_Open_LootBoxClip = "Open Loot Box(Magazine)",
+	Recipe_Open_LootBoxSpecialWeapon = "Open Loot Box(Fire Weapon Premium)",
+
+	Recipe_Stack_Scrap_Small = "Stack to Small Valuable Scrap",
+	Recipe_Stack_Scrap_Medium = "Stack to Medium Valuable Scrap",
+	Recipe_Stack_Scrap_Large = "Stack to Large Valuable Scrap",
+	Recipe_Scrap_Munition = "Scrap Munition",
+	Recipe_Scrap_Weapon = "Scrap Weapon",
+}

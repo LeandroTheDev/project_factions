@@ -1,0 +1,13 @@
+module Base
+{
+	item TradeOutpost
+	{
+            DisplayCategory = Tool,
+            Weight	=	0.3,
+            Type	=	Normal,
+            DisplayName	=	Trade Outpost,
+            Icon	=	trade_outpost,
+            WorldStaticModel = EmptyNotebook,
+            Tooltip = Tooltip_TradeOutpost,
+	}
+}

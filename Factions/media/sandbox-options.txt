@@ -1,0 +1,49 @@
+VERSION = 1,
+
+option Factions.TimeToEnableCapture
+{
+	type = integer,
+	min = 0,
+    max = 24,
+    default = 19,
+	page = Factions,
+	translation = Factions_TimeToEnableCapture,
+}
+
+option Factions.TimeToDisableCapture
+{
+	type = integer,
+	min = 0,
+    max = 24,
+    default = 20,
+	page = Factions,
+	translation = Factions_TimeToDisableCapture,
+}
+
+option Factions.DaysOfWeek
+{
+	type = string,
+	default = 0/3/6,
+	page = Factions,
+	translation = Factions_DaysOfWeek,
+}
+
+option Factions.Timezone
+{
+    type = integer,
+    min = -24,
+    max = 24,
+    default = 3,
+
+    page = Factions,
+    translation = Factions_Timezone,
+}
+
+option Factions.IncreaseConstructionLife
+{
+    type = boolean,
+    default = true,
+
+    page = Factions,
+    translation = Factions_IncreaseConstructionLife,
+}

@@ -5,7 +5,7 @@ module Base
                 Weight	=	0.1,
                 Type	=	Normal,
                 DisplayName	=	Upgrade Safehouse,
-                Icon	=	UpgradeSafehouse,
+                Icon	=	upgrade_safehouse,
                 WorldStaticModel = Money,
 	}
 	recipe Upgrade Safehouse {

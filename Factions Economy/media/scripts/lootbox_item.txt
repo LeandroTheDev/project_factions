@@ -1,0 +1,171 @@
+module Base
+{
+	model LootBoxAmmoModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/lootbox_ammo_model,
+		scale = 0.5,
+	}
+	model LootBoxClothesModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/lootbox_clothes_model,
+		scale = 0.5,
+	}
+	model LootBoxMeleeModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/lootbox_melee_model,
+		scale = 0.5,
+	}
+	model LootBoxWeaponModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/lootbox_weapon_model,
+		scale = 0.5,
+	}
+	model LootBoxAttachmentModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/lootbox_attachment_model,
+		scale = 0.5,
+	}
+	model LootBoxClipModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/lootbox_clip_model,
+		scale = 0.5,
+	}
+	model LootBoxSpecialWeaponModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/lootbox_special_weapon_model,
+		scale = 0.5,
+	}
+	item LootBoxAmmo
+    {
+		DisplayName = Loot Box Ammo,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = lootbox_ammo,
+        WorldStaticModel = Base.LootBoxAmmoModel,
+    }
+	item LootBoxClothes
+    {
+		DisplayName = Loot Box Clothes,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = lootbox_clothes,
+        WorldStaticModel = Base.LootBoxClothesModel,
+    }
+    item LootBoxMelee
+    {
+		DisplayName = Loot Box Melee,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = lootbox_melee,
+        WorldStaticModel = Base.LootBoxMeleeModel,
+    }
+	item LootBoxWeapon
+	{
+		DisplayName = Loot Box Weapon,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = lootbox_weapon,
+        WorldStaticModel = Base.LootBoxWeaponModel,
+    }
+	item LootBoxAttachment
+    {
+		DisplayName = Loot Box Attachment,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = lootbox_attachment,
+        WorldStaticModel = Base.LootBoxAttachmentModel,
+    }
+	item LootBoxClip
+	{
+		DisplayName = Loot Box Clip,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = lootbox_clip,
+        WorldStaticModel = Base.LootBoxClipModel,
+    }
+	item LootBoxSpecialWeapon
+	{
+		DisplayName = Loot Box Special Weapon,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = lootbox_special_weapon,
+        WorldStaticModel = Base.LootBoxSpecialWeaponModel,
+    }
+	recipe Open LootBoxAmmo
+	{
+		Base.LootBoxAmmo,
+		Result : Base.LootBoxAmmo,
+		RemoveResultItem:true,
+		Time: 100,
+		OnCreate: LootBoxAmmoOpen,
+		Sound:PutItemInBag,
+	}
+    recipe Open LootBoxClothes
+	{
+		Base.LootBoxClothes,
+		Result : Base.LootBoxClothes,
+		RemoveResultItem:true,
+		Time: 100,
+		OnCreate: LootBoxClothesOpen,
+		Sound:PutItemInBag,
+	}
+	recipe Open LootBoxMelee
+	{
+		Base.LootBoxMelee,
+		Result : Base.LootBoxMelee,
+		RemoveResultItem:true,
+		Time: 100,
+		OnCreate: LootBoxMeleeOpen,
+		Sound:PutItemInBag,
+	}
+	recipe Open LootBoxWeapon
+	{
+		Base.LootBoxWeapon,
+		Result : Base.LootBoxWeapon,
+		RemoveResultItem:true,
+		Time: 100,
+		OnCreate: LootBoxWeaponOpen,
+		Sound:PutItemInBag,
+	}
+	recipe Open LootBoxAttachment
+	{
+		Base.LootBoxAttachment,
+		Result : Base.LootBoxAttachment,
+		RemoveResultItem:true,
+		Time: 100,
+		OnCreate: LootBoxAttachmentOpen,
+		Sound:PutItemInBag,
+	}
+	recipe Open LootBoxClip
+	{
+		Base.LootBoxClip,
+		Result : Base.LootBoxClip,
+		RemoveResultItem:true,
+		Time: 100,
+		OnCreate: LootBoxClipOpen,
+		Sound:PutItemInBag,
+	}
+	recipe Open LootBoxSpecialWeapon
+	{
+		Base.LootBoxSpecialWeapon,
+		Result : Base.LootBoxSpecialWeapon,
+		RemoveResultItem:true,
+		Time: 100,
+		OnCreate: LootBoxSpecialWeaponOpen,
+		Sound:PutItemInBag,
+	}
+}
