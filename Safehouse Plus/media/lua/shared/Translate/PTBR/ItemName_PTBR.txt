@@ -1,0 +1,3 @@
+ItemName_PTBR = {
+	ItemName_Base.UpgradeSafehouse = "Melhoria de Safehouse",
+}

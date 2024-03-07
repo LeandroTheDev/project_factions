@@ -1,0 +1,52 @@
+VERSION = 1,
+
+option FactionsPlus.EnableFarmSpeed
+{
+	type = boolean,
+	default = true,
+	page = FactionsPlus,
+	translation = FactionsPlus_EnableFarmSpeed,
+}
+
+option FactionsPlus.EnableReduceSeedDrop
+{
+	type = boolean,
+	default = true,
+	page = FactionsPlus,
+	translation = FactionsPlus_EnableReduceSeedDrop,
+}
+
+option FactionsPlus.EnableReduceWaterNeed
+{
+	type = boolean,
+	default = true,
+	page = FactionsPlus,
+	translation = FactionsPlus_EnableReduceWaterNeed,
+}
+
+option FactionsPlus.EnableWaterLightCycle
+{
+	type = boolean,
+	default = true,
+	page = FactionsPlus,
+	translation = FactionsPlus_EnableWaterLightCycle,
+}
+
+option FactionsPlus.WaterLightCycle
+{
+	type = string,
+	default = 0/3/6,
+	page = FactionsPlus,
+	translation = FactionsPlus_WaterLightCycle,
+}
+
+option FactionsPlus.Timezone
+{
+    type = integer,
+    min = -24,
+    max = 24,
+    default = 3,
+
+    page = FactionsPlus,
+    translation = FactionsPlus_Timezone,
+}

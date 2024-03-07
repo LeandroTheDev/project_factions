@@ -1,0 +1,23 @@
+module Base
+{       
+        item UpgradeSafehouse {
+                DisplayCategory = Junk,
+                Weight	=	0.1,
+                Type	=	Normal,
+                DisplayName	=	Upgrade Safehouse,
+                Icon	=	UpgradeSafehouse,
+                WorldStaticModel = Money,
+	}
+	recipe Upgrade Safehouse {
+                UpgradeSafehouse,
+
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:UpgradeSafehouse=1,
+                RemoveResultItem:true,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                SafehousePlus:AddUpgrade,
+        }
+}

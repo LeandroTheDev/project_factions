@@ -1,0 +1,985 @@
+module Base
+{
+        item FacMoney {
+                DisplayCategory = Junk,
+                Weight	=	0.0,
+                Type	=	Normal,
+                DisplayName	=	Trade Coin,
+                Icon	=	FacMoney,
+                WorldStaticModel = Money,
+        }
+	recipe Return Coin {
+                FacMoney,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:Money=1,
+                RemoveResultItem:true,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveMoney,
+        }
+
+	item ScrapMoney {
+                DisplayCategory = Junk,
+                Weight	=	0.1,
+                Type	=	Normal,
+                DisplayName	=	Scrap Money,
+                Icon	=	ScrapMoney,
+                WorldStaticModel = Money,
+	}
+
+	item ScrapStack1 {
+                DisplayCategory = Junk,
+                Weight	=	0.5,
+                Type	=	Normal,
+                DisplayName	=	Small Scrap Stack,
+                Icon	=	ScrapMoney,
+                WorldStaticModel = Money,
+	}
+
+	item ScrapStack2 {
+                DisplayCategory = Junk,
+                Weight	=	1.5,
+                Type	=	Normal,
+                DisplayName	=	Medium Scrap Stack,
+                Icon	=	ScrapMoney,
+                WorldStaticModel = Money,
+	}
+
+	item ScrapStack3 {
+                DisplayCategory = Junk,
+                Weight	=	3.0,
+                Type	=	Normal,
+                DisplayName	=	Large Scrap Stack,
+                Icon	=	ScrapMoney,
+                WorldStaticModel = Money,
+	}
+
+	recipe Stack Scrap Small {
+      	        ScrapMoney=10,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapStack1=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+        }
+
+	recipe Stack Scrap Medium {
+      	        ScrapStack1=10,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapStack2=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+        }
+
+	recipe Stack Scrap Large {
+      	        ScrapStack2=5,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapStack3=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+        }
+
+	recipe Scrap Munition {
+                762Clip,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                762Box,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                22Box,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                223Clip20,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                308Clip,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                45Clip12,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                45Clip32,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                9mmClip20,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                9mmClip13,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                9mmClip16,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                9mmClip17,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                9mmClip30,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                FALClip,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                M14Clip,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                44Clip,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                556Clip,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                45Clip,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                9mmClip,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                22ClipRifle,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                223Box,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                308Box,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                Bullets38Box,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                Bullets44Box,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                Bullets45Box,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                556Box,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                Bullets9mmBox,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Munition {
+                ShotgunShellsBox,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+	
+	recipe Scrap Weapon {
+                Shotgun,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Shotgun2,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Shotgun2Bayonet,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                ShotgunSemi,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                ShotgunSemi2,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                ShotgunSawnoff,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                ShotgunSawnoffNoStock,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                DoubleBarrelShotgun,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                DoubleBarrelShotgunSawnoff,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                DoubleBarrelShotgunSawnoffNoStock,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Spas12,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Spas12Folded,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                AK47Unfolded,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                AK47Folded,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                AK47,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                SKS,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                SKSSpiker,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                SKSSpikerBayonet,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                1022,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Mini14Unfolded,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Mini14Folded,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Mini14,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                FAL,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                FALClassic,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                CAR15,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                CAR15Folded,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                CAR15D,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                CAR15DFolded,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                AssaultRifle2,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                AssaultRifleM1,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                AssaultRifle,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                AssaultRifleBayonet,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                HuntingRifle,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                VarmintRifle,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                SniperRifle,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                LeverRifle,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                MP5,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                MP5SD,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                MP5Unfolded,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                MP5Folded,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                MAC10Unfolded,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                MAC10Folded,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Tec9,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Pistol,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Pistol2,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Pistol3,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Glock,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Glock18,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                P229,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                CZ75,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Revolver,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Revolver_Short,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                Revolver_Long,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+        recipe Scrap Weapon {
+                M16Bayonet,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:GiveScrapMission,
+        }
+}

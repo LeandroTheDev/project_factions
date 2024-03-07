@@ -1,0 +1,5 @@
+name=Factions Plus
+id=factionsplus
+description=Adds features to make the factions enviromnent better
+require=factions
+poster=Poster.png

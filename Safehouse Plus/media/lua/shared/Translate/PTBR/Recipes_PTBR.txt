@@ -1,0 +1,3 @@
+Recipes_PTBR = {
+	Recipe_Upgrade_Safehouse = "Melhorar Safehouse"
+}

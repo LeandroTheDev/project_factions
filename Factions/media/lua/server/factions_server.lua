@@ -84,6 +84,7 @@ factions.checkDay = function(actualDay)
 end
 
 -- Check if capture is enabled, returns true if is enabled, false for not enabled
+-- ServerSafehouseData is automatically reseted by this function
 factions.checkIfCaptureIsEnabled = function()
 	local currentTime = GetCurrentTime(factions.Timezone);
 	-- Check if is not time to capture
@@ -165,13 +166,16 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 		ServerSafehouseData["SafehouseCaptureTimer"][safehouseLocation.X .. safehouseLocation.Y] = os.time();
 		-- Alerting the players from the safehouse
 		for i = safehouseBeenCaptured:getPlayers():size() - 1, 0, -1 do
-			local safehousePlayer = safehouseBeenCaptured:getPlayers():get(i)
-			-- Alert the player that the safehouse has been lost
-			sendServerCommand(safehousePlayer, "ServerSafehouse", "alert",
-				{
-					safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
-					type = 1 -- Under Attack
-				});
+			local safehousePlayer = getPlayerByUserName(safehouseBeenCaptured:getPlayers():get(i));
+			-- Check if player is online
+			if safehousePlayer ~= nil then
+				-- Alert the player that the safehouse has been lost
+				sendServerCommand(safehousePlayer, "ServerSafehouse", "alert",
+					{
+						safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+						type = 1 -- Under Attack
+					});
+			end
 		end
 		-- Alert capturers that hes are capturing
 		local playersFaction = playerFaction:getPlayers();
@@ -199,13 +203,16 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 		ServerSafehouseData["SafehouseCaptureTimer"][safehouseLocation.X .. safehouseLocation.Y] = os.time();
 		-- Alerting the players from the safehouse
 		for i = safehouseBeenCaptured:getPlayers():size() - 1, 0, -1 do
-			local safehousePlayer = safehouseBeenCaptured:getPlayers():get(i)
-			-- Alert the player that the safehouse has been lost
-			sendServerCommand(safehousePlayer, "ServerSafehouse", "alert",
-				{
-					safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
-					type = 1 -- Under Attack
-				});
+			local safehousePlayer = getPlayerByUserName(safehouseBeenCaptured:getPlayers():get(i));
+			-- Check if player is online
+			if safehousePlayer ~= nil then
+				-- Alert the player that the safehouse has been lost
+				sendServerCommand(safehousePlayer, "ServerSafehouse", "alert",
+					{
+						safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+						type = 1 -- Under Attack
+					});
+			end
 		end
 		-- Alert capturers that hes are capturing
 		local playersFaction = playerFaction:getPlayers();
@@ -263,14 +270,18 @@ function ServerSafehouseCommands.onCaptureSafehouse(module, command, player, arg
 
 	-- Releasing Safehouse and alerting all enemies
 	for i = safehouseBeenCaptured:getPlayers():size() - 1, 0, -1 do
-		local safehousePlayer = safehouseBeenCaptured:getPlayers():get(i)
-		-- Alert the player that the safehouse has been lost
-		sendServerCommand(safehousePlayer, "ServerSafehouse", "alert",
-			{
-				safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
-				type = 2
-			});
-		safehouseBeenCaptured:removePlayer(safehousePlayer);
+		local safehousePlayer = getPlayerByUserName(safehouseBeenCaptured:getPlayers():get(i));
+		-- Check if player is online
+		if safehousePlayer ~= nil then
+			-- Alert the player that the safehouse has been lost
+			sendServerCommand(safehousePlayer, "ServerSafehouse", "alert",
+				{
+					safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+					type = 2
+				});
+		end
+		-- Remove player use the Username String so we need to get the username again
+		safehouseBeenCaptured:removePlayer(safehouseBeenCaptured:getPlayers():get(i));
 	end
 
 	-- Capturing Safehouse
@@ -303,5 +314,25 @@ end
 Events.OnClientCommand.Add(function(module, command, player, args)
 	if module == "ServerFactions" and FactionsCommands[command] then
 		FactionsCommands[command](module, command, player, args)
+	end
+end)
+
+Events.EveryTenMinutes.Add(function()
+	if factions.checkIfCaptureIsEnabled() then
+		getSandboxOptions():set("ConstructionBonusPoints", 2)
+		local players = getOnlinePlayers()
+		-- Update sandbox to all players
+		for i = players:size() - 1, 0, -1 do
+			local player = players:get(i);
+			sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 2 });
+		end
+	else
+		getSandboxOptions():set("ConstructionBonusPoints", 5)
+		local players = getOnlinePlayers()
+		-- Update sandbox to all players
+		for i = players:size() - 1, 0, -1 do
+			local player = players:get(i);
+			sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 5 });
+		end
 	end
 end)

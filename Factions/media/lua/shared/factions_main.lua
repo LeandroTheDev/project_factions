@@ -274,3 +274,16 @@ FactionsMain.syncFactionMembers = function(safehouse, player)
 		end
 	end
 end
+
+if isClient() then
+	local function OnServerCommand(module, command, arguments)
+		-- Receives alerts from the server
+		if module == "ServerSafehouse" and command == "updateSandbox" then
+			-- Updating the Construction bonus points
+			if arguments.ConstructionBonusPoints then
+				getSandboxOptions():set("ConstructionBonusPoints", arguments.ConstructionBonusPoints)
+			end
+		end
+	end
+	Events.OnServerCommand.Add(OnServerCommand)
+end

@@ -1,0 +1,11 @@
+IGUI_PTBR = {
+  IGUI_Door_Create_Key = "Fazer Chave",
+  IGUI_Door_Key_Created = "Chave Criada",
+  IGUI_Door_Lock = "Fechadura",
+  IGUI_Door_Key_Not_Created = "Não posso fazer isso",
+
+  IGUI_Redeem_Safehouse_Points = "Reivindicar Pontos da Safehouse"
+  IGUI_Redeem_Safehouse_Claimed = "Reinvidicado: "
+  IGUI_Redeem_Safehouse_Not_In_Safehouse = "Não estou em uma Safehouse..."
+  IGUI_Redeem_Safehouse_Upgraded = "Safehouse Melhorada"
+}

@@ -1,0 +1,128 @@
+module farming
+{
+	imports
+	{
+		Base
+	}
+
+  	recipe Sell Carrot {
+		Carrots=5,
+
+		CanBeDoneFromFloor:true,
+      	Time:50,
+      	Result:Money=1,
+      	RemoveResultItem:true,
+      	Sound:Hammering,
+      	AnimNode:Craft,
+      	Category:General,
+      	FactionsSell:SellCarrot,
+	}
+  	recipe Sell Potato {
+		Potato=10,
+
+		CanBeDoneFromFloor:true,
+      	Time:50,
+      	Result:Money=1,
+      	RemoveResultItem:true,
+      	Sound:Hammering,
+      	AnimNode:Craft,
+      	Category:General,
+      	FactionsSell:SellPotato,
+	}
+  	recipe Sell Strawberry {
+		Strewberrie=10,
+
+		CanBeDoneFromFloor:true,
+      	Time:25,
+      	Result:Money=1,
+      	RemoveResultItem:true,
+      	Sound:Hammering,
+      	AnimNode:Craft,
+      	Category:General,
+      	FactionsSell:SellStrewberrie,
+	}
+  	recipe Sell Radish {
+		RedRadish=15,
+
+		CanBeDoneFromFloor:true,
+      	Time:50,
+      	Result:Money=1,
+      	RemoveResultItem:true,
+      	Sound:Hammering,
+      	AnimNode:Craft,
+      	Category:General,
+      	FactionsSell:SellRedRadish,
+	}
+  	recipe Sell Cabbage {
+		Cabbage=5,
+
+		CanBeDoneFromFloor:true,
+      	Time:50,
+      	Result:Money=1,
+      	RemoveResultItem:true,
+      	Sound:Hammering,
+      	AnimNode:Craft,
+      	Category:General,
+      	FactionsSell:SellCabbage,
+	}
+   	recipe Sell Tomato {
+		Tomato=10,
+
+		CanBeDoneFromFloor:true,
+      	Time:50,
+      	Result:Money=1,
+      	RemoveResultItem:true,
+      	Sound:Hammering,
+      	AnimNode:Craft,
+      	Category:General,
+      	FactionsSell:SellTomato,
+	}
+   	recipe Sell Broccoli {
+		Broccoli=5,
+
+		CanBeDoneFromFloor:true,
+      	Time:50,
+      	Result:Money=1,
+      	RemoveResultItem:true,
+      	Sound:Hammering,
+      	AnimNode:Craft,
+      	Category:General,
+      	FactionsSell:SellBroccoli,
+	}
+	recipe Sell Small Stack Valuable Scrap {
+		ScrapStack1=1,
+
+		CanBeDoneFromFloor:true,
+      	Time:50,
+      	Result:Money=1,
+      	RemoveResultItem:true,
+      	Sound:Hammering,
+      	AnimNode:Craft,
+      	Category:General,
+      	FactionsSell:SellSmallScrap,
+	}
+	recipe Sell Medium Stack Valuable Scrap {
+		ScrapStack2=1,
+
+		CanBeDoneFromFloor:true,
+      	Time:200,
+      	Result:Money=1,
+      	RemoveResultItem:true,
+      	Sound:Hammering,
+      	AnimNode:Craft,
+      	Category:General,
+      	FactionsSell:SellMediumScrap,
+	}
+	recipe Sell Large Stack Valuable Scrap {
+		ScrapStack3=1,
+
+		CanBeDoneFromFloor:true,
+      	Time:500,
+      	Result:Money=1,
+      	RemoveResultItem:true,
+      	Sound:Hammering,
+      	AnimNode:Craft,
+      	Category:General,
+      	FactionsSell:SellLargeScrap,
+	}
+}

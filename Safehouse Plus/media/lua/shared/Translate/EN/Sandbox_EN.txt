@@ -1,0 +1,9 @@
+Sandbox_EN = {
+    Sandbox_Safehouse = "Safehouse Plus",
+
+    Sandbox_SafehousePlus_EnableSafehousePoints = "Enable Safehouse Points",
+    Sandbox_SafehousePlus_EnableSafehousePoints_tooltip = "Enable points upgrade and reedeem to your Safehouse, !!you also need the Server Points mod for this work!!",
+
+    Sandbox_SafehousePlus_EnableSafehouseCreateKey = "Enable Safehouse Create Key",
+    Sandbox_SafehousePlus_EnableSafehouseCreateKey_tooltip = "Add the option to create a house key in the player safehouses",
+}

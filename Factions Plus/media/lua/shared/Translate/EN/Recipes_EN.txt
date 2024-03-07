@@ -1,0 +1,13 @@
+Recipes_EN = {
+	Recipe_Return_Coin = "Return Coin",
+	Recipe_Sell_Carrot = "Sell Carrot"
+	Recipe_Sell_Potato = "Sell Potato"
+	Recipe_Sell_Strawberry = "Sell Strawberry"
+	Recipe_Sell_Radish = "Sell Radish"
+	Recipe_Sell_Cabbage = "Sell Cabbage"
+	Recipe_Sell_Tomato = "Sell Tomato"
+	Recipe_Sell_Broccoli = "Sell Broccoli"
+	Recipe_Sell_Small_Stack_Valuable_Scrap = "Sell Small Stack Valuable Scrap"
+	Recipe_Sell_Medium_Stack_Valuable_Scrap = "Sell Medium Stack Valuable Scrap"
+	Recipe_Sell_Large_Stack_Valuable_Scrap = "Sell Large Stack Valuable Scrap"
+}
