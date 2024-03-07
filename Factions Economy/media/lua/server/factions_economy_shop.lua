@@ -1,4 +1,5 @@
 ---@diagnostic disable: undefined-global, deprecated
+if isClient() then return end;
 ServerShopData = {};
 local shopItems = {};
 local tradeItems = {};

@@ -1,21 +1,21 @@
 Sandbox_EN = {
     Sandbox_FactionsPlus = "Factions Plus",
 
-    FactionsPlus_EnableFarmSpeed = "Enable Fast Crop Grow",
-    FactionsPlus_EnableFarmSpeed_tooltip = "Grow will grow much faster thant normal",
+    Sandbox_FactionsPlus_EnableFarmSpeed = "Enable Fast Crop Grow",
+    Sandbox_FactionsPlus_EnableFarmSpeed_tooltip = "Grow will grow much faster thant normal",
 
-    FactionsPlus_EnableReduceSeedDrop = "Enable Reduced Seed Drop",
-    FactionsPlus_EnableReduceSeedDrop_tooltip = "Receive less seeds harvesting crops",
+    Sandbox_FactionsPlus_EnableReduceSeedDrop = "Enable Reduced Seed Drop",
+    Sandbox_FactionsPlus_EnableReduceSeedDrop_tooltip = "Receive less seeds harvesting crops",
     
-    FactionsPlus_EnableReduceWaterNeed = "Enable Reduced Crops Watering",
-    FactionsPlus_EnableReduceWaterNeed_tooltip = "Crops will need much less water to be fully watered",
+    Sandbox_FactionsPlus_EnableReduceWaterNeed = "Enable Reduced Crops Watering",
+    Sandbox_FactionsPlus_EnableReduceWaterNeed_tooltip = "Crops will need much less water to be fully watered",
 
-    FactionsPlus_EnableWaterLightCycle = "Enable Water Light Cycle",
-    FactionsPlus_EnableWaterLightCycle_tooltip = "Water and Light will cycle between days of the week",
+    Sandbox_FactionsPlus_EnableWaterLightCycle = "Enable Water Light Cycle",
+    Sandbox_FactionsPlus_EnableWaterLightCycle_tooltip = "Water and Light will cycle between days of the week",
 
-    FactionsPlus_WaterLightCycle = "Water Light Cycle Days",
-    FactionsPlus_WaterLightCycle_tooltip = "0 = Sunday, 1 = Monday... example: 0/3/6, Sunday,Wednesday,Saturday the water and lights will be turned on",
+    Sandbox_FactionsPlus_WaterLightCycle = "Water Light Cycle Days",
+    Sandbox_FactionsPlus_WaterLightCycle_tooltip = "0 = Sunday, 1 = Monday... example: 0/3/6, Sunday,Wednesday,Saturday the water and lights will be turned on",
 
-    FactionsPlus_Timezone = "Timezone",
-    FactionsPlus_Timezone_tooltip = "Timezone from your current location, Sao Paulo: -3, New York: -5, Moscou: 3",
+    Sandbox_FactionsPlus_Timezone = "Timezone",
+    Sandbox_FactionsPlus_Timezone_tooltip = "Timezone from your current location, Sao Paulo: -3, New York: -5, Moscou: 3",
 }

@@ -1,5 +1,5 @@
 ---@diagnostic disable: undefined-global, lowercase-global
-
+if isClient() then return end;
 -- Check if feature is enabled
 if SandboxVars.FactionsPlus.EnableFarmSpeed then
     -- Default function for calculate the speed

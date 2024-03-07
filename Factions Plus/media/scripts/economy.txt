@@ -18,7 +18,7 @@ module Base
                 Sound:Hammering,
                 AnimNode:RipSheets,
                 Category:General,
-                OnGiveXP:GiveMoney,
+                OnCreate: ReturnMoney,
         }
 
 	item ScrapMoney {

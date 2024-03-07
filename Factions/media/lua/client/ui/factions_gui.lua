@@ -1,5 +1,5 @@
 ---@diagnostic disable: undefined-global
-require "ISUI/ISLabelMod"
+require "ui/factions_label"
 require "ISUI/ISPanel"
 require "ISUI/ISButton"
 
@@ -20,6 +20,10 @@ local safehouseUI = nil;
 -- when the capture finish this variable will be send to the server
 -- to check if the safehouse is the same
 local temporaryCaptureSafehouse
+
+local function getDeltaTimeInMillis(ts)
+	return getTimeInMillis() - ts;
+end
 
 -- Creating the panel the right side of GUI
 
@@ -268,7 +272,8 @@ function FactionsGUI:createChildren() -- Overwrite the children creation method
 	local height_button = getTextManager():MeasureFont(UIFont.NewMedium);
 
 	-- Creating the Title Text
-	local titleLabel = ISLabelMod:new((self.panel.width / 2) - (width_title / 2) - 1.5, 18 - 2, width_title, height_title,
+	local titleLabel = FactionsGUILabel:new((self.panel.width / 2) - (width_title / 2) - 1.5, 18 - 2, width_title,
+		height_title,
 		self.titleText, 1.0, 1.0, 1.0, 1.0, UIFont.NewLarge)
 	-- Initializing
 	titleLabel:initialise()
@@ -277,7 +282,7 @@ function FactionsGUI:createChildren() -- Overwrite the children creation method
 	self.titleLabel = titleLabel;
 
 	-- Creating the Faction Text
-	local factionLabel = ISLabelMod:new((self.panel.width / 2) - (width_faction / 2) - 1.5, 18 + height_title,
+	local factionLabel = FactionsGUILabel:new((self.panel.width / 2) - (width_faction / 2) - 1.5, 18 + height_title,
 		width_faction, height_faction, self.factionText, 1.0, 1.0, 1.0, 1.0, UIFont.NewMedium)
 	-- Initializing
 	factionLabel:initialise()

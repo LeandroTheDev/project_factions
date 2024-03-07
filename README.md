@@ -8,6 +8,8 @@ Forked from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/
 - Chat alert for actions (capturing, losing, captured, lost)
 - Configurable time to enable safehouse capture invasion
 
+Consider downloading the safehouse limit remover in the folder [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) and place it in the main project zomboid dedicated server folder
+
 # Factions Plus
 
 Add new features and adjustments for playing with Factions Mode
@@ -35,7 +37,5 @@ Add several new mechanics to safehouses, the upgrader item will not spawn natura
 - Create key in Safehouse
 - Upgrade Safehouse (Need Server Points Mod)
 - Reedem points (Need Server Points Mod)
-
-
 
 FTM License

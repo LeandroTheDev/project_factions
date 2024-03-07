@@ -1,5 +1,5 @@
 ---@diagnostic disable: undefined-global
-
+if isClient() then return end;
 -- Explanation about this file.
 -- this file contains the serverside treatment for handling the capture system
 
@@ -13,6 +13,91 @@ factions.Start = 20
 factions.End = 21
 factions.Days = {};
 factions.ResetData = false;
+
+local function getCurrentTime(timezone, timestamp)
+	local function remainder(a, b)
+		return a - math.floor(a / b) * b;
+	end
+	if not timezone then
+		timezone = SSRLoader.timezone;
+	end
+	local tm = {};
+	local daysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	local seconds, minutes, hours, days, year, month;
+	local dayOfWeek;
+
+	if timestamp then
+		seconds = math.floor(timestamp) + (timezone or 0) * 3600;
+	else
+		seconds = getTimestamp() + (timezone or 0) * 3600;
+	end
+	-- Calculate minutes
+	minutes   = math.floor(seconds / 60);
+	seconds   = seconds - (minutes * 60);
+	-- Calculate hours
+	hours     = math.floor(minutes / 60);
+	minutes   = minutes - (hours * 60);
+	-- Calculate days
+	days      = math.floor(hours / 24);
+	hours     = hours - (days * 24);
+
+	-- Unix time starts in 1970 on a Thursday
+	year      = 1970;
+	dayOfWeek = 4;
+
+	while true do
+		local leapYear = remainder(year, 4) == 0 and (remainder(year, 100) ~= 0 or remainder(year, 400) == 0);
+		local daysInYear = 365;
+		if leapYear then
+			daysInYear = 366;
+		end
+
+		if days >= daysInYear then
+			if leapYear then
+				dayOfWeek = dayOfWeek + 2;
+			else
+				dayOfWeek = dayOfWeek + 1;
+			end
+			days = days - daysInYear;
+			if dayOfWeek >= 7 then
+				dayOfWeek = dayOfWeek - 7;
+			end
+			year = year + 1;
+		else
+			tm.tm_yday = days;
+			dayOfWeek  = dayOfWeek + days;
+			dayOfWeek  = remainder(dayOfWeek, 7);
+			-- Calculate the month and day
+
+			month      = 1;
+			while month <= 12 do
+				local dim = daysInMonth[month];
+
+				-- Add a day to feburary if this is a leap year
+				if month == 2 and leapYear then
+					dim = dim + 1;
+				end
+
+				if days >= dim then
+					days = days - dim;
+				else
+					break;
+				end
+				month = month + 1;
+			end
+			break;
+		end
+	end
+
+	tm.tm_sec  = seconds;
+	tm.tm_min  = minutes;
+	tm.tm_hour = hours;
+	tm.tm_mday = days + 1;
+	tm.tm_mon  = month;
+	tm.tm_year = year;
+	tm.tm_wday = dayOfWeek;
+	return tm;
+end
 
 -- Simple read the Sandbox options
 factions.readOptions = function()
@@ -45,7 +130,7 @@ end
 -- Check if capture is enabled, returns true if is enabled, false for not enabled
 -- ServerSafehouseData is automatically reseted by this function
 factions.checkIfCaptureIsEnabled = function()
-	local currentTime = GetCurrentTime(factions.Timezone);
+	local currentTime = getCurrentTime(factions.Timezone);
 	-- Check if is not time to capture
 	if (currentTime.tm_hour >= factions.End or currentTime.tm_hour < factions.Start) then
 		factions.ResetData = true;
@@ -193,7 +278,7 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 end
 
 -- Finished the capture
-function ServerSafehouseCommands.onCaptureSafehouse(module, command, player, args)
+function FactionsCommands.onCaptureSafehouse(module, command, player, args)
 	-- Check if Faction is Nil
 	local playerFaction = FactionsMain.getFaction(player:getUsername());
 	local playerLocation = player:getSquare();
@@ -300,5 +385,5 @@ if SandboxVars.Factions.IncreaseConstructionLife then
 end
 
 -- Read Options on start
-Events.OnGameStart.Add(factions.readOptions()); -- Singleplayer
+Events.OnGameStart.Add(factions.readOptions());     -- Singleplayer
 Events.OnServerStarted.Add(factions.readOptions()); -- Multiplayer

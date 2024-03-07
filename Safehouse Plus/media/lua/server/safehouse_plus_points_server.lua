@@ -1,4 +1,5 @@
 ---@diagnostic disable: undefined-global
+if isClient() then return end;
 local ServerSafehouseCommands = {};
 local ServerSafehouseData = {};
 

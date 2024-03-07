@@ -24,49 +24,49 @@ option FactionsEconomy.PointsPerTick
 option FactionsEconomy.itemTable0
 {
 	type = string,
-    default = Base.Baseball/1/Base.Shovel/1,
+    default = Base.Baseball/50/Base.Shovel/50,
 	page = LootBox,
     translation = LootBox_itemTable0,
 }
 option FactionsEconomy.itemTable1
 {
 	type = string,
-    default = Base.Baseball/1/Base.Shovel/1,
+    default = Base.Baseball/50/Base.Shovel/50,
 	page = LootBox,
     translation = LootBox_itemTable1,
 }
 option FactionsEconomy.itemTable2
 {
 	type = string,
-    default = Base.Baseball/1/Base.Shovel/1,
+    default = Base.Baseball/50/Base.Shovel/50,
 	page = LootBox,
     translation = LootBox_itemTable2,
 }
 option FactionsEconomy.itemTable3
 {
 	type = string,
-    default = Base.Baseball/1/Base.Shovel/1,
+    default = Base.Baseball/50/Base.Shovel/50,
 	page = LootBox,
     translation = LootBox_itemTable3,
 }
 option FactionsEconomy.itemTable4
 {
 	type = string,
-    default = Base.Baseball/1/Base.Shovel/1,
+    default = Base.Baseball/50/Base.Shovel/50,
 	page = LootBox,
     translation = LootBox_itemTable4,
 }
 option FactionsEconomy.itemTable5
 {
 	type = string,
-    default = Base.Baseball/1/Base.Shovel/1,
+    default = Base.Baseball/50/Base.Shovel/50,
 	page = LootBox,
     translation = LootBox_itemTable5,
 }
 option FactionsEconomy.itemTable6
 {
 	type = string,
-    default = Base.Baseball/1/Base.Shovel/1,
+    default = Base.Baseball/50/Base.Shovel/50,
 	page = LootBox,
     translation = LootBox_itemTable6,
 }

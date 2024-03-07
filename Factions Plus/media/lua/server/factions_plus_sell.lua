@@ -1,92 +1,78 @@
 ---@diagnostic disable: undefined-global, deprecated
+if isClient() then return end;
 --Return Money Function
-local function ReturnPoints(value)
-	local username = getPlayer():getUsername()
-	sendClientCommand("ServerPoints", "addPoints", { username, value })
-	getPlayer():Say(getText("IGUI_Shop_Return"))
+local function ReturnPoints(value, player)
+	sendServerCommand("ServerPoints", "addPoints", { player:getUsername(), value })
+	player:Say(getText("IGUI_Shop_Return"))
 end
 
 --Sell Item Function
-local function SellItem(value)
-	local username = getPlayer():getUsername()
-	sendClientCommand("ServerPoints", "addPoints", { username, value })
-	getPlayer():Say(getText("IGUI_Shop_Sell") .. " + " .. tostring(value))
+local function SellItem(value, player)
+	sendServerCommand("ServerPoints", "addPoints", { player:getUsername(), value })
+	player:Say(getText("IGUI_Shop_Sell") .. " + " .. tostring(value))
 end
 
 --Return Money
-function Recipe.FactionsSell.Money(recipe, ingredients, result, player)
-	ReturnPoints(1)
+function ReturnMoney(recipe, ingredients, result, player)
+	ReturnPoints(1, player)
 end
 
 --Sell Carrot
-function Recipe.FactionsSell.Carrot(recipe, ingredients, result, player)
+function SellCarrot(recipe, ingredients, result, player)
 	print("[Factions] " .. player:getUsername() .. " selled Carrots")
-	SellItem(7)
+	SellItem(7, player)
 end
 
 --Sell Potato
-function Recipe.FactionsSell.Potato(recipe, ingredients, result, player)
+function SellPotato(recipe, ingredients, result, player)
 	print("[Factions] " .. player:getUsername() .. " selled Potatos")
-	SellItem(9)
+	SellItem(9, player)
 end
 
 --Sell Strewberrie
-function Recipe.FactionsSell.Strewberrie(recipe, ingredients, result, player)
+function SellStrewberrie(recipe, ingredients, result, player)
 	print("[Factions] " .. player:getUsername() .. " selled Strewberries")
-	SellItem(4)
+	SellItem(4, player)
 end
 
 --Sell RedRadish
-function Recipe.FactionsSell.RedRadish(recipe, ingredients, result, player)
+function SellRedRadish(recipe, ingredients, result, player)
 	print("[Factions] " .. player:getUsername() .. " selled RedRadishs")
-	SellItem(8)
+	SellItem(8, player)
 end
 
 --Sell Cabbage
-function Recipe.FactionsSell.Cabbage(recipe, ingredients, result, player)
+function SellCabbage(recipe, ingredients, result, player)
 	print("[Factions] " .. player:getUsername() .. " selled Cabbages")
-	SellItem(7)
+	SellItem(7, player)
 end
 
 --Sell Tomato
-function Recipe.FactionsSell.Tomato(recipe, ingredients, result, player)
+function SellTomato(recipe, ingredients, result, player)
 	print("[Factions] " .. player:getUsername() .. " selled Tomatos")
-	SellItem(10)
+	SellItem(10, player)
 end
 
 --Sell Broccoli
-function Recipe.FactionsSell.Broccoli(recipe, ingredients, result, player)
+function SellBroccoli(recipe, ingredients, result, player)
 	print("[Factions] " .. player:getUsername() .. " selled Broccolis")
-	SellItem(9)
+	SellItem(9, player)
 end
 
 --Sell Small Scrap
-function Recipe.FactionsSell.SmallScrap(recipe, ingredients, result, player)
+function SellSmallScrap(recipe, ingredients, result, player)
 	print("[Factions] " .. player:getUsername() .. " selled Small Scrap")
-	SellItem(1)
+	SellItem(1, player)
 end
 
 --Sell Medium Scrap
-function Recipe.FactionsSell.MediumScrap(recipe, ingredients, result, player)
+function SellMediumScrap(recipe, ingredients, result, player)
 	print("[Factions] " .. player:getUsername() .. " selled Medium Scrap")
-	SellItem(15)
+	SellItem(15, player)
 end
 
 --Sell Large Scrap
-function Recipe.FactionsSell.LargeScrap(recipe, ingredients, result, player)
+function SellLargeScrap(recipe, ingredients, result, player)
 	print("[Factions] " .. player:getUsername() .. " selled Large Scrap")
-	SellItem(100)
+	SellItem(100, player)
 end
-
---Sells Commands
-SellMoney = Recipe.FactionsSell.Money
-SellCarrot = Recipe.FactionsSell.Carrot
-SellPotato = Recipe.FactionsSell.Potato
-SellStrewberrie = Recipe.FactionsSell.Strewberrie
-SellRedRadish = Recipe.FactionsSell.RedRadish
-SellCabbage = Recipe.FactionsSell.Cabbage
-SellTomato = Recipe.FactionsSell.Tomato
-SellBroccoli = Recipe.FactionsSell.Broccoli
-SellSmallScrap = Recipe.FactionsSell.SmallScrap
-SellMediumScrap = Recipe.FactionsSell.MediumScrap
-SellLargeScrap = Recipe.FactionsSell.LargeScrap

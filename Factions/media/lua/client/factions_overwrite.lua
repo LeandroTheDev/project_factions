@@ -10,7 +10,7 @@ require "ISUI/UserPanel/ISFactionUI"
 require "ISUI/UserPanel/ISCreateFactionUI"
 require "ISUI/UserPanel/ISFactionAddPlayerUI"
 
-require "ui/safehouse"
+require "ui/factions"
 
 -- Removing the View Safehouse Context Menu in right click on the ground
 local _addOption = ISContextMenu.addOption;

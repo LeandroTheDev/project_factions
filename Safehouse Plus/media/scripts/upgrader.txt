@@ -18,6 +18,6 @@ module Base
                 Sound:Hammering,
                 AnimNode:RipSheets,
                 Category:General,
-                SafehousePlus:AddUpgrade,
+                OnCreate: UpgradeSafehouse,
         }
 }

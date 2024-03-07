@@ -15,7 +15,7 @@ module farming
       	Sound:Hammering,
       	AnimNode:Craft,
       	Category:General,
-      	FactionsSell:SellCarrot,
+      	OnCreate: SellCarrot,
 	}
   	recipe Sell Potato {
 		Potato=10,
@@ -27,7 +27,7 @@ module farming
       	Sound:Hammering,
       	AnimNode:Craft,
       	Category:General,
-      	FactionsSell:SellPotato,
+      	OnCreate: SellPotato,
 	}
   	recipe Sell Strawberry {
 		Strewberrie=10,
@@ -39,7 +39,7 @@ module farming
       	Sound:Hammering,
       	AnimNode:Craft,
       	Category:General,
-      	FactionsSell:SellStrewberrie,
+      	OnCreate: SellStrewberrie,
 	}
   	recipe Sell Radish {
 		RedRadish=15,
@@ -51,7 +51,7 @@ module farming
       	Sound:Hammering,
       	AnimNode:Craft,
       	Category:General,
-      	FactionsSell:SellRedRadish,
+      	OnCreate: SellRedRadish,
 	}
   	recipe Sell Cabbage {
 		Cabbage=5,
@@ -63,7 +63,7 @@ module farming
       	Sound:Hammering,
       	AnimNode:Craft,
       	Category:General,
-      	FactionsSell:SellCabbage,
+      	OnCreate: SellCabbage,
 	}
    	recipe Sell Tomato {
 		Tomato=10,
@@ -75,7 +75,7 @@ module farming
       	Sound:Hammering,
       	AnimNode:Craft,
       	Category:General,
-      	FactionsSell:SellTomato,
+      	OnCreate: SellTomato,
 	}
    	recipe Sell Broccoli {
 		Broccoli=5,
@@ -87,7 +87,7 @@ module farming
       	Sound:Hammering,
       	AnimNode:Craft,
       	Category:General,
-      	FactionsSell:SellBroccoli,
+      	OnCreate: SellBroccoli,
 	}
 	recipe Sell Small Stack Valuable Scrap {
 		ScrapStack1=1,
@@ -99,7 +99,7 @@ module farming
       	Sound:Hammering,
       	AnimNode:Craft,
       	Category:General,
-      	FactionsSell:SellSmallScrap,
+      	OnCreate: SellSmallScrap,
 	}
 	recipe Sell Medium Stack Valuable Scrap {
 		ScrapStack2=1,
@@ -111,7 +111,7 @@ module farming
       	Sound:Hammering,
       	AnimNode:Craft,
       	Category:General,
-      	FactionsSell:SellMediumScrap,
+      	OnCreate: SellMediumScrap,
 	}
 	recipe Sell Large Stack Valuable Scrap {
 		ScrapStack3=1,
@@ -123,6 +123,6 @@ module farming
       	Sound:Hammering,
       	AnimNode:Craft,
       	Category:General,
-      	FactionsSell:SellLargeScrap,
+      	OnCreate: SellLargeScrap,
 	}
 }
