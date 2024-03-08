@@ -1,5 +1,4 @@
 ---@diagnostic disable: undefined-global
-if isClient() then return end;
 require "Farming/SFarmingSystem"
 -- Check if feature is enabled
 if SandboxVars.FactionsPlus.EnableReduceSeedDrop then

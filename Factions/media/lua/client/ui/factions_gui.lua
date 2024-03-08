@@ -218,7 +218,7 @@ end
 
 function FactionsGUI:updateButtons() -- Update dynamically the buttons based in self parameters
 	-- Check for idle gui, not capturing and is not any enemy safehouse
-	if self.team and not self.badge.capture and self.canBeCaptured then
+	if not self.badge.capture and self.canBeCaptured then
 		-- Update the self someone inside
 		self.someoneInside = FactionsMain.isSomeoneInside(self.player:getSquare(), self.faction, self.floors)
 		-- Check if someone is inside and is enabled

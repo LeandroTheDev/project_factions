@@ -1,5 +1,4 @@
 ---@diagnostic disable: undefined-global, lowercase-global
-if isClient() then return end;
 require "Farming/TimedActions/ISWaterPlantAction"
 
 -- Check if feature is enabled

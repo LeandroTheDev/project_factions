@@ -429,7 +429,7 @@ if isServer() then
 	-- Get factions points
 	function ServerFactionCommands.getPoints(module, command, player, args)
 		-- Receive player faction
-		local playerFaction = Private.getFaction(player:getUsername(), false)
+		local playerFaction = FactionsMain.getFaction(player:getUsername())
 
 		-- Check if player has faction
 		if playerFaction == nil then
