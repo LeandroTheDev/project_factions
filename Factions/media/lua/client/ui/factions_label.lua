@@ -3,12 +3,6 @@ require "ISUI/ISUIElement"
 
 FactionsGUILabel = ISUIElement:derive("FactionsGUILabel");
 
-
---************************************************************************--
---** ISPanel:initialise
---**
---************************************************************************--
-
 function FactionsGUILabel:initialise()
 	ISUIElement.initialise(self);
 end
@@ -16,7 +10,6 @@ end
 function FactionsGUILabel:getName()
 	return self.name;
 end
-
 
 function FactionsGUILabel:setName(name)
 	if self.name == name then return end
@@ -33,10 +26,6 @@ function FactionsGUILabel:setColor(r,g,b)
 	self.b = b;
 end
 
---************************************************************************--
---** ISPanel:render
---**
---************************************************************************--
 function FactionsGUILabel:prerender()
     local txt = self.name;
     if self.translation then
@@ -123,10 +112,6 @@ function FactionsGUILabel:setTranslation(translation)
     end
 end
 
---************************************************************************--
---** ISPanel:new
---**
---************************************************************************--
 function FactionsGUILabel:new (x, y, width, height, name, r, g, b, a, font)
 	local o = {}
 	--o.data = {}

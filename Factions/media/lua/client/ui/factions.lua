@@ -43,7 +43,7 @@ FactionsMain.createButton = function(button, safehouse, square, price)
 					button:setEnable(false);
 					button:setTooltip(getText("IGUI_Safehouse_SomeoneInside"));
 					-- Check if you have the points to capture
-				elseif available < price then
+				elseif available < price or available == 0 then
 					button:setEnable(false);
 					button:setTooltip(getText("UI_Text_SafehouseNotEnoughPoints", available, price))
 					-- Shows the points available for capturing
@@ -142,7 +142,8 @@ FactionsMain.update = function()
 				local player_faction = FactionsMain.getFaction(player:getUsername());
 
 				-- If true this means the safehouse is from your team
-				local team = false;
+				-- false means its a enemy, nil means empty safehouse
+				local team = nil;
 
 				-- Add this building to the global variable building
 				FactionsMain.building = building;
@@ -220,24 +221,6 @@ FactionsMain.alert = function(safehouse, type)
 		end
 		getSoundManager():PlaySound("baseCaptureFinish", false, 1.0);
 	end
-end
-
--- Create the safehouse from residential square
-FactionsMain.onTakeSafeHouse_R = function(square, player)
-	local safehouse = SafeHouse.addSafeHouse(square:getBuilding():getDef():getX() - 2,
-		square:getBuilding():getDef():getY() - 2, square:getBuilding():getDef():getW() + 2 * 2,
-		square:getBuilding():getDef():getH() + 2 * 2, player:getUsername(), false);
-	-- Invite all faction members
-	FactionsMain.syncFactionMembers(safehouse, player);
-end
-
--- Create the safehouse from non residential square
-FactionsMain.onTakeSafeHouse_NonR = function(square, player)
-	local safehouse = SafeHouse.addSafeHouse(square:getBuilding():getDef():getX() - 2,
-		square:getBuilding():getDef():getY() - 2, square:getBuilding():getDef():getW() + 2 * 2,
-		square:getBuilding():getDef():getH() + 2 * 2, player:getUsername(), false);
-	-- Invite all faction members
-	FactionsMain.syncFactionMembers(safehouse, player);
 end
 
 local function OnServerCommand(module, command, arguments)

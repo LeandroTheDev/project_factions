@@ -72,7 +72,7 @@ function MainScreen:instantiate()
             self:addChild(self.serverTrade)
 
             local labelHgt = getTextManager():getFontHeight(UIFont.Large) + 8 * 2
-            self.tradeOptions = ISLabel:new(self.quitToDesktop.x, self.quitToDesktop.y + labelHgt + 16, labelHgt, getText("IGUI_Trade"), 1, 1, 1, 1, UIFont.Large, true)
+            self.tradeOptions = ISLabel:new(self.quitToDesktop.x, self.pointsOption.y + labelHgt + 16, labelHgt, getText("IGUI_Trade"), 1, 1, 1, 1, UIFont.Large, true)
             self.tradeOptions.internal = "TRADES"
             self.tradeOptions:initialise()
             self.bottomPanel:addChild(self.tradeOptions)

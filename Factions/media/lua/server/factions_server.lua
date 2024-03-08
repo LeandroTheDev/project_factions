@@ -14,6 +14,7 @@ factions.End = 21
 factions.Days = {};
 factions.ResetData = false;
 
+-- Get the days, hours from the OS time based in timezone
 local function getCurrentTime(timezone, timestamp)
 	local function remainder(a, b)
 		return a - math.floor(a / b) * b;

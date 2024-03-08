@@ -8,4 +8,10 @@ IGUI_EN = {
 	IGUI_Redeem_Safehouse_Claimed = "Claimed: "
 	IGUI_Redeem_Safehouse_Not_In_Safehouse = "I am not in a Safehouse..."
 	IGUI_Redeem_Safehouse_Upgraded = "Safehouse Upgraded"
+
+	IGUI_Respawn_SayRespawn = "Respawn Point Set",
+    IGUI_Respawn_DeathUI_Respawn = "RESPAWN",
+    IGUI_Respawn_CCC_Respawn = "RESPAWN",
+    IGUI_Respawn_Bed = "Bed"
+    IGUI_Respawn_In_Bed = "Respawn in Bed"
 }

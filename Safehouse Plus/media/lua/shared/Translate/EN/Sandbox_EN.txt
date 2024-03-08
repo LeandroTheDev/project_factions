@@ -6,4 +6,19 @@ Sandbox_EN = {
 
     Sandbox_SafehousePlus_EnableSafehouseCreateKey = "Enable Safehouse Create Key",
     Sandbox_SafehousePlus_EnableSafehouseCreateKey_tooltip = "Add the option to create a house key in the player safehouses",
+
+    SafehousePlus_EnableSafehouseRespawn = "Enable Respawn in Safehouse Bed",
+    SafehousePlus_EnableSafehouseRespawn_tooltip = "Inspect the bed and select Respawn Here to set the respawn point, only in safehouses",
+    
+    SafehousePlus_SpawnpointTimer = "Respawn Time to Spawnpoint",
+    SafehousePlus_SpawnpointTimer_tooltip = "The timer to finish setting the spawnpoint in seconds",
+
+    SafehousePlus_RespawnCooldown = "Respawn Cooldown",
+    SafehousePlus_RespawnCooldown_tooltip = "When you die you need to wait this seconds before respawn",
+
+    SafehousePlus_HealthOnRespawn = "Respawn Health",
+    SafehousePlus_HealthOnRespawn_tooltip = "Health that player will respawn",
+
+    SafehousePlus_KeepInventory = "Respawn Keep Inventory",
+    SafehousePlus_KeepInventory_tooltip = "When the player dies the item on the ground is removed and spawned on the player in respawn",
 }

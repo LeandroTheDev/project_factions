@@ -1,0 +1,3 @@
+ContextMenu_EN = {
+	ContextMenu_Respawn_SetRespawn = "Respawn Here"
+}
