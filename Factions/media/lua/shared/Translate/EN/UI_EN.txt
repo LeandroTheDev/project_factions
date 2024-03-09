@@ -16,4 +16,5 @@ UI_EN = {
 	UI_Text_SafehouseWasCaptured = "<RED> [INFO] We captured the enemy's safehouse '%1'!"
 	UI_Text_SafehouseNotTimeCapture = "Its not time yet"
 	UI_Text_SafehouseCapturing = "Capturing..."
+	UI_Text_SafehouseWithoutFaction = "You dont have a faction"
 }

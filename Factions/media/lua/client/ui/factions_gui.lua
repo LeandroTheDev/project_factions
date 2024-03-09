@@ -217,26 +217,69 @@ function FactionsGUI:update() -- UI every tick overwrite
 end
 
 function FactionsGUI:updateButtons() -- Update dynamically the buttons based in self parameters
-	-- Check for idle gui, not capturing and is not any enemy safehouse
-	if not self.badge.capture and self.canBeCaptured then
-		-- Update the self someone inside
-		self.someoneInside = FactionsMain.isSomeoneInside(self.player:getSquare(), self.faction, self.floors)
-		-- Check if someone is inside and is enabled
-		if self.someoneInside and self.button:isEnabled() then
-			-- Set to false, because someone is inside and you cannot capture a safehouse with someone inside... dummy
-			self.button:setEnable(false);
-			self.button:setTooltip(getText("IGUI_Safehouse_SomeoneInside"));
-		elseif not self.someoneInside and not self.button:isEnabled() then
-			-- Get the used points
-			local available = FactionsMain.Points - FactionsMain.getUsedPoints(self.username);
-			-- Check if dont have points available
-			if available < self.price then
-				self.button:setTooltip(getText("UI_Text_SafehouseNotEnoughPoints", available, self.price))
-			else
-				self.button:setEnable(true);
-				self.button:setTooltip(getText("UI_Text_SafehousePointsAvailable", self.price, available))
-			end
-		end
+	-- If player is capturing disable the button
+	if self.badge.capture then
+		self.button:setEnable(false);
+		self.internal = "";
+		return;
+	end
+
+	-- If player is not in a faction simple do nothing,
+	-- if someoneInside is nil is because hes doesnt have a faction
+	if not self.faction then
+		self.button:setEnable(false);
+		self.button:setTooltip(getText("UI_Text_SafehouseWithoutFaction"))
+		self.internal = "";
+		return;
+	end
+
+	-- Check if safehouse is from enemy
+	if self.team == false then
+		self.internal = "Capture";
+		return;
+	end
+
+	-- Check if safehouse is from friendly
+	if self.team == true then
+		self.internal = "View";
+		return;
+	end
+
+	-- Capture message is only updated in create button functions in
+	-- FactionsMain.createButton, so the player needs to get out the safehouse
+	-- and enter again to verify a new captureMessage this is made by this way
+	-- because captureMessage only check for spawnPoints and residentials
+	-- and others static things
+	if self.button.captureMessage ~= "valid" then
+		self.button:setEnable(false);
+		self.button:setTooltip(getText(self.button.captureMessage));
+		self.internal = "";
+		return;
+	end
+
+	-- Update the self someone inside
+	self.someoneInside = FactionsMain.isSomeoneInside(self.player:getSquare(), self.faction, self.floors)
+
+	-- Get available points
+	local available = FactionsMain.Points - FactionsMain.getUsedPoints(self.player:getUsername());
+	local pointsEnough = tonumber(available) >= tonumber(self.price);
+	-- Check if someone is inside and is enabled
+	if self.someoneInside then
+		-- Set to false, because someone is inside and you cannot capture a safehouse with someone inside... dummy
+		self.button:setEnable(false);
+		self.button:setTooltip(getText("IGUI_Safehouse_SomeoneInside"));
+		self.internal = "";
+		return;
+	elseif pointsEnough then -- Check if have points enough for capturing
+		self.button:setEnable(true);
+		self.button:setTooltip(getText("UI_Text_SafehousePointsAvailable", self.price, available))
+		self.internal = "Capture_Empty";
+		return;
+	else -- Not enough points
+		self.button:setEnable(false);
+		self.button:setTooltip(getText("UI_Text_SafehouseNotEnoughPoints", available, self.price))
+		self.internal = "";
+		return;
 	end
 end
 
@@ -299,10 +342,24 @@ function FactionsGUI:createChildren() -- Overwrite the children creation method
 	self.panel:addChild(button);
 	self.button = button;
 	self.button.internal = "";
-	-- Update the button datas
-	FactionsMain.createButton(self.button, self.safehouse, self.player:getSquare(), self.price)
 	-- Update visibility based in the button data
 	self.button:setVisible(self.buttonVisible);
+
+	-- Getting the price of the house of the player standing house
+	if FactionsMain.building then
+		if instanceof(FactionsMain.building, "IsoBuilding") then
+			self.price = FactionsMain.getCost(FactionsMain.building:getDef());
+		elseif instanceof(FactionsMain.building, "SafeHouse") then
+			self.price = FactionsMain.getCost(FactionsMain.building, 4);
+		end
+	end
+	-- If the price is lower than one, set to one
+	if self.price < 1 then
+		self.price = 1;
+	end
+
+	-- Check if this safehouse can be captured
+	self.button.captureMessage = FactionsMain.canBeCaptured(self.player:getSquare());
 
 	-- Offset for making parent borders visible
 	self.panel.y = 2;
@@ -315,10 +372,11 @@ function FactionsGUI:createChildren() -- Overwrite the children creation method
 	end
 
 	self:onMouseMoveOutside();
+	self:updateButtons();
 end
 
 function FactionsGUI.onButtonClick() -- On the button click
-	local internal = FactionsMain.GUI.button.internal;
+	local internal = FactionsMain.GUI.internal;
 	if internal == "View" then       -- View the safehouse button
 		if safehouseUI then
 			safehouseUI:removeFromUIManager()
@@ -330,16 +388,7 @@ function FactionsGUI.onButtonClick() -- On the button click
 	elseif internal == "Capture" then -- Capture the enemy safehouse button
 		-- Ask the server that you are trying to capture the safehouse
 		sendClientCommand("ServerFactions", "captureSafehouse", nil)
-	elseif internal == "Capture_Residential" then -- Capture Residential button
-		local player = getPlayer()
-		local square = player:getSquare()
-		-- Add the safehouse and save to the temporaryCaptureSafehouse
-		temporaryCaptureSafehouse = SafeHouse.addSafeHouse(square:getBuilding():getDef():getX() - 2,
-			square:getBuilding():getDef():getY() - 2, square:getBuilding():getDef():getW() + 2 * 2,
-			square:getBuilding():getDef():getH() + 2 * 2, player:getUsername(), false)
-		-- Ask the server if is valid capturing the safehouse
-		sendClientCommand("ServerFactions", "captureEmptySafehouse", nil)
-	elseif internal == "Capture_Non_Residential" then -- Capture Non Residential button
+	elseif internal == "Capture_Empty" then -- Capture Residential button
 		local player = getPlayer()
 		local square = player:getSquare()
 		-- Add the safehouse and save to the temporaryCaptureSafehouse
@@ -439,21 +488,6 @@ function FactionsGUI:new(titleText, factionText, buttonText, faction, team) -- I
 	-- Adding the player faction to the gui parameter
 	o.faction = faction;
 
-	local def = nil;
-	-- Getting the price of the house of the player position
-	if FactionsMain.building then
-		if instanceof(FactionsMain.building, "IsoBuilding") then
-			def = FactionsMain.building:getDef();
-			o.price = FactionsMain.getCost(def);
-		elseif instanceof(FactionsMain.building, "SafeHouse") then
-			o.price = FactionsMain.getCost(FactionsMain.building, 4);
-		end
-	end
-	-- If the price is lower than one, set to one
-	if o.price < 1 then
-		o.price = 1;
-	end
-
 	-- Instanciate Variables
 	local square = player:getSquare();
 	if o.faction then
@@ -477,6 +511,7 @@ function FactionsGUI:new(titleText, factionText, buttonText, faction, team) -- I
 	o:setCapture(false);
 	o.timestamp = getTimeInMillis();
 	o.dragging = true;
+	o.internal = "";
 
 	return o
 end
@@ -500,7 +535,7 @@ end
 function FactionsGUI:captureFinished() -- Capturing Finished
 	-- Add the sound for the player that capture finish
 	getSoundManager():PlaySound("baseCaptureFinish", false, 1.0)
-	--Update
+	-- Update
 	local player = getPlayer();
 	local safehouse = SafeHouse.getSafeHouse(player:getSquare())
 	if safehouse then

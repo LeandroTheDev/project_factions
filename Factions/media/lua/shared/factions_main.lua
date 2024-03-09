@@ -106,6 +106,11 @@ end
 
 -- Check if someone is inside
 FactionsMain.isSomeoneInside = function(square, faction, level)
+	-- If player doesnt have a faction simple return
+	if not faction then
+		return nil;
+	end
+	-- Check if square is valid
 	if square then
 		local building = square:getBuilding();
 		if building then
@@ -126,7 +131,6 @@ FactionsMain.isSomeoneInside = function(square, faction, level)
 						if _square then
 							for i = 0, _square:getMovingObjects():size() - 1 do
 								local o = _square:getMovingObjects():get(i);
-								--print(i.." - "..tostring(o).." ("..tostring(o:getType())..")")
 
 								if not o:getSquare():getProperties():Is(IsoFlagType.exterior) and o:getBuilding() then
 									if instanceof(o, "IsoPlayer") then
@@ -193,6 +197,11 @@ end
 
 -- Check if can be captured, return "valid" if is valid, and return a Language text is not
 FactionsMain.canBeCaptured = function(square)
+	-- Check if enemies is on the house or zombies
+	if FactionsMain.isSomeoneInside(square, faction) then
+		return getText("IGUI_Safehouse_SomeoneInside");
+	end
+
 	-- Checking if is spawnpoint
 	if FactionsMain.isSpawnPoint(square) then
 		return getText("IGUI_Safehouse_IsSpawnPoint");
@@ -335,61 +344,61 @@ if isServer() then
 	--Receives from server and do a command
 	local function zombiesKillPoints(kills)
 		local killsPoints = 0;
-		if kills > 50 and kills < 150 then
+		if kills > 50 and kills <= 150 then
 			killsPoints = 1;
-		elseif kills > 150 and kills < 200 then
+		elseif kills > 150 and kills <= 200 then
 			killsPoints = 2;
-		elseif kills > 200 and kills < 300 then
+		elseif kills > 200 and kills <= 300 then
 			killsPoints = 3;
-		elseif kills > 300 and kills < 850 then
+		elseif kills > 300 and kills <= 850 then
 			killsPoints = 4;
-		elseif kills > 850 and kills < 1500 then
+		elseif kills > 850 and kills <= 1500 then
 			killsPoints = 6;
-		elseif kills > 1500 and kills < 2500 then
+		elseif kills > 1500 and kills <= 2500 then
 			killsPoints = 8;
-		elseif kills > 2500 and kills < 3500 then
+		elseif kills > 2500 and kills <= 3500 then
 			killsPoints = 10;
-		elseif kills > 3500 and kills < 5000 then
+		elseif kills > 3500 and kills <= 5000 then
 			killsPoints = 14;
-		elseif kills > 5000 and kills < 7000 then
+		elseif kills > 5000 and kills <= 7000 then
 			killsPoints = 18;
-		elseif kills > 7000 and kills < 9000 then
+		elseif kills > 7000 and kills <= 9000 then
 			killsPoints = 20;
-		elseif kills > 9000 and kills < 11000 then
+		elseif kills > 9000 and kills <= 11000 then
 			killsPoints = 22;
-		elseif kills > 11000 and kills < 13000 then
+		elseif kills > 11000 and kills <= 13000 then
 			killsPoints = 24;
-		elseif kills > 13000 and kills < 16000 then
+		elseif kills > 13000 and kills <= 16000 then
 			killsPoints = 26;
-		elseif kills > 16000 and kills < 20000 then
+		elseif kills > 16000 and kills <= 20000 then
 			killsPoints = 30;
-		elseif kills > 20000 and kills < 24000 then
+		elseif kills > 20000 and kills <= 24000 then
 			killsPoints = 32;
-		elseif kills > 24000 and kills < 28000 then
+		elseif kills > 24000 and kills <= 28000 then
 			killsPoints = 34;
-		elseif kills > 28000 and kills < 30000 then
+		elseif kills > 28000 and kills <= 30000 then
 			killsPoints = 36;
-		elseif kills > 30000 and kills < 34000 then
+		elseif kills > 30000 and kills <= 34000 then
 			killsPoints = 38;
-		elseif kills > 34000 and kills < 40000 then
+		elseif kills > 34000 and kills <= 40000 then
 			killsPoints = 40;
-		elseif kills > 40000 and kills < 50000 then
+		elseif kills > 40000 and kills <= 50000 then
 			killsPoints = 45;
-		elseif kills > 50000 and kills < 60000 then
+		elseif kills > 50000 and kills <= 60000 then
 			killsPoints = 50;
-		elseif kills > 60000 and kills < 70000 then
+		elseif kills > 60000 and kills <= 70000 then
 			killsPoints = 55;
-		elseif kills > 70000 and kills < 80000 then
+		elseif kills > 70000 and kills <= 80000 then
 			killsPoints = 60;
-		elseif kills > 80000 and kills < 90000 then
+		elseif kills > 80000 and kills <= 90000 then
 			killsPoints = 65;
-		elseif kills > 90000 and kills < 100000 then
+		elseif kills > 90000 and kills <= 100000 then
 			killsPoints = 70;
-		elseif kills > 100000 and kills < 150000 then
+		elseif kills > 100000 and kills <= 150000 then
 			killsPoints = 80;
-		elseif kills > 150000 and kills < 200000 then
+		elseif kills > 150000 and kills <= 200000 then
 			killsPoints = 90;
-		elseif kills > 200000 and kills < 250000 then
+		elseif kills > 200000 and kills <= 250000 then
 			killsPoints = 100;
 		elseif kills >= 250000 then
 			killsPoints = 110;

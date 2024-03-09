@@ -6,16 +6,6 @@ require "factions_main"
 -- Explanation about this file.
 -- this file contains the button utils for FactionsGUI
 
--- Check if the player can capture the safehouse
-local canBeCaptured = function(square, faction)
-	-- Check if enemies is on the house or zombies
-	if FactionsMain.isSomeoneInside(square, faction) then
-		return getText("IGUI_Safehouse_SomeoneInside");
-	end
-
-	return FactionsMain.canBeCaptured(square);
-end
-
 -- Create the safehouse button datas, called when the factions_gui shows up
 -- we need this to update the global variables
 FactionsMain.createButton = function(button, safehouse, square, price)
@@ -37,48 +27,44 @@ FactionsMain.createButton = function(button, safehouse, square, price)
 				button.internal = "View";
 			else
 				button.internal = "Capture";
-
 				-- Check if someone is inside
 				if FactionsMain.isSomeoneInside(square, faction) then
 					button:setEnable(false);
 					button:setTooltip(getText("IGUI_Safehouse_SomeoneInside"));
 					-- Check if you have the points to capture
-				elseif available < price or available == 0 then
+				elseif tonumber(available) >= tonumber(price) then
 					button:setEnable(false);
 					button:setTooltip(getText("UI_Text_SafehouseNotEnoughPoints", available, price))
 					-- Shows the points available for capturing
 				else
 					button:setTooltip(getText("UI_Text_SafehousePointsAvailable", price, available))
+					button:setEnable(true);
 				end
 			end
 			-- Check if is a building
 		elseif building then
-			-- Check if is enabled
-			local captureEnable = canBeCaptured(square, faction);
-			if captureEnable then
-				-- Check if is residential
-				if FactionsMain.isResidential(square) then
-					button.internal = "Capture_Residential"
-				else
-					button.internal = "Capture_Non_Residential"
-				end
+			-- Check if is residential
+			if FactionsMain.isResidential(square) then
+				button.internal = "Capture_Residential"
+			else
+				button.internal = "Capture_Non_Residential"
+			end
 
-				-- Check if can be captured and enable the button and show the points available
-				if captureEnable == "valid" then
-					button:setEnable(true);
-					captureEnable = getText("UI_Text_SafehousePointsAvailable", price, available)
-					-- Check if doesnt have price enough
-				elseif available < price then
-					button:setEnable(false);
-					-- Change de error to be the not enough points
-					captureEnable = getText("UI_Text_SafehouseNotEnoughPoints", available, price)
-				else
-					-- Others errors just disable the button
-					button:setEnable(false);
-				end
-
-				-- Show the result message
-				button:setTooltip(captureEnable);
+			-- Check if faction has points enough to capture this safehouse
+			local pointsEnough = tonumber(available) >= tonumber(price);
+			-- Check if can be captured and enable the button and show the points available
+			if button.captureMessage ~= "valid" then
+				button:setEnable(false);
+				button.captureMessage = getText(button.captureMessage);
+			elseif pointsEnough then
+				print("WTFFF")
+				button:setEnable(true);
+				button.captureMessage = getText("UI_Text_SafehousePointsAvailable", price, available)
+				-- Check if doesnt have price enough
+			elseif not pointsEnough then
+				button:setEnable(false);
+				-- Change de error to be the not enough points
+				button.captureMessage = getText("UI_Text_SafehouseNotEnoughPoints", available, price)
 			end
 		end
 	end
