@@ -30,10 +30,8 @@ option Factions.DaysOfWeek
 
 option Factions.Timezone
 {
-    type = integer,
-    min = -24,
-    max = 24,
-    default = 3,
+    type = string,
+    default = 0,
 
     page = Factions,
     translation = Factions_Timezone,

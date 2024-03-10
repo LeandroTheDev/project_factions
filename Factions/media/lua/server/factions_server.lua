@@ -8,43 +8,32 @@ local FactionsCommands = {};
 local ServerSafehouseData = {};
 
 -- Default Values
-factions.Timezone = 0;
-factions.Start = 20
-factions.End = 21
-factions.Days = {};
+local days = {};
 factions.ResetData = false;
 
 -- Get the days, hours from the OS time based in timezone
-local function getCurrentTime(timezone, timestamp)
+local function getCurrentTime()
 	local function remainder(a, b)
 		return a - math.floor(a / b) * b;
 	end
-	if not timezone then
-		timezone = SSRLoader.timezone;
-	end
-	local tm = {};
+	local tm          = {};
 	local daysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-	local seconds, minutes, hours, days, year, month;
+	local minutes, hours, days, year, month;
 	local dayOfWeek;
-
-	if timestamp then
-		seconds = math.floor(timestamp) + (timezone or 0) * 3600;
-	else
-		seconds = getTimestamp() + (timezone or 0) * 3600;
-	end
+	local seconds     = getTimestamp() + 0 * 3600;
 	-- Calculate minutes
-	minutes   = math.floor(seconds / 60);
-	seconds   = seconds - (minutes * 60);
+	minutes           = math.floor(seconds / 60);
+	seconds           = seconds - (minutes * 60);
 	-- Calculate hours
-	hours     = math.floor(minutes / 60);
-	minutes   = minutes - (hours * 60);
+	hours             = math.floor(minutes / 60);
+	minutes           = minutes - (hours * 60);
 	-- Calculate days
-	days      = math.floor(hours / 24);
-	hours     = hours - (days * 24);
+	days              = math.floor(hours / 24);
+	hours             = hours - (days * 24);
 
 	-- Unix time starts in 1970 on a Thursday
-	year      = 1970;
-	dayOfWeek = 4;
+	year              = 1970;
+	dayOfWeek         = 4;
 
 	while true do
 		local leapYear = remainder(year, 4) == 0 and (remainder(year, 100) ~= 0 or remainder(year, 400) == 0);
@@ -93,6 +82,7 @@ local function getCurrentTime(timezone, timestamp)
 	tm.tm_sec  = seconds;
 	tm.tm_min  = minutes;
 	tm.tm_hour = hours;
+	tm.tm_hour = tm.tm_hour + tonumber(SandboxVars.Factions.Timezone);
 	tm.tm_mday = days + 1;
 	tm.tm_mon  = month;
 	tm.tm_year = year;
@@ -102,15 +92,12 @@ end
 
 -- Simple read the Sandbox options
 factions.readOptions = function()
-	factions.Start = SandboxVars.Factions.TimeToEnableCapture;
-	factions.End = SandboxVars.Factions.TimeToDisableCapture;
-	factions.Timezone = SandboxVars.Factions.Timezone;
 	local stringDays = SandboxVars.Factions.DaysOfWeek;
 	-- Swipe the days into a variable
 	for day in string.gmatch(stringDays, "%d+") do
 		-- Get the day number
 		local dayNumber = tonumber(day);
-		table.insert(factions.Days, dayNumber);
+		table.insert(days, dayNumber);
 	end
 
 	print("[Factions] Fully Started")
@@ -119,7 +106,7 @@ end
 -- Returns a boolean based on the parameter actualDay and enabled Days from factions
 factions.checkDay = function(actualDay)
 	-- Swipe the Days array
-	for _, day in ipairs(factions.Days) do
+	for _, day in ipairs(days) do
 		-- Check if days exist in the array
 		if day == actualDay then
 			return true
@@ -131,12 +118,9 @@ end
 -- Check if capture is enabled, returns true if is enabled, false for not enabled
 -- ServerSafehouseData is automatically reseted by this function
 factions.checkIfCaptureIsEnabled = function()
-	local currentTime = getCurrentTime(factions.Timezone);
+	local currentTime = getCurrentTime();
 	-- Check if is not time to capture
-	if (currentTime.tm_hour >= factions.End or currentTime.tm_hour < factions.Start) then
-		factions.ResetData = true;
-		return false
-	else
+	if (currentTime.tm_hour >= SandboxVars.Factions.TimeToEnableCapture and currentTime.tm_hour < SandboxVars.Factions.TimeToDisableCapture) then
 		-- Check if is day for capture
 		if factions.checkDay(currentTime.tm_wday) then
 			-- Reset Data if necessary
@@ -146,6 +130,8 @@ factions.checkIfCaptureIsEnabled = function()
 		factions.ResetData = true;
 		return false
 	end
+	factions.ResetData = true;
+	return false
 end
 
 -- Factions Commands
@@ -211,27 +197,44 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 		ServerSafehouseData["SafehouseCaptureTimer"][safehouseLocation.X .. safehouseLocation.Y] = os.time();
 		-- Alerting the players from the safehouse
 		for i = safehouseBeenCaptured:getPlayers():size() - 1, 0, -1 do
-			local safehousePlayer = getPlayerByUserName(safehouseBeenCaptured:getPlayers():get(i));
-			-- Check if player is online
-			if safehousePlayer ~= nil then
-				-- Alert the player that the safehouse has been lost
-				sendServerCommand(safehousePlayer, "ServerSafehouse", "alert",
-					{
-						safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
-						type = 1 -- Under Attack
-					});
+			-- Get all online players
+			local onlinePlayers = getOnlinePlayers();
+			-- Swipe it
+			for j = 1, onlinePlayers:size() do
+				-- Get the actual player
+				local selectedPlayer = onlinePlayers:get(j - 1)
+				-- Check if safehouse player is the same as the swiped player
+				if selectedPlayer:getUsername() == safehouseBeenCaptured:getPlayers():get(i) then
+					-- Alert the player that the safehouse has been lost
+					sendServerCommand(selectedPlayer, "ServerSafehouse", "alert",
+						{
+							safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+							type = 1 -- Under Attack
+						});
+					break;
+				end
 			end
 		end
 		-- Alert capturers that hes are capturing
 		local playersFaction = playerFaction:getPlayers();
 		for _, playerUsername in ipairs(playersFaction) do
-			local factionPlayer = getPlayerFromUsername(playerUsername);
-			-- Alert the player that the safehouse has been captured
-			sendServerCommand(factionPlayer, "ServerSafehouse", "alert",
-				{
-					safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
-					type = 3
-				});
+			-- Get all online players
+			local onlinePlayers = getOnlinePlayers();
+			-- Swipe it
+			for j = 1, onlinePlayers:size() do
+				-- Get the actual player
+				local selectedPlayer = onlinePlayers:get(j - 1)
+				-- Check if safehouse player is the same as the swiped player
+				if selectedPlayer:getUsername() == playerUsername then
+					-- Alert the player that the safehouse has been captured
+					sendServerCommand(selectedPlayer, "ServerSafehouse", "alert",
+						{
+							safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+							type = 3
+						});
+					break;
+				end
+			end
 		end
 		return;
 	end
@@ -248,27 +251,44 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 		ServerSafehouseData["SafehouseCaptureTimer"][safehouseLocation.X .. safehouseLocation.Y] = os.time();
 		-- Alerting the players from the safehouse
 		for i = safehouseBeenCaptured:getPlayers():size() - 1, 0, -1 do
-			local safehousePlayer = getPlayerByUserName(safehouseBeenCaptured:getPlayers():get(i));
-			-- Check if player is online
-			if safehousePlayer ~= nil then
-				-- Alert the player that the safehouse has been lost
-				sendServerCommand(safehousePlayer, "ServerSafehouse", "alert",
-					{
-						safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
-						type = 1 -- Under Attack
-					});
+			-- Get all online players
+			local onlinePlayers = getOnlinePlayers();
+			-- Swipe it
+			for j = 1, onlinePlayers:size() do
+				-- Get the actual player
+				local selectedPlayer = onlinePlayers:get(j - 1)
+				-- Check if safehouse player is the same as the swiped player
+				if selectedPlayer:getUsername() == safehouseBeenCaptured:getPlayers():get(i) then
+					-- Alert the player that the safehouse has been lost
+					sendServerCommand(selectedPlayer, "ServerSafehouse", "alert",
+						{
+							safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+							type = 1 -- Under Attack
+						});
+					break;
+				end
 			end
 		end
 		-- Alert capturers that hes are capturing
 		local playersFaction = playerFaction:getPlayers();
 		for _, playerUsername in ipairs(playersFaction) do
-			local factionPlayer = getPlayerFromUsername(playerUsername);
-			-- Alert the player that the safehouse has been captured
-			sendServerCommand(factionPlayer, "ServerSafehouse", "alert",
-				{
-					safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
-					type = 3
-				});
+			-- Get all online players
+			local onlinePlayers = getOnlinePlayers();
+			-- Swipe it
+			for j = 1, onlinePlayers:size() do
+				-- Get the actual player
+				local selectedPlayer = onlinePlayers:get(j - 1)
+				-- Check if safehouse player is the same as the swiped player
+				if selectedPlayer:getUsername() == playerUsername then
+					-- Alert the player that the safehouse has been captured
+					sendServerCommand(selectedPlayer, "ServerSafehouse", "alert",
+						{
+							safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+							type = 3
+						});
+					break;
+				end
+			end
 		end
 	else
 		--Contact player saying that is not time yet
@@ -313,43 +333,90 @@ function FactionsCommands.onCaptureSafehouse(module, command, player, args)
 		return
 	end
 
-	-- Releasing Safehouse and alerting all enemies
+	-- Send a message to the player started the capture
+	-- to finalize it, sad but its necessary
+	sendServerCommand(player, "ServerSafehouse", "safehouseCaptureFinish",
+		{
+			X = safehouseBeenCaptured:getX(),
+			Y = safehouseBeenCaptured:getY(),
+			W = safehouseBeenCaptured:getW(),
+			H = safehouseBeenCaptured:getH(),
+			owner = playerFaction:getOwner(),
+		});
+
+	-- Alert enemies that the safehouse has been captured
 	for i = safehouseBeenCaptured:getPlayers():size() - 1, 0, -1 do
-		local safehousePlayer = getPlayerByUserName(safehouseBeenCaptured:getPlayers():get(i));
-		-- Check if player is online
-		if safehousePlayer ~= nil then
-			-- Alert the player that the safehouse has been lost
-			sendServerCommand(safehousePlayer, "ServerSafehouse", "alert",
-				{
-					safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
-					type = 2
-				});
+		-- Get all online players
+		local onlinePlayers = getOnlinePlayers();
+		-- Swipe it
+		for j = 1, onlinePlayers:size() do
+			-- Get the actual player
+			local selectedPlayer = onlinePlayers:get(j - 1)
+			-- Check if safehouse player is the same as the swiped player
+			if selectedPlayer:getUsername() == safehouseBeenCaptured:getPlayers():get(i) then
+				-- Alert the player that the safehouse has been lost
+				sendServerCommand(selectedPlayer, "ServerSafehouse", "alert",
+					{
+						safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+						type = 2
+					});
+				break;
+			end
 		end
-		-- Remove player use the Username String so we need to get the username again
-		safehouseBeenCaptured:removePlayer(safehouseBeenCaptured:getPlayers():get(i));
 	end
-
-	-- Capturing Safehouse
-	safehouseBeenCaptured:setOwner(playerFaction:getOwner());
-	safehouseBeenCaptured:syncSafehouse();
-
-	-- Syncing Data
-	FactionsMain.syncFactionMembers(safehouseBeenCaptured, player);
 
 	-- Get the faction usernames
 	local playersFaction = playerFaction:getPlayers();
 	for _, playerUsername in ipairs(playersFaction) do
-		local factionPlayer = getPlayerFromUsername(playerUsername);
-		-- Alert the player that the safehouse has been captured
-		sendServerCommand(factionPlayer, "ServerSafehouse", "alert",
-			{
-				safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
-				type = 4
-			});
+		-- Get all online players
+		local onlinePlayers = getOnlinePlayers();
+		-- Swipe it
+		for j = 1, onlinePlayers:size() do
+			-- Get the actual player
+			local selectedPlayer = onlinePlayers:get(j - 1)
+			-- Check if safehouse player is the same as the swiped player
+			if selectedPlayer:getUsername() == playerUsername then
+				-- Alert the player that the safehouse has been captured
+				sendServerCommand(selectedPlayer, "ServerSafehouse", "alert",
+					{
+						safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+						type = 4
+					});
+				--Finish
+				sendServerCommand(selectedPlayer, "ServerSafehouse", "safehouseCaptured",
+					{
+						X = safehouseBeenCaptured:getX(),
+						Y = safehouseBeenCaptured:getY(),
+						W = safehouseBeenCaptured:getW(),
+						H = safehouseBeenCaptured:getH(),
+						owner = playerFaction:getOwner(),
+					});
+				break;
+			end
+		end
 	end
-	--Finish
-	sendServerCommand(player, "ServerSafehouse", "safehouseCaptured",
-		{ validation = true });
+
+	-- Owner doesnt belong to playerFactions players so we need to send a message
+	-- to him manually
+	-- Get all online players
+	local onlinePlayers = getOnlinePlayers();
+	-- Swipe it
+	for i = 1, onlinePlayers:size() do
+		local selectedPlayer = onlinePlayers:get(i - 1)
+		if selectedPlayer:getUsername() == playerFaction:getOwner() then
+			--Finish
+			sendServerCommand(selectedPlayer, "ServerSafehouse", "safehouseCaptured",
+				{
+					X = safehouseBeenCaptured:getX(),
+					Y = safehouseBeenCaptured:getY(),
+					W = safehouseBeenCaptured:getW(),
+					H = safehouseBeenCaptured:getH(),
+					owner = playerFaction:getOwner(),
+				});
+		end
+	end
+
+	-- Server Log
 	print("[Factions] " ..
 		player:getUsername() ..
 		" captured a safehouse in X: " .. playerLocation:getX() .. " Y: " .. playerLocation:getY());

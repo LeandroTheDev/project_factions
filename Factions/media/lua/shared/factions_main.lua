@@ -310,7 +310,6 @@ if isClient() then
 		local player = getPlayer()
 		--Check nulls
 		if lastZombieKills == nil then lastZombieKills = player:getZombieKills() end
-		if before15kills == nil then before15kills = player:getZombieKills() end
 		--Get Actual Zombie Kills
 		actualZombieKills = player:getZombieKills()
 		--Check if last kills is lower than actual kills

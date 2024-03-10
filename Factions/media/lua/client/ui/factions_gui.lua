@@ -12,6 +12,7 @@ FactionsGUI.btnText = { getText("UI_Text_SafehouseClaim"), getText("UI_Text_Safe
 FactionsGUI.captureTime = 50000;
 FactionsGUI.updateTime = 500;
 FactionsGUI.minimized = true;
+FactionsGUI.finishedCapture = false;
 
 local safehouseUI = nil;
 
@@ -64,9 +65,12 @@ function Badge:update() -- Updates every ticks
 		elseif self.state == 1 then
 			-- In the final of the capture
 			if self.timer > FactionsGUI.captureTime then
+				-- Spam check for not spamming the server with requisitions
+				if FactionsGUI.finishedCapture then return end
 				-- We communicate with the server saying you finish capturing,
 				-- the server will handle if makes sense the capture
 				sendClientCommand("ServerFactions", "onCaptureSafehouse", nil)
+				FactionsGUI.finishedCapture = true;
 			else
 				self.timer = self.timer + delta
 			end
@@ -386,8 +390,9 @@ function FactionsGUI.onButtonClick() -- On the button click
 		safehouseUI:initialise()
 		safehouseUI:addToUIManager()
 	elseif internal == "Capture" then -- Capture the enemy safehouse button
+		FactionsGUI.finishedCapture = false;
 		-- Ask the server that you are trying to capture the safehouse
-		sendClientCommand("ServerFactions", "captureSafehouse", nil)
+		sendClientCommand("ServerFactions", "captureSafehouse", nil);
 	elseif internal == "Capture_Empty" then -- Capture Residential button
 		local player = getPlayer()
 		local square = player:getSquare()
@@ -523,26 +528,11 @@ function FactionsGUI:startCapture() -- Start the capturing system
 	self.button:setTooltip(getTextOrNull("UI_Text_SafehouseProgress") or "Capture in progress");
 	-- Add the sound for the player
 	getSoundManager():PlaySound("baseCaptureStart", false, 1.0)
-	-- Warn owners that their base is under attack
-	SyncClient.sendCommand('FactionsUI', 'sendAlert_1')
 
 	-- Add the timer for the capture
 	self.badge.timer = FactionsGUI.captureTime;
 	self.badge.timestamp = getTimeInMillis()
 	self.badge.capture = true;
-end
-
-function FactionsGUI:captureFinished() -- Capturing Finished
-	-- Add the sound for the player that capture finish
-	getSoundManager():PlaySound("baseCaptureFinish", false, 1.0)
-	-- Update
-	local player = getPlayer();
-	local safehouse = SafeHouse.getSafeHouse(player:getSquare())
-	if safehouse then
-		safehouse:syncSafehouse();
-	end
-	-- Reload UI
-	FactionsMain.unloadUI();
 end
 
 local function OnServerCommand(module, command, arguments)
@@ -555,13 +545,51 @@ local function OnServerCommand(module, command, arguments)
 			getPlayer():Say(getText("UI_Text_SafehouseNotTimeCapture"))
 		end
 	end
-	--Safehouse Captured Sync
+	-- Safehouse Captured Sync
 	if module == "ServerSafehouse" and command == "safehouseCaptured" then
-		if arguments.validation then
-			FactionsMain.GUI:captureFinished();
-		else
-			getPlayer():Say("Cheat Detected")
+		-- Add the sound for the player that capture finish
+		getSoundManager():PlaySound("baseCaptureFinish", false, 1.0)
+		local safehouseBeenCaptured = SafeHouse.getSafeHouse(arguments.X, arguments.Y, arguments.W, arguments.H);
+		if safehouseBeenCaptured then
+			safehouseBeenCaptured:syncSafehouse();
 		end
+	end
+
+	-- Indie stone why? for some reason safehouses needs to be handled
+	-- by the client??????????? why indie stone this is so dangerous....
+	if module == "ServerSafehouse" and command == "safehouseCaptureFinish" then
+		local player = getPlayer();
+		local safehouseBeenCaptured = SafeHouse.getSafeHouse(arguments.X, arguments.Y, arguments.W, arguments.H);
+		local faction = FactionsMain.getFaction(player:getUsername());
+
+		-- Check if player has a faction
+		if faction == nil then return end;
+
+		-- Check if player is in a safehouse
+		if safehouseBeenCaptured == nil then
+			FactionsMain.unloadUI();
+			return;
+		end
+
+		-- Releasing all players from safehouse
+		for i = safehouseBeenCaptured:getPlayers():size() - 1, 0, -1 do
+			safehouseBeenCaptured:removePlayer(safehouseBeenCaptured:getPlayers():get(i));
+		end
+
+		-- Capturing Safehouse
+		safehouseBeenCaptured:setOwner(faction:getOwner());
+
+		-- Sync throught players
+		safehouseBeenCaptured:syncSafehouse();
+
+		-- Syncing Data
+		FactionsMain.syncFactionMembers(safehouseBeenCaptured, player);
+
+		-- Sync again throught players
+		safehouseBeenCaptured:syncSafehouse();
+
+		-- Update UI
+		FactionsMain.unloadUI();
 	end
 
 	-- Empty safehouse capture
@@ -571,7 +599,7 @@ local function OnServerCommand(module, command, arguments)
 				return
 			end
 			-- Sync safehouse to get the updated safehouse
-			temporaryCaptureSafehouse:syncSafehouse()
+			temporaryCaptureSafehouse:syncSafehouse();
 		end
 		temporaryCaptureSafehouse = nil
 		-- Reload UI

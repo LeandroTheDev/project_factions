@@ -1,74 +1,9 @@
 ---@diagnostic disable: undefined-global
-require "Communications/SyncClient"
 require "ui/factions_gui"
 require "factions_main"
 
 -- Explanation about this file.
 -- this file contains the button utils for FactionsGUI
-
--- Create the safehouse button datas, called when the factions_gui shows up
--- we need this to update the global variables
-FactionsMain.createButton = function(button, safehouse, square, price)
-	local playerObj = getPlayer();
-	-- Player faction
-	local faction = FactionsMain.getFaction(playerObj:getUsername());
-	-- Points used
-	local used = FactionsMain.getUsedPoints(playerObj:getUsername());
-	-- Points available
-	local available = FactionsMain.Points - used;
-
-	-- Check if faction exist
-	if faction then
-		-- Get the building from the actual position of the player
-		local building = square:getBuilding();
-		-- Check if the safehouse exist
-		if safehouse then
-			if FactionsMain.getSafehouseTeam(square) then
-				button.internal = "View";
-			else
-				button.internal = "Capture";
-				-- Check if someone is inside
-				if FactionsMain.isSomeoneInside(square, faction) then
-					button:setEnable(false);
-					button:setTooltip(getText("IGUI_Safehouse_SomeoneInside"));
-					-- Check if you have the points to capture
-				elseif tonumber(available) >= tonumber(price) then
-					button:setEnable(false);
-					button:setTooltip(getText("UI_Text_SafehouseNotEnoughPoints", available, price))
-					-- Shows the points available for capturing
-				else
-					button:setTooltip(getText("UI_Text_SafehousePointsAvailable", price, available))
-					button:setEnable(true);
-				end
-			end
-			-- Check if is a building
-		elseif building then
-			-- Check if is residential
-			if FactionsMain.isResidential(square) then
-				button.internal = "Capture_Residential"
-			else
-				button.internal = "Capture_Non_Residential"
-			end
-
-			-- Check if faction has points enough to capture this safehouse
-			local pointsEnough = tonumber(available) >= tonumber(price);
-			-- Check if can be captured and enable the button and show the points available
-			if button.captureMessage ~= "valid" then
-				button:setEnable(false);
-				button.captureMessage = getText(button.captureMessage);
-			elseif pointsEnough then
-				print("WTFFF")
-				button:setEnable(true);
-				button.captureMessage = getText("UI_Text_SafehousePointsAvailable", price, available)
-				-- Check if doesnt have price enough
-			elseif not pointsEnough then
-				button:setEnable(false);
-				-- Change de error to be the not enough points
-				button.captureMessage = getText("UI_Text_SafehouseNotEnoughPoints", available, price)
-			end
-		end
-	end
-end
 
 -- Treatment for resolutions change
 FactionsMain.onResolutionChange = function()
@@ -189,21 +124,70 @@ end
 
 -- Alert the online players specific behaviours
 FactionsMain.alert = function(safehouse, type)
+	-- Add the text to the player
+	local function addLineToChat(message, color)
+		if not isClient() then return end
+
+
+		local options = {
+			showTime = false,
+			serverAlert = false,
+			showAuthor = false,
+		};
+
+		if options.showTime then
+			local dateStamp = Calendar.getInstance():getTime();
+			local dateFormat = SimpleDateFormat.new("H:mm");
+			if dateStamp and dateFormat then
+				message = color .. "[" .. tostring(dateFormat:format(dateStamp) or "N/A") .. "]  " .. message;
+			end
+		else
+			message = color .. message;
+		end
+
+		local msg = {
+			getText = function(_)
+				return message;
+			end,
+			getTextWithPrefix = function(_)
+				return message;
+			end,
+			isServerAlert = function(_)
+				return options.serverAlert;
+			end,
+			isShowAuthor = function(_)
+				return options.showAuthor;
+			end,
+			getAuthor = function(_)
+				return tostring(getPlayer():getUsername());
+			end,
+			setShouldAttractZombies = function(_)
+				return false
+			end,
+			setOverHeadSpeech = function(_)
+				return false
+			end,
+		};
+
+		if not ISChat.instance then return; end;
+		if not ISChat.instance.chatText then return; end;
+		ISChat.addLineInChat(msg, 0);
+	end
 	-- Under attack
 	if type == 1 then
-		addLineInChat(getText("UI_Text_SafehouseUnderAttack", safehouse), 0);
+		addLineToChat(getText("UI_Text_SafehouseUnderAttack", safehouse), "<RGB:" .. "255,0,0" .. ">");
 		getSoundManager():PlaySound("baseUnderAttackSound", false, 1.0);
 		-- Is being captured
 	elseif type == 3 then
-		addLineInChat(getText("UI_Text_SafehouseIsBeingCaptured", safehouse), 0);
+		addLineToChat(getText("UI_Text_SafehouseIsBeingCaptured", safehouse), "<RGB:" .. "255,255,0" .. ">");
 		getSoundManager():PlaySound("baseCaptureStart", false, 1.0);
 	else
 		-- Safehouse lost
 		if type == 2 then
-			addLineInChat(getText("UI_Text_SafehouseWasLost", safehouse), 0);
+			addLineToChat(getText("UI_Text_SafehouseWasLost", safehouse), "<RGB:" .. "255,0,0" .. ">");
 			-- Safehouse success captured
 		elseif type == 4 then
-			addLineInChat(getText("UI_Text_SafehouseWasCaptured", safehouse), 0);
+			addLineToChat(getText("UI_Text_SafehouseWasCaptured", safehouse), "<RGB:" .. "0,255,0" .. ">");
 		end
 		getSoundManager():PlaySound("baseCaptureFinish", false, 1.0);
 	end
