@@ -209,7 +209,7 @@ FactionsMain.canBeCaptured = function(square)
 
 	-- Check if residential is allowed
 	local flag = getServerOptions():getBoolean("SafehouseAllowNonResidential");
-	if flag == false then
+	if not flag then
 		if not FactionsMain.isResidential(square) then
 			return getText("IGUI_Safehouse_NotHouse");
 		end
@@ -337,72 +337,48 @@ if isClient() then
 end
 
 if isServer() then
+	-- The functions with client and server communication is stored here
 	local ServerFactionCommands = {};
+	-- Used to store the factions points, auto save in moddata if changed,
+	-- this is a list of the faction names that contains a object:
+	-- [
+	--		"Test Factions": {
+	--			"zombieKills": 100, # Total factions zombie kills
+	--			"points": 10, # This cannot be changed, its calculated by the faction kill
+	--			"specialPoints": 2, # Used to increase faction points without using the "points"
+	-- 		}
+	-- ]
 	local ServerFactionPoints = {};
 
 	--Receives from server and do a command
 	local function zombiesKillPoints(kills)
 		local killsPoints = 0;
-		if kills > 50 and kills <= 150 then
-			killsPoints = 1;
-		elseif kills > 150 and kills <= 200 then
-			killsPoints = 2;
-		elseif kills > 200 and kills <= 300 then
-			killsPoints = 3;
-		elseif kills > 300 and kills <= 850 then
-			killsPoints = 4;
-		elseif kills > 850 and kills <= 1500 then
-			killsPoints = 6;
-		elseif kills > 1500 and kills <= 2500 then
-			killsPoints = 8;
-		elseif kills > 2500 and kills <= 3500 then
-			killsPoints = 10;
-		elseif kills > 3500 and kills <= 5000 then
-			killsPoints = 14;
-		elseif kills > 5000 and kills <= 7000 then
-			killsPoints = 18;
-		elseif kills > 7000 and kills <= 9000 then
-			killsPoints = 20;
-		elseif kills > 9000 and kills <= 11000 then
-			killsPoints = 22;
-		elseif kills > 11000 and kills <= 13000 then
-			killsPoints = 24;
-		elseif kills > 13000 and kills <= 16000 then
-			killsPoints = 26;
-		elseif kills > 16000 and kills <= 20000 then
-			killsPoints = 30;
-		elseif kills > 20000 and kills <= 24000 then
-			killsPoints = 32;
-		elseif kills > 24000 and kills <= 28000 then
-			killsPoints = 34;
-		elseif kills > 28000 and kills <= 30000 then
-			killsPoints = 36;
-		elseif kills > 30000 and kills <= 34000 then
-			killsPoints = 38;
-		elseif kills > 34000 and kills <= 40000 then
-			killsPoints = 40;
-		elseif kills > 40000 and kills <= 50000 then
-			killsPoints = 45;
-		elseif kills > 50000 and kills <= 60000 then
-			killsPoints = 50;
-		elseif kills > 60000 and kills <= 70000 then
-			killsPoints = 55;
-		elseif kills > 70000 and kills <= 80000 then
-			killsPoints = 60;
-		elseif kills > 80000 and kills <= 90000 then
-			killsPoints = 65;
-		elseif kills > 90000 and kills <= 100000 then
-			killsPoints = 70;
-		elseif kills > 100000 and kills <= 150000 then
-			killsPoints = 80;
-		elseif kills > 150000 and kills <= 200000 then
-			killsPoints = 90;
-		elseif kills > 200000 and kills <= 250000 then
-			killsPoints = 100;
-		elseif kills >= 250000 then
-			killsPoints = 110;
+
+		-- Converts the sandbox to a readable table
+		local configuration = {}
+		for pair in string.gmatch(SandboxVars.Factions.PointsPerZombieKills, "([^;]+)") do
+			local zombieToKill, pointsToReceive = string.match(pair, "(%d+)=(%d+)");
+			-- Converting to number
+			zombieToKill = tonumber(zombieToKill);
+			pointsToReceive = tonumber(pointsToReceive);
+
+			-- Inserting into the configuration table
+			table.insert(configuration, { zombieToKill = zombieToKill, pointsToReceive = pointsToReceive });
 		end
-		return killsPoints
+
+		-- Swipe all configurations files to receive the exact kill points
+		for i = #configuration, 1, -1 do
+			-- If you have more kills than the configuration
+			if kills >= configuration[i].zombieToKill then
+				-- Add the points to the final result
+				killsPoints = configuration[i].pointsToReceive;
+			else -- If not
+				-- Receive the actual points from the swipe
+				break;
+			end
+		end
+		
+		return killsPoints;
 	end
 
 	-- Zombie Kill
@@ -419,12 +395,13 @@ if isServer() then
 		if ServerFactionPoints[playerFaction:getName()] == nil then ServerFactionPoints[playerFaction:getName()] = {} end
 		if ServerFactionPoints[playerFaction:getName()]["zombieKills"] == nil then ServerFactionPoints[playerFaction:getName()]["zombieKills"] = 0 end
 		if ServerFactionPoints[playerFaction:getName()]["points"] == nil then ServerFactionPoints[playerFaction:getName()]["points"] = 0 end
+		if ServerFactionPoints[playerFaction:getName()]["specialPoints"] == nil then ServerFactionPoints[playerFaction:getName()]["specialPoints"] = 0 end
 
 		-- Add new datas
 		ServerFactionPoints[playerFaction:getName()]["zombieKills"] = ServerFactionPoints[playerFaction:getName()]
 			["zombieKills"] + args.quantity;
 		ServerFactionPoints[playerFaction:getName()]["points"] = zombiesKillPoints(ServerFactionPoints
-			[playerFaction:getName()]["zombieKills"]);
+			[playerFaction:getName()]["zombieKills"]) + ServerFactionPoints[playerFaction:getName()]["specialPoints"];
 
 		-- Send players from factions the new updated points
 		for i = playerFaction:getPlayers():size() - 1, 0, -1 do
@@ -437,36 +414,83 @@ if isServer() then
 	-- Get factions points
 	function ServerFactionCommands.getPoints(module, command, player, args)
 		-- Receive player faction
-		local playerFaction = FactionsMain.getFaction(player:getUsername())
+		local playerFaction = FactionsMain.getFaction(player:getUsername());
 
 		-- Check if player has faction
 		if playerFaction == nil then
-			return
+			return;
 		end
 
 		-- Null Check
 		if ServerFactionPoints[playerFaction:getName()] == nil then ServerFactionPoints[playerFaction:getName()] = {} end
 		if ServerFactionPoints[playerFaction:getName()]["zombieKills"] == nil then ServerFactionPoints[playerFaction:getName()]["zombieKills"] = 0 end
 		if ServerFactionPoints[playerFaction:getName()]["points"] == nil then ServerFactionPoints[playerFaction:getName()]["points"] = 0 end
+		if ServerFactionPoints[playerFaction:getName()]["specialPoints"] == nil then ServerFactionPoints[playerFaction:getName()]["specialPoints"] = 0 end
 
 		-- Send the datas
 		sendServerCommand(player, "ServerFactionPoints", "receivePoints",
-			{ points = ServerFactionPoints[playerFaction:getName()]["points"] });
+			{
+				points = ServerFactionPoints[playerFaction:getName()]["points"] +
+					ServerFactionPoints[playerFaction:getName()]["specialPoints"]
+			});
 	end
 
-	--Remove os pontos da facção
+	-- Add special points
+	function ServerFactionCommands.addSpecialPoints(module, command, player, args)
+		-- Receive player faction
+		local playerFaction = FactionsMain.getFaction(player:getUsername())
+
+		-- Check if player has faction
+		if playerFaction == nil then
+			return;
+		end
+
+		if args.quantity then
+			if ServerFactionPoints[playerFaction:getName()]["specialPoints"] == nil then ServerFactionPoints[playerFaction:getName()]["specialPoints"] = 0 end
+			ServerFactionPoints[playerFaction:getName()]["specialPoints"] = ServerFactionPoints[playerFaction:getName()]
+				["specialPoints"] + args.quantity;
+		else
+			print("[Factions] ERROR: Cannot add points from " .. player:getUsername() .. " factions, the quantity is nil");
+		end
+	end
+
+	-- Remove special points
+	function ServerFactionCommands.removeSpecialPoints(module, command, player, args)
+		-- Receive player faction
+		local playerFaction = FactionsMain.getFaction(player:getUsername())
+
+		-- Check if player has faction
+		if playerFaction == nil then
+			return;
+		end
+
+		if args.quantity then
+			if ServerFactionPoints[playerFaction:getName()]["specialPoints"] == nil then ServerFactionPoints[playerFaction:getName()]["specialPoints"] = 0 end
+			ServerFactionPoints[playerFaction:getName()]["specialPoints"] = ServerFactionPoints[playerFaction:getName()]
+				["specialPoints"] - args.quantity;
+			-- Negative treatment
+			if ServerFactionPoints[playerFaction:getName()]["specialPoints"] < 0 then
+				ServerFactionPoints[playerFaction:getName()]["specialPoints"] = 0
+			end
+		else
+			print("[Factions] ERROR: Cannot remove points from " ..
+				player:getUsername() .. " factions, the quantity is nil");
+		end
+	end
+
+	-- Remove factions data
 	function ServerFactionCommands.removeFaction(module, command, player, args)
 		print("[Factions] Faction " .. args.factionName .. " is been deleted by: " .. player:getUsername())
 		ServerFactionPoints[args.factionName] = nil;
 	end
 
-	--Load Mod Data
+	-- Load Mod Data
 	Events.OnInitGlobalModData.Add(function(isNewGame)
 		ServerFactionPoints = ModData.getOrCreate("ServerFactionPoints");
 		if not ServerFactionPoints then ServerFactionPoints = {}; end
 	end)
 
-	--Receives Commands from Clients
+	-- Receives Commands from Clients
 	Events.OnClientCommand.Add(function(module, command, player, args)
 		if module == "ServerFactionPoints" and ServerFactionCommands[command] then
 			ServerFactionCommands[command](module, command, player, args)

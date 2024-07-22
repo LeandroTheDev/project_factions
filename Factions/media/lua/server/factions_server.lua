@@ -9,6 +9,9 @@ local ServerSafehouseData = {};
 
 -- Default Values
 local days = {};
+-- Variable to treatment the safehouse data,
+-- this handles if the player has already captured a safehouse
+-- in the invasion, resets every time the invasion start
 factions.ResetData = false;
 
 -- Get the days, hours from the OS time based in timezone
@@ -124,7 +127,8 @@ factions.checkIfCaptureIsEnabled = function()
 		-- Check if is day for capture
 		if factions.checkDay(currentTime.tm_wday) then
 			-- Reset Data if necessary
-			if factions.ResetData then ServerSafehouseData = {} else factions.ResetData = false end
+			if factions.ResetData then ServerSafehouseData = {} end
+			factions.ResetData = false;
 			return true
 		end
 		factions.ResetData = true;
@@ -433,17 +437,21 @@ end)
 if SandboxVars.Factions.IncreaseConstructionLife then
 	Events.EveryTenMinutes.Add(function()
 		if factions.checkIfCaptureIsEnabled() then
+			-- Setting the sandbox to max
 			getSandboxOptions():set("ConstructionBonusPoints", 2)
-			local players = getOnlinePlayers()
-			-- Update sandbox to all players
+			local players = getOnlinePlayers();
+			-- Update sandbox to all players, this is necessary because for some reason the sandbox options
+			-- is handled by the player???
 			for i = players:size() - 1, 0, -1 do
 				local player = players:get(i);
 				sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 2 });
 			end
 		else
+			-- Setting the sandbox to max
 			getSandboxOptions():set("ConstructionBonusPoints", 5)
-			local players = getOnlinePlayers()
-			-- Update sandbox to all players
+			local players = getOnlinePlayers();
+			-- Update sandbox to all players, this is necessary because for some reason the sandbox options
+			-- is handled by the player???
 			for i = players:size() - 1, 0, -1 do
 				local player = players:get(i);
 				sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 5 });

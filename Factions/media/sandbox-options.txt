@@ -45,3 +45,12 @@ option Factions.IncreaseConstructionLife
     page = Factions,
     translation = Factions_IncreaseConstructionLife,
 }
+
+option Factions.PointsPerZombieKills
+{
+    type = string,
+    default = "100=1;200=2;400=4;",
+
+    page = Factions,
+    translation = Factions_PointsPerZombieKills,
+}
