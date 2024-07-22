@@ -6,7 +6,9 @@ Forked from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/
 - Capture safehouse system
 - Multiple Safehouses (Need server configuration)
 - Chat alert for actions (capturing, losing, captured, lost)
-- Configurable time to enable safehouse capture invasion
+- Configurable time to enable safehouse capture invasion, also timezone
+- Configurable zombie kills to earn points
+- Configurable player construction health while in capture mode
 
 Consider downloading the safehouse limit remover in the folder [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) and place it in the main project zomboid dedicated server folder
 
@@ -35,7 +37,7 @@ Add new features and adjustments for playing with Factions Mode, require the Fac
 Add several new mechanics to safehouses, with the upgrader you can increase the house level to gain more Points in the Server, you can easily create keys for your safehouse
 Respawn mechanics if forked from [Keep Inventory](https://steamcommunity.com/sharedfiles/filedetails/?id=2879960829)
 
-- Create key in Safehouse
+- Create key in Safehouse (Need Factions Mod)
 - Upgrade Safehouse (Need Factions Economy Mod)
 - Reedem points (Need Factions Economy Mod)
 - Respawn in safehouse bed

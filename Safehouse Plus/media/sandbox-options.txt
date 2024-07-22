@@ -8,6 +8,36 @@ option SafehousePlus.EnableSafehousePoints
 	translation = SafehousePlus_EnableSafehousePoints,
 }
 
+option SafehousePlus.SafehouseHoursPerPoints
+{
+	type = integer,
+	default = 1,
+	min = 1,
+	max = 999,
+	page = Safehouse,
+	translation = SafehousePlus_SafehouseHoursPerPoints,
+}
+
+option SafehousePlus.SafehouseBasePoints
+{
+	type = integer,
+	default = 1,
+	min = 1,
+	max = 999,
+	page = Safehouse,
+	translation = SafehousePlus_SafehouseBasePoints,
+}
+
+option SafehousePlus.SafehousePointsPerScore
+{
+	type = integer,
+	default = 1,
+	min = 1,
+	max = 999,
+	page = Safehouse,
+	translation = SafehousePlus_SafehousePointsPerScore,
+}
+
 option SafehousePlus.EnableSafehouseCreateKey
 {
 	type = boolean,

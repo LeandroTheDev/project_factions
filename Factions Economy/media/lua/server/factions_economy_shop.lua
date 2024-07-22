@@ -44,14 +44,14 @@ local function LoadShopItems()
         line = fileReader:readLine()
     end
     fileReader:close()
-    print("[Factions Economy] Shop items has been loaded")
+    print("[Factions Economy] Shop items has been loaded");
     shopItems = loadstring(table.concat(lines, "\n"))() or { ["Missing Configuration"] = {} }
 end
 
 -- Simple load the items from the server data
 local function LoadTradeItems()
     if ServerShopData["ServerTradeItems"] == nil then ServerShopData["ServerTradeItems"] = { ["No_Items"] = {} } end
-    print("[Factions Economy] Trade items has been loaded")
+    print("[Factions Economy] Trade items has been loaded");
     tradeItems = ServerShopData["ServerTradeItems"];
 end
 
