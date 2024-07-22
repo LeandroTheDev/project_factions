@@ -10,7 +10,7 @@ Sandbox_EN = {
 
     Sandbox_FactionsEconomy_PointsPerTick = "Points Per Tick",
 
-    Sandbox_LootBox = "Loot Box",
+    Sandbox_FactionsEconomyLootBox = "Factions Loot Box",
     Sandbox_LootBox_itemTable0   = "Items in the Loot Box(Ammo)",
 	Sandbox_LootBox_itemTable1   = "Items in the Loot Box(Clothes)",
 	Sandbox_LootBox_itemTable2   = "Items in the Loot Box(Melee)",

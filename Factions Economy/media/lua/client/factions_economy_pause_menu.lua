@@ -21,7 +21,7 @@ function MainScreen:instantiate()
 
     if self.inGame and isClient() then
         -- Add the text for open Shop
-        if true then
+        if self.quitToDesktop then
             -- Default options
             local FONT_SCALE = getTextManager():getFontHeight(UIFont.Small) / 14
             local core = getCore()
@@ -46,10 +46,10 @@ function MainScreen:instantiate()
                 getSoundManager():playUISound("UIActivateMainMenuItem")
                 MainScreen.instance.serverShop:setVisible(true)
             end
-            self.shopOptions.onMouseMove = function(self)
+            self.shopOptions.onMouseMove = function()
                 self.fade:setFadeIn(true)
             end
-            self.shopOptions.onMouseMoveOutside = function(self)
+            self.shopOptions.onMouseMoveOutside = function()
                 self.fade:setFadeIn(false)
             end
             self.shopOptions:setWidth(self.quitToDesktop.width)
@@ -59,7 +59,7 @@ function MainScreen:instantiate()
         end
 
         -- Add the text for open the Trading
-        if true then
+        if self.quitToDesktop then
             local FONT_SCALE = getTextManager():getFontHeight(UIFont.Small) / 14
             local core = getCore()
             local width = 800 * FONT_SCALE
