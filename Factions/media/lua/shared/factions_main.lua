@@ -7,25 +7,25 @@ FactionsMain.GUI = nil
 FactionsMain.Points = 0;
 
 --Thanks chat gpt
--- local function formatarTabela(tabela, nivel)
--- 	nivel = nivel or 0
--- 	local prefixo = string.rep("  ", nivel) -- Espaços para recuo
--- 	if type(tabela) == "table" then
--- 		local str = "{\n"
--- 		for chave, valor in pairs(tabela) do
--- 			str = str .. prefixo .. "  [" .. tostring(chave) .. "] = "
--- 			if type(valor) == "table" then
--- 				str = str .. formatarTabela(valor, nivel + 1) .. ",\n"
--- 			else
--- 				str = str .. tostring(valor) .. ",\n"
--- 			end
--- 		end
--- 		str = str .. prefixo .. "}"
--- 		return str
--- 	else
--- 		return tostring(tabela)
--- 	end
--- end
+local function formatarTabela(tabela, nivel)
+	nivel = nivel or 0
+	local prefixo = string.rep("  ", nivel) -- Espaços para recuo
+	if type(tabela) == "table" then
+		local str = "{\n"
+		for chave, valor in pairs(tabela) do
+			str = str .. prefixo .. "  [" .. tostring(chave) .. "] = "
+			if type(valor) == "table" then
+				str = str .. formatarTabela(valor, nivel + 1) .. ",\n"
+			else
+				str = str .. tostring(valor) .. ",\n"
+			end
+		end
+		str = str .. prefixo .. "}"
+		return str
+	else
+		return tostring(tabela)
+	end
+end
 
 -- Get the safehouse cost based in the size of it
 FactionsMain.getCost = function(safehouse, offset)
@@ -393,7 +393,7 @@ if isServer() then
 		end
 
 		-- Swipe all configurations files to receive the exact kill points
-		for i = #configuration, 1, -1 do
+		for i = 1, #configuration do
 			-- If you have more kills than the configuration
 			if kills >= configuration[i].zombieToKill then
 				-- Add the points to the final result
@@ -403,6 +403,13 @@ if isServer() then
 				break;
 			end
 		end
+
+		-- print("---------------------------");
+		-- print("function: zombiesKillPoints");
+		-- print("Kills: " .. kills);
+		-- print("Configuration: ");
+		-- print(formatarTabela(configuration));
+		-- print("---------------------------");
 
 		return killsPoints;
 	end
@@ -429,11 +436,30 @@ if isServer() then
 		ServerFactionPoints[playerFaction:getName()]["points"] = zombiesKillPoints(ServerFactionPoints
 			[playerFaction:getName()]["zombieKills"]) + ServerFactionPoints[playerFaction:getName()]["specialPoints"];
 
+		-- print("---------------------------");
+		-- print("function: ServerFactionCommands.killedZombie");
+		-- print(player:getUsername());
+		-- print("Zombie kills: " .. ServerFactionPoints[playerFaction:getName()]["zombieKills"]);
+		-- print("Points: " .. ServerFactionPoints[playerFaction:getName()]["points"]);
+		-- print("Special Points: " .. ServerFactionPoints[playerFaction:getName()]["specialPoints"]);
+		-- print("---------------------------");
+
 		-- Send players from factions the new updated points
+		local onlinePlayers = getOnlinePlayers();
 		for i = playerFaction:getPlayers():size() - 1, 0, -1 do
-			local member = playerFaction:getPlayers():get(i)
-			sendServerCommand(member, "ServerFactionPoints", "receivePoints",
-				{ points = ServerFactionPoints[playerFaction:getName()]["points"] });
+			-- Swipe online players
+			for j = 1, onlinePlayers:size() do
+				-- Get the actual player
+				local selectedPlayer = onlinePlayers:get(j - 1);
+				local memberUsername = playerFaction:getPlayers():get(i);
+				-- Check if faction player is the same as the swiped player
+				if selectedPlayer:getUsername() == memberUsername then
+					-- Refresh player points
+					sendServerCommand(selectedPlayer, "ServerFactionPoints", "receivePoints",
+						{ points = ServerFactionPoints[playerFaction:getName()]["points"] });
+					break;
+				end
+			end
 		end
 	end
 
