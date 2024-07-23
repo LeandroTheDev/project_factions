@@ -45,7 +45,7 @@ local function LoadShopItems()
     end
     fileReader:close()
     print("[Factions Economy] Shop items has been loaded");
-    shopItems = loadstring(table.concat(lines, "\n"))() or { ["Missing Configuration"] = {} }
+    shopItems = loadstring(table.concat(lines, "\n"))() or { ["missing"] = {} }
 end
 
 -- Simple load the items from the server data

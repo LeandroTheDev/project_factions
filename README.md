@@ -11,6 +11,7 @@ Forked from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/
 - Configurable player construction health while in capture mode
 
 Consider downloading the safehouse limit remover in the folder [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) and place it in the main project zomboid dedicated server folder
+> This patch is made from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/?id=1178772929&searchtext=Safehouse)
 
 # Factions Economy
 
@@ -41,5 +42,13 @@ Respawn mechanics if forked from [Keep Inventory](https://steamcommunity.com/sha
 - Upgrade Safehouse (Need Factions Economy Mod)
 - Reedem points (Need Factions Economy Mod)
 - Respawn in safehouse bed
+
+### Questions
+- Can i use in my server? yes
+- Can i reupload this to workshop? yes
+- Can i modify this mod? yes
+- Can i share this mod? yes
+- Can i steal this mod? only if the name is changed
+- Can i charge for this mod? only if the name is changed
 
 FTM License

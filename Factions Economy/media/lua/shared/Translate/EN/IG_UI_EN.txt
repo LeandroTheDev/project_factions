@@ -10,6 +10,7 @@ IGUI_EN = {
 	IGUI_Shop_farm = "Farm",
 	IGUI_Shop_faction = "Faction",
 	IGUI_Shop_vehicle = "Vehicle",
+	IGUI_Shop_missing = "No Items",
 	IGUI_Add_Trade_Items = "Add Trade Items",
 	IGUI_Trade_No_Items = "No Items",
 	IGUI_Trade_Item = "Item",
