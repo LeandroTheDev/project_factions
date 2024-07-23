@@ -46,12 +46,6 @@ function MainScreen:instantiate()
                 getSoundManager():playUISound("UIActivateMainMenuItem")
                 MainScreen.instance.serverShop:setVisible(true)
             end
-            self.shopOptions.onMouseMove = function()
-                self.fade:setFadeIn(true)
-            end
-            self.shopOptions.onMouseMoveOutside = function()
-                self.fade:setFadeIn(false)
-            end
             self.shopOptions:setWidth(self.quitToDesktop.width)
             self.shopOptions.fade = UITransition.new()
             self.shopOptions.fade:setFadeIn(false)
@@ -80,12 +74,6 @@ function MainScreen:instantiate()
             self.tradeOptions.onMouseDown = function()
                 getSoundManager():playUISound("UIActivateMainMenuItem")
                 MainScreen.instance.serverTrade:setVisible(true)
-            end
-            self.tradeOptions.onMouseMove = function(self)
-                self.fade:setFadeIn(true)
-            end
-            self.tradeOptions.onMouseMoveOutside = function(self)
-                self.fade:setFadeIn(false)
             end
             self.tradeOptions:setWidth(self.quitToDesktop.width)
             self.tradeOptions.fade = UITransition.new()

@@ -7,25 +7,25 @@ FactionsMain.GUI = nil
 FactionsMain.Points = 0;
 
 --Thanks chat gpt
-local function formatarTabela(tabela, nivel)
-    nivel = nivel or 0
-    local prefixo = string.rep("  ", nivel) -- Espaços para recuo
-    if type(tabela) == "table" then
-        local str = "{\n"
-        for chave, valor in pairs(tabela) do
-            str = str .. prefixo .. "  [" .. tostring(chave) .. "] = "
-            if type(valor) == "table" then
-                str = str .. formatarTabela(valor, nivel + 1) .. ",\n"
-            else
-                str = str .. tostring(valor) .. ",\n"
-            end
-        end
-        str = str .. prefixo .. "}"
-        return str
-    else
-        return tostring(tabela)
-    end
-end
+-- local function formatarTabela(tabela, nivel)
+-- 	nivel = nivel or 0
+-- 	local prefixo = string.rep("  ", nivel) -- Espaços para recuo
+-- 	if type(tabela) == "table" then
+-- 		local str = "{\n"
+-- 		for chave, valor in pairs(tabela) do
+-- 			str = str .. prefixo .. "  [" .. tostring(chave) .. "] = "
+-- 			if type(valor) == "table" then
+-- 				str = str .. formatarTabela(valor, nivel + 1) .. ",\n"
+-- 			else
+-- 				str = str .. tostring(valor) .. ",\n"
+-- 			end
+-- 		end
+-- 		str = str .. prefixo .. "}"
+-- 		return str
+-- 	else
+-- 		return tostring(tabela)
+-- 	end
+-- end
 
 -- Get the safehouse cost based in the size of it
 FactionsMain.getCost = function(safehouse, offset)
@@ -383,12 +383,14 @@ if isServer() then
 			zombieToKill = tonumber(zombieToKill);
 			pointsToReceive = tonumber(pointsToReceive);
 
+			-- Finished
+			if not zombieToKill and not pointsToReceive then
+				break;
+			end
+
 			-- Inserting into the configuration table
 			table.insert(configuration, { zombieToKill = zombieToKill, pointsToReceive = pointsToReceive });
 		end
-
-		print("DEBUGGING CONFIGURATION TABLE");
-		print(formatarTabela(configuration));
 
 		-- Swipe all configurations files to receive the exact kill points
 		for i = #configuration, 1, -1 do
