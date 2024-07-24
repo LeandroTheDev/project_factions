@@ -80,7 +80,7 @@ local function getCurrentTime()
 end
 
 -- Get the file instance
-local fileWriter = getFileWriter("Logs/FactionsEconomy.txt", true, false);
+local fileWriter = getFileWriter("Logs/FactionsEconomyShop.txt", true, false);
 local function logger(log)
     local time = getCurrentTime();
     -- Write the log in it
