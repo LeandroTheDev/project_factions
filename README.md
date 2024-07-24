@@ -60,4 +60,11 @@ External very useful mods to make the factions better
 
 - > To download the submodules you can use "git submodule init", "git submodule update" in your terminal
 
+### Using the project in the Server
+- Install git in your operational system
+- In your terminal type: git clone --recurse-submodules https://github.com/LeandroTheDev/project_factions
+- Copy all mods from the new folder created, and paste on your project zomboid mods folder
+- > You can also upload to workshop to automatically users download this project
+- Now you can open the game, enable the mods and change the sandbox configurations
+
 FTM License
