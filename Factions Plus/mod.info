@@ -1,5 +1,4 @@
 name=Factions Plus
 id=factionsplus
 description=Adds features to make the factions enviromnent better
-require=factionseconomy
 poster=Poster.png

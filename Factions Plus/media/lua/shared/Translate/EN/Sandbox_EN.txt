@@ -18,4 +18,13 @@ Sandbox_EN = {
 
     Sandbox_FactionsPlus_Timezone = "Timezone",
     Sandbox_FactionsPlus_Timezone_tooltip = "Timezone from your current location, Sao Paulo: -3, New York: -5, Moscou: 3",
+
+    Sandbox_FactionsPlus_EnablePlayerJoinMessages = "Enable Join Messages",
+    Sandbox_FactionsPlus_EnablePlayerJoinMessages = "When a player joins the server it will display a message with their username",
+
+    Sandbox_FactionsPlus_EnablePlayerLeaveMessages = "Enable Leave Messages",
+    Sandbox_FactionsPlus_EnablePlayerLeaveMessages = "When a player leaves the server it will display a message with their username",
+
+    Sandbox_FactionsPlus_EnablePlayerDeathMessages = "Enable Death Messages",
+    Sandbox_FactionsPlus_EnablePlayerDeathMessages = "When a player dies in the server it will display a message with their username",
 }

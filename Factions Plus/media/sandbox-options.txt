@@ -50,3 +50,27 @@ option FactionsPlus.Timezone
     page = FactionsPlus,
     translation = FactionsPlus_Timezone,
 }
+
+option FactionsPlus.EnablePlayerJoinMessages
+{
+	type = boolean,
+	default = true,
+	page = FactionsPlus,
+	translation = FactionsPlus_EnablePlayerJoinMessages,
+}
+
+option FactionsPlus.EnablePlayerLeaveMessages
+{
+	type = boolean,
+	default = true,
+	page = FactionsPlus,
+	translation = FactionsPlus_EnablePlayerLeaveMessages,
+}
+
+option FactionsPlus.EnablePlayerDeathMessages
+{
+	type = boolean,
+	default = true,
+	page = FactionsPlus,
+	translation = FactionsPlus_EnablePlayerDeathMessages,
+}

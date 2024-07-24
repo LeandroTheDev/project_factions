@@ -1,0 +1,6 @@
+[submodule "Random Airdrops"]
+	path = Random Airdrops
+	url = https://github.com/LeandroTheDev/random_airdrops.git
+[submodule "RA Smoke Flares"]
+	path = RA Smoke Flares
+	url = https://github.com/LeandroTheDev/ra_smoke_flares

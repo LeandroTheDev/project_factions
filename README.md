@@ -11,7 +11,7 @@ Forked from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/
 - Configurable player construction health while in capture mode
 
 Consider downloading the safehouse limit remover in the folder [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) and place it in the main project zomboid dedicated server folder
-> This patch is made from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/?id=1178772929&searchtext=Safehouse)
+> This patch is made by [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/?id=1178772929&searchtext=Safehouse), this factions_project does not maintain this patch.
 
 # Factions Economy
 
@@ -43,12 +43,21 @@ Respawn mechanics if forked from [Keep Inventory](https://steamcommunity.com/sha
 - Reedem points (Need Factions Economy Mod)
 - Respawn in safehouse bed
 
+#
+
 ### Questions
 - Can i use in my server? yes
 - Can i reupload this to workshop? yes
-- Can i modify this mod? yes
-- Can i share this mod? yes
-- Can i steal this mod? only if the name is changed
-- Can i charge for this mod? only if the name is changed
+- Can i modify this project? yes
+- Can i share this project? yes
+- Can i steal this project? only if the name is changed
+- Can i charge for this project? only if the name is changed
+
+### Submodules
+External very useful mods to make the factions better
+- [Random Airdrops](https://github.com/LeandroTheDev/random_airdrops)
+- [RA Airdrops](https://github.com/LeandroTheDev/ra_smoke_flares)
+
+- > To download the submodules you can use "git submodule init", "git submodule update" in your terminal
 
 FTM License
