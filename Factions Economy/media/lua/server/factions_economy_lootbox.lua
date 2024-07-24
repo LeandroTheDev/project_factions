@@ -79,7 +79,7 @@ local function getCurrentTime()
 end
 
 -- Get the file instance
-local fileWriter = getFileWriter("Logs/FactionsEconomyLootBox.txt", true, false);
+local fileWriter = getFileWriter("Logs/FactionsEconomyLootBox.txt", false, true);
 local function logger(log)
 	local time = getCurrentTime();
 	-- Write the log in it
@@ -146,37 +146,37 @@ end
 
 -- Functions called when opening a box
 function LootBoxAmmoOpen(recipe, ingredients, result, player)
-	logger(player:getUsername() .. " opened ammo box");
+	-- logger(player:getUsername() .. " opened ammo box");
 	openBox(ItemTable0);
 end
 
 function LootBoxClothesOpen(recipe, ingredients, result, player)
-	logger(player:getUsername() .. " opened clothes box");
+	-- logger(player:getUsername() .. " opened clothes box");
 	openBox(ItemTable1);
 end
 
 function LootBoxMeleeOpen(recipe, ingredients, result, player)
-	logger(player:getUsername() .. " opened melee box");
+	-- logger(player:getUsername() .. " opened melee box");
 	openBox(ItemTable2);
 end
 
 function LootBoxWeaponOpen(recipe, ingredients, result, player)
-	logger(player:getUsername() .. " opened weapon box");
+	-- logger(player:getUsername() .. " opened weapon box");
 	openBox(ItemTable3);
 end
 
 function LootBoxAttachmentOpen(recipe, ingredients, result, player)
-	logger(player:getUsername() .. " opened attachment box");
+	-- logger(player:getUsername() .. " opened attachment box");
 	openBox(ItemTable4);
 end
 
 function LootBoxClipOpen(recipe, ingredients, result, player)
-	logger(player:getUsername() .. " opened magazines box");
+	-- logger(player:getUsername() .. " opened magazines box");
 	openBox(ItemTable5);
 end
 
 function LootBoxSpecialWeaponOpen(recipe, ingredients, result, player)
-	logger(player:getUsername() .. " opened special weapon box");
+	-- logger(player:getUsername() .. " opened special weapon box");
 	openBox(ItemTable6);
 end
 
