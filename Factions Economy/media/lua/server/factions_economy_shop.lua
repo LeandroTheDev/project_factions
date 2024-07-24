@@ -1,5 +1,96 @@
 ---@diagnostic disable: undefined-global, deprecated
 if isClient() then return end;
+-- Get the days, hours from the OS time based in timezone
+local function getCurrentTime()
+    local function remainder(a, b)
+        return a - math.floor(a / b) * b;
+    end
+    local tm          = {};
+    local daysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    local minutes, hours, days, year, month;
+    local dayOfWeek;
+    local seconds     = getTimestamp() + 0 * 3600;
+    -- Calculate minutes
+    minutes           = math.floor(seconds / 60);
+    seconds           = seconds - (minutes * 60);
+    -- Calculate hours
+    hours             = math.floor(minutes / 60);
+    minutes           = minutes - (hours * 60);
+    -- Calculate days
+    days              = math.floor(hours / 24);
+    hours             = hours - (days * 24);
+
+    -- Unix time starts in 1970 on a Thursday
+    year              = 1970;
+    dayOfWeek         = 4;
+
+    while true do
+        local leapYear = remainder(year, 4) == 0 and (remainder(year, 100) ~= 0 or remainder(year, 400) == 0);
+        local daysInYear = 365;
+        if leapYear then
+            daysInYear = 366;
+        end
+
+        if days >= daysInYear then
+            if leapYear then
+                dayOfWeek = dayOfWeek + 2;
+            else
+                dayOfWeek = dayOfWeek + 1;
+            end
+            days = days - daysInYear;
+            if dayOfWeek >= 7 then
+                dayOfWeek = dayOfWeek - 7;
+            end
+            year = year + 1;
+        else
+            tm.tm_yday = days;
+            dayOfWeek  = dayOfWeek + days;
+            dayOfWeek  = remainder(dayOfWeek, 7);
+            -- Calculate the month and day
+
+            month      = 1;
+            while month <= 12 do
+                local dim = daysInMonth[month];
+
+                -- Add a day to feburary if this is a leap year
+                if month == 2 and leapYear then
+                    dim = dim + 1;
+                end
+
+                if days >= dim then
+                    days = days - dim;
+                else
+                    break;
+                end
+                month = month + 1;
+            end
+            break;
+        end
+    end
+
+    tm.tm_sec  = seconds;
+    tm.tm_min  = minutes;
+    tm.tm_hour = hours;
+    tm.tm_hour = tm.tm_hour + tonumber(SandboxVars.Factions.Timezone);
+    tm.tm_mday = days + 1;
+    tm.tm_mon  = month;
+    tm.tm_year = year;
+    tm.tm_wday = dayOfWeek;
+    return tm;
+end
+
+-- Get the file instance
+local fileWriter = getFileWriter("Logs/FactionsEconomy.txt", true, false);
+local function logger(log)
+    local time = getCurrentTime();
+    -- Write the log in it
+    fileWriter:write("[" ..
+        time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
+
+    -- Close the file
+    fileWriter:close();
+end
+
 ServerShopData = {};
 local shopItems = {};
 local tradeItems = {};
@@ -27,11 +118,16 @@ local tradeItems = {};
 
 local function PointsTick()
     local players = getOnlinePlayers()
+    logger("----------------------------");
+    logger("Giving points to players...")
     for i = 0, players:size() - 1 do
         local username = players:get(i):getUsername()
         if not ServerShopData[username] then ServerShopData[username] = 0 end
         ServerShopData[username] = ServerShopData[username] + SandboxVars.FactionsEconomy.PointsPerTick
+        logger(username ..
+            "received: " .. SandboxVars.FactionsEconomy.PointsPerTick .. " total: " .. ServerShopData[username]);
     end
+    logger("----------------------------");
 end
 
 -- Simple load the items from storage in server Lua/FactionsEconomyItems.ini
@@ -44,14 +140,14 @@ local function LoadShopItems()
         line = fileReader:readLine()
     end
     fileReader:close()
-    print("[Factions Economy] Shop items has been loaded");
+    logger("Shop items has been loaded");
     shopItems = loadstring(table.concat(lines, "\n"))() or { ["missing"] = {} }
 end
 
 -- Simple load the items from the server data
 local function LoadTradeItems()
     if ServerShopData["ServerTradeItems"] == nil then ServerShopData["ServerTradeItems"] = { ["No_Items"] = {} } end
-    print("[Factions Economy] Trade items has been loaded");
+    logger("Trade items has been loaded");
     tradeItems = ServerShopData["ServerTradeItems"];
 end
 
@@ -74,8 +170,8 @@ local ServerPointsCommands = {}
 
 -- Player add new item to the trade
 function ServerPointsCommands.addTrade(module, command, player, args)
-    print(string.format("[Factions Economy] %s added %d %s item for %d points in trade", player:getUsername(),
-        args[1].quantity, args[1].target, args[1].price))
+    logger(string.format("%s added %d %s item for %d points in trade", player:getUsername(),
+        args[1].quantity, args[1].target, args[1].price));
 
     -- Verify if trade item is empty
     if ServerShopData["ServerTradeItems"].No_Items ~= nil then ServerShopData["ServerTradeItems"] = {} end
@@ -89,7 +185,7 @@ end
 
 -- Player buy trade
 function ServerPointsCommands.buyTrade(module, command, player, args)
-    print(string.format("[Factions Economy] %s bought %s for %d points", player:getUsername(), args[1].type,
+    logger(string.format("[Factions Economy] %s bought %s for %d points", player:getUsername(), args[1].type,
         args[1].price));
     local serverItem = ServerShopData["ServerTradeItems"][args[1].category][args[1].index]
     local clientItem = args[1]
@@ -119,7 +215,7 @@ end
 
 -- Buy from shop
 function ServerPointsCommands.buyShop(module, command, player, args)
-    print(string.format("[Factions Economy] %s bought %s for %d points", player:getUsername(), args[2], args[1]))
+    logger(string.format("%s bought %s for %d points", player:getUsername(), args[2], args[1]))
     if not ServerShopData[player:getUsername()] then ServerShopData[player:getUsername()] = 0 end
     ServerShopData[player:getUsername()] = ServerShopData[player:getUsername()] - math.abs(args[1])
 end
@@ -154,7 +250,7 @@ end
 
 -- Add points for the player
 function ServerPointsCommands.addPoints(module, command, player, args)
-    print(string.format("[Factions Economy] " .. args[1] .. " Received " .. args[2] .. " Points"));
+    logger(string.format(args[1] .. " received " .. args[2] .. " points"));
     -- Null Check
     if not ServerShopData[args[1]] then ServerShopData[args[1]] = 0 end
     -- Adding the Points
