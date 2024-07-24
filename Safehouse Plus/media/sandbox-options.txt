@@ -38,6 +38,14 @@ option SafehousePlus.SafehousePointsPerScore
 	translation = SafehousePlus_SafehousePointsPerScore,
 }
 
+option SafehousePlus.ResetPointsWhenNotClaimed
+{
+	type = boolean,
+	default = true,
+	page = Safehouse,
+	translation = SafehousePlus_ResetPointsWhenNotClaimed,
+}
+
 option SafehousePlus.EnableSafehouseCreateKey
 {
 	type = boolean,

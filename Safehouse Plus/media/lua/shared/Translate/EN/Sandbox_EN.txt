@@ -2,16 +2,19 @@ Sandbox_EN = {
     Sandbox_Safehouse = "Safehouse Plus",
 
     Sandbox_SafehousePlus_EnableSafehousePoints = "Enable Safehouse Points",
-    Sandbox_SafehousePlus_EnableSafehousePoints_tooltip = "Enable points upgrade and reedeem to your Safehouse, !! you also need the Factions Plus mod for this work !!",
+    Sandbox_SafehousePlus_EnableSafehousePoints_tooltip = "Enable points upgrade and reedeem to your Safehouse, !! you also need the Factions Economy mod for this work !!",
 
     Sandbox_SafehousePlus_SafehouseHoursPerPoints = "Receive Points Every Hours",
-    Sandbox_SafehousePlus_SafehouseHoursPerPoints_tooltip = "Every this amount of hours all safehouses will earns points according to the upgrades quantity, !! you also need the Factions Plus mod for this work !!",
+    Sandbox_SafehousePlus_SafehouseHoursPerPoints_tooltip = "Every this amount of hours all safehouses will earns points according to the upgrades quantity, !! you also need the Factions Economy mod for this work !!",
 
     Sandbox_SafehousePlus_SafehouseBasePoints = "Base Points Every Tick",
-    Sandbox_SafehousePlus_SafehouseBasePoints_tooltip = "Starting points to receive in safehouse, !! you also need the Factions Plus mod for this work !!",
+    Sandbox_SafehousePlus_SafehouseBasePoints_tooltip = "Starting points to receive in safehouse, !! you also need the Factions Economy mod for this work !!",
 
     Sandbox_SafehousePlus_SafehousePointsPerScore = "Points module every Upgrade",
-    Sandbox_SafehousePlus_SafehousePointsPerScore_tooltip = "Every this amounts of upgrades will increase the points earned equals the base, !! you also need the Factions Plus mod for this work !!",
+    Sandbox_SafehousePlus_SafehousePointsPerScore_tooltip = "Every this amounts of upgrades will increase the points earned equals the base, !! you also need the Factions Economy mod for this work !!",
+
+    Sandbox_SafehousePlus_ResetPointsWhenNotClaimed = "Reset Safehouse points when not Claimed",
+    Sandbox_SafehousePlus_ResetPointsWhenNotClaimed_tooltip = "When the player unclains the safehouse, all their points accomulated will be reseted, !! you also need the Factions Economy mod for this work !!",
 
     Sandbox_SafehousePlus_EnableSafehouseCreateKey = "Enable Safehouse Create Key",
     Sandbox_SafehousePlus_EnableSafehouseCreateKey_tooltip = "Add the option to create a house key in the player safehouses !! you also need the Factions mod for this work !!",

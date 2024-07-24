@@ -1,6 +1,4 @@
 ---@diagnostic disable: undefined-global
-require = "recipecode";
-
 -- Call the server to add a safehouse point
 function Recipe.OnGiveXP.UpgradeSafehouse(recipe, ingredients, result, player)
 	sendClientCommand("ServerSafehouse", "addSafehousePoint", nil);

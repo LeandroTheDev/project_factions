@@ -51,6 +51,17 @@ option FactionsPlus.Timezone
     translation = FactionsPlus_Timezone,
 }
 
+option FactionsPlus.MessagesCheckPerTick
+{
+    type = integer,
+    min = 0,
+    max = 999999,
+    default = 100,
+
+    page = FactionsPlus,
+    translation = FactionsPlus_MessagesCheckPerTick,
+}
+
 option FactionsPlus.EnablePlayerJoinMessages
 {
 	type = boolean,

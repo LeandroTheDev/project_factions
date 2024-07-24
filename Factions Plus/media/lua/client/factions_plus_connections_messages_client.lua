@@ -1,22 +1,4 @@
 ---@diagnostic disable: undefined-global
--- Connection Message
-if SandboxVars.FactionsPlus.EnablePlayerJoinMessages then
-    local function OnConnected()
-        sendClientCommand("ServerMessages", "iconnected", nil);
-    end
-
-    Events.OnGameStart.Add(OnConnected);
-end
-
--- Disconnect Message
-if SandboxVars.FactionsPlus.EnablePlayerLeaveMessages then
-    local function OnDisconnect()
-        sendClientCommand("ServerMessages", "idisconnected", nil);
-    end
-
-    Events.OnDisconnect.Add(OnDisconnect);
-end
-
 -- Add the text to the player
 local function addLineToChat(message, color, username, options)
     if not isClient() then return end
