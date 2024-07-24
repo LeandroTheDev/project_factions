@@ -35,8 +35,8 @@ Add new features and adjustments for playing with Factions Mode, require the Fac
 
 # Safehouse Plus
 
-Add several new mechanics to safehouses, with the upgrader you can increase the house level to gain more Points in the Server, you can easily create keys for your safehouse
-Respawn mechanics if forked from [Keep Inventory](https://steamcommunity.com/sharedfiles/filedetails/?id=2879960829)
+Add several new mechanics to safehouses, with the upgrader you can increase the house level to gain more Points in the Server, you can easily create keys for your safehouse, and new
+respawn mechanics forked from [Keep Inventory](https://steamcommunity.com/sharedfiles/filedetails/?id=2879960829)
 
 - Create key in Safehouse (Need Factions Mod)
 - Upgrade Safehouse (Need Factions Economy Mod)

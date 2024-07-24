@@ -1,19 +1,5 @@
 ---@diagnostic disable: undefined-global
 if isClient() then return end;
--- Explanation about this file.
--- this file contains the serverside treatment for handling the capture system
-
-local factions = {}
-local FactionsCommands = {};
-local ServerSafehouseData = {};
-
--- Default Values
-local days = {};
--- Variable to treatment the safehouse data,
--- this handles if the player has already captured a safehouse
--- in the invasion, resets every time the invasion start
-factions.ResetData = false;
-
 -- Get the days, hours from the OS time based in timezone
 local function getCurrentTime()
 	local function remainder(a, b)
@@ -93,6 +79,32 @@ local function getCurrentTime()
 	return tm;
 end
 
+-- Get the file instance
+local fileWriter = getFileWriter("Logs/Factions", true, false);
+local function logger(log)
+	local time = getCurrentTime();
+	-- Write the log in it
+	fileWriter:write("[" ..
+		time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
+
+	-- Close the file
+	fileWriter:close();
+end
+
+-- Explanation about this file.
+-- this file contains the serverside treatment for handling the capture system
+
+local factions = {}
+local FactionsCommands = {};
+local ServerSafehouseData = {};
+
+-- Default Values
+local days = {};
+-- Variable to treatment the safehouse data,
+-- this handles if the player has already captured a safehouse
+-- in the invasion, resets every time the invasion start
+factions.ResetData = false;
+
 -- Simple read the Sandbox options
 factions.readOptions = function()
 	local stringDays = SandboxVars.Factions.DaysOfWeek;
@@ -102,8 +114,7 @@ factions.readOptions = function()
 		local dayNumber = tonumber(day);
 		table.insert(days, dayNumber);
 	end
-
-	print("[Factions] Fully Started")
+	logger("Options has been readed");
 end
 
 -- Returns a boolean based on the parameter actualDay and enabled Days from factions
@@ -146,7 +157,7 @@ function FactionsCommands.captureEmptySafehouse(module, command, player, args)
 	local playerFaction = FactionsMain.getFaction(player:getUsername());
 	-- Check if safehouse is valid and player has a faction
 	if safehouse == nil or playerFaction == nil then
-		print("[Server] " .. player:getUsername() .. " faction or safehous invalid")
+		logger(player:getUsername() .. " trying to capture any invalid safehouse");
 		return
 	end
 	safehouse:setOwner(playerFaction:getOwner());
@@ -155,12 +166,14 @@ function FactionsCommands.captureEmptySafehouse(module, command, player, args)
 	safehouse:syncSafehouse();
 	-- Send the client he needs to sync too
 	sendServerCommand(player, "ServerSafehouse", "syncCapturedSafehouse", { validation = true });
+	logger(player:getUsername() ..
+		" captured any empty safehouse in X: " .. safehouse:getX() .. " Y: " .. safehouse:getY());
 end
 
 -- Capturing the enemy safehouse
 function FactionsCommands.captureSafehouse(module, command, player, args)
 	if not factions.checkIfCaptureIsEnabled() then
-		print("[Factions] " .. player:getUsername() .. " is trying to capture a safehouse before the invasion time")
+		logger(player:getUsername() .. " is trying to capture a safehouse before the invasion time");
 		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false });
 		return
 	end
@@ -176,6 +189,7 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 	-- Check if player doesnt have factions
 	if playerFaction == nil then
 		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false });
+		logger(player:getUsername() .. " is trying to capture any safehouse without faction, probably trying to cheat");
 	end
 
 	local safehouseBeenCaptureOwner = safehouseBeenCaptured:getOwner();
@@ -192,11 +206,9 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 	end
 	--Verify if the capturing player is the owner of old safehouse
 	if ServerSafehouseData["SafehouseListUnblocked"][safehouseLocation.X .. safehouseLocation.Y] == playerCapturing then
+		logger(playerCapturing ..
+			" is trying to recapture a old safehouse in X: " .. playerLocation:getX() .. " Y: " .. playerLocation:getY());
 		--Contact Player for confirming
-		print("[Factions] " ..
-			playerCapturing ..
-			" is trying to recapture a old safehouse in X: " ..
-			playerLocation:getX() .. " Y: " .. playerLocation:getY());
 		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = true });
 		ServerSafehouseData["SafehouseCaptureTimer"][safehouseLocation.X .. safehouseLocation.Y] = os.time();
 		-- Alerting the players from the safehouse
@@ -209,7 +221,7 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 				local selectedPlayer = onlinePlayers:get(j - 1)
 				-- Check if safehouse player is the same as the swiped player
 				if selectedPlayer:getUsername() == safehouseBeenCaptured:getPlayers():get(i) then
-					-- Alert the player that the safehouse has been lost
+					-- Alert the player that the safehouse is been lost
 					sendServerCommand(selectedPlayer, "ServerSafehouse", "alert",
 						{
 							safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
@@ -248,8 +260,7 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 		--Add player to blocked
 		ServerSafehouseData["SafehousePlayersCaptureBlock"][playerCapturing] = true
 		--Contact Player for confirming
-		print("[Factions] " ..
-			playerCapturing ..
+		logger(playerCapturing ..
 			" is trying to capture a safehouse in X: " .. playerLocation:getX() .. " Y: " .. playerLocation:getY());
 		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = true });
 		ServerSafehouseData["SafehouseCaptureTimer"][safehouseLocation.X .. safehouseLocation.Y] = os.time();
@@ -296,8 +307,7 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 		end
 	else
 		--Contact player saying that is not time yet
-		print("[Factions] " ..
-			playerCapturing .. " trying to capture but hes already tried captured a safehouse this week");
+		logger(playerCapturing .. " trying to capture but hes already tried captured a safehouse this time");
 		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false });
 	end
 end
@@ -331,8 +341,7 @@ function FactionsCommands.onCaptureSafehouse(module, command, player, args)
 
 	-- Limiar error
 	if timeCapturePassed > 110 or timeCapturePassed < 90 then
-		print("[Factions] " ..
-			player:getUsername() .. " tried to capture a safehouse but the timer doesnt match: " .. timeCapturePassed)
+		logger(player:getUsername() .. " tried to capture a safehouse but the timer doesnt match: " .. timeCapturePassed);
 		sendServerCommand(player, "ServerSafehouse", "safehouseCaptured", { validation = false });
 		return
 	end
@@ -421,8 +430,7 @@ function FactionsCommands.onCaptureSafehouse(module, command, player, args)
 	end
 
 	-- Server Log
-	print("[Factions] " ..
-		player:getUsername() ..
+	logger(player:getUsername() ..
 		" captured a safehouse in X: " .. playerLocation:getX() .. " Y: " .. playerLocation:getY());
 end
 
@@ -435,9 +443,9 @@ end)
 
 -- Increase building life while not in capture
 if SandboxVars.Factions.IncreaseConstructionLife then
-	Events.EveryTenMinutes.Add(function()
+	Events.EveryHours.Add(function()
 		if factions.checkIfCaptureIsEnabled() then
-			-- Setting the sandbox to max
+			-- Setting the sandbox to normal
 			getSandboxOptions():set("ConstructionBonusPoints", 2)
 			local players = getOnlinePlayers();
 			-- Update sandbox to all players, this is necessary because for some reason the sandbox options
@@ -446,6 +454,7 @@ if SandboxVars.Factions.IncreaseConstructionLife then
 				local player = players:get(i);
 				sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 2 });
 			end
+			logger("CAPTURE ON");
 		else
 			-- Setting the sandbox to max
 			getSandboxOptions():set("ConstructionBonusPoints", 5)
@@ -456,6 +465,7 @@ if SandboxVars.Factions.IncreaseConstructionLife then
 				local player = players:get(i);
 				sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 5 });
 			end
+			logger("CAPTURE OFF");
 		end
 	end)
 end
