@@ -172,6 +172,26 @@ local spriteNames = {
 -- Secondary function to check if player is on the safehouse, returns true if belongs to the safehouse
 -- false if not belongs to the safehouse or the safehouse is not exist
 local function BelongsToTheSafehouse()
+    -- Get the player faction based on username
+    local function GetPlayerFaction(username)
+        -- Get all factions from the server
+        local factions = Faction.getFactions();
+        for i = 0, factions:size() - 1 do
+            local faction = factions:get(i);
+            -- If the player is the owner simple return the faction
+            if faction:isOwner(username) then
+                return faction;
+            end
+            local players = faction:getPlayers();
+            -- If not we swipe the players in faction and see if the actual player is on it
+            for j = 0, players:size() - 1 do
+                local player = players:get(j);
+                if player == username then
+                    return faction;
+                end
+            end
+        end
+    end
     local player = getPlayer();
     -- Get player safehouse standing
     local safehouse = SafeHouse.getSafeHouse(player:getSquare());
@@ -182,22 +202,22 @@ local function BelongsToTheSafehouse()
     end
 
     -- Fast check if is the owner
-    local owner = safehouse:getOwner();
-    if player:getUsername() == owner then
-        return true
+    local safehouseOwner = safehouse:getOwner();
+    if player:getUsername() == safehouseOwner then
+        return true;
     end
 
-    -- If not the owner we need to check all players from the safehouse,
-    -- and if the actual player is on it
-    for i = safehouse:getPlayers():size() - 1, 0, -1 do
-        local safehousePlayerUsername = safehouseBeenCaptured:getPlayers():get(i);
-        -- Check if safehousePlayerUsername is the same as the player
-        if safehousePlayerUsername == player:getUsername() then
-            return true
-        end
-    end
-    -- Player dont belong to the safehouse
-    return false
+    -- Getting player faction
+    local player_faction = GetPlayerFaction(player:getUsername());
+    -- Getting the owner faction
+    local owner_faction = GetPlayerFaction(safehouseOwner);
+
+    -- Checking if the owner faction is the same as player faction
+    if player_faction == owner_faction then
+		return true;
+	else
+		return false
+	end
 end
 
 -- On click set respawn function
