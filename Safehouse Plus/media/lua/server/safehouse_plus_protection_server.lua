@@ -167,12 +167,12 @@ function ServerSafehouseProtection.protectSafehouse(module, command, player, arg
     if not playerSquare then
         logger(player:getUsername() ..
             " player square is null, cannot protect safehouse, returning item to player inventory");
-        player:getInventory():addItem("Base.ProtectSafehouse");
+        sendServerCommand(player, "ServerSafehouseProtection", "notBelongs", nil);
     end
     -- Getting the safehouse where player is standing
     local safehouse = SafeHouse.getSafeHouse(square);
     -- Checking if player is allied of the safehouse
-    local safehouseResult = belongsToSafehouse(safehouse, player);    
+    local safehouseResult = belongsToSafehouse(safehouse, player);
     if safehouseResult == "owner" then -- owner
         -- Getting the safehouse id
         local safehouseId = tostring(safehouse:getX()) .. tostring(safehouse:getY());
@@ -180,7 +180,7 @@ function ServerSafehouseProtection.protectSafehouse(module, command, player, arg
         if not factionName then
             logger(player:getUsername() ..
                 " cannot protect that safehouse player doesn't belongs to any faction, returning item to player inventory");
-            player:getInventory():addItem("Base.ProtectSafehouse");
+            sendServerCommand(player, "ServerSafehouseProtection", "notBelongs", nil);
             return;
         end
 
@@ -199,12 +199,10 @@ function ServerSafehouseProtection.protectSafehouse(module, command, player, arg
     elseif safehouseResult == "yes" then -- ally
         logger(player:getUsername() ..
             " cannot protect that safehouse player is not the safehouse owner, returning item to player inventory");
-        player:getInventory():addItem("Base.ProtectSafehouse");
         sendServerCommand(player, "ServerSafehouseProtection", "notOwner", nil);
     else -- enemy or invalid
         logger(player:getUsername() ..
             " cannot protect that safehouse player doesn't belongs to the safehouse, returning item to player inventory");
-        player:getInventory():addItem("Base.ProtectSafehouse");
         sendServerCommand(player, "ServerSafehouseProtection", "notBelongs", nil);
     end
 end

@@ -1,4 +1,4 @@
 ItemName_PTBR = {
 	ItemName_Base.UpgradeSafehouse = "Melhoria de Safehouse",
-	ItemName_Base.UpgradeSafehouse = "Proteção de Safehouse",
+	ItemName_Base.ProtectSafehouse = "Proteção de Safehouse",
 }

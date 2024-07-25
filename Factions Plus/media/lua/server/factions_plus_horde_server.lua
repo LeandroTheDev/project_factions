@@ -193,7 +193,7 @@ function StartRandomHorde(specificPlayer)
 			-- Send alert to the player
 			sendServerCommand(player, "ServerHorde", "alert", { difficulty = difficulty });
 
-			logger("All players Horde spawning on: " .. specificPlayer:getUsername() .. " quantity: " .. zombieCount);
+			logger("All players Horde spawning on: " .. player:getUsername() .. " quantity: " .. zombieCount);
 		end
 
 		-- Adding the tick event to spawn zombies

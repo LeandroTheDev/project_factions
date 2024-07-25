@@ -70,8 +70,8 @@ local function OnServerCommand(module, command, arguments)
 
 		-- Chat message
 		addLineToChat(
-		getText("IGUI_PlayerText_HNWarning") ..
-		" " .. getText("IGUI_PlayerText_HNWarning_Difficulty_" .. arguments.difficulty), "<RGB:" .. "255,0,0" .. ">");
+		getText("IGUI_Factions_Horde_Warning") ..
+		" " .. getText("IGUI_Factions_Horde_" .. arguments.difficulty), "<RGB:" .. "255,0,0" .. ">");
 	end
 end
 Events.OnServerCommand.Add(OnServerCommand)
