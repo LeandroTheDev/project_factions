@@ -1,4 +1,5 @@
 ---@diagnostic disable: undefined-global
+FactionsCompatibility = true;
 -- Explanation about this file.
 -- this file contains the utils features from the factions
 

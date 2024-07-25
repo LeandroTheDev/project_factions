@@ -14,4 +14,6 @@ ItemName_EN = {
 	ItemName_Base.ScrapStack3 = "Larger Stack of Valuable Scrap",
 
 	ItemName_Base.TradeOutpost = "Trading Post",
+
+	ItemName_Base.FacMoney = "Trade Money",
 }

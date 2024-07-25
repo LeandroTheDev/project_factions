@@ -14,4 +14,6 @@ ItemName_PTBR = {
 	ItemName_Base.ScrapStack3 = "Pilha de Sucata Valiosa Grande",
 
 	ItemName_Base.TradeOutpost = "Estação de Troca",
+
+	ItemName_Base.FacMoney = "Moeda de Troca",
 }

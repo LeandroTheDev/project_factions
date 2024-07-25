@@ -1,5 +1,4 @@
 ItemName_EN = {
-	ItemName_Base.FacMoney = "Trade Money",
 	ItemName_Base.ScrapMoney = "Valuable Scrap",
 	ItemName_Base.ScrapStack1 = "Small Stack of Valuable Scrap",
 	ItemName_Base.ScrapStack2 = "Medium Stack of Valuable Scrap",

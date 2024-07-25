@@ -20,6 +20,7 @@ Shop Forked from [Server Points](https://steamcommunity.com/sharedfiles/filedeta
 - Shop UI
 - Trade UI
 - Lootboxes
+- Trade Money can be returned to get points for the shop and trade
 
 # Factions Plus
 
@@ -27,11 +28,13 @@ Add new features and adjustments for playing with Factions Mode, require the Fac
 
 - New economy item
 - Sell vegetables/fruits
-- Scrap Weapons
+- Scrap Weapons to earn Trade Money
 - Increase crop grow speed
 - Reduced seed drop by crops
 - Reduced water need for fully watered crop
-- Trade Money can be returned to get points for the shop and trade
+- Connections/Disconnections/Death player messages events
+- Random hordes
+- Special hordes for special locations (Lua/HordeSpecialPositions.ini)
 
 # Safehouse Plus
 
