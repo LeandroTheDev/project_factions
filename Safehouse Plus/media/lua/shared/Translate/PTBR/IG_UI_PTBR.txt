@@ -12,6 +12,10 @@ IGUI_PTBR = {
     IGUI_Respawn_SayRespawn = "Ponto de Renascimento Definido",
     IGUI_Respawn_DeathUI_Respawn = "RENASCER",
     IGUI_Respawn_CCC_Respawn = "RENASCER",
-    IGUI_Respawn_Bed = "Cama"
-    IGUI_Respawn_In_Bed = "Renascer na Cama"
+    IGUI_Respawn_Bed = "Cama",
+    IGUI_Respawn_In_Bed = "Renascer na Cama",
+
+    IGUI_Safehouse_Protected = "Safehouse Protegida",
+	IGUI_Safehouse_Protected_Not_Owner = "Apenas o dono...",
+	IGUI_Safehouse_Protected_Invalid = "Não posso fazer isso...",
 }

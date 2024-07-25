@@ -542,7 +542,12 @@ local function OnServerCommand(module, command, arguments)
 			FactionsMain.GUI:startCapture();
 			getPlayer():Say(getText("UI_Text_SafehouseCapturing"))
 		else
-			getPlayer():Say(getText("UI_Text_SafehouseNotTimeCapture"))
+			-- SafehousePlus compatibility
+			if arguments.protected then
+				getPlayer():Say(getText("UI_Text_SafehouseProtected"))
+			else
+				getPlayer():Say(getText("UI_Text_SafehouseNotTimeCapture"));
+			end
 		end
 	end
 	-- Safehouse Captured Sync

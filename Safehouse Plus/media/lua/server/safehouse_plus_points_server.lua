@@ -1,5 +1,4 @@
 ---@diagnostic disable: undefined-global
-if isClient() then return end;
 -- Get the days, hours from the OS time based in timezone
 local function getCurrentTime()
     local function remainder(a, b)
@@ -98,6 +97,8 @@ end
 
 -- Declaring variables to be called in script text
 UpgradeSafehouse = Recipe.OnGiveXP.UpgradeSafehouse;
+
+if isClient() then return end;
 
 -- Stores the server and client communication
 local ServerSafehouseCommands = {};

@@ -1,0 +1,23 @@
+module Base
+{       
+        item ProtectSafehouse {
+                DisplayCategory = Junk,
+                Weight	=	0.1,
+                Type	=	Normal,
+                DisplayName	=	Protect Safehouse,
+                Icon	=	protect_safehouse,
+                WorldStaticModel = Money,
+	}
+	recipe Protect Safehouse {
+                ProtectSafehouse,
+
+                CanBeDoneFromFloor:true,
+                Time:500,
+                Result:ProtectSafehouse=1,
+                RemoveResultItem:true,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+                OnGiveXP:ProtectSafehouse,
+        }
+}

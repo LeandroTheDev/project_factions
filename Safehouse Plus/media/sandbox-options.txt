@@ -99,3 +99,21 @@ option SafehousePlus.KeepInventory
 	page = Safehouse,
 	translation = SafehousePlus_KeepInventory,
 }
+
+option SafehousePlus.EnableSafehouseProtection
+{
+	type = boolean,
+	default = true,
+	page = Safehouse,
+	translation = SafehousePlus_EnableSafehouseProtection,
+}
+
+option SafehousePlus.SafehouseProtectionLimit
+{
+	type = integer,
+	default = 1,
+	min = 0,
+	max = 99999,
+	page = Safehouse,
+	translation = SafehousePlus_SafehouseProtectionLimit,
+}

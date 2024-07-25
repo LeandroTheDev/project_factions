@@ -33,4 +33,10 @@ Sandbox_EN = {
 
     Sandbox_SafehousePlus_KeepInventory = "Respawn Keep Inventory",
     Sandbox_SafehousePlus_KeepInventory_tooltip = "When the player dies the item on the ground is removed and spawned on the player in respawn",
+
+    Sandbox_SafehousePlus_EnableSafehouseProtection = "Enable Safehouse Protection",
+    Sandbox_SafehousePlus_EnableSafehouseProtection_tooltip = "Enable protection with the Safehouse Protector item, !! you also need the Factions mod for this work !!",
+
+    Sandbox_SafehousePlus_SafehouseProtectionLimit = "Protection Limits",
+    Sandbox_SafehousePlus_SafehouseProtectionLimit_tooltip = "How much safehouses a faction can protect, !! you also need the Factions mod for this work !!",
 }

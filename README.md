@@ -45,6 +45,7 @@ respawn mechanics forked from [Keep Inventory](https://steamcommunity.com/shared
 - Upgrade Safehouse (Need Factions Economy Mod)
 - Reedem points (Need Factions Economy Mod)
 - Respawn in safehouse bed
+- Safehouse Protection Item (Need Factions Mod)
 
 #
 
@@ -69,6 +70,14 @@ External very useful mods to make the factions better
 - Copy all mods from the new folder created, and paste on your project zomboid mods folder
 - > You can also upload to workshop to automatically users download this project
 - Now you can open the game, enable the mods and change the sandbox configurations
-- > Some mods require special configurations in Lua, after starting the server take a look in the Lua folder
+- > Some mods require special configurations in Lua, after starting the server take a look in the Lua folder, all mods also have a Logs folder in Lua to manage players actions
+
+Load Order:
+- Factions
+- Factions Economy
+- Factions Plus
+- Safehouse Plus
+- Random Airdrops
+- RA Smoke Flares
 
 FTM License

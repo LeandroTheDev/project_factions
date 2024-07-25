@@ -257,8 +257,22 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 
 	--Verifiy if the players already attacked today
 	if ServerSafehouseData["SafehousePlayersCaptureBlock"][playerCapturing] == nil then
+		-- SafehousePlus compatibility
+		if SafehousePlusCompatibility and SandboxVars.SafehousePlus then
+			if SandboxVars.SafehousePlus.EnableSafehouseProtection then
+				-- Checking if safehouse is protected
+				if SafehouseIsProtected(safehouseBeenCaptured) then
+					logger(playerCapturing ..
+						" is trying to capture a safehouse but it is protected by SafehousePlusProtection X: " ..
+						playerLocation:getX() .. " Y: " .. playerLocation:getY());
+					sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation",
+						{ validation = false, protected = true });
+					return;
+				end
+			end
+		end
 		--Add player to blocked
-		ServerSafehouseData["SafehousePlayersCaptureBlock"][playerCapturing] = true
+		ServerSafehouseData["SafehousePlayersCaptureBlock"][playerCapturing] = true;
 		--Contact Player for confirming
 		logger(playerCapturing ..
 			" is trying to capture a safehouse in X: " .. playerLocation:getX() .. " Y: " .. playerLocation:getY());
