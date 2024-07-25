@@ -7,8 +7,8 @@ Sandbox_EN = {
     Sandbox_Factions_TimeToDisableCapture = "Capture Finish Hour",
     Sandbox_Factions_TimeToDisableCapture_tooltip = "Hour in the day to Capture be disabled",
     
-    Sandbox_Factions_DaysOfWeek = "Capture Days",
-    Sandbox_Factions_DaysOfWeek_tooltip = "Days of weeks that capture will be enable, 0 = Sunday, 1 = Monday... example: 0/3/6, Sunday,Wednesday,Saturday capture will be enabled",
+    Sandbox_Factions_CaptureDaysOfWeek = "Capture Days",
+    Sandbox_Factions_CaptureDaysOfWeek_tooltip = "Days of weeks that capture will be enable, 0 = Sunday, 1 = Monday... example: 0/3/6, Sunday,Wednesday,Saturday capture will be enabled",
 
     Sandbox_Factions_Timezone = "Timezone",
     Sandbox_Factions_Timezone_tooltip = "Timezone from your current location, Sao Paulo: -3, New York: -5, Moscou: 3",

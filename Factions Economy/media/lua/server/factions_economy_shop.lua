@@ -86,9 +86,6 @@ local function logger(log)
     -- Write the log in it
     fileWriter:write("[" ..
         time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
-
-    -- Close the file
-    fileWriter:close();
 end
 
 ServerShopData = {};

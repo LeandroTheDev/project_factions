@@ -20,12 +20,12 @@ option Factions.TimeToDisableCapture
 	translation = Factions_TimeToDisableCapture,
 }
 
-option Factions.DaysOfWeek
+option Factions.CaptureDaysOfWeek
 {
 	type = string,
-	default = 0/3/6,
+	default = 0/1/2/3/4/5/6,
 	page = Factions,
-	translation = Factions_DaysOfWeek,
+	translation = Factions_CaptureDaysOfWeek,
 }
 
 option Factions.Timezone

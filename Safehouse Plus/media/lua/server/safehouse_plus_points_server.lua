@@ -85,14 +85,11 @@ local function logger(log)
     -- Write the log in it
     fileWriter:write("[" ..
         time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
-
-    -- Close the file
-    fileWriter:close();
 end
 
 -- Call the server to add a safehouse point
 function Recipe.OnGiveXP.UpgradeSafehouse(recipe, ingredients, result, player)
-	sendClientCommand("ServerSafehouse", "addSafehousePoint", nil);
+    sendClientCommand("ServerSafehouse", "addSafehousePoint", nil);
 end
 
 -- Declaring variables to be called in script text

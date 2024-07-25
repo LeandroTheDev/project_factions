@@ -85,9 +85,26 @@ local function logger(log)
     -- Write the log in it
     fileWriter:write("[" ..
         time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
+end
 
-    -- Close the file
-    fileWriter:close();
+local function tableFormat(tabela, nivel)
+    nivel = nivel or 0
+    local prefixo = string.rep("  ", nivel) -- Espaços para recuo
+    if type(tabela) == "table" then
+        local str = "{\n"
+        for chave, valor in pairs(tabela) do
+            str = str .. prefixo .. "  [" .. tostring(chave) .. "] = "
+            if type(valor) == "table" then
+                str = str .. tableFormat(valor, nivel + 1) .. ",\n"
+            else
+                str = str .. tostring(valor) .. ",\n"
+            end
+        end
+        str = str .. prefixo .. "}"
+        return str
+    else
+        return tostring(tabela)
+    end
 end
 
 -- Call the server to add a safehouse point
@@ -147,6 +164,8 @@ local function belongsToSafehouse(safehouse, player)
 
     -- Getting the faction name from the player
     local player_faction = getFaction(player:getUsername());
+    if not player_faction then return "no" end;
+
     -- Getting the faction name from the owner
     local owner_faction = getFaction(safehouseOwner);
 
@@ -170,19 +189,20 @@ function ServerSafehouseProtection.protectSafehouse(module, command, player, arg
         sendServerCommand(player, "ServerSafehouseProtection", "notBelongs", nil);
     end
     -- Getting the safehouse where player is standing
-    local safehouse = SafeHouse.getSafeHouse(square);
+    local safehouse = SafeHouse.getSafeHouse(playerSquare);
     -- Checking if player is allied of the safehouse
     local safehouseResult = belongsToSafehouse(safehouse, player);
     if safehouseResult == "owner" then -- owner
         -- Getting the safehouse id
         local safehouseId = tostring(safehouse:getX()) .. tostring(safehouse:getY());
-        local factionName = getFaction(player:getUsername());
-        if not factionName then
+        local playerFaction = getFaction(player:getUsername());
+        if not playerFaction then
             logger(player:getUsername() ..
                 " cannot protect that safehouse player doesn't belongs to any faction, returning item to player inventory");
             sendServerCommand(player, "ServerSafehouseProtection", "notBelongs", nil);
             return;
         end
+        local factionName = playerFaction:getName();
 
         -- Nil checks
         if not ServerSafehouseProtectionData[factionName] then ServerSafehouseProtectionData[factionName] = {} end;
@@ -196,6 +216,8 @@ function ServerSafehouseProtection.protectSafehouse(module, command, player, arg
             table.insert(ServerSafehouseProtectionData[factionName], safehouseId)
         end
         sendServerCommand(player, "ServerSafehouseProtection", "safehouseProtected", nil);
+        logger(player:getUsername() ..
+            " has protected the safehouse in X: " .. safehouse:getX() .. " Y: " .. safehouse:getY());
     elseif safehouseResult == "yes" then -- ally
         logger(player:getUsername() ..
             " cannot protect that safehouse player is not the safehouse owner, returning item to player inventory");
@@ -272,7 +294,7 @@ function SafehouseIsProtected(safehouse)
     -- Getting the safehouse id
     local selectedSafehouseId = tostring(safehouse:getX()) .. tostring(safehouse:getY());
     -- Swiping all factions
-    for factionName, safehousesProtecteds in pairs(ServerSafehouseProtectionData) do
+    for _, safehousesProtecteds in pairs(ServerSafehouseProtectionData) do
         -- Swiping all safehouse from the actual faction
         for _, safehouseId in ipairs(safehousesProtecteds) do
             if selectedSafehouseId == safehouseId then

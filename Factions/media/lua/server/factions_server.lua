@@ -86,9 +86,6 @@ local function logger(log)
 	-- Write the log in it
 	fileWriter:write("[" ..
 		time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
-
-	-- Close the file
-	fileWriter:close();
 end
 
 -- Explanation about this file.
@@ -105,16 +102,35 @@ local days = {};
 -- in the invasion, resets every time the invasion start
 factions.ResetData = false;
 
+
+local function tableFormat(tabela, nivel)
+	nivel = nivel or 0
+	local prefixo = string.rep("  ", nivel) -- Espaços para recuo
+	if type(tabela) == "table" then
+		local str = "{\n"
+		for chave, valor in pairs(tabela) do
+			str = str .. prefixo .. "  [" .. tostring(chave) .. "] = "
+			if type(valor) == "table" then
+				str = str .. tableFormat(valor, nivel + 1) .. ",\n"
+			else
+				str = str .. tostring(valor) .. ",\n"
+			end
+		end
+		str = str .. prefixo .. "}"
+		return str
+	else
+		return tostring(tabela)
+	end
+end
+
 -- Simple read the Sandbox options
 factions.readOptions = function()
-	local stringDays = SandboxVars.Factions.DaysOfWeek;
+	local stringDays = SandboxVars.Factions.CaptureDaysOfWeek;
 	-- Swipe the days into a variable
-	for day in string.gmatch(stringDays, "%d+") do
-		-- Get the day number
-		local dayNumber = tonumber(day);
-		table.insert(days, dayNumber);
+	for num in stringDays:gmatch("[^/]+") do
+		print(num);
+		table.insert(days, tonumber(num));
 	end
-	logger("Options has been readed");
 end
 
 -- Returns a boolean based on the parameter actualDay and enabled Days from factions
@@ -256,7 +272,7 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 	end
 
 	--Verifiy if the players already attacked today
-	if ServerSafehouseData["SafehousePlayersCaptureBlock"][playerCapturing] == nil then
+	if ServerSafehouseData["SafehousePlayersCaptureBlock"][playerCapturing] == nil or true then -- delete the "or true"
 		-- SafehousePlus compatibility
 		if SafehousePlusCompatibility and SandboxVars.SafehousePlus then
 			if SandboxVars.SafehousePlus.EnableSafehouseProtection then
@@ -485,5 +501,4 @@ if SandboxVars.Factions.IncreaseConstructionLife then
 end
 
 -- Read Options on start
-Events.OnGameStart.Add(factions.readOptions());     -- Singleplayer
 Events.OnServerStarted.Add(factions.readOptions()); -- Multiplayer

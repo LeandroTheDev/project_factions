@@ -86,9 +86,6 @@ local function logger(log)
 	-- Write the log in it
 	fileWriter:write("[" ..
 		time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
-
-	-- Close the file
-	fileWriter:close();
 end
 -- Explanation about this file.
 -- this file contains the utils features from the factions
@@ -97,26 +94,25 @@ FactionsMain = {};
 FactionsMain.GUI = nil
 FactionsMain.Points = 0;
 
---Thanks chat gpt
--- local function formatarTabela(tabela, nivel)
--- 	nivel = nivel or 0
--- 	local prefixo = string.rep("  ", nivel) -- Espaços para recuo
--- 	if type(tabela) == "table" then
--- 		local str = "{\n"
--- 		for chave, valor in pairs(tabela) do
--- 			str = str .. prefixo .. "  [" .. tostring(chave) .. "] = "
--- 			if type(valor) == "table" then
--- 				str = str .. formatarTabela(valor, nivel + 1) .. ",\n"
--- 			else
--- 				str = str .. tostring(valor) .. ",\n"
--- 			end
--- 		end
--- 		str = str .. prefixo .. "}"
--- 		return str
--- 	else
--- 		return tostring(tabela)
--- 	end
--- end
+local function tableFormat(tabela, nivel)
+	nivel = nivel or 0
+	local prefixo = string.rep("  ", nivel) -- Espaços para recuo
+	if type(tabela) == "table" then
+		local str = "{\n"
+		for chave, valor in pairs(tabela) do
+			str = str .. prefixo .. "  [" .. tostring(chave) .. "] = "
+			if type(valor) == "table" then
+				str = str .. tableFormat(valor, nivel + 1) .. ",\n"
+			else
+				str = str .. tostring(valor) .. ",\n"
+			end
+		end
+		str = str .. prefixo .. "}"
+		return str
+	else
+		return tostring(tabela)
+	end
+end
 
 -- Get the safehouse cost based in the size of it
 FactionsMain.getCost = function(safehouse, offset)
@@ -496,7 +492,7 @@ if isServer() then
 		logger("function: zombiesKillPoints");
 		logger("Kills: " .. kills);
 		logger("Configuration: ");
-		logger(formatarTabela(configuration));
+		logger(tableFormat(configuration));
 		logger("---------------------------");
 
 		return killsPoints;
