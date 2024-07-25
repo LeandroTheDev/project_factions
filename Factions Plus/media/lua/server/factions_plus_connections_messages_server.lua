@@ -1,4 +1,26 @@
 ---@diagnostic disable: undefined-global
+if isClient() then return end;
+--Thanks chat gpt
+local function formatarTabela(tabela, nivel)
+    nivel = nivel or 0
+    local prefixo = string.rep("  ", nivel) -- Espaços para recuo
+    if type(tabela) == "table" then
+        local str = "{\n"
+        for chave, valor in pairs(tabela) do
+            str = str .. prefixo .. "  [" .. tostring(chave) .. "] = "
+            if type(valor) == "table" then
+                str = str .. formatarTabela(valor, nivel + 1) .. ",\n"
+            else
+                str = str .. tostring(valor) .. ",\n"
+            end
+        end
+        str = str .. prefixo .. "}"
+        return str
+    else
+        return tostring(tabela)
+    end
+end
+
 -- Get the days, hours from the OS time based in timezone
 local function getCurrentTime()
     local function remainder(a, b)
@@ -79,7 +101,7 @@ local function getCurrentTime()
 end
 
 -- Get the file instance
-local fileWriter = getFileWriter("Logs/FactionsPlusConnectionsMessages.txt", true, false);
+local fileWriter = getFileWriter("Logs/FactionsPlusConnectionsMessages.txt", false, true);
 local function logger(log)
     local time = getCurrentTime();
     -- Write the log in it
@@ -93,21 +115,21 @@ end
 local ticksToDetectPlayers = SandboxVars.FactionsPlus.MessagesCheckPerTick;
 local actualTicks = 0;
 
-local function sendMessageToAllPlayers(message, player)
+local function sendMessageToAllPlayers(message, _playerUsername)
     local onlinePlayers = getOnlinePlayers();
 
     -- Swiping all online players
     for i = 0, onlinePlayers:size() - 1 do
         local selectedPlayer = onlinePlayers:get(i);
-        sendServerCommand(selectedPlayer, "ServerMessages", message, { playerUsername = player:getUsername() });
+        sendServerCommand(selectedPlayer, "ServerMessages", message, { playerUsername = _playerUsername });
     end
 
     if message == "playerconnected" then
-        logger(player:getUsername() .. " connected");
+        logger(_playerUsername .. " connected");
     elseif message == "playerdisconnected" then
-        logger(player:getUsername() .. " disconnected");
+        logger(_playerUsername .. " disconnected");
     elseif message == "playerdied" then
-        logger(player:getUsername() .. " dead");
+        logger(_playerUsername .. " dead");
     end
 end
 
@@ -120,26 +142,35 @@ end
 
 -- Stores any old online players, is a List<string> with the username
 local previousOnlinePlayers = {};
+local lastTimeSeconds = 0;
 
 -- Player message handler
 if SandboxVars.FactionsPlus.EnablePlayerJoinMessages or SandboxVars.FactionsPlus.EnablePlayerLeaveMessages then
     Events.OnTick.Add(function()
         -- Tickrate detection
         if actualTicks < ticksToDetectPlayers then
-            actualTicks = actualTicks + 1; return
+            actualTicks = actualTicks + 1;
+            return;
         end
         actualTicks = 0;
 
+        -- Check if server was freeze (no players)
+        local actualTime = getTimestamp() + 0 * 3600;
+        if actualTime > lastTimeSeconds + 15 then
+            logger("server was freezed, resetting variables");
+            -- Resetting players
+            previousOnlinePlayers = {}
+        end 
+
         -- Getting online players
         local onlinePlayers = getOnlinePlayers();
-        if not players then return end -- server empty
 
         -- Detecting disconnected players
-        -- Swiping all previous players
-        for i = 0, previousOnlinePlayers:size() - 1 do
-            local selectedPreviousPlayer = previousOnlinePlayers:get(i);
+        -- Iterating over previousOnlinePlayers
+        for i = 1, #previousOnlinePlayers do
+            local selectedPreviousPlayer = previousOnlinePlayers[i];
             local isDisconnected = true;
-            -- Swiping all online players
+            -- Iterating over onlinePlayers
             for j = 0, onlinePlayers:size() - 1 do
                 local selectedPlayer = onlinePlayers:get(j);
                 -- Checking if player is still online
@@ -150,32 +181,24 @@ if SandboxVars.FactionsPlus.EnablePlayerJoinMessages or SandboxVars.FactionsPlus
             end
             -- Checking if player disconnected
             if isDisconnected then
-                -- Sending a message to all players the disconnected player
+                -- Sending a message to all players about the disconnected player
                 if SandboxVars.FactionsPlus.EnablePlayerLeaveMessages then
-                    sendMessageToAllPlayers("playerconnected", selectedPreviousPlayer);
+                    sendMessageToAllPlayers("playerdisconnected", selectedPreviousPlayer);
                 end
                 -- Removing the player from the previousOnlinePlayers table
-                for x = #previousOnlinePlayers, 1, -1 do
-                    -- Checking the exact index
-                    if previousOnlinePlayers[x] == selectedPreviousPlayer then
-                        -- Removing the player from previous
-                        table.remove(previousOnlinePlayers, x);
-                        -- Reducing the index because we removed a value from the table
-                        i = i - 1;
-                        break;
-                    end
-                end
+                table.remove(previousOnlinePlayers, i);
+                i = i - 1; -- Adjusting index due to table.remove
             end
         end
 
         -- Detecting new players
-        -- Swiping all online players
+        -- Iterating over onlinePlayers
         for i = 0, onlinePlayers:size() - 1 do
             local selectedPlayer = onlinePlayers:get(i);
             local isNew = true;
-            -- Swiping all previous players
-            for j = 0, previousOnlinePlayers:size() - 1 do
-                local selectedPreviousPlayer = previousOnlinePlayers:get(j);
+            -- Iterating over previousOnlinePlayers
+            for j = 1, #previousOnlinePlayers do
+                local selectedPreviousPlayer = previousOnlinePlayers[j];
                 -- Checking if the previous player is already added
                 if selectedPlayer:getUsername() == selectedPreviousPlayer then
                     isNew = false;
@@ -186,11 +209,14 @@ if SandboxVars.FactionsPlus.EnablePlayerJoinMessages or SandboxVars.FactionsPlus
             if isNew then
                 -- Adding it to the previous players
                 table.insert(previousOnlinePlayers, selectedPlayer:getUsername());
-                -- Sending a message to all players the new connected player
+                -- Sending a message to all players about the new connected player
                 if SandboxVars.FactionsPlus.EnablePlayerJoinMessages then
                     sendMessageToAllPlayers("playerconnected", selectedPlayer:getUsername());
                 end
             end
         end
+
+        -- Adding actual seconds on the lastTimeSeconds
+        lastTimeSeconds = getTimestamp() + 0 * 3600;
     end)
 end

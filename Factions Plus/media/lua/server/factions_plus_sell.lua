@@ -1,6 +1,5 @@
 ---@diagnostic disable: undefined-global, deprecated
 if isClient() then return end;
-require = "recipecode";
 
 --Return Money Function
 local function ReturnPoints(value, player)

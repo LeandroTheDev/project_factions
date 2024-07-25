@@ -80,7 +80,7 @@ local function getCurrentTime()
 end
 
 -- Get the file instance
-local fileWriter = getFileWriter("Logs/SafehousePlusPoints.txt", true, false);
+local fileWriter = getFileWriter("Logs/SafehousePlusPoints.txt", false, true);
 local function logger(log)
     local time = getCurrentTime();
     -- Write the log in it

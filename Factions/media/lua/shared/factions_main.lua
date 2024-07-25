@@ -1,5 +1,95 @@
 ---@diagnostic disable: undefined-global
 FactionsCompatibility = true;
+-- Get the days, hours from the OS time based in timezone
+local function getCurrentTime()
+	local function remainder(a, b)
+		return a - math.floor(a / b) * b;
+	end
+	local tm          = {};
+	local daysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	local minutes, hours, days, year, month;
+	local dayOfWeek;
+	local seconds     = getTimestamp() + 0 * 3600;
+	-- Calculate minutes
+	minutes           = math.floor(seconds / 60);
+	seconds           = seconds - (minutes * 60);
+	-- Calculate hours
+	hours             = math.floor(minutes / 60);
+	minutes           = minutes - (hours * 60);
+	-- Calculate days
+	days              = math.floor(hours / 24);
+	hours             = hours - (days * 24);
+
+	-- Unix time starts in 1970 on a Thursday
+	year              = 1970;
+	dayOfWeek         = 4;
+
+	while true do
+		local leapYear = remainder(year, 4) == 0 and (remainder(year, 100) ~= 0 or remainder(year, 400) == 0);
+		local daysInYear = 365;
+		if leapYear then
+			daysInYear = 366;
+		end
+
+		if days >= daysInYear then
+			if leapYear then
+				dayOfWeek = dayOfWeek + 2;
+			else
+				dayOfWeek = dayOfWeek + 1;
+			end
+			days = days - daysInYear;
+			if dayOfWeek >= 7 then
+				dayOfWeek = dayOfWeek - 7;
+			end
+			year = year + 1;
+		else
+			tm.tm_yday = days;
+			dayOfWeek  = dayOfWeek + days;
+			dayOfWeek  = remainder(dayOfWeek, 7);
+			-- Calculate the month and day
+
+			month      = 1;
+			while month <= 12 do
+				local dim = daysInMonth[month];
+
+				-- Add a day to feburary if this is a leap year
+				if month == 2 and leapYear then
+					dim = dim + 1;
+				end
+
+				if days >= dim then
+					days = days - dim;
+				else
+					break;
+				end
+				month = month + 1;
+			end
+			break;
+		end
+	end
+
+	tm.tm_sec  = seconds;
+	tm.tm_min  = minutes;
+	tm.tm_hour = hours;
+	tm.tm_hour = tm.tm_hour + tonumber(SandboxVars.Factions.Timezone);
+	tm.tm_mday = days + 1;
+	tm.tm_mon  = month;
+	tm.tm_year = year;
+	tm.tm_wday = dayOfWeek;
+	return tm;
+end
+
+-- Get the file instance
+local fileWriter = getFileWriter("Logs/Factions.txt", false, true);
+local function logger(log)
+	local time = getCurrentTime();
+	-- Write the log in it
+	fileWriter:write("[" ..
+		time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
+
+	-- Close the file
+	fileWriter:close();
+end
 -- Explanation about this file.
 -- this file contains the utils features from the factions
 
@@ -101,7 +191,7 @@ FactionsMain.isSpawnPoint = function(square)
 				end
 			end
 		else
-			print("[ERROR] getServerSpawnRegions() returned nil");
+			logger("[ERROR] getServerSpawnRegions() returned nil");
 		end
 	end
 
@@ -156,7 +246,6 @@ FactionsMain.isSomeoneInside = function(square, faction, level)
 
 								if not o:getSquare():getProperties():Is(IsoFlagType.exterior) and o:getBuilding() then
 									if instanceof(o, "IsoPlayer") then
-										--print(tostring(o:getUsername()));
 										local member = false;
 
 										for j = 0, faction:getPlayers():size() - 1 do
@@ -172,11 +261,9 @@ FactionsMain.isSomeoneInside = function(square, faction, level)
 										end
 
 										if not member then
-											--print("Found unknown survivor!")
 											return true
 										end
 									elseif instanceof(o, "IsoZombie") then
-										--print("Found zombie!")
 										return true
 									end
 								end
@@ -405,12 +492,12 @@ if isServer() then
 			end
 		end
 
-		-- print("---------------------------");
-		-- print("function: zombiesKillPoints");
-		-- print("Kills: " .. kills);
-		-- print("Configuration: ");
-		-- print(formatarTabela(configuration));
-		-- print("---------------------------");
+		logger("---------------------------");
+		logger("function: zombiesKillPoints");
+		logger("Kills: " .. kills);
+		logger("Configuration: ");
+		logger(formatarTabela(configuration));
+		logger("---------------------------");
 
 		return killsPoints;
 	end
@@ -437,13 +524,13 @@ if isServer() then
 		ServerFactionPoints[playerFaction:getName()]["points"] = zombiesKillPoints(ServerFactionPoints
 			[playerFaction:getName()]["zombieKills"]) + ServerFactionPoints[playerFaction:getName()]["specialPoints"];
 
-		-- print("---------------------------");
-		-- print("function: ServerFactionCommands.killedZombie");
-		-- print(player:getUsername());
-		-- print("Zombie kills: " .. ServerFactionPoints[playerFaction:getName()]["zombieKills"]);
-		-- print("Points: " .. ServerFactionPoints[playerFaction:getName()]["points"]);
-		-- print("Special Points: " .. ServerFactionPoints[playerFaction:getName()]["specialPoints"]);
-		-- print("---------------------------");
+		logger("---------------------------");
+		logger("function: ServerFactionCommands.killedZombie");
+		logger(player:getUsername());
+		logger("Zombie kills: " .. ServerFactionPoints[playerFaction:getName()]["zombieKills"]);
+		logger("Points: " .. ServerFactionPoints[playerFaction:getName()]["points"]);
+		logger("Special Points: " .. ServerFactionPoints[playerFaction:getName()]["specialPoints"]);
+		logger("---------------------------");
 
 		-- Send players from factions the new updated points
 		local onlinePlayers = getOnlinePlayers();
@@ -503,7 +590,7 @@ if isServer() then
 			ServerFactionPoints[playerFaction:getName()]["specialPoints"] = ServerFactionPoints[playerFaction:getName()]
 				["specialPoints"] + args.quantity;
 		else
-			print("[Factions] ERROR: Cannot add points from " .. player:getUsername() .. " factions, the quantity is nil");
+			logger("[ERROR] Cannot add points from " .. player:getUsername() .. " factions, the quantity is nil");
 		end
 	end
 
@@ -526,14 +613,14 @@ if isServer() then
 				ServerFactionPoints[playerFaction:getName()]["specialPoints"] = 0
 			end
 		else
-			print("[Factions] ERROR: Cannot remove points from " ..
+			logger("[ERROR] Cannot remove points from " ..
 				player:getUsername() .. " factions, the quantity is nil");
 		end
 	end
 
 	-- Remove factions data
 	function ServerFactionCommands.removeFaction(module, command, player, args)
-		print("[Factions] Faction " .. args.factionName .. " is been deleted by: " .. player:getUsername())
+		logger("[ERROR] Faction " .. args.factionName .. " is been deleted by: " .. player:getUsername())
 		ServerFactionPoints[args.factionName] = nil;
 	end
 
