@@ -272,7 +272,7 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 	end
 
 	--Verifiy if the players already attacked today
-	if ServerSafehouseData["SafehousePlayersCaptureBlock"][playerCapturing] == nil or true then -- delete the "or true"
+	if ServerSafehouseData["SafehousePlayersCaptureBlock"][playerCapturing] == nil then
 		-- SafehousePlus compatibility
 		if SafehousePlusCompatibility and SandboxVars.SafehousePlus then
 			if SandboxVars.SafehousePlus.EnableSafehouseProtection then
