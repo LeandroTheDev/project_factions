@@ -36,8 +36,13 @@ end
 function ServerShopUI.LoadType.ITEM(row, entry)
     row.quantity = entry.quantity or 1
     local item = getScriptManager():getItem(entry.target)
-    row.text = item:getDisplayName()
-    row.texture = item:getNormalTexture()
+    if item then
+        row.text = item:getDisplayName()
+        row.texture = item:getNormalTexture()
+    else
+        row.text = "Unkown"
+        row.text = "Base.Axe"
+    end
 end
 
 function ServerShopUI.LoadType.VEHICLE(row, entry)
@@ -57,7 +62,8 @@ function ServerShopUI.LoadType.DIV(row, entry)
         row.target = {}
         for text in entry.target:gmatch("([^\n]+)") do table.insert(row.target, text) end
     end
-    row.font = row.height > #row.target * (FONT_HGT_LARGE + 1 * FONT_SCALE) and UIFont.Large or row.height > #row.target * (FONT_HGT_MEDIUM + 1 * FONT_SCALE) and UIFont.Medium or UIFont.Small
+    row.font = row.height > #row.target * (FONT_HGT_LARGE + 1 * FONT_SCALE) and UIFont.Large or
+    row.height > #row.target * (FONT_HGT_MEDIUM + 1 * FONT_SCALE) and UIFont.Medium or UIFont.Small
     row.fontHeight = getTextManager():getFontHeight(row.font)
 end
 
@@ -65,7 +71,8 @@ function ServerShopUI.LoadListings(module, command, arguments)
     if module == "ServerPoints" and command == "loadShop" then
         Events.OnServerCommand.Remove(ServerShopUI.LoadListings)
         for k, v in pairs(arguments) do
-            local scrollingList = ISScrollingListBox:new(1, 0, ServerShopUI.instance.tabPanel.width - 2, ServerShopUI.instance.tabPanel.height - ServerShopUI.instance.tabPanel.tabHeight)
+            local scrollingList = ISScrollingListBox:new(1, 0, ServerShopUI.instance.tabPanel.width - 2,
+                ServerShopUI.instance.tabPanel.height - ServerShopUI.instance.tabPanel.tabHeight)
             scrollingList.itemPadY = 10 * FONT_SCALE
             scrollingList.itemheight = FONT_HGT_LARGE + scrollingList.itemPadY * 2 + 1 * FONT_SCALE + FONT_HGT_SMALL
             scrollingList.textureHeight = scrollingList.itemheight - scrollingList.itemPadY * 2
@@ -109,7 +116,8 @@ function ServerShopUI:createChildren()
     self:addChild(self.tabPanel)
     Events.OnTick.Add(OnTick)
 
-    self.previewButton = ISButton:new(self.width - 200 * FONT_SCALE - padBottom * 2, 0, 100 * FONT_SCALE, FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, "PREVIEW", self, ServerShopUI.onPreview)
+    self.previewButton = ISButton:new(self.width - 200 * FONT_SCALE - padBottom * 2, 0, 100 * FONT_SCALE,
+        FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, "PREVIEW", self, ServerShopUI.onPreview)
     self.previewButton:initialise()
     self.previewButton:instantiate()
     self.previewButton.borderColor = self.buttonBorderColor
@@ -117,7 +125,8 @@ function ServerShopUI:createChildren()
     self.previewButton.font = UIFont.Medium
     self:addChild(self.previewButton)
 
-    self.buyButton = ISButton:new(self.width - 100 * FONT_SCALE - padBottom, 0, 100 * FONT_SCALE, FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, getText("IGUI_Buy"), self, ServerShopUI.onBuy)
+    self.buyButton = ISButton:new(self.width - 100 * FONT_SCALE - padBottom, 0, 100 * FONT_SCALE,
+        FONT_HGT_LARGE + 1 * FONT_SCALE + FONT_HGT_SMALL, getText("IGUI_Buy"), self, ServerShopUI.onBuy)
     self.buyButton:initialise()
     self.buyButton:instantiate()
     self.buyButton.borderColor = self.buttonBorderColor
@@ -125,13 +134,15 @@ function ServerShopUI:createChildren()
     self.buyButton.font = UIFont.Medium
     self:addChild(self.buyButton)
 
-    self.cancelButton = ISButton:new(self.width - padBottom - btnWid, self.height - padBottom - btnHgt, btnWid, btnHgt, getText("UI_btn_close"), self, ServerShopUI.close)
+    self.cancelButton = ISButton:new(self.width - padBottom - btnWid, self.height - padBottom - btnHgt, btnWid, btnHgt,
+        getText("UI_btn_close"), self, ServerShopUI.close)
     self.cancelButton:initialise()
     self.cancelButton:instantiate()
     self:addChild(self.cancelButton)
 
     if getDebug() then
-        self.reloadButton = ISButton:new(self.cancelButton.x - padBottom - btnWid, self.cancelButton.y, btnWid, btnHgt, getText("IGUI_Reload"), self, ServerShopUI.onReload)
+        self.reloadButton = ISButton:new(self.cancelButton.x - padBottom - btnWid, self.cancelButton.y, btnWid, btnHgt,
+            getText("IGUI_Reload"), self, ServerShopUI.onReload)
         self.reloadButton:initialise()
         self.reloadButton:instantiate()
         self:addChild(self.reloadButton)
@@ -199,9 +210,11 @@ function ServerShopUI.PreviewType.VEHICLE(self)
     self.preview.javaObject:fromLua1("setView", "UserDefined")
     self.preview.javaObject:fromLua2("dragView", 0, 30)
     self.preview.javaObject:fromLua1("setZoom", 6)
-    self.preview.javaObject:fromLua2("setVehicleScript", "vehicle", self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected].target)
+    self.preview.javaObject:fromLua2("setVehicleScript", "vehicle",
+        self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected].target)
 
-    self.preview.closeButton = ISButton:new(self.preview.width - 15 * FONT_SCALE, 5 * FONT_SCALE, 10 * FONT_SCALE, 10 * FONT_SCALE, nil, self.preview, function(self)
+    self.preview.closeButton = ISButton:new(self.preview.width - 15 * FONT_SCALE, 5 * FONT_SCALE, 10 * FONT_SCALE,
+        10 * FONT_SCALE, nil, self.preview, function(self)
         self:setVisible(false)
         self:removeFromUIManager()
         ServerShopUI.instance.preview = nil
@@ -220,7 +233,8 @@ function ServerShopUI:onPreview()
         ServerShopUI.instance.preview = nil
     end
     if ServerShopUI.PreviewType[self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected].type] then
-        ServerShopUI.PreviewType[self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected].type](self)
+        ServerShopUI.PreviewType
+            [self.tabPanel.activeView.view.items[self.tabPanel.activeView.view.mouseoverselected].type](self)
     end
 end
 
@@ -297,7 +311,8 @@ function ServerShopUI:addView(name, view)
 end
 
 function ServerShopUI.DrawType.DIV(self, y, item, alt)
-    self:drawRectBorder(0, y, self:getWidth(), item.height, 0.5, self.borderColor.r, self.borderColor.g, self.borderColor.b)
+    self:drawRectBorder(0, y, self:getWidth(), item.height, 0.5, self.borderColor.r, self.borderColor.g,
+        self.borderColor.b)
     y = y + (item.height - #item.target * item.fontHeight) / 2
     for i, v in ipairs(item.target) do
         self:drawTextCentre(v, self.width / 2, y, 0.7, 0.7, 0.7, 1.0, item.font)
@@ -306,7 +321,8 @@ function ServerShopUI.DrawType.DIV(self, y, item, alt)
 end
 
 function ServerShopUI.DrawType.DEFAULT(self, y, item, alt)
-    self:drawRectBorder(0, y, self:getWidth(), item.height, 0.5, self.borderColor.r, self.borderColor.g, self.borderColor.b)
+    self:drawRectBorder(0, y, self:getWidth(), item.height, 0.5, self.borderColor.r, self.borderColor.g,
+        self.borderColor.b)
     local x = self.itemPadY
     local z = y + self.itemPadY
     if item.texture then
@@ -315,7 +331,8 @@ function ServerShopUI.DrawType.DEFAULT(self, y, item, alt)
     x = x + self.itemPadY + self.textureHeight
     if item.quantity then
         self:drawText("Quantity: ", x, z + FONT_HGT_LARGE + 1 * FONT_SCALE, 0.7, 0.7, 0.7, 1.0, UIFont.Small)
-        self:drawText(tostring(item.quantity), x + getTextManager():MeasureStringX(UIFont.Small, "Quantity: "), z + FONT_HGT_LARGE + 1 * FONT_SCALE, 0.7, 0.7, 0.7, 1.0, UIFont.Small)
+        self:drawText(tostring(item.quantity), x + getTextManager():MeasureStringX(UIFont.Small, "Quantity: "),
+            z + FONT_HGT_LARGE + 1 * FONT_SCALE, 0.7, 0.7, 0.7, 1.0, UIFont.Small)
     else
         z = y + (item.height - FONT_HGT_LARGE) / 2
     end
@@ -341,7 +358,8 @@ function ServerShopUI:render()
 
     z = z + FONT_HGT_LARGE + z
     local x = self.width - 10 * FONT_SCALE - FONT_HGT_LARGE
-    self:drawTextureScaledAspect2(getSteamAvatarFromUsername(getPlayer():getUsername()), x, (z - FONT_HGT_LARGE) / 2, FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
+    self:drawTextureScaledAspect2(getSteamAvatarFromUsername(getPlayer():getUsername()), x, (z - FONT_HGT_LARGE) / 2,
+        FONT_HGT_LARGE, FONT_HGT_LARGE, 1, 1, 1, 1)
     x = x - (5 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, self.available)
     self:drawText(self.available, x, (z - FONT_HGT_MEDIUM) / 2, 1, 1, 1, 1, UIFont.Medium)
     x = x - (3 * FONT_SCALE) - getTextManager():MeasureStringX(UIFont.Medium, tostring(self.points))
@@ -349,7 +367,8 @@ function ServerShopUI:render()
 
     self:drawRect(0, z, self.width, 1, 1, 0.4, 0.4, 0.4)
 
-    self:drawText(self.serverMsg, 10 * FONT_SCALE, self.tabPanel:getBottom() + 1 + 10 * FONT_SCALE, 1, 1, 1, 1, UIFont.Medium)
+    self:drawText(self.serverMsg, 10 * FONT_SCALE, self.tabPanel:getBottom() + 1 + 10 * FONT_SCALE, 1, 1, 1, 1,
+        UIFont.Medium)
 
     local view = self.tabPanel.activeView
     if view then view = view.view else return end
