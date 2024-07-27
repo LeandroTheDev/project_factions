@@ -11,7 +11,7 @@ option SafehousePlus.EnableSafehousePoints
 option SafehousePlus.SafehouseHoursPerPoints
 {
 	type = integer,
-	default = 1,
+	default = 3,
 	min = 1,
 	max = 999,
 	page = Safehouse,
@@ -75,7 +75,7 @@ option SafehousePlus.SpawnpointTimer
 option SafehousePlus.RespawnCooldown
 {
 	type = integer,
-	default = -1,
+	default = 30,
 	min = -1,
 	max = 999999999,
 	page = Safehouse,

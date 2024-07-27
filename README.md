@@ -59,8 +59,10 @@ respawn mechanics forked from [Keep Inventory](https://steamcommunity.com/shared
 
 ### Submodules
 External very useful mods to make the factions better
-- [Random Airdrops](https://github.com/LeandroTheDev/random_airdrops)
-- [RA Airdrops](https://github.com/LeandroTheDev/ra_smoke_flares)
+- [Random Airdrops](https://github.com/LeandroTheDev/random_airdrops), add random airdrops to the server
+- [RA Smoke Flares](https://github.com/LeandroTheDev/ra_smoke_flares), add smoke flares to call any airdrop
+- [Factions Weapons](https://github.com/LeandroTheDev/factions_weapons), overhaul the weapons to make it more immersive and fun to play with
+- [Complex Distributions](https://github.com/LeandroTheDev/complex_distribution), makes the distribution better with Factions Weapons
 
 - > To download the submodules you can use "git submodule init", "git submodule update" in your terminal
 
@@ -70,7 +72,7 @@ External very useful mods to make the factions better
 - Copy all mods from the new folder created, and paste on your project zomboid mods folder
 - > You can also upload to workshop to automatically users download this project
 - Now you can open the game, enable the mods and change the sandbox configurations
-- > Some mods require special configurations in Lua, after starting the server take a look in the Lua folder, all mods also have a Logs folder in Lua to manage players actions
+- > Some mods require special configurations in Lua, after starting the server take a look in the Lua folder, all mods also have a Logs folder in Lua to manage players actions, you can view templates in [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) folder
 
 Load Order:
 - Factions
@@ -79,5 +81,7 @@ Load Order:
 - Safehouse Plus
 - Random Airdrops
 - RA Smoke Flares
+- Factions Weapons
+- Complex Distributions
 
 FTM License

@@ -45,7 +45,7 @@ option FactionsPlus.Timezone
     type = integer,
     min = -24,
     max = 24,
-    default = 3,
+    default = -3,
 
     page = FactionsPlus,
     translation = FactionsPlus_Timezone,
@@ -103,7 +103,7 @@ option FactionsPlus.HordeNightFrequency
     type = integer,
     min = 0,
     max = 100,
-    default = 5,
+    default = 1,
 
     page = FactionsPlus,
     translation = FactionsPlus_HordeNightFrequency,
@@ -141,7 +141,7 @@ option FactionsPlus.SpecialHordeNightBaseQuantity
     type = integer,
     min = 0,
     max = 99999,
-    default = 50,
+    default = 75,
 
     page = FactionsPlus,
     translation = FactionsPlus_SpecialHordeNightBaseQuantity,
@@ -152,7 +152,7 @@ option FactionsPlus.SpecialHordeNightFrequency
     type = integer,
     min = 0,
     max = 100,
-    default = 5,
+    default = 2,
 
     page = FactionsPlus,
     translation = FactionsPlus_SpecialHordeNightFrequency,

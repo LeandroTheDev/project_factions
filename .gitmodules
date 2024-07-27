@@ -4,3 +4,9 @@
 [submodule "RA Smoke Flares"]
 	path = RA Smoke Flares
 	url = https://github.com/LeandroTheDev/ra_smoke_flares
+[submodule "Complex Distributions"]
+	path = Complex Distributions
+	url = https://github.com/LeandroTheDev/complex_distribution.git
+[submodule "Factions Weapons"]
+	path = Factions Weapons
+	url = https://github.com/LeandroTheDev/factions_weapons
