@@ -72,6 +72,7 @@ External very useful mods to make the factions better
 - > You can also upload to workshop to automatically users download this project
 - Now you can open the game, enable the mods and change the sandbox configurations
 - > Some mods require special configurations in Lua, after starting the server take a look in the Lua folder, all mods also have a Logs folder in Lua to manage players actions, you can view templates in [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) folder
+- > Also some mods needs modifications in the java class to work propertly, consider checking the [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) folder
 
 Load Order:
 - Factions
