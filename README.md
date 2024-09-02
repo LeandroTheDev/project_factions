@@ -62,7 +62,6 @@ External very useful mods to make the factions better
 - [Random Airdrops](https://github.com/LeandroTheDev/random_airdrops), add random airdrops to the server
 - [RA Smoke Flares](https://github.com/LeandroTheDev/ra_smoke_flares), add smoke flares to call any airdrop
 - [Factions Weapons](https://github.com/LeandroTheDev/factions_weapons), overhaul the weapons to make it more immersive and fun to play with
-- [Complex Distributions](https://github.com/LeandroTheDev/complex_distribution), makes the distribution better with Factions Weapons
 
 - > To download the submodules you can use "git submodule init", "git submodule update" in your terminal
 
@@ -82,6 +81,5 @@ Load Order:
 - Random Airdrops
 - RA Smoke Flares
 - Factions Weapons
-- Complex Distributions
 
 FTM License
