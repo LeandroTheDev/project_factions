@@ -1,0 +1,1 @@
+Place this folder inside your project zomboid dedicated server and overwrite
