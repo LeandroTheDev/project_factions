@@ -152,7 +152,7 @@ function ServerRespawnCommands.canSpawn(module, command, player, args)
         if playerSafehouseId == selectedSafehouseId then
             -- Verify if this safehouse is valid and
             -- the player owns this safehouse
-            if isEnemy(selectedSafehouse) then
+            if isEnemy(selectedSafehouse, player) then
                 -- Caso não for valida então ele não pode renascer
                 logger(player:getUsername() .. " cannot respawn in safehouse, doesn't belong to it")
                 sendServerCommand(player, "ServerRespawn", "canSpawn", {
