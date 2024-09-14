@@ -11,7 +11,6 @@ Forked from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/
 - Configurable player construction health while in capture mode
 
 Consider downloading the safehouse limit remover in the folder [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) and place it in the main project zomboid dedicated server folder
-> This patch is made by [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/?id=1178772929&searchtext=Safehouse), this factions_project does not maintain this patch.
 
 # Factions Economy
 

@@ -200,7 +200,7 @@ end
 function loadPlayer(player)
     clearInventory(player);
 
-    if (SandboxVars.Respawn.KeepInventory) then
+    if (SandboxVars.SafehousePlus.KeepInventory) then
         loadPlayerInventory(player);
         loadPlayerLevels(player);
         loadPlayerBooks(player);
