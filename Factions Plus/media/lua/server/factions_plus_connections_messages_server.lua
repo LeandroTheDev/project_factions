@@ -105,7 +105,9 @@ local fileWriter = getFileWriter("Logs/FactionsPlusConnectionsMessages.txt", fal
 local function logger(log)
     local time = getCurrentTime();
     -- Write the log in it
-    fileWriter:write("[" ..
+    -- fileWriter:write("[" ..
+    --     time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
+    print("[" ..
         time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
 end
 
@@ -157,7 +159,7 @@ if SandboxVars.FactionsPlus.EnablePlayerJoinMessages or SandboxVars.FactionsPlus
             logger("server was freezed, resetting variables");
             -- Resetting players
             previousOnlinePlayers = {}
-        end 
+        end
 
         -- Getting online players
         local onlinePlayers = getOnlinePlayers();

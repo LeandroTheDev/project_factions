@@ -84,7 +84,9 @@ local fileWriter = getFileWriter("Logs/Factions.txt", false, true);
 local function logger(log)
 	local time = getCurrentTime();
 	-- Write the log in it
-	fileWriter:write("[" ..
+	-- fileWriter:write("[" ..
+	-- 	time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
+	print("[" ..
 		time.tm_min .. ":" .. time.tm_hour .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
 end
 -- Explanation about this file.
@@ -488,12 +490,12 @@ if isServer() then
 			end
 		end
 
-		logger("---------------------------");
-		logger("function: zombiesKillPoints");
-		logger("Kills: " .. kills);
-		logger("Configuration: ");
-		logger(tableFormat(configuration));
-		logger("---------------------------");
+		-- logger("---------------------------");
+		-- logger("function: zombiesKillPoints");
+		-- logger("Kills: " .. kills);
+		-- logger("Configuration: ");
+		-- logger(tableFormat(configuration));
+		-- logger("---------------------------");
 
 		return killsPoints;
 	end
@@ -520,13 +522,13 @@ if isServer() then
 		ServerFactionPoints[playerFaction:getName()]["points"] = zombiesKillPoints(ServerFactionPoints
 			[playerFaction:getName()]["zombieKills"]) + ServerFactionPoints[playerFaction:getName()]["specialPoints"];
 
-		logger("---------------------------");
-		logger("function: ServerFactionCommands.killedZombie");
-		logger(player:getUsername());
-		logger("Zombie kills: " .. ServerFactionPoints[playerFaction:getName()]["zombieKills"]);
-		logger("Points: " .. ServerFactionPoints[playerFaction:getName()]["points"]);
-		logger("Special Points: " .. ServerFactionPoints[playerFaction:getName()]["specialPoints"]);
-		logger("---------------------------");
+		-- logger("---------------------------");
+		-- logger("function: ServerFactionCommands.killedZombie");
+		-- logger(player:getUsername());
+		-- logger("Zombie kills: " .. ServerFactionPoints[playerFaction:getName()]["zombieKills"]);
+		-- logger("Points: " .. ServerFactionPoints[playerFaction:getName()]["points"]);
+		-- logger("Special Points: " .. ServerFactionPoints[playerFaction:getName()]["specialPoints"]);
+		-- logger("---------------------------");
 
 		-- Send players from factions the new updated points
 		local onlinePlayers = getOnlinePlayers();
