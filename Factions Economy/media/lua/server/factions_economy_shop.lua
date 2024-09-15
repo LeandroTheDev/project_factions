@@ -117,8 +117,6 @@ local tradeItems = {};
 
 local function PointsTick()
     local players = getOnlinePlayers()
-    logger("----------------------------");
-    logger("Giving points to players...")
     for i = 0, players:size() - 1 do
         local username = players:get(i):getUsername()
         if not ServerShopData[username] then ServerShopData[username] = 0 end
@@ -126,7 +124,6 @@ local function PointsTick()
         logger(username ..
             "received: " .. SandboxVars.FactionsEconomy.PointsPerTick .. " total: " .. ServerShopData[username]);
     end
-    logger("----------------------------");
 end
 
 -- Simple load the items from storage in server Lua/FactionsEconomyItems.ini

@@ -23,7 +23,7 @@ local function BelongsToTheSafehouse()
 	-- If not the owner we need to check all players from the safehouse,
 	-- and if the actual player is on it
 	for i = safehouse:getPlayers():size() - 1, 0, -1 do
-		local safehousePlayerUsername = safehouseBeenCaptured:getPlayers():get(i);
+		local safehousePlayerUsername = safehouse:getPlayers():get(i);
 		-- Check if safehousePlayerUsername is the same as the player
 		if safehousePlayerUsername == player:getUsername() then
 			return true

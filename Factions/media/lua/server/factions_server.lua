@@ -504,3 +504,8 @@ end
 
 -- Read Options on start
 Events.OnServerStarted.Add(factions.readOptions()); -- Multiplayer
+
+-- Reset players block system every game day
+Events.EveryDays.Add(function()
+	ServerSafehouseData["SafehousePlayersCaptureBlock"] = {};
+end)

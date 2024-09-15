@@ -220,9 +220,6 @@ if SandboxVars.SafehousePlus.EnableSafehousePoints then
             if not ServerSafehouseData["SafehouseRedeemPoints"] then ServerSafehouseData["SafehouseRedeemPoints"] = {} end
             if not ServerSafehouseData["SafehouseScore"] then ServerSafehouseData["SafehouseScore"] = {} end
 
-            logger("--------------------------------");
-            logger("Incrementing points for existing safehouses");
-
             -- Swipe all safehouses to add points
             for safehousePosition, safehousePoints in pairs(ServerSafehouseData["SafehouseRedeemPoints"]) do
                 -- Null Check
@@ -235,9 +232,7 @@ if SandboxVars.SafehousePlus.EnableSafehousePoints then
                 logger(safehousePosition .. " increased: " .. safehousePoints +
                     calculateScorePoints(ServerSafehouseData["SafehouseScore"][safehousePosition]) ..
                     " total: " .. ServerSafehouseData["SafehouseRedeemPoints"][safehousePosition]);
-            end
-
-            logger("--------------------------------");
+            end            
         else
             ServerSafehousePointsTicks = ServerSafehousePointsTicks + 1;
         end
@@ -248,8 +243,6 @@ if SandboxVars.SafehousePlus.EnableSafehousePoints then
 
         -- Get safehouses list
         if ServerSafehouseData["SafehouseRedeemPoints"] and SandboxVars.SafehousePlus.ResetPointsWhenNotClaimed then
-            logger("--------------------------------");
-            logger("Reseting points for not claimed safehouses");
             -- Get all safehouse in the server
             local safehouses = SafeHouse.getSafehouseList();
             -- Swipe all safehouses from points
@@ -268,11 +261,10 @@ if SandboxVars.SafehousePlus.EnableSafehousePoints then
                 end
                 -- If not exist reset the redeem points
                 if not stillExist then
-                    logger(safehousePosition .. " is not claimed points has been reseted");
+                logger(safehousePosition .. " is not claimed points has been reseted");         
                     ServerSafehouseData["SafehouseRedeemPoints"][safehousePosition] = 0;
                 end
             end
-            logger("--------------------------------");
         end
         --#endregion
     end);

@@ -9,6 +9,7 @@ Forked from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/
 - Configurable time to enable safehouse capture invasion, also timezone
 - Configurable zombie kills to earn points
 - Configurable player construction health while in capture mode
+- Players can only try to capture safehouse one time per game day
 
 Consider downloading the safehouse limit remover in the folder [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) and place it in the main project zomboid dedicated server folder
 
