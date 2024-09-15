@@ -123,7 +123,7 @@ function CheckRandomHordes()
 	local chance = SandboxVars.FactionsPlus.HordeNightFrequency * 100
 
 	-- Checking the chance
-	if ZombRand(100) + 1 <= chance then
+	if ZombRand(1000) + 1 <= chance then
 		-- Starting the random horde
 		StartRandomHorde();
 	else

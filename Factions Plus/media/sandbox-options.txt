@@ -103,7 +103,7 @@ option FactionsPlus.HordeNightFrequency
     type = integer,
     min = 0,
     max = 100,
-    default = 1,
+    default = 5,
 
     page = FactionsPlus,
     translation = FactionsPlus_HordeNightFrequency,
@@ -152,7 +152,7 @@ option FactionsPlus.SpecialHordeNightFrequency
     type = integer,
     min = 0,
     max = 100,
-    default = 2,
+    default = 5,
 
     page = FactionsPlus,
     translation = FactionsPlus_SpecialHordeNightFrequency,
