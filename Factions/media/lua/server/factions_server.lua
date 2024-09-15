@@ -486,7 +486,6 @@ if SandboxVars.Factions.IncreaseConstructionLife then
 				local player = players:get(i);
 				sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 2 });
 			end
-			logger("CAPTURE ON");
 		else
 			-- Setting the sandbox to max
 			getSandboxOptions():set("ConstructionBonusPoints", 5)
@@ -497,7 +496,6 @@ if SandboxVars.Factions.IncreaseConstructionLife then
 				local player = players:get(i);
 				sendServerCommand(player, "ServerSafehouse", "updateSandbox", { ConstructionBonusPoints = 5 });
 			end
-			logger("CAPTURE OFF");
 		end
 	end)
 end
