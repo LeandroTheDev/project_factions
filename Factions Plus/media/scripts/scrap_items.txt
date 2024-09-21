@@ -70,127 +70,7 @@ module Base
         }
 
 	recipe Scrap Munition {
-                762Clip,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                762Box,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                22Box,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                223Clip20,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                308Clip,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                45Clip12,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                45Clip32,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                9mmClip20,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                9mmClip13,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                9mmClip16,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                9mmClip17,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                9mmClip30,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                FALClip,
+                44Clip,
       
                 CanBeDoneFromFloor:true,
                 Time:10,
@@ -201,16 +81,6 @@ module Base
         }
         recipe Scrap Munition {
                 M14Clip,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=1,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Munition {
-                44Clip,
       
                 CanBeDoneFromFloor:true,
                 Time:10,
@@ -250,7 +120,17 @@ module Base
                 Category:General,
         }
         recipe Scrap Munition {
-                22ClipRifle,
+                223Clip,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=1,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+        }
+        recipe Scrap Munition {
+                308Clip,
       
                 CanBeDoneFromFloor:true,
                 Time:10,
@@ -341,67 +221,7 @@ module Base
         }
 	
 	recipe Scrap Weapon {
-                Shotgun,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Shotgun2,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Shotgun2Bayonet,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                ShotgunSemi,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                ShotgunSemi2,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                ShotgunSawnoff,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                ShotgunSawnoffNoStock,
+                Pistol3,
       
                 CanBeDoneFromFloor:true,
                 Time:10,
@@ -421,197 +241,7 @@ module Base
                 Category:General,
         }
         recipe Scrap Weapon {
-                DoubleBarrelShotgunSawnoff,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                DoubleBarrelShotgunSawnoffNoStock,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Spas12,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Spas12Folded,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                AK47Unfolded,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                AK47Folded,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                AK47,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                SKS,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                SKSSpiker,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                SKSSpikerBayonet,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                1022,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Mini14Unfolded,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Mini14Folded,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Mini14,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                FAL,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                FALClassic,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                CAR15,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                CAR15Folded,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                CAR15D,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                CAR15DFolded,
+                Shotgun,
       
                 CanBeDoneFromFloor:true,
                 Time:10,
@@ -631,217 +261,7 @@ module Base
                 Category:General,
         }
         recipe Scrap Weapon {
-                AssaultRifleM1,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
                 AssaultRifle,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                AssaultRifleBayonet,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                HuntingRifle,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                VarmintRifle,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                SniperRifle,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                LeverRifle,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                MP5,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                MP5SD,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                MP5Unfolded,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                MP5Folded,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                MAC10Unfolded,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                MAC10Folded,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Tec9,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Pistol,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Pistol2,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Pistol3,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Glock,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Glock18,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                P229,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                CZ75,
-      
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:ScrapMoney=4,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-        }
-        recipe Scrap Weapon {
-                Revolver,
       
                 CanBeDoneFromFloor:true,
                 Time:10,
@@ -861,6 +281,46 @@ module Base
                 Category:General,
         }
         recipe Scrap Weapon {
+                Revolver,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+        }
+        recipe Scrap Weapon {
+                Pistol,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+        }
+        recipe Scrap Weapon {
+                VarmintRifle,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+        }
+        recipe Scrap Weapon {
+                HuntingRifle,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+        }
+        recipe Scrap Weapon {
                 Revolver_Long,
       
                 CanBeDoneFromFloor:true,
@@ -871,7 +331,17 @@ module Base
                 Category:General,
         }
         recipe Scrap Weapon {
-                M16Bayonet,
+                DoubleBarrelShotgunSawnoff,
+      
+                CanBeDoneFromFloor:true,
+                Time:10,
+                Result:ScrapMoney=4,
+                Sound:Hammering,
+                AnimNode:RipSheets,
+                Category:General,
+        }
+        recipe Scrap Weapon {
+                ShotgunSawnoff,
       
                 CanBeDoneFromFloor:true,
                 Time:10,
