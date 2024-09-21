@@ -4,5 +4,8 @@ IGUI_EN = {
 	IGUI_Player_Dead = "died",
 	IGUI_Factions_Horde_Warning = "Here they come",
 	IGUI_Factions_Horde_Easy = "a small horde...",
+	IGUI_Factions_Horde_Hard = "a big horde...",
 	IGUI_Factions_Horde_Insane = "a huge horde...",
+	IGUI_Shop_Sell = "Sold",
+	IGUI_Shop_Return = "Returned",
 }

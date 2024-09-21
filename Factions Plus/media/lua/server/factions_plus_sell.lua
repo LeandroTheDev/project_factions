@@ -1,18 +1,16 @@
 ---@diagnostic disable: undefined-global, deprecated
-if isClient() then return end;
-
 --Return Money Function
 local function ReturnPoints(value, player)
-	local username = getPlayer():getUsername();
-	sendServerCommand("ServerPoints", "addPoints", { username, value });
-	getPlayer():Say(getText("IGUI_Shop_Return"));
+	local username = player:getUsername();
+	sendClientCommand("ServerPoints", "addPoints", { username, value });
+	player:Say(getText("IGUI_Shop_Return"));
 end
 
 --Sell Item Function
 local function SellItem(value, player)
-	local username = getPlayer():getUsername();
-	sendServerCommand("ServerPoints", "addPoints", { username, value });
-	getPlayer():Say(getText("IGUI_Shop_Sell") .. " + " .. tostring(value));
+	local username = player:getUsername();
+	sendClientCommand("ServerPoints", "addPoints", { username, value });
+	player:Say(getText("IGUI_Shop_Sell") .. " + " .. tostring(value));
 end
 
 --Return Money
