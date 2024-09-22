@@ -65,7 +65,8 @@ External very useful mods to make the factions better
 - [RA Smoke Flares](https://github.com/LeandroTheDev/ra_smoke_flares), add smoke flares to call any airdrop
 - [Factions Weapons](https://github.com/LeandroTheDev/factions_weapons), overhaul the weapons to make it more immersive and fun to play with
 
-- > To download the submodules you can use "git submodule init", "git submodule update" in your terminal
+- > To download the submodules you can use ``git submodule init``, ``git submodule update`` in your terminal
+- > To get the latest submodules commit: `git submodule update --remote``
 
 ### Using the project in the Server
 - Install git in your operational system (Or you can simple clone the repository and the submodules)

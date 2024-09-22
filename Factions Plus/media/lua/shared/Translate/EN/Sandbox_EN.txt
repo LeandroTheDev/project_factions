@@ -1,8 +1,20 @@
 Sandbox_EN = {
     Sandbox_FactionsPlus = "Factions Plus",
 
+    Sandbox_FactionsPlus_EnableFastSleep = "Enable Fast Sleep",
+    Sandbox_FactionsPlus_EnableFastSleep_tooltip = "Players will restore fatigue and endurance much more faster than in vanilla",
+
+    Sandbox_FactionsPlus_SleepFatigueReducer = "Fast Sleep Fatigue Reducer",
+    Sandbox_FactionsPlus_SleepFatigueReducer_tooltip = "How much fatigue reduce per ingame minute while sleeping",
+
+    Sandbox_FactionsPlus_SleepEnduranceReceive = "Fast Endurance Receive",
+    Sandbox_FactionsPlus_SleepEnduranceReceive_tooltip = "How much endurance receive per ingame minute while sleeping",
+
+    Sandbox_FactionsPlus_EnableCalendarReset = "Enable Calendar Reset",
+    Sandbox_FactionsPlus_EnableCalendarReset_tooltip = "Every day the sandbox starting day will reset to the actual day, so all respawned items will be fresh",
+
     Sandbox_FactionsPlus_EnableFarmSpeed = "Enable Fast Crop Grow",
-    Sandbox_FactionsPlus_EnableFarmSpeed_tooltip = "Grow will grow much faster thant normal",
+    Sandbox_FactionsPlus_EnableFarmSpeed_tooltip = "Grow will grow much faster thant normal",       
 
     Sandbox_FactionsPlus_EnableReduceSeedDrop = "Enable Reduced Seed Drop",
     Sandbox_FactionsPlus_EnableReduceSeedDrop_tooltip = "Receive less seeds harvesting crops",

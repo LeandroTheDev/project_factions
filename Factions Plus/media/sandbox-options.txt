@@ -1,5 +1,43 @@
 VERSION = 1,
 
+option FactionsPlus.EnableFastSleep
+{
+	type = boolean,
+	default = true,
+	page = FactionsPlus,
+	translation = FactionsPlus_EnableFastSleep,
+}
+
+option FactionsPlus.SleepFatigueReducer
+{
+    type = integer,
+    min = 1,
+    max = 100,
+    default = 1,
+
+    page = FactionsPlus,
+    translation = FactionsPlus_SleepFatigueReducer,
+}
+
+option FactionsPlus.SleepEnduranceReceive
+{
+    type = integer,
+    min = 1,
+    max = 100,
+    default = 1,
+
+    page = FactionsPlus,
+    translation = FactionsPlus_SleepEnduranceReceive,
+}
+
+option FactionsPlus.EnableCalendarReset
+{
+	type = boolean,
+	default = true,
+	page = FactionsPlus,
+	translation = FactionsPlus_EnableCalendarReset,
+}
+
 option FactionsPlus.EnableFarmSpeed
 {
 	type = boolean,
