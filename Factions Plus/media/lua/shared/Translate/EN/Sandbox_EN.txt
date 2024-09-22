@@ -55,6 +55,9 @@ Sandbox_EN = {
     Sandbox_FactionsPlus_HordeCommonZombies = "Horde Common Zombies",
     Sandbox_FactionsPlus_HordeCommonZombies_tooltip = "All zombies that will normaly spawn in any horde",
 
+    Sandbox_FactionsPlus_HordeNightRareZombiesChance = "Horde Rare Zombies Chance",
+    Sandbox_FactionsPlus_HordeNightRareZombiesChance_tooltip = "How often a rare zombie will spawn",
+
     Sandbox_FactionsPlus_HordeRareZombies = "Horde Rare Zombies",
     Sandbox_FactionsPlus_HordeRareZombies_tooltip = "Rare zombies that will spawn with 1% chance in any horde",
 
@@ -69,6 +72,9 @@ Sandbox_EN = {
 
     Sandbox_FactionsPlus_SpecialHordeCommonZombies = "Special Horde Common Zombies",
     Sandbox_FactionsPlus_SpecialHordeCommonZombies_tooltip = "All zombies that will normaly spawn in any special horde",
+
+    Sandbox_FactionsPlus_HordeNightSpecialRareZombiesChance = "Special Horde Rare Zombies Chance",
+    Sandbox_FactionsPlus_HordeNightSpecialRareZombiesChance_tooltip = "How often a rare zombie will spawn",
 
     Sandbox_FactionsPlus_SpecialHordeRareZombies = "Special Horde Rare Zombies",
     Sandbox_FactionsPlus_SpecialHordeRareZombies_tooltip = "Rare zombies that will spawn with 1% chance in any special horde",

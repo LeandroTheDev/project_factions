@@ -111,6 +111,12 @@ local zombieOutfitTable = stringToList(SandboxVars.FactionsPlus.HordeCommonZombi
 -- This is the rare zombies
 local zombieRareOutfitTable = stringToList(SandboxVars.FactionsPlus.HordeRareZombies);
 
+-- This is all the zombies that should spawn when calling the smoke flare
+local zombieSpecialOutfitTable = stringToList(SandboxVars.FactionsPlus.SpecialHordeCommonZombies);
+
+-- This is the rare zombies
+local zombieSpecialRareOutfitTable = stringToList(SandboxVars.FactionsPlus.SpecialHordeRareZombies);
+
 local playerZombie = {}; -- Para hordas aleatorias
 
 --
@@ -120,7 +126,7 @@ local playerZombie = {}; -- Para hordas aleatorias
 -- Check if its time to start any random horde
 function CheckRandomHordes()
 	-- Getting the frequency chance
-	local chance = SandboxVars.FactionsPlus.HordeNightFrequency * 100
+	local chance = SandboxVars.FactionsPlus.HordeNightFrequency * 10
 
 	-- Checking the chance
 	if ZombRand(1000) + 1 <= chance then
@@ -240,10 +246,19 @@ function SpawnOneZombie(player, isSingleHorde)
 	if canSpawn then
 		-- Getting the zombie rarity
 		local outfit
-		if ZombRand(100) + 1 == 1 then
-			outfit = zombieRareOutfitTable[ZombRand(#zombieRareOutfitTable) + 1];
-		else
-			outfit = zombieOutfitTable[ZombRand(#zombieOutfitTable) + 1];
+		-- Special zombie outfits
+		if playerZombie[player:getUsername()]["special"] then
+			if ZombRand(1000) + 1 <= (SandboxVars.FactionsPlus.HordeNightSpecialRareZombiesChance * 10) then
+				outfit = zombieSpecialRareOutfitTable[ZombRand(#zombieSpecialRareOutfitTable) + 1];
+			else
+				outfit = zombieSpecialOutfitTable[ZombRand(#zombieSpecialOutfitTable) + 1];
+			end
+		else -- Normal zombie outfit
+			if ZombRand(1000) + 1 <= (SandboxVars.FactionsPlus.HordeNightRareZombiesChance * 10) then
+				outfit = zombieRareOutfitTable[ZombRand(#zombieRareOutfitTable) + 1];
+			else
+				outfit = zombieOutfitTable[ZombRand(#zombieOutfitTable) + 1];
+			end
 		end
 		-- Adding the zombie
 		addZombiesInOutfit(zLocationX, zLocationY, 0, 1, outfit, 50, false, false, false, false, 1.5);
@@ -416,6 +431,7 @@ function StartSpecialHorde()
 			playerZombie[player:getUsername()]["zombieCount"] = zombieCount;
 			playerZombie[player:getUsername()]["zombieSpawned"] = 0;
 			playerZombie[player:getUsername()]["player"] = player;
+			playerZombie[player:getUsername()]["special"] = true;
 
 			-- Sending any alert to the player
 			sendServerCommand(player, "ServerHorde", "alert", { difficulty = difficulty });
@@ -436,9 +452,9 @@ end
 -- This functions is called when the global horde check is false
 -- this will check for special locations hordes
 function SpecialLocationHordeCheck()
-	local chance = SandboxVars.FactionsPlus.SpecialHordeNightFrequency * 100
+	local chance = SandboxVars.FactionsPlus.SpecialHordeNightFrequency * 10
 	-- Checking the chance
-	if ZombRand(100) + 1 <= chance then
+	if ZombRand(1000) + 1 <= chance then
 		StartSpecialHorde();
 	else
 		logger("Special location checked no");
