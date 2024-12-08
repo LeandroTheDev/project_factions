@@ -80,7 +80,7 @@ local function getCurrentTime()
 end
 
 -- Get the file instance
-local fileWriter = getFileWriter("Logs/Factions.txt", false, true);
+-- local fileWriter = getFileWriter("Logs/Factions.txt", false, true);
 local function logger(log)
 	local time = getCurrentTime();
 	-- Write the log in it
@@ -124,13 +124,19 @@ end
 
 -- Get the factions used points
 FactionsMain.getUsedPoints = function(username)
+	local playerFaction = FactionsMain.getFaction(username);
+	-- Check if player doesnt have factions
+	if playerFaction == nil then return 0; end
+
+	local factionOwner = playerFaction:getOwner();
+
 	local used = 0;
 	-- Get safehouses list
 	local safehouses = SafeHouse.getSafehouseList();
 	for i = 0, safehouses:size() - 1 do
 		local safehouse = safehouses:get(i);
 		-- Check if you are the owner
-		if safehouse:getOwner() == username then
+		if safehouse:getOwner() == factionOwner then
 			-- Get the cost of this safehouse
 			local value = FactionsMain.getCost(safehouse, 4);
 			-- Increment the used value
@@ -455,7 +461,7 @@ if isServer() then
 	--			"specialPoints": 2, # Used to increase faction points without using the "points"
 	-- 		}
 	-- ]
-	local ServerFactionPoints = {};
+	ServerFactionPoints = {};
 
 	--Receives from server and do a command
 	local function zombiesKillPoints(kills)

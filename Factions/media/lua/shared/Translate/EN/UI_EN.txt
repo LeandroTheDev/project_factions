@@ -1,6 +1,4 @@
 UI_EN = {
-	UI_ServerOptionDesc_ForceTab = "Show specific news tab to player and lock close button for N seconds. Use: /forcetab \"username\" tab_id time"
-
 	UI_Text_LabelFaction = "Faction: "
 	UI_Text_SafehouseClaim = "Claim"
 	UI_Text_SafehouseCapture = "Capture"
@@ -14,7 +12,11 @@ UI_EN = {
 	UI_Text_SafehouseIsBeingCaptured = "<RED> [ALERT] Safehouse '%1' capture is in progress!"
 	UI_Text_SafehouseWasLost = "<RED> [INFO] Safehouse '%1' was captured by the enemy!"
 	UI_Text_SafehouseWasCaptured = "<RED> [INFO] We captured the enemy's safehouse '%1'!"
-	UI_Text_SafehouseNotTimeCapture = "Its not time yet"
+	UI_Text_SafehouseNotTimeCapture = "Its not time yet..."
+	UI_Text_SafehouseCheat = "Cheat detected..."
+	UI_Text_SafehouseNoPoints = "Insuficient Points..."
+	UI_Text_SafehouseProtected = "It is protected..."
 	UI_Text_SafehouseCapturing = "Capturing..."
-	UI_Text_SafehouseWithoutFaction = "You dont have a faction"
+	UI_Text_SafehouseProgress = "Capture in progress"
+	UI_Text_SafehouseWithoutFaction = "You don't have a faction"
 }

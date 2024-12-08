@@ -80,7 +80,7 @@ local function getCurrentTime()
 end
 
 -- Get the file instance
-local fileWriter = getFileWriter("Logs/Factions.txt", false, true);
+-- local fileWriter = getFileWriter("Logs/Factions.txt", false, true);
 local function logger(log)
 	local time = getCurrentTime();
 	-- Write the log in it
@@ -123,6 +123,22 @@ local function tableFormat(tabela, nivel)
 	else
 		return tostring(tabela)
 	end
+end
+
+factions.getFactionPoints = function(playerFaction)
+	-- Check if player has faction
+	if playerFaction == nil then
+		return 0;
+	end
+
+	-- Null Check
+	if ServerFactionPoints[playerFaction:getName()] == nil then ServerFactionPoints[playerFaction:getName()] = {} end
+	if ServerFactionPoints[playerFaction:getName()]["zombieKills"] == nil then ServerFactionPoints[playerFaction:getName()]["zombieKills"] = 0 end
+	if ServerFactionPoints[playerFaction:getName()]["points"] == nil then ServerFactionPoints[playerFaction:getName()]["points"] = 0 end
+	if ServerFactionPoints[playerFaction:getName()]["specialPoints"] == nil then ServerFactionPoints[playerFaction:getName()]["specialPoints"] = 0 end
+
+	return ServerFactionPoints[playerFaction:getName()]["points"] +
+		ServerFactionPoints[playerFaction:getName()]["specialPoints"]
 end
 
 -- Simple read the Sandbox options
@@ -192,13 +208,21 @@ end
 function FactionsCommands.captureSafehouse(module, command, player, args)
 	if not factions.checkIfCaptureIsEnabled() then
 		logger(player:getUsername() .. " is trying to capture a safehouse before the invasion time");
-		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false });
+		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false, reason = "nottime" });
 		return
 	end
 	local playerCapturing = player:getUsername();
 	local playerFaction = FactionsMain.getFaction(playerCapturing);
+	local factionPoints = factions.getFactionPoints(playerFaction) - FactionsMain.getUsedPoints(playerCapturing);
 	local playerLocation = player:getSquare();
 	local safehouseBeenCaptured = SafeHouse.getSafeHouse(playerLocation);
+	if safehouseBeenCaptured == nil then
+		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false, reason = "cheat" });
+		logger(player:getUsername() .. " is trying to capture any invalid safehouse");
+		return;
+	end
+	local safehouseCost = FactionsMain.getCost(safehouseBeenCaptured, 4);
+	if safehouseCost < 1 then safehouseCost = 1 end;
 	local safehouseLocation = {
 		X = safehouseBeenCaptured:getX(),
 		Y = safehouseBeenCaptured:getY(),
@@ -206,8 +230,18 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 
 	-- Check if player doesnt have factions
 	if playerFaction == nil then
-		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false });
+		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false, reason = "cheat" });
 		logger(player:getUsername() .. " is trying to capture any safehouse without faction, probably trying to cheat");
+		return;
+	end
+
+	-- Check if the faction has sufficient points for capture
+	if factionPoints - safehouseCost < 0 then
+		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false, reason = "nopoints" });
+		logger(player:getUsername() ..
+			" is trying to capture a safehouse but he doesn't have sufficient points: " ..
+			factionPoints .. " : " .. safehouseCost);
+		return;
 	end
 
 	local safehouseBeenCaptureOwner = safehouseBeenCaptured:getOwner();
@@ -284,7 +318,7 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 						" is trying to capture a safehouse but it is protected by SafehousePlusProtection X: " ..
 						playerLocation:getX() .. " Y: " .. playerLocation:getY());
 					sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation",
-						{ validation = false, protected = true });
+						{ validation = false, reason = "protected" });
 					return;
 				end
 			end
@@ -340,7 +374,7 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 	else
 		--Contact player saying that is not time yet
 		logger(playerCapturing .. " trying to capture but hes already tried captured a safehouse this time");
-		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false });
+		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false, reason = "nottime" });
 	end
 end
 

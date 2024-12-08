@@ -543,7 +543,13 @@ local function OnServerCommand(module, command, arguments)
 			getPlayer():Say(getText("UI_Text_SafehouseCapturing"))
 		else
 			-- SafehousePlus compatibility
-			if arguments.protected then
+			if arguments.reason == "cheat" then
+				getPlayer():Say(getText("UI_Text_SafehouseCheat"))
+			elseif arguments.reason == "nopoints" then
+				getPlayer():Say(getText("UI_Text_SafehouseNoPoints"))
+			elseif arguments.reason == "nottime" then
+				getPlayer():Say(getText("UI_Text_SafehouseNotTimeCapture"))
+			elseif arguments.reason == "protected" then
 				getPlayer():Say(getText("UI_Text_SafehouseProtected"))
 			else
 				getPlayer():Say(getText("UI_Text_SafehouseNotTimeCapture"));
