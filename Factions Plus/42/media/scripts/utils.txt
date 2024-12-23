@@ -1,0 +1,40 @@
+module Base
+{
+        craftRecipe Make Long Stick
+	{
+		Tags = InHandCraft;Carpentry,
+		Sound:Sawing,
+		Time:50.0,
+		Category:Carpentry,
+		xpAward = Woodwork:1,
+
+		inputs
+		{
+			item 1 [Base.Plank] flags[Prop2],
+			item 1 tags[Saw] mode:keep flags[MayDegradeLight;Prop1],
+		}
+		outputs
+		{
+			item 4 Base.LongStick,
+		}
+	}
+
+        craftRecipe Make Stick
+	{
+		Tags = InHandCraft;Carpentry,
+		Sound:Sawing,
+		Time:50.0,
+		Category:Carpentry,
+		xpAward = Woodwork:1,
+
+		inputs
+		{
+			item 1 [Base.Plank] flags[Prop2],
+			item 1 tags[Saw] mode:keep flags[MayDegradeLight;Prop1],
+		}
+		outputs
+		{
+			item 8 Base.WoodenStick,
+		}
+	}
+}
