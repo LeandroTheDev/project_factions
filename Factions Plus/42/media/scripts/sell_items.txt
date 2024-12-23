@@ -1,128 +1,145 @@
-module farming
+module Base
 {
-	imports
-	{
-		Base
+  	recipe SellCarrot {
+		Time = 50,
+      	timedAction = CraftWeapon2H,
+      	category = General,
+		tags = Sell,
+      	OnCreate = Recipe.OnGiveXP.SellCarrot,
+		inputs
+		{
+			item 5 [Base.Carrots],
+		}
+		outputs
+		{
+		}
+	}
+  	recipe SellPotato {
+		Time = 50,
+      	timedAction = CraftWeapon2H,
+      	category = General,
+		tags = Sell,
+      	OnCreate = Recipe.OnGiveXP.SellPotato,
+		inputs
+		{
+			item 10 [Base.Potato],
+		}
+		outputs
+		{
+		}
+	}
+  	recipe SellStrawberry {
+		Time = 50,
+      	timedAction = CraftWeapon2H,
+      	category = General,
+		tags = Sell,
+      	OnCreate = Recipe.OnGiveXP.SellStrewberrie,
+		inputs
+		{
+			item 10 [Base.Strewberrie],
+		}
+		outputs
+		{
+		}
+	}
+  	recipe SellRadish {
+		Time = 50,
+      	timedAction = CraftWeapon2H,
+      	category = General,
+		tags = Sell,
+      	OnCreate = Recipe.OnGiveXP.SellRedRadish,
+		inputs
+		{
+			item 15 [Base.RedRadish],
+		}
+		outputs
+		{
+		}
+	}
+  	recipe SellCabbage {
+		Time = 50,
+      	timedAction = CraftWeapon2H,
+      	category = General,
+		tags = Sell,
+      	OnCreate = Recipe.OnGiveXP.SellCabbage,
+		inputs
+		{
+			item 5 [Base.Cabbage],
+		}
+		outputs
+		{
+		}
+	}
+   	recipe SellTomato {
+		Time = 50,
+      	timedAction = CraftWeapon2H,
+      	category = General,
+		tags = Sell,
+      	OnCreate = Recipe.OnGiveXP.SellTomato,
+		inputs
+		{
+			item 10 [Base.Tomato],
+		}
+		outputs
+		{
+		}
+	}
+   	recipe SellBroccoli {
+		Time = 50,
+      	timedAction = CraftWeapon2H,
+      	category = General,
+		tags = Sell,
+      	OnCreate = Recipe.OnGiveXP.SellBroccoli,
+		inputs
+		{
+			item 5 [Base.Broccoli],
+		}
+		outputs
+		{
+		}
 	}
 
-  	recipe Sell Carrot {
-		Carrots=5,
 
-		CanBeDoneFromFloor:true,
-      	Time:50,
-      	Result:Money=1,
-      	RemoveResultItem:true,
-      	Sound:Hammering,
-      	AnimNode:Craft,
-      	Category:General,
-      	OnGiveXP:SellCarrot,
+	recipe SellSmallStackValuableScrap {
+		Time = 50,
+      	timedAction = CraftWeapon2H,
+      	category = General,
+		tags = Sell,
+      	OnCreate = Recipe.OnGiveXP.SellSmallScrap,
+		inputs
+		{
+			item 1 [Base.ScrapStack1],
+		}
+		outputs
+		{
+		}
 	}
-  	recipe Sell Potato {
-		Potato=10,
-
-		CanBeDoneFromFloor:true,
-      	Time:50,
-      	Result:Money=1,
-      	RemoveResultItem:true,
-      	Sound:Hammering,
-      	AnimNode:Craft,
-      	Category:General,
-      	OnGiveXP:SellPotato,
+	recipe SellMediumStackValuableScrap {
+		Time = 50,
+      	timedAction = CraftWeapon2H,
+      	category = General,
+		tags = Sell,
+      	OnCreate = Recipe.OnGiveXP.SellMediumScrap,
+		inputs
+		{
+			item 1 [Base.ScrapStack2],
+		}
+		outputs
+		{
+		}
 	}
-  	recipe Sell Strawberry {
-		Strewberrie=10,
-
-		CanBeDoneFromFloor:true,
-      	Time:25,
-      	Result:Money=1,
-      	RemoveResultItem:true,
-      	Sound:Hammering,
-      	AnimNode:Craft,
-      	Category:General,
-      	OnGiveXP:SellStrewberrie,
-	}
-  	recipe Sell Radish {
-		RedRadish=15,
-
-		CanBeDoneFromFloor:true,
-      	Time:50,
-      	Result:Money=1,
-      	RemoveResultItem:true,
-      	Sound:Hammering,
-      	AnimNode:Craft,
-      	Category:General,
-      	OnGiveXP:SellRedRadish,
-	}
-  	recipe Sell Cabbage {
-		Cabbage=5,
-
-		CanBeDoneFromFloor:true,
-      	Time:50,
-      	Result:Money=1,
-      	RemoveResultItem:true,
-      	Sound:Hammering,
-      	AnimNode:Craft,
-      	Category:General,
-      	OnGiveXP:SellCabbage,
-	}
-   	recipe Sell Tomato {
-		Tomato=10,
-
-		CanBeDoneFromFloor:true,
-      	Time:50,
-      	Result:Money=1,
-      	RemoveResultItem:true,
-      	Sound:Hammering,
-      	AnimNode:Craft,
-      	Category:General,
-      	OnGiveXP:SellTomato,
-	}
-   	recipe Sell Broccoli {
-		Broccoli=5,
-
-		CanBeDoneFromFloor:true,
-      	Time:50,
-      	Result:Money=1,
-      	RemoveResultItem:true,
-      	Sound:Hammering,
-      	AnimNode:Craft,
-      	Category:General,
-      	OnGiveXP:SellBroccoli,
-	}
-	recipe Sell Small Stack Valuable Scrap {
-		ScrapStack1=1,
-
-		CanBeDoneFromFloor:true,
-      	Time:50,
-      	Result:Money=1,
-      	RemoveResultItem:true,
-      	Sound:Hammering,
-      	AnimNode:Craft,
-      	Category:General,
-      	OnGiveXP:SellSmallScrap,
-	}
-	recipe Sell Medium Stack Valuable Scrap {
-		ScrapStack2=1,
-
-		CanBeDoneFromFloor:true,
-      	Time:200,
-      	Result:Money=1,
-      	RemoveResultItem:true,
-      	Sound:Hammering,
-      	AnimNode:Craft,
-      	Category:General,
-      	OnGiveXP:SellMediumScrap,
-	}
-	recipe Sell Large Stack Valuable Scrap {
-		ScrapStack3=1,
-
-		CanBeDoneFromFloor:true,
-      	Time:500,
-      	Result:Money=1,
-      	RemoveResultItem:true,
-      	Sound:Hammering,
-      	AnimNode:Craft,
-      	Category:General,
-      	OnGiveXP:SellLargeScrap,
+	recipe SellLargeStackValuableScrap {
+		Time = 50,
+      	timedAction = CraftWeapon2H,
+      	category = General,
+		tags = Sell,
+      	OnCreate = Recipe.OnGiveXP.SellLargeScrap,
+		inputs
+		{
+			item 1 [Base.ScrapStack3],
+		}
+		outputs
+		{
+		}
 	}
 }
