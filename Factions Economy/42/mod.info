@@ -2,3 +2,7 @@ name=Factions Economy
 id=factionseconomy
 description=Provides a shopping menu, global trading system and loot boxes
 poster=Poster.png
+pzversion=42
+modversion=1.0.0
+versionMin=42.0.0
+author=BoboDev

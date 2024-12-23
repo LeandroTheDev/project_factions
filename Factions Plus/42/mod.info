@@ -2,3 +2,7 @@ name=Factions Plus
 id=factionsplus
 description=Adds features to make the factions enviromnent better
 poster=Poster.png
+pzversion=42
+modversion=1.0.0
+versionMin=42.0.0
+author=BoboDev
