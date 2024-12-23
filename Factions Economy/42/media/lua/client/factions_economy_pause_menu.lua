@@ -2,9 +2,9 @@
 local ServerShopUI = require "factions_economy_shop_ui"
 local ServerTradeUI = require "factions_economy_trade_ui"
 
-local oldMainScreen_render = MainScreen.render
+local defaultMainScreenRender = MainScreen.render
 local function newRender(self)
-    oldMainScreen_render(self)
+    defaultMainScreenRender(self)
 
     if self.inGame and isClient() then
         self.bottomPanel:setHeight(self.shopOptions:getBottom())
@@ -13,11 +13,11 @@ local function newRender(self)
 end
 
 -- Get the default function from pause menu
-local oldMainScreen_instantiate = MainScreen.instantiate
+local defaultMainScreen = MainScreen.instantiate
 -- Overwrite the pause menu
 function MainScreen:instantiate()
     -- Default behavior
-    oldMainScreen_instantiate(self)
+    defaultMainScreen(self)
 
     if self.inGame and isClient() then
         -- Add the text for open Shop
