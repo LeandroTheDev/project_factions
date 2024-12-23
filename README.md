@@ -1,4 +1,4 @@
-# This pack will support B42
+# Hardly working on refactoration to work in b42
 
 # Factions
 
@@ -37,6 +37,10 @@ Add new features and adjustments for playing with Factions Mode, require the Fac
 - Connections/Disconnections/Death player messages events
 - Random hordes
 - Special hordes for special locations (Lua/HordeSpecialPositions.ini)
+### UTILS
+- Craftable long sticks (with planks)
+- Craftable sticks (with planks)
+- Remove maintenance required for crafting crude stone axe
 
 # Safehouse Plus
 

@@ -10,4 +10,6 @@ Recipes_EN = {
 	Recipe_Sell_Small_Stack_Valuable_Scrap = "Sell Small Stack Valuable Scrap"
 	Recipe_Sell_Medium_Stack_Valuable_Scrap = "Sell Medium Stack Valuable Scrap"
 	Recipe_Sell_Large_Stack_Valuable_Scrap = "Sell Large Stack Valuable Scrap"
+	MakeLongStick = "Make Long Sticks"
+	MakeStick = "Make Sticks"
 }

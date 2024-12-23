@@ -10,4 +10,6 @@ Recipes_PTBR = {
 	Recipe_Sell_Small_Stack_Valuable_Scrap = "Vender Pilha de Sucata Valiosa Pequena"
 	Recipe_Sell_Medium_Stack_Valuable_Scrap = "Vender Pilha de Sucata Valiosa Mediana"
 	Recipe_Sell_Large_Stack_Valuable_Scrap = "Vender Pilha de Sucata Valiosa Grande"
+	MakeLongStick = "Fazer Gravetos Longos"
+	MakeStick = "Fazer Gravetos"
 }
