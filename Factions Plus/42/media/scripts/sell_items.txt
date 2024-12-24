@@ -1,10 +1,10 @@
 module Base
 {
-  	recipe SellCarrot {
+  	craftRecipe SellCarrot {
 		Time = 50,
       	timedAction = CraftWeapon2H,
-      	category = General,
-		tags = Sell,
+      	Category = Carpentry,
+		Tags = InHandCraft;Carpentry,
       	OnCreate = Recipe.OnGiveXP.SellCarrot,
 		inputs
 		{
@@ -14,11 +14,11 @@ module Base
 		{
 		}
 	}
-  	recipe SellPotato {
+  	craftRecipe SellPotato {
 		Time = 50,
       	timedAction = CraftWeapon2H,
-      	category = General,
-		tags = Sell,
+      	Category = Carpentry,
+		Tags = InHandCraft;Carpentry,
       	OnCreate = Recipe.OnGiveXP.SellPotato,
 		inputs
 		{
@@ -28,11 +28,11 @@ module Base
 		{
 		}
 	}
-  	recipe SellStrawberry {
+  	craftRecipe SellStrawberry {
 		Time = 50,
       	timedAction = CraftWeapon2H,
-      	category = General,
-		tags = Sell,
+      	Category = Carpentry,
+		Tags = InHandCraft;Carpentry,
       	OnCreate = Recipe.OnGiveXP.SellStrewberrie,
 		inputs
 		{
@@ -42,11 +42,11 @@ module Base
 		{
 		}
 	}
-  	recipe SellRadish {
+  	craftRecipe SellRadish {
 		Time = 50,
       	timedAction = CraftWeapon2H,
-      	category = General,
-		tags = Sell,
+      	Category = Carpentry,
+		Tags = InHandCraft;Carpentry,
       	OnCreate = Recipe.OnGiveXP.SellRedRadish,
 		inputs
 		{
@@ -56,11 +56,11 @@ module Base
 		{
 		}
 	}
-  	recipe SellCabbage {
+  	craftRecipe SellCabbage {
 		Time = 50,
       	timedAction = CraftWeapon2H,
-      	category = General,
-		tags = Sell,
+      	Category = Carpentry,
+		Tags = InHandCraft;Carpentry,
       	OnCreate = Recipe.OnGiveXP.SellCabbage,
 		inputs
 		{
@@ -70,11 +70,11 @@ module Base
 		{
 		}
 	}
-   	recipe SellTomato {
+   	craftRecipe SellTomato {
 		Time = 50,
       	timedAction = CraftWeapon2H,
-      	category = General,
-		tags = Sell,
+      	Category = Carpentry,
+		Tags = InHandCraft;Carpentry,
       	OnCreate = Recipe.OnGiveXP.SellTomato,
 		inputs
 		{
@@ -84,11 +84,11 @@ module Base
 		{
 		}
 	}
-   	recipe SellBroccoli {
+   	craftRecipe SellBroccoli {
 		Time = 50,
       	timedAction = CraftWeapon2H,
-      	category = General,
-		tags = Sell,
+      	Category = Carpentry,
+		Tags = InHandCraft;Carpentry,
       	OnCreate = Recipe.OnGiveXP.SellBroccoli,
 		inputs
 		{
@@ -100,11 +100,11 @@ module Base
 	}
 
 
-	recipe SellSmallStackValuableScrap {
+	craftRecipe SellSmallStackValuableScrap {
 		Time = 50,
       	timedAction = CraftWeapon2H,
-      	category = General,
-		tags = Sell,
+      	Category = Carpentry,
+		Tags = InHandCraft;Carpentry,
       	OnCreate = Recipe.OnGiveXP.SellSmallScrap,
 		inputs
 		{
@@ -114,11 +114,11 @@ module Base
 		{
 		}
 	}
-	recipe SellMediumStackValuableScrap {
+	craftRecipe SellMediumStackValuableScrap {
 		Time = 50,
       	timedAction = CraftWeapon2H,
-      	category = General,
-		tags = Sell,
+      	Category = Carpentry,
+		Tags = InHandCraft;Carpentry,
       	OnCreate = Recipe.OnGiveXP.SellMediumScrap,
 		inputs
 		{
@@ -128,11 +128,11 @@ module Base
 		{
 		}
 	}
-	recipe SellLargeStackValuableScrap {
+	craftRecipe SellLargeStackValuableScrap {
 		Time = 50,
       	timedAction = CraftWeapon2H,
-      	category = General,
-		tags = Sell,
+      	Category = Carpentry,
+		Tags = InHandCraft;Carpentry,
       	OnCreate = Recipe.OnGiveXP.SellLargeScrap,
 		inputs
 		{

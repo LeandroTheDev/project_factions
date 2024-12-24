@@ -7,5 +7,4 @@ IGUI_PTBR = {
 	IGUI_Factions_Horde_Hard = "um grupo grande...",
 	IGUI_Factions_Horde_Insane = "um grupo imenso...",
 	IGUI_Shop_Sell = "Vendido",
-	IGUI_Shop_Return = "Retornado",
 }

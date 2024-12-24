@@ -25,5 +25,6 @@ IGUI_PTBR = {
 	IGUI_Trade_Items = "Itens no container",
 	IGUI_ItemCat_Special = "Loot Box Especial",
 	IGUI_Trade_Message = "Compre items de outros Jogadores",
-	IGUI_Shop_Message = "Compre items da Loja"
+	IGUI_Shop_Message = "Compre items da Loja",
+	IGUI_Shop_Return = "Retornado",
 }

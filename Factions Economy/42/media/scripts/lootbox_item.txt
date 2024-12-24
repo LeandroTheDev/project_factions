@@ -105,67 +105,109 @@ module Base
         Icon = lootbox_special_weapon,
         WorldStaticModel = Base.LootBoxSpecialWeaponModel,
     }
-	recipe Open LootBoxAmmo
-	{
-		Base.LootBoxAmmo,
-		Result : Base.LootBoxAmmo,
-		RemoveResultItem:true,
-		Time: 100,
-		OnCreate: LootBoxAmmoOpen,
-		Sound:PutItemInBag,
+	craftRecipe OpenLootBoxAmmo {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = LootBoxAmmoOpen,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxAmmo],
+		}
+		outputs
+		{
+		}
 	}
-    recipe Open LootBoxClothes
-	{
-		Base.LootBoxClothes,
-		Result : Base.LootBoxClothes,
-		RemoveResultItem:true,
-		Time: 100,
-		OnCreate: LootBoxClothesOpen,
-		Sound:PutItemInBag,
+	craftRecipe OpenLootBoxClothes {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = LootBoxClothesOpen,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxClothes],
+		}
+		outputs
+		{
+		}
 	}
-	recipe Open LootBoxMelee
-	{
-		Base.LootBoxMelee,
-		Result : Base.LootBoxMelee,
-		RemoveResultItem:true,
-		Time: 100,
-		OnCreate: LootBoxMeleeOpen,
-		Sound:PutItemInBag,
+	craftRecipe OpenLootBoxMelee {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = LootBoxMeleeOpen,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxMelee],
+		}
+		outputs
+		{
+		}
 	}
-	recipe Open LootBoxWeapon
-	{
-		Base.LootBoxWeapon,
-		Result : Base.LootBoxWeapon,
-		RemoveResultItem:true,
-		Time: 100,
-		OnCreate: LootBoxWeaponOpen,
-		Sound:PutItemInBag,
+	craftRecipe OpenLootBoxWeapon {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = LootBoxWeaponOpen,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxWeapon],
+		}
+		outputs
+		{
+		}
 	}
-	recipe Open LootBoxAttachment
-	{
-		Base.LootBoxAttachment,
-		Result : Base.LootBoxAttachment,
-		RemoveResultItem:true,
-		Time: 100,
-		OnCreate: LootBoxAttachmentOpen,
-		Sound:PutItemInBag,
+	craftRecipe OpenLootBoxAttachment {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = LootBoxAttachmentOpen,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxAttachment],
+		}
+		outputs
+		{
+		}
 	}
-	recipe Open LootBoxClip
-	{
-		Base.LootBoxClip,
-		Result : Base.LootBoxClip,
-		RemoveResultItem:true,
-		Time: 100,
-		OnCreate: LootBoxClipOpen,
-		Sound:PutItemInBag,
+	craftRecipe OpenLootBoxClip {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = LootBoxClipOpen,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxClip],
+		}
+		outputs
+		{
+		}
 	}
-	recipe Open LootBoxSpecialWeapon
-	{
-		Base.LootBoxSpecialWeapon,
-		Result : Base.LootBoxSpecialWeapon,
-		RemoveResultItem:true,
-		Time: 100,
-		OnCreate: LootBoxSpecialWeaponOpen,
-		Sound:PutItemInBag,
+	craftRecipe OpenLootBoxSpecialWeapon {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = LootBoxSpecialWeaponOpen,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxSpecialWeapon],
+		}
+		outputs
+		{
+		}
 	}
 }
