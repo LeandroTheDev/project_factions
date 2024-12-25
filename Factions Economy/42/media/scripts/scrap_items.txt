@@ -92,7 +92,7 @@ module Base
         category = Miscellaneous,
 		inputs
 		{
-			item 1 tags[PistolMagazine,RifleMagazine,AmmoBox],
+			item 1 tags[PistolMagazine;RifleMagazine;AmmoBox],
 		}
 		outputs
 		{
