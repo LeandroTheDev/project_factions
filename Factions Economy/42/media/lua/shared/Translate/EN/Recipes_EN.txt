@@ -13,4 +13,15 @@ Recipe_EN = {
 	StackScrapLarge = "Stack to Large Valuable Scrap",
 	ScrapMunition = "Scrap Munition",
 	ScrapWeapon = "Scrap Weapon",
+
+	SellCarrot = "Sell Carrot",
+	SellPotato = "Sell Potato",
+	SellStrawberry = "Sell Strawberry",
+	SellRadish = "Sell Radish",
+	SellCabbage = "Sell Cabbage",
+	SellTomato = "Sell Tomato",
+	SellBroccoli = "Sell Broccoli",
+	SellSmallStackValuableScrap = "Sell Small Stack Valuable Scrap",
+	SellMediumStackValuableScrap = "Sell Medium Stack Valuable Scrap",
+	SellLargeStackValuableScrap = "Sell Large Stack Valuable Scrap",
 }

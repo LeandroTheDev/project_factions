@@ -13,4 +13,15 @@ Recipe_PTBR = {
 	StackScrapLarge = "Empilhar Sucata Valiosa Grande",
 	ScrapMunition = "Sucatear Munição",
 	ScrapWeapon = "Sucatear Arma",
+
+	SellCarrot = "Vender Cenoura",
+	SellPotato = "Vender Batata",
+	SellStrawberry = "Vender Morango",
+	SellRadish = "Vender Rabanete",
+	SellCabbage = "Vender Repolho",
+	SellTomato = "Vender Tomate",
+	SellBroccoli = "Vender Brócolis",
+	SellSmallStackValuableScrap = "Vender Pilha de Sucata Valiosa Pequena",
+	SellMediumStackValuableScrap = "Vender Pilha de Sucata Valiosa Mediana",
+	SellLargeStackValuableScrap = "Vender Pilha de Sucata Valiosa Grande",
 }

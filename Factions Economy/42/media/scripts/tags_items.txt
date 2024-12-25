@@ -1,0 +1,127 @@
+module Base
+{
+    /******* This script is necessary because devs forgot to add tags to ammo boxes *******/
+
+    item 223Box
+	{
+		DisplayName = Box of .223 Rounds,
+		DisplayCategory = Ammo,
+		Type = Normal,
+		Weight = 1.2,
+		Icon = RifleAmmo223,
+		AlwaysWelcomeGift = TRUE,
+		MetalValue = 40,
+		PlaceMultipleSound = BoxOfRoundsPlaceAll,
+		PlaceOneSound = BoxOfRoundsPlaceOne,
+		StaticModel = RifleAmmoBox,
+		WorldStaticModel = RifleAmmoBox,
+        Tags = Ammo;AmmoBox,
+	}
+
+    item 308Box
+	{
+		DisplayName = Box of .308 Rounds,
+		DisplayCategory = Ammo,
+		Type = Normal,
+		Weight = 0.6,
+		Icon = RifleAmmo308,
+		AlwaysWelcomeGift = TRUE,
+		MetalValue = 40,
+		PlaceMultipleSound = BoxOfRoundsPlaceAll,
+		PlaceOneSound = BoxOfRoundsPlaceOne,
+		StaticModel = RifleAmmoBox,
+		WorldStaticModel = RifleAmmoBox,
+        Tags = Ammo;AmmoBox,
+	}
+
+    item 556Box
+	{
+		DisplayName = Box of 5.56mm Rounds,
+		DisplayCategory = Ammo,
+		Type = Normal,
+		Weight = 1.2,
+		Icon = RifleAmmo308,
+		AlwaysWelcomeGift = TRUE,
+		MetalValue = 40,
+		PlaceMultipleSound = BoxOfRoundsPlaceAll,
+		PlaceOneSound = BoxOfRoundsPlaceOne,
+		StaticModel = RifleAmmoBox,
+		WorldStaticModel = RifleAmmoBox,
+        Tags = Ammo;AmmoBox,
+	}
+
+    item Bullets38Box
+	{
+		DisplayName = Box of .38 Special Rounds,
+		DisplayCategory = Ammo,
+		Type = Normal,
+		Weight = 0.50,
+		Icon = HandgunAmmoBox,
+		MetalValue = 30,
+		PlaceMultipleSound = BoxOfRoundsPlaceAll,
+		PlaceOneSound = BoxOfRoundsPlaceOne,
+		StaticModel = BoxOf38Special,
+		WorldStaticModel = BoxOf38Special,
+        Tags = Ammo;AmmoBox,
+	}
+
+    item Bullets44Box
+	{
+		DisplayName = Box of .44 Magnum Rounds,
+		DisplayCategory = Ammo,
+		Type = Normal,
+		Weight = 0.40,
+		Icon = HandgunAmmoBox,
+		MetalValue = 30,
+		PlaceMultipleSound = BoxOfRoundsPlaceAll,
+		PlaceOneSound = BoxOfRoundsPlaceOne,
+		StaticModel = BoxOf44Magnum,
+		WorldStaticModel = BoxOf44Magnum,
+        Tags = Ammo;AmmoBox,
+	}
+
+    item Bullets45Box
+	{
+		DisplayName = Box of .45 Auto Rounds,
+		DisplayCategory = Ammo,
+		Type = Normal,
+		Weight = 1,
+		Icon = HandgunAmmoBox,
+		MetalValue = 30,
+		PlaceMultipleSound = BoxOfRoundsPlaceAll,
+		PlaceOneSound = BoxOfRoundsPlaceOne,
+		StaticModel = BoxOf45Auto,
+		WorldStaticModel = BoxOf45Auto,
+        Tags = Ammo;AmmoBox,
+	}
+
+    item Bullets9mmBox
+	{
+		DisplayName = Box of 9mm Rounds,
+		DisplayCategory = Ammo,
+		Type = Normal,
+		Weight = 0.8,
+		Icon = HandgunAmmoBox,
+		MetalValue = 30,
+		PlaceMultipleSound = BoxOfRoundsPlaceAll,
+		PlaceOneSound = BoxOfRoundsPlaceOne,
+		StaticModel = HandGunAmmoBox,
+		WorldStaticModel = HandGunAmmoBox,
+        Tags = Ammo;AmmoBox,
+	}
+
+    item ShotgunShellsBox
+	{
+		DisplayName = Box of Shotgun Shells,
+		DisplayCategory = Ammo,
+		Type = Normal,
+		Weight = 1.2,
+		Icon = ShotgunAmmoBox,
+		MetalValue = 24,
+		PlaceMultipleSound = BoxOfShellsPlaceAll,
+		PlaceOneSound = BoxOfShellsPlaceOne,
+		StaticModel = BoxOfShotGunShells,
+		WorldStaticModel = BoxOfShotGunShells,
+        Tags = Ammo;AmmoBox,
+	}
+}

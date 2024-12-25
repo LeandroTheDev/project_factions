@@ -1,0 +1,118 @@
+module Base
+{
+	item ScrapMoney {
+        DisplayCategory = Junk,
+        Weight	=	0.1,
+        Type	=	Normal,
+        DisplayName	=	Scrap Money,
+        Icon	=	scrap_money,
+        WorldStaticModel = Money,
+	}
+
+	item ScrapStack1 {
+        DisplayCategory = Junk,
+    	Weight	=	0.5,
+        Type	=	Normal,
+        DisplayName	=	Small Scrap Stack,
+        Icon	=	scrap_money,
+        WorldStaticModel = Money,
+	}
+
+	item ScrapStack2 {
+        DisplayCategory = Junk,
+        Weight	=	1.5,
+        Type	=	Normal,
+        DisplayName	=	Medium Scrap Stack,
+        Icon	=	scrap_money,
+        WorldStaticModel = Money,
+	}
+
+	item ScrapStack3 {
+        DisplayCategory = Junk,
+    	Weight	=	3.0,
+        Type	=	Normal,
+        DisplayName	=	Large Scrap Stack,
+    	Icon	=	scrap_money,
+        WorldStaticModel = Money,
+	}
+
+    craftRecipe StackScrapSmall {
+		timedAction = Making,
+		Time = 25,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 10 [Base.ScrapMoney],
+		}
+		outputs
+		{
+            item 1 Base.ScrapStack1,
+		}
+	}
+
+    craftRecipe StackScrapMedium {
+		timedAction = Making,
+		Time = 25,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 10 [Base.ScrapStack1],
+		}
+		outputs
+		{
+            item 1 Base.ScrapStack2,
+		}
+	}
+
+    craftRecipe StackScrapLarge {
+		timedAction = Making,
+		Time = 25,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 10 [Base.ScrapStack2],
+		}
+		outputs
+		{
+            item 1 Base.ScrapStack3,
+		}
+	}
+
+    craftRecipe ScrapAmmo {
+		timedAction = Making,
+		Time = 25,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 tags[PistolMagazine,RifleMagazine,AmmoBox],
+		}
+		outputs
+		{
+            item 1 Base.ScrapMoney,
+		}
+	}
+
+    craftRecipe ScrapWeapon {
+		timedAction = Making,
+		Time = 25,
+		/* CanWalk = true, */
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 tags[Firearm],
+		}
+		outputs
+		{
+            item 1 Base.ScrapStack1,
+		}
+	}
+}

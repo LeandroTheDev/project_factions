@@ -22,15 +22,14 @@ Shop Forked from [Server Points](https://steamcommunity.com/sharedfiles/filedeta
 - Shop UI
 - Trade UI
 - Lootboxes
-- Trade Money can be returned to get points for the shop and trade
+- New economy coin that can be returned to get points for the shop and trade
+- Sell vegetables/fruits
+- Scrap Weapons to earn the economy coin
 
 # Factions Plus
 
 Add new features and adjustments for playing with Factions Mode, require the Factions Economy
 
-- New economy item
-- Sell vegetables/fruits
-- Scrap Weapons to earn Trade Money
 - Increase crop grow speed
 - Reduced seed drop by crops
 - Reduced water need for fully watered crop
