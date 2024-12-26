@@ -38,14 +38,6 @@ option FactionsPlus.EnableCalendarReset
 	translation = FactionsPlus_EnableCalendarReset,
 }
 
-option FactionsPlus.EnableFarmSpeed
-{
-	type = boolean,
-	default = true,
-	page = FactionsPlus,
-	translation = FactionsPlus_EnableFarmSpeed,
-}
-
 option FactionsPlus.EnableReduceSeedDrop
 {
 	type = boolean,

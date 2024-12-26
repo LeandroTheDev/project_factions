@@ -33,7 +33,7 @@ function MainScreen:instantiate()
             self.shopOptions.internal = "SHOP";
             self.shopOptions:initialise();
             self.bottomPanel:addChild(self.shopOptions);
-            self.shopOptions.onMouseDown = function()
+            self.shopOptions.onMouseDown = function(item, x, y)
                 getSoundManager():playUISound("UIActivateMainMenuItem");
                 MainScreen.instance.serverShop:setVisible(true);
             end;
@@ -59,7 +59,7 @@ function MainScreen:instantiate()
             self.tradeOptions.internal = "TRADES"
             self.tradeOptions:initialise()
             self.bottomPanel:addChild(self.tradeOptions);
-            self.tradeOptions.onMouseDown = function()
+            self.tradeOptions.onMouseDown = function(item, x, y)
                 getSoundManager():playUISound("UIActivateMainMenuItem");
                 MainScreen.instance.serverTrade:setVisible(true);
             end
