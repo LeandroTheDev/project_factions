@@ -27,4 +27,5 @@ IGUI_EN = {
 	IGUI_Trade_Message = "Buy items from others Players",
 	IGUI_Shop_Message = "Buy items from Server Market",
 	IGUI_Shop_Return = "Returned",
+	IGUI_Shop_Sell = "Sold",
 }

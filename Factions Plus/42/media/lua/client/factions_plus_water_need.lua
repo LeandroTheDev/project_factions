@@ -27,7 +27,7 @@ if SandboxVars.FactionsPlus.EnableReduceWaterNeed then
 				for i=1,uses do
 					if(waterLvl < 100) then
 						self:useItemOneUnit()
-						waterLvl = waterLvl + 50
+						waterLvl = waterLvl + 50 -- Add sandbox var for changing it
 						if(waterLvl > 100) then
 							waterLvl = 100
 						end

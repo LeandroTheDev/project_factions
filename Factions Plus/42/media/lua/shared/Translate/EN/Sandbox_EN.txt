@@ -13,9 +13,6 @@ Sandbox_EN = {
     Sandbox_FactionsPlus_EnableCalendarReset = "Enable Calendar Reset",
     Sandbox_FactionsPlus_EnableCalendarReset_tooltip = "Every day the sandbox starting day will reset to the actual day, so all respawned items will be fresh",
 
-    Sandbox_FactionsPlus_EnableFarmSpeed = "Enable Fast Crop Grow",
-    Sandbox_FactionsPlus_EnableFarmSpeed_tooltip = "Grow will grow much faster thant normal",       
-
     Sandbox_FactionsPlus_EnableReduceSeedDrop = "Enable Reduced Seed Drop",
     Sandbox_FactionsPlus_EnableReduceSeedDrop_tooltip = "Receive less seeds harvesting crops",
     
