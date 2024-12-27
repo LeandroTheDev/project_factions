@@ -8,16 +8,18 @@ module Base
                 Icon	=	upgrade_safehouse,
                 WorldStaticModel = Money,
 	}
-	recipe Upgrade Safehouse {
-                UpgradeSafehouse,
-
-                CanBeDoneFromFloor:true,
-                Time:10,
-                Result:UpgradeSafehouse=1,
-                RemoveResultItem:true,
-                Sound:Hammering,
-                AnimNode:RipSheets,
-                Category:General,
-                OnGiveXP:UpgradeSafehouse,
-        }
+        craftRecipe UpgradeSafehouse {
+		Time = 50,
+      	        timedAction = CraftWeapon2H,
+      	        Category = Carpentry,
+		Tags = InHandCraft;Carpentry,
+      	        OnCreate = Recipe.OnGiveXP.UpgradeSafehouse,
+		inputs
+		{
+			item 1 [Base.UpgradeSafehouse],
+		}
+		outputs
+		{
+		}
+	}
 }

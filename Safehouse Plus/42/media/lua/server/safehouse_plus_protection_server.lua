@@ -110,12 +110,10 @@ local function tableFormat(tabela, nivel)
 end
 
 -- Call the server to add a safehouse point
-function Recipe.OnGiveXP.ProtectSafehouse(recipe, ingredients, result, player)
+function Recipe.OnGiveXP.ProtectSafehouse(craftRecipeData, player)
     sendClientCommand("ServerSafehouseProtection", "protectSafehouse", nil);
 end
 
--- Declaring variables to be called in script text
-ProtectSafehouse = Recipe.OnGiveXP.ProtectSafehouse;
 if isClient() then return end;
 
 -- Stores the server and client communication

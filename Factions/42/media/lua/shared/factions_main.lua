@@ -87,7 +87,7 @@ local function logger(log)
 	-- fileWriter:write("[" ..
 	-- 	time.tm_hour .. ":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
 	print("[" ..
-		time.tm_hour .. ":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
+		time.tm_hour .. ":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "-Factions] " .. log .. "\n");
 end
 -- Explanation about this file.
 -- this file contains the utils features from the factions
@@ -195,7 +195,7 @@ FactionsMain.isSpawnPoint = function(square)
 				end
 			end
 		else
-			logger("[ERROR] getServerSpawnRegions() returned nil");
+			logger("[ERROR] getServerSpawnRegions() returned nil, uhh you are in singleplayer?");
 		end
 	end
 
@@ -624,7 +624,7 @@ if isServer() then
 
 	-- Remove factions data
 	function ServerFactionCommands.removeFaction(module, command, player, args)
-		logger("[ERROR] Faction " .. args.factionName .. " is been deleted by: " .. player:getUsername())
+		logger("[Factions] Faction " .. args.factionName .. " is been deleted by: " .. player:getUsername())
 		ServerFactionPoints[args.factionName] = nil;
 	end
 

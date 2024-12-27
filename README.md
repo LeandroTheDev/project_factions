@@ -22,9 +22,9 @@ Shop Forked from [Server Points](https://steamcommunity.com/sharedfiles/filedeta
 - Shop UI
 - Trade UI
 - Lootboxes
-- New economy coin that can be returned to get points for the shop and trade
+- Economy coin that can be returned to get points for the shop and trade
 - Sell vegetables/fruits
-- Scrap Weapons to earn the economy coin
+- Scrap Weapons to earn the stackable scrap (bigger the scrap the more economy coin you will earn)
 
 # Factions Plus
 
@@ -32,14 +32,11 @@ Add new features and adjustments for playing with Factions Mode, require the Fac
 
 - Increase crop grow speed
 - Reduced seed drop by crops
-- Reduced water need for fully watered crop
 - Connections/Disconnections/Death player messages events
 - Random hordes
 - Special hordes for special locations (Lua/HordeSpecialPositions.ini)
 ### UTILS
 - Craftable long sticks (with planks)
-- Craftable sticks (with planks)
-- Remove maintenance required for crafting crude stone axe
 
 # Safehouse Plus
 
@@ -67,6 +64,7 @@ External very useful mods to make the factions better
 - [Random Airdrops](https://github.com/LeandroTheDev/random_airdrops), add random airdrops to the server
 - [RA Smoke Flares](https://github.com/LeandroTheDev/ra_smoke_flares), add smoke flares to call any airdrop
 - [Factions Weapons](https://github.com/LeandroTheDev/factions_weapons), overhaul the weapons to make it more immersive and fun to play with
+- [Factions Clothes - TODO](), add a set of military and factions friendly clothes to give more options for factions teams
 
 - > To download the submodules you can use ``git submodule init``, ``git submodule update`` in your terminal
 - > To get the latest submodules commit: `git submodule update --remote``
@@ -78,7 +76,7 @@ External very useful mods to make the factions better
 - Copy all mods from the new folder created, and paste on your project zomboid mods folder
 - > You can also upload to workshop to automatically users download this project
 - Now you can open the game, enable the mods and change the sandbox configurations
-- > Some mods require special configurations in Lua, after starting the server take a look in the Lua folder, all mods also have a Logs folder in Lua to manage players actions, you can view templates in [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) folder
+- > Some mods require special configurations in Lua, after starting the server take a look in the Lua folder, you can view templates in [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) folder
 - > Also some mods needs modifications in the java class to work propertly, consider checking the [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) folder
 
 Load Order:
@@ -89,5 +87,6 @@ Load Order:
 - Random Airdrops
 - RA Smoke Flares
 - Factions Weapons
+- Factions Clothes
 
 FTM License

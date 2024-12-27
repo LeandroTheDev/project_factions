@@ -87,7 +87,7 @@ local function logger(log)
     -- fileWriter:write("[" ..
     --     time.tm_hour .. ":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
     print("[" ..
-        time.tm_hour .. ":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
+        time.tm_hour .. ":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "-FactionsEconomy] " .. log .. "\n");
 end
 
 ServerShopData = {};

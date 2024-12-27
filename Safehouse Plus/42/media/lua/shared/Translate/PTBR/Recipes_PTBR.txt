@@ -1,4 +1,4 @@
 Recipes_PTBR = {
-	Recipe_Upgrade_Safehouse = "Melhorar Safehouse"
-	Recipe_Protect_Safehouse = "Proteger Safehouse"
+	UpgradeSafehouse = "Melhorar Safehouse"
+	ProtectSafehouse = "Proteger Safehouse"
 }
