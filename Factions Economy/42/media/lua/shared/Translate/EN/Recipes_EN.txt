@@ -11,7 +11,7 @@ Recipe_EN = {
 	StackScrapSmall = "Stack to Small Valuable Scrap",
 	StackScrapMedium = "Stack to Medium Valuable Scrap",
 	StackScrapLarge = "Stack to Large Valuable Scrap",
-	ScrapMunition = "Scrap Munition",
+	ScrapAmmo = "Scrap Munition",
 	ScrapWeapon = "Scrap Weapon",
 
 	SellCarrot = "Sell Carrot",
