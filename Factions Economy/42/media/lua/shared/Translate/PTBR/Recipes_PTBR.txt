@@ -11,7 +11,7 @@ Recipe_PTBR = {
 	StackScrapSmall = "Empilhar Sucata Valiosa Pequena",
 	StackScrapMedium = "Empilhar Sucata Valiosa  Mediana",
 	StackScrapLarge = "Empilhar Sucata Valiosa Grande",
-	ScrapMunition = "Sucatear Munição",
+	ScrapAmmo = "Sucatear Munição",
 	ScrapWeapon = "Sucatear Arma",
 
 	SellCarrot = "Vender Cenoura",
