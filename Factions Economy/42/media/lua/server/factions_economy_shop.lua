@@ -1,5 +1,20 @@
 ---@diagnostic disable: undefined-global, deprecated
-if isClient() then return end;
+
+--TODO
+-- better singleplayer treatment
+
+-- Check if is not a single player game
+local isSingleplayer = false;
+if not (not isClient() and not isServer()) then
+    -- Check if is a client on the dedicated server
+    if isClient() then
+        print("Factions Shop has been disable reason: you are the client in dedicated server");
+        return;
+    end
+else
+    isSingleplayer = true;
+end
+
 -- Get the days, hours from the OS time based in timezone
 local function getCurrentTime()
     local function remainder(a, b)
@@ -87,42 +102,50 @@ local function logger(log)
     -- fileWriter:write("[" ..
     --     time.tm_hour .. ":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
     print("[" ..
-        time.tm_hour .. ":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "-FactionsEconomy] " .. log .. "\n");
+        time.tm_hour ..
+        ":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "-FactionsEconomy] " .. log .. "\n");
 end
 
 ServerShopData = {};
-local shopItems = {};
-local tradeItems = {};
+ShopItems = {};
+TradeItems = {};
 
---Thanks chat gpt
--- local function formatarTabela(tabela, nivel)
---     nivel = nivel or 0
---     local prefixo = string.rep("  ", nivel) -- Espaços para recuo
---     if type(tabela) == "table" then
---         local str = "{\n"
---         for chave, valor in pairs(tabela) do
---             str = str .. prefixo .. "  [" .. tostring(chave) .. "] = "
---             if type(valor) == "table" then
---                 str = str .. formatarTabela(valor, nivel + 1) .. ",\n"
---             else
---                 str = str .. tostring(valor) .. ",\n"
---             end
---         end
---         str = str .. prefixo .. "}"
---         return str
---     else
---         return tostring(tabela)
---     end
--- end
+local function tableToString(table, level)
+    level = level or 0
+    local prefixo = string.rep("  ", level)
+    if type(table) == "table" then
+        local str = "{\n"
+        for chave, valor in pairs(table) do
+            str = str .. prefixo .. "  [" .. tostring(chave) .. "] = "
+            if type(valor) == "table" then
+                str = str .. tableToString(valor, level + 1) .. ",\n"
+            else
+                str = str .. tostring(valor) .. ",\n"
+            end
+        end
+        str = str .. prefixo .. "}"
+        return str
+    else
+        return tostring(table)
+    end
+end
 
 local function PointsTick()
-    local players = getOnlinePlayers()
-    for i = 0, players:size() - 1 do
-        local username = players:get(i):getUsername()
+    if isSingleplayer then
+        local username = getPlayer():getUsername();
         if not ServerShopData[username] then ServerShopData[username] = 0 end
         ServerShopData[username] = ServerShopData[username] + SandboxVars.FactionsEconomy.PointsPerTick
         logger(username ..
-            "received: " .. SandboxVars.FactionsEconomy.PointsPerTick .. " total: " .. ServerShopData[username]);
+            " received: " .. SandboxVars.FactionsEconomy.PointsPerTick .. " total: " .. ServerShopData[username]);
+    else
+        local players = getOnlinePlayers()
+        for i = 0, players:size() - 1 do
+            local username = players:get(i):getUsername()
+            if not ServerShopData[username] then ServerShopData[username] = 0 end
+            ServerShopData[username] = ServerShopData[username] + SandboxVars.FactionsEconomy.PointsPerTick
+            logger(username ..
+                " ddreceived: " .. SandboxVars.FactionsEconomy.PointsPerTick .. " total: " .. ServerShopData[username]);
+        end
     end
 end
 
@@ -137,14 +160,14 @@ local function LoadShopItems()
     end
     fileReader:close()
     logger("Shop items has been loaded");
-    shopItems = loadstring(table.concat(lines, "\n"))() or { ["missing"] = {} }
+    ShopItems = loadstring(table.concat(lines, "\n"))() or { ["missing"] = {} }
 end
 
 -- Simple load the items from the server data
 local function LoadTradeItems()
     if ServerShopData["ServerTradeItems"] == nil then ServerShopData["ServerTradeItems"] = { ["No_Items"] = {} } end
     logger("Trade items has been loaded");
-    tradeItems = ServerShopData["ServerTradeItems"];
+    TradeItems = ServerShopData["ServerTradeItems"];
 end
 
 Events.OnInitGlobalModData.Add(function(isNewGame)
@@ -152,6 +175,8 @@ Events.OnInitGlobalModData.Add(function(isNewGame)
 
     LoadShopItems()
     LoadTradeItems()
+
+    print("POINTS FREQUENCY: " .. SandboxVars.FactionsEconomy.PointsFrequency);
 
     if SandboxVars.FactionsEconomy.PointsFrequency == 2 then
         Events.EveryTenMinutes.Add(PointsTick)
@@ -206,7 +231,7 @@ end
 
 -- Get trade items
 function ServerPointsCommands.loadTrade(module, command, player, args)
-    sendServerCommand(player, module, command, tradeItems)
+    sendServerCommand(player, module, command, TradeItems)
 end
 
 -- Buy from shop
@@ -231,7 +256,7 @@ end
 
 -- Get shop items
 function ServerPointsCommands.loadShop(module, command, player, args)
-    sendServerCommand(player, module, command, shopItems)
+    sendServerCommand(player, module, command, ShopItems)
 end
 
 -- Reload shop items

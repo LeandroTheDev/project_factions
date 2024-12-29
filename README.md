@@ -1,6 +1,8 @@
-# Factions
 Legacy b41 version: access [Last commit from B41](https://github.com/LeandroTheDev/project_factions/tree/25b168e77add44a12f5f35f02ec0fd80618451be)
+
 B42: currently
+# Factions
+Singeplayer Compatibility: No, theres is no reason to add a capture system in singleplayer
 
 Forked from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/?id=1178772929&searchtext=Safehouse) to create a complete new system to safehouse claim and capture
 
@@ -16,6 +18,7 @@ Forked from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/
 Consider downloading the safehouse limit remover in the folder [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) and place it in the main project zomboid dedicated server folder
 
 # Factions Economy
+Singeplayer Compatibility: Yes
 
 Shop Forked from [Server Points](https://steamcommunity.com/sharedfiles/filedetails/?id=2823055977&searchtext=Server+Points), Trade system to the game, including Loot Boxes
 
@@ -27,6 +30,7 @@ Shop Forked from [Server Points](https://steamcommunity.com/sharedfiles/filedeta
 - Scrap Weapons to earn the stackable scrap (bigger the scrap the more economy coin you will earn)
 
 # Factions Plus
+Singeplayer Compatibility: Yes
 
 Add new features and adjustments for playing with Factions Mode, require the Factions Economy
 
@@ -39,6 +43,7 @@ Add new features and adjustments for playing with Factions Mode, require the Fac
 - Craftable long sticks (with planks)
 
 # Safehouse Plus
+Singeplayer Compatibility: No, the same reason as Factions doesn't have the singeplayer compatibility
 
 Add several new mechanics to safehouses, with the upgrader you can increase the house level to gain more Points in the Server, you can easily create keys for your safehouse, and new
 respawn mechanics forked from [Keep Inventory](https://steamcommunity.com/sharedfiles/filedetails/?id=2879960829)

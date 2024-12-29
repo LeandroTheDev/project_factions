@@ -1,5 +1,12 @@
 ---@diagnostic disable: undefined-global
 
+--TODO
+-- Change the server command to be more clean
+-- OnStartGame instead the OnTick on children create
+-- better singleplayer treatment
+
+local isSingleplayer = (not isClient() and not isServer());
+
 local ServerShopUI = ISPanel:derive("ServerShopUI")
 ServerShopUI.BuyType = {}
 ServerShopUI.DrawType = {}
@@ -10,7 +17,6 @@ local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
 local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 local FONT_SCALE = FONT_HGT_SMALL / 14
-
 
 local function OnServerCommand(module, command, arguments)
     if module == "ServerPoints" and command == "getPoints" then
@@ -28,8 +34,12 @@ function ServerShopUI:setVisible(visible)
         self.preview:setVisible(visible)
     end
     if visible then
-        Events.OnServerCommand.Add(OnServerCommand)
-        sendClientCommand("ServerPoints", "getPoints", nil)
+        if isSingleplayer then
+            ServerShopUI.instance.points = ServerShopData[getPlayer():getUsername()] or 0
+        else
+            Events.OnServerCommand.Add(OnServerCommand)
+            sendClientCommand("ServerPoints", "getPoints", nil)
+        end
     end
 end
 
@@ -63,7 +73,7 @@ function ServerShopUI.LoadType.DIV(row, entry)
         for text in entry.target:gmatch("([^\n]+)") do table.insert(row.target, text) end
     end
     row.font = row.height > #row.target * (FONT_HGT_LARGE + 1 * FONT_SCALE) and UIFont.Large or
-    row.height > #row.target * (FONT_HGT_MEDIUM + 1 * FONT_SCALE) and UIFont.Medium or UIFont.Small
+        row.height > #row.target * (FONT_HGT_MEDIUM + 1 * FONT_SCALE) and UIFont.Medium or UIFont.Small
     row.fontHeight = getTextManager():getFontHeight(row.font)
 end
 
@@ -96,9 +106,13 @@ function ServerShopUI.LoadListings(module, command, arguments)
 end
 
 local function OnTick()
-    Events.OnTick.Remove(OnTick)
-    Events.OnServerCommand.Add(ServerShopUI.LoadListings)
-    sendClientCommand("ServerPoints", "loadShop", nil)
+    Events.OnTick.Remove(OnTick);
+    if isSingleplayer then
+        ServerShopUI.LoadListings("ServerPoints", "loadShop", ShopItems);
+    else
+        Events.OnServerCommand.Add(ServerShopUI.LoadListings)
+        sendClientCommand("ServerPoints", "loadShop", nil)
+    end
 end
 
 function ServerShopUI:createChildren()
@@ -215,10 +229,10 @@ function ServerShopUI.PreviewType.VEHICLE(self)
 
     self.preview.closeButton = ISButton:new(self.preview.width - 15 * FONT_SCALE, 5 * FONT_SCALE, 10 * FONT_SCALE,
         10 * FONT_SCALE, nil, self.preview, function(self)
-        self:setVisible(false)
-        self:removeFromUIManager()
-        ServerShopUI.instance.preview = nil
-    end)
+            self:setVisible(false)
+            self:removeFromUIManager()
+            ServerShopUI.instance.preview = nil
+        end)
     self.preview.closeButton:setDisplayBackground(false)
     self.preview.closeButton:setImage(getTexture("media/ui/Dialog_Titlebar_CloseIcon.png"))
     self.preview.closeButton:forceImageSize(self.preview.closeButton.width, self.preview.closeButton.height)

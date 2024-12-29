@@ -1,19 +1,19 @@
 module Base
 {       
-        item ProtectSafehouse {
-                DisplayCategory = Junk,
-                Weight	=	0.1,
-                Type	=	Normal,
-                DisplayName	=	Protect Safehouse,
-                Icon	=	protect_safehouse,
-                WorldStaticModel = Money,
+    item ProtectSafehouse {
+        DisplayCategory = Junk,
+        Weight	=	0.1,
+        Type	=	Normal,
+        DisplayName	=	Protect Safehouse,
+		Icon	=	protect_safehouse,
+        WorldStaticModel = Money,
 	}
-        craftRecipe ProtectSafehouse {
+	craftRecipe ProtectSafehouse {
 		Time = 50,
-      	        timedAction = CraftWeapon2H,
-      	        Category = Carpentry,
+        timedAction = CraftWeapon2H,
+        Category = Carpentry,
 		Tags = InHandCraft;Carpentry,
-      	        OnCreate = Recipe.OnGiveXP.ProtectSafehouse,
+        OnCreate = Recipe.OnGiveXP.ProtectSafehouse,
 		inputs
 		{
 			item 1 [Base.ProtectSafehouse],

@@ -1,19 +1,19 @@
 module Base
 {       
-        item UpgradeSafehouse {
-                DisplayCategory = Junk,
-                Weight	=	0.1,
-                Type	=	Normal,
-                DisplayName	=	Upgrade Safehouse,
-                Icon	=	upgrade_safehouse,
-                WorldStaticModel = Money,
+	item UpgradeSafehouse {
+    	DisplayCategory = Junk,
+    	Weight	=	0.1,
+     	Type	=	Normal,
+    	DisplayName	=	Upgrade Safehouse,
+    	Icon	=	upgrade_safehouse,
+    	WorldStaticModel = Money,
 	}
-        craftRecipe UpgradeSafehouse {
+	craftRecipe UpgradeSafehouse {
 		Time = 50,
-      	        timedAction = CraftWeapon2H,
-      	        Category = Carpentry,
+		timedAction = CraftWeapon2H,
+		Category = Carpentry,
 		Tags = InHandCraft;Carpentry,
-      	        OnCreate = Recipe.OnGiveXP.UpgradeSafehouse,
+		OnCreate = Recipe.OnGiveXP.UpgradeSafehouse,
 		inputs
 		{
 			item 1 [Base.UpgradeSafehouse],

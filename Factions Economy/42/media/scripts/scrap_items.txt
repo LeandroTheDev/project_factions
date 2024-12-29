@@ -89,7 +89,7 @@ module Base
 		Time = 25,
 		/* CanWalk = true, */
 		Tags = InHandCraft;CanBeDoneInDark,
-        category = Miscellaneous,
+        category = Metalworking,
 		inputs
 		{
 			item 1 tags[PistolMagazine;RifleMagazine;AmmoBox],
@@ -105,7 +105,7 @@ module Base
 		Time = 25,
 		/* CanWalk = true, */
 		Tags = InHandCraft;CanBeDoneInDark,
-        category = Miscellaneous,
+        category = Metalworking,
 		inputs
 		{
 			item 1 tags[Firearm],
