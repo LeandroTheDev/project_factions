@@ -12,29 +12,6 @@ require "ISUI/UserPanel/ISFactionAddPlayerUI"
 
 require "ui/factions"
 
--- Removing the View Safehouse Context Menu in right click on the ground
-local _addOption = ISContextMenu.addOption;
-function ISContextMenu:addOption(name, target, onSelect, param1, param2, param3, param4, param5, param6, param7, param8,
-                                 param9, param10)
-    if name == getText("ContextMenu_ViewSafehouse") or name == getText("ContextMenu_SafehouseClaim") then
-        local arr = {};
-        return arr;
-    end
-    return _addOption(self, name, target, onSelect, param1, param2, param3, param4, param5, param6, param7, param8,
-        param9, param10);
-end
-
-local _addOptionOnTop = ISContextMenu.addOptionOnTop;
-function ISContextMenu:addOptionOnTop(name, target, onSelect, param1, param2, param3, param4, param5, param6, param7,
-                                      param8, param9, param10)
-    if name == getText("ContextMenu_ViewSafehouse") or name == getText("ContextMenu_SafehouseClaim") then
-        local arr = {};
-        return arr;
-    end
-    return _addOptionOnTop(self, name, target, onSelect, param1, param2, param3, param4, param5, param6, param7, param8,
-        param9, param10);
-end
-
 -- Override Functions
 
 -- Default function to handle on click to create faction

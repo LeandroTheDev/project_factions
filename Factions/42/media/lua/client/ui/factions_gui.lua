@@ -16,12 +16,6 @@ FactionsGUI.finishedCapture = false;
 
 local safehouseUI = nil;
 
--- When the player tries to capture the safehouse, this variable
--- will store the safehouse the player are capturing,
--- when the capture finish this variable will be send to the server
--- to check if the safehouse is the same
-local temporaryCaptureSafehouse
-
 local function getDeltaTimeInMillis(ts)
 	return getTimeInMillis() - ts;
 end
@@ -237,15 +231,23 @@ function FactionsGUI:updateButtons() -- Update dynamically the buttons based in 
 		return;
 	end
 
-	-- Check if safehouse is from enemy
-	if self.team == false then
-		self.internal = "Capture";
-		return;
+	local safehouse = SafeHouse.getSafeHouse(self.player:getSquare());
+	if safehouse then
+		if safehouse:playerAllowed(self.player) then
+			self.internal = "View";
+			self.button:setEnable(true);
+			return;
+		else
+			self.internal = "Capture";
+			self.button:setEnable(true);
+			return;
+		end
 	end
 
-	-- Check if safehouse is from friendly
-	if self.team == true then
-		self.internal = "View";
+	if FactionsMain.isSpawnPoint(self.player:getSquare()) then
+		self.button:setEnable(false);
+		self.button:setTooltip(getText("IGUI_Safehouse_IsSpawnPoint"));
+		self.internal = "Capture_Spawn";
 		return;
 	end
 
@@ -276,7 +278,7 @@ function FactionsGUI:updateButtons() -- Update dynamically the buttons based in 
 		return;
 	elseif pointsEnough then -- Check if have points enough for capturing
 		self.button:setEnable(true);
-		self.button:setTooltip(getText("UI_Text_SafehousePointsAvailable", self.price, available))
+		self.button:setTooltip(getText("UI_Text_SafehousePointsAvailable", self.price, available));
 		self.internal = "Capture_Empty";
 		return;
 	else -- Not enough points
@@ -394,12 +396,10 @@ function FactionsGUI.onButtonClick() -- On the button click
 		-- Ask the server that you are trying to capture the safehouse
 		sendClientCommand("ServerFactions", "captureSafehouse", nil);
 	elseif internal == "Capture_Empty" then -- Capture Residential button
-		local player = getPlayer()
-		local square = player:getSquare()
-		-- Add the safehouse and save to the temporaryCaptureSafehouse
-		temporaryCaptureSafehouse = SafeHouse.addSafeHouse(square:getBuilding():getDef():getX() - 2,
-			square:getBuilding():getDef():getY() - 2, square:getBuilding():getDef():getW() + 2 * 2,
-			square:getBuilding():getDef():getH() + 2 * 2, player:getUsername(), false)
+		-- IMPORTANT
+		-- You cannot do that on the server side, the b42mp patch handle this in clientside, maybe in the official releases it will be different
+		sendSafehouseClaim(getPlayer():getSquare(), getPlayer(), getPlayer():getUsername());
+
 		-- Ask the server if is valid capturing the safehouse
 		sendClientCommand("ServerFactions", "captureEmptySafehouse", nil)
 	end
@@ -605,14 +605,6 @@ local function OnServerCommand(module, command, arguments)
 
 	-- Empty safehouse capture
 	if module == "ServerSafehouse" and command == "syncCapturedSafehouse" then
-		if arguments.validation then
-			if temporaryCaptureSafehouse == nil then
-				return
-			end
-			-- Sync safehouse to get the updated safehouse
-			temporaryCaptureSafehouse:syncSafehouse();
-		end
-		temporaryCaptureSafehouse = nil
 		-- Reload UI
 		FactionsMain.unloadUI()
 	end

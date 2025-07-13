@@ -187,19 +187,32 @@ end
 
 -- Capture empty safehouse
 function FactionsCommands.captureEmptySafehouse(module, command, player, args)
-	local safehouse = SafeHouse.getSafeHouse(player:getSquare());
+	local square = player:getSquare();
 	local playerFaction = FactionsMain.getFaction(player:getUsername());
 	-- Check if safehouse is valid and player has a faction
-	if safehouse == nil or playerFaction == nil then
-		logger(player:getUsername() .. " trying to capture any invalid safehouse");
-		return
+	if playerFaction == nil then
+		logger(player:getUsername() .. " trying to capture a safehouse without faction");
+		return;
 	end
-	safehouse:setOwner(playerFaction:getOwner());
-	--Updating new safehouse
-	FactionsMain.syncFactionMembers(safehouse, player);
-	safehouse:syncSafehouse();
-	-- Send the client he needs to sync too
+
+	-- IMPORTANT
+	-- don't work... in b42mp patch, maybe when official releases...
+	-- sendSafehouseClaim(square, player, player:getUsername());
+
+	local safehouse = SafeHouse.getSafeHouse(square);
+
+	if safehouse == nil then
+		logger(player:getUsername() .. " trying to sync any empty safehouse");
+		return;
+	end
+
+	if not FactionsMain.isSafehouseFromTeam(square, player) then
+		logger(player:getUsername() .. " trying to capture any enemy safehouse as empty safehouse");
+		return;
+	end
+
 	sendServerCommand(player, "ServerSafehouse", "syncCapturedSafehouse", { validation = true });
+
 	logger(player:getUsername() ..
 		" captured any empty safehouse in X: " .. safehouse:getX() .. " Y: " .. safehouse:getY());
 end
@@ -208,7 +221,8 @@ end
 function FactionsCommands.captureSafehouse(module, command, player, args)
 	if not factions.checkIfCaptureIsEnabled() then
 		logger(player:getUsername() .. " is trying to capture a safehouse before the invasion time");
-		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false, reason = "nottime" });
+		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation",
+			{ validation = false, reason = "nottime" });
 		return
 	end
 	local playerCapturing = player:getUsername();
@@ -217,7 +231,8 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 	local playerLocation = player:getSquare();
 	local safehouseBeenCaptured = SafeHouse.getSafeHouse(playerLocation);
 	if safehouseBeenCaptured == nil then
-		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false, reason = "cheat" });
+		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation",
+			{ validation = false, reason = "cheat" });
 		logger(player:getUsername() .. " is trying to capture any invalid safehouse");
 		return;
 	end
@@ -230,14 +245,16 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 
 	-- Check if player doesnt have factions
 	if playerFaction == nil then
-		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false, reason = "cheat" });
+		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation",
+			{ validation = false, reason = "cheat" });
 		logger(player:getUsername() .. " is trying to capture any safehouse without faction, probably trying to cheat");
 		return;
 	end
 
 	-- Check if the faction has sufficient points for capture
 	if factionPoints - safehouseCost < 0 then
-		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false, reason = "nopoints" });
+		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation",
+			{ validation = false, reason = "nopoints" });
 		logger(player:getUsername() ..
 			" is trying to capture a safehouse but he doesn't have sufficient points: " ..
 			factionPoints .. " : " .. safehouseCost);
@@ -374,7 +391,8 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 	else
 		--Contact player saying that is not time yet
 		logger(playerCapturing .. " trying to capture but hes already tried captured a safehouse this time");
-		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation", { validation = false, reason = "nottime" });
+		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation",
+			{ validation = false, reason = "nottime" });
 	end
 end
 

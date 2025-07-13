@@ -173,33 +173,63 @@ end
 
 -- Check if is spawnpoint
 FactionsMain.isSpawnPoint = function(square)
-	if square then
-		local status, regions = pcall(getServerSpawnRegions);
-		if status and regions then
-			for k1 = 1, #regions do
-				for _, points in pairs(regions[k1].points) do
-					for _, point in pairs(points) do
-						local playerIsInSafeHouse = getCell():getGridSquare(
-							point.posX:doubleValue() + point.worldX:doubleValue() * 300.0,
-							point.posY:doubleValue() + point.worldY:doubleValue() * 300.0, 0.0);
-						if playerIsInSafeHouse then
-							local building = playerIsInSafeHouse:getBuilding();
-							if building then
-								local def = building:getDef();
-								if square:getX() >= def:getX() and square:getX() < def:getX2() and square:getY() >= def:getY() and square:getY() < def:getY2() then
-									return true;
-								end
+	if not square then
+		print("[DEBUG] square is nil.")
+		return false
+	end
+
+	local status, regions = pcall(getServerSpawnRegions)
+	if not status or not regions then
+		print("[ERROR] getServerSpawnRegions() failed or returned nil. Are you in singleplayer?")
+		logger("[ERROR] getServerSpawnRegions() failed or returned nil. Are you in singleplayer?")
+		return false
+	end
+
+	for regionIndex, region in ipairs(regions) do
+		if not region.points then
+			print("[WARNING] region.points is nil for region index:", regionIndex)
+		else
+			for pointIndex, point in ipairs(region.points) do
+				if not (point.posX and point.posY and point.worldX and point.worldY) then
+					print(string.format(
+						"[ERROR] Invalid point structure at region %d, point %d. point = %s",
+						regionIndex, pointIndex, tostring(point)
+					))
+				else
+					local gx = point.posX:doubleValue() + point.worldX:doubleValue() * 300.0
+					local gy = point.posY:doubleValue() + point.worldY:doubleValue() * 300.0
+					local gridSquare = getCell():getGridSquare(gx, gy, 0)
+
+					if not gridSquare then
+						print(string.format(
+							"[WARNING] getGridSquare returned nil at x=%d y=%d",
+							gx, gy
+						))
+					else
+						local building = gridSquare:getBuilding()
+						if not building then
+							print(string.format(
+								"[INFO] No building found at x=%d y=%d", gx, gy
+							))
+						else
+							local def = building:getDef()
+							if square:getX() >= def:getX() and square:getX() < def:getX2()
+								and square:getY() >= def:getY() and square:getY() < def:getY2() then
+								print(string.format(
+									"[DEBUG] Square is inside building at spawn region %d, point %d",
+									regionIndex, pointIndex
+								))
+								return true
 							end
 						end
 					end
 				end
 			end
-		else
-			logger("[ERROR] getServerSpawnRegions() returned nil, uhh you are in singleplayer?");
 		end
 	end
 
-	return false;
+	print("[DEBUG] Square is not inside any spawn region.")
+	return false
 end
 
 -- Get floor count
@@ -332,27 +362,28 @@ FactionsMain.canBeCaptured = function(square)
 end
 
 -- Returns true if is your team, and false if not, also nil if not exist
-FactionsMain.getSafehouseTeam = function(square)
+FactionsMain.isSafehouseFromTeam = function(square, player)
 	local safehouse = SafeHouse.getSafeHouse(square);
 
 	if not safehouse then
 		return nil
 	end
 
-	local player = getPlayer();
 	local owner = safehouse:getOwner();
 
+	-- Verify if the player is thhe owner
 	if player:getUsername() == owner then
-		return true
+		return true;
 	end
 
-	local player_faction = FactionsMain.getFaction(player:getUsername())
+	-- Getting the faction owner username
 	local owner_faction = FactionsMain.getFaction(safehouse:getOwner())
 
-	if player_faction == owner_faction then
-		return true
+	-- If the faction owner is the same as safehouse owner
+	if owner == owner_faction then
+		return true;
 	else
-		return false
+		return false;
 	end
 end
 
@@ -407,7 +438,8 @@ if isClient() then
 	local function OnServerCommand(module, command, arguments)
 		--Receive Points from Server
 		if module == "ServerFactionPoints" and command == "receivePoints" then
-			FactionsMain.Points = arguments.points
+			--FactionsMain.Points = arguments.points
+			FactionsMain.Points = 15
 		end
 		-- Receives the new sandbox options
 		if module == "ServerSafehouse" and command == "updateSandbox" then

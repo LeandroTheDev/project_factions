@@ -32,7 +32,7 @@ function savePlayerLevels(player)
     Respawn.Levels = {};
     local perks = PerkFactory.PerkList;
 
-    for i = 0, perks:size()-1 do
+    for i = 0, perks:size() - 1 do
         local perk = perks:get(i);
 
         Respawn.Levels[perk] = player:getPerkLevel(perk);
@@ -55,7 +55,7 @@ function savePlayerBooks(player)
     Respawn.SkillBooks = {};
     local items = getAllItems();
 
-    for i = 0, items:size()-1 do
+    for i = 0, items:size() - 1 do
         if (items:get(i):getTypeString() == "Literature") then
             local item = items:get(i):InstanceItem(items:get(i):getName());
             if (item ~= nil and item:IsLiterature() and item:getNumberOfPages() > 0) then
@@ -68,20 +68,20 @@ end
 function savePlayerMedia(player)
     Respawn.Media = {};
 
-	for _, media in pairs(RecMedia) do
+    for _, media in pairs(RecMedia) do
         for _, line in pairs(media.lines or {}) do
             if (player:isKnownMediaLine(line.text)) then
                 table.insert(Respawn.Media, line.text);
             end;
         end
-	end
+    end
 end
 
 function savePlayerMultipliers(player)
     Respawn.Multipliers = {};
     local perks = PerkFactory.PerkList;
 
-    for i = 0, perks:size()-1 do
+    for i = 0, perks:size() - 1 do
         local perk = perks:get(i);
         Respawn.Multipliers[perk] = player:getXp():getMultiplier(perk);
     end
@@ -91,19 +91,19 @@ function savePlayerInventory(player)
     Respawn.Hotbar = player:getModData().hotbar;
     local WornItems = player:getWornItems();
     Respawn.WornItems = {};
-    
-    for i = 0, WornItems:size()-1 do
+
+    for i = 0, WornItems:size() - 1 do
         Respawn.WornItems[i] = WornItems:get(i);
     end
 
     local AttachedItems = player:getAttachedItems();
     Respawn.AttachedItems = {};
-    
-    for i = 0, AttachedItems:size()-1 do
+
+    for i = 0, AttachedItems:size() - 1 do
         Respawn.AttachedItems[i] = AttachedItems:get(i);
     end
 
-	Respawn.Items = player:getInventory():getItems():clone();
+    Respawn.Items = player:getInventory():getItems():clone();
 end
 
 function saveRespawnLocation(player)
@@ -163,7 +163,7 @@ function savePlayerFitness(player)
 
     local parts = player:getBodyDamage():getBodyParts();
 
-    for i = 0, parts:size()-1 do
+    for i = 0, parts:size() - 1 do
         Respawn.Fitness.Stiffness[i] = parts:get(i):getStiffness();
     end
 end
@@ -172,7 +172,6 @@ function savePlayerStats(player)
     Respawn.Stats = {};
     Respawn.Stats.Anger = player:getStats():getAnger();
     Respawn.Stats.Boredom = player:getStats():getBoredom();
-    Respawn.Stats.Idleboredom = player:getStats():getIdleboredom();
     Respawn.Stats.Morale = player:getStats():getMorale();
     Respawn.Stats.Fatigue = player:getStats():getFatigue();
     Respawn.Stats.Fitness = player:getStats():getFitness();
@@ -187,7 +186,7 @@ end
 function savePlayerFavoriteRecipes(player)
     local pModData = player:getModData();
     Respawn.FavoriteRecipes = {}
-    
+
     for k, v in pairs(pModData) do
         if (k:sub(0, 16) == "craftingFavorite") then
             Respawn.FavoriteRecipes[k] = v;
@@ -231,7 +230,7 @@ function loadPlayerLevels(player)
 
         while (perkLevel > 0) do
             player:LoseLevel(perk);
-            perkLevel = perkLevel-1;
+            perkLevel = perkLevel - 1;
         end
 
         player:getXp():setXPToLevel(perk, 0);
@@ -253,7 +252,7 @@ end
 function loadPlayerTraits(player)
     player:getTraits():clear();
 
-    for i = 0, Respawn.Traits:size()-1 do
+    for i = 0, Respawn.Traits:size() - 1 do
         player:getTraits():add(Respawn.Traits:get(i));
     end
 end
@@ -271,14 +270,14 @@ function loadPlayerMultipliers(player)
 end
 
 function loadPlayerRecipes(player)
-    for i = 0, Respawn.Recipes:size()-1 do
+    for i = 0, Respawn.Recipes:size() - 1 do
         player:learnRecipe(Respawn.Recipes:get(i));
     end
 end
 
 function loadPlayerFavoriteRecipes(player)
     local pModData = player:getModData();
-    
+
     for k, v in pairs(Respawn.FavoriteRecipes) do
         pModData[k] = v;
     end
@@ -296,13 +295,13 @@ function loadPlayerInventory(player)
     player:setUnlimitedCarry(true);
 
     --Assign new player's container to old items
-    for i = 0, Respawn.Items:size()-1 do
+    for i = 0, Respawn.Items:size() - 1 do
         Respawn.Items:get(i):setEquipParent(player);
         Respawn.Items:get(i):setContainer(player:getInventory());
     end
 
     --Set items
-	player:getInventory():setItems(Respawn.Items);
+    player:getInventory():setItems(Respawn.Items);
 
     --Set back worn items, clothes, belts, etc
     for _, WornItem in pairs(Respawn.WornItems or {}) do
@@ -325,9 +324,9 @@ function loadPlayerInventory(player)
     player:setUnlimitedCarry(isUnlimitedCarry);
     --player:update(); --I have no clue if this does anything
 
-	if (isClient()) then
-		triggerEvent("OnClothingUpdated", player);
-	end
+    if (isClient()) then
+        triggerEvent("OnClothingUpdated", player);
+    end
 end
 
 function loadRespawnLocation(player)
@@ -382,7 +381,6 @@ end
 function loadPlayerStats(player)
     player:getStats():setAnger(Respawn.Stats.Anger);
     player:getStats():setBoredom(Respawn.Stats.Boredom);
-    player:getStats():setIdleboredom(Respawn.Stats.Idleboredom);
     player:getStats():setMorale(Respawn.Stats.Morale);
     player:getStats():setFatigue(Respawn.Stats.Fatigue);
     player:getStats():setFitness(Respawn.Stats.Fitness);
@@ -404,7 +402,7 @@ function clearInventory(player)
     local WornItems = {};
 
     --Remove item while looping will cause an error
-    for i = 0, player:getWornItems():size()-1 do
+    for i = 0, player:getWornItems():size() - 1 do
         WornItems[i] = player:getWornItems():get(i):getItem();
     end
 
@@ -413,35 +411,35 @@ function clearInventory(player)
         player:removeWornItem(WornItem);
     end
 
-	player:getWornItems():clear(); --Worn items, like clothes and belt
+    player:getWornItems():clear();     --Worn items, like clothes and belt
     player:getAttachedItems():clear(); --Attched items, like attached to belt
     player:setPrimaryHandItem(nil);
     player:setSecondaryHandItem(nil);
 
-	local playerInventory = player:getInventory();
-	playerInventory:getItems():clear();
-	playerInventory:removeAllItems();
-	player:setInventory(playerInventory);
+    local playerInventory = player:getInventory();
+    playerInventory:getItems():clear();
+    playerInventory:removeAllItems();
+    player:setInventory(playerInventory);
     player:setUnlimitedCarry(isUnlimitedCarry);
-	--player:update(); --I have no clue if this does anything
+    --player:update(); --I have no clue if this does anything
 
-	if (isClient()) then
-		triggerEvent("OnClothingUpdated", player);
-	end
+    if (isClient()) then
+        triggerEvent("OnClothingUpdated", player);
+    end
 end
 
 function clearBandages(player)
     local items = player:getWornItems();
     local parts = player:getBodyDamage():getBodyParts();
 
-    for i = items:size()-1, 0, -1 do
+    for i = items:size() - 1, 0, -1 do
         if (items:get(i):getLocation() == "Bandage") then
             player:getInventory():Remove(items:get(i):getItem());
             items:remove(items:get(i):getItem());
         end
     end
 
-    for i = 0, parts:size()-1 do
+    for i = 0, parts:size() - 1 do
         parts:get(i):setBandaged(false, 0);
     end
 
@@ -451,7 +449,7 @@ end
 function clearWounds(player)
     local parts = player:getBodyDamage():getBodyParts();
 
-    for i = 0, parts:size()-1 do
+    for i = 0, parts:size() - 1 do
         parts:get(i):SetBitten(true);
         parts:get(i):setScratched(true, true);
         parts:get(i):setCut(true, true);
@@ -459,7 +457,7 @@ function clearWounds(player)
 
     player:getBodyDamage():setBodyPartsLastState();
 
-    for i = 0, parts:size()-1 do
+    for i = 0, parts:size() - 1 do
         parts:get(i):SetBitten(false);
         parts:get(i):setScratched(false, true);
         parts:get(i):setScratchTime(0);
@@ -475,16 +473,16 @@ end
 
 function setPlayerRespawn(player)
     local pModData = player:getModData();
-	pModData.RespawnX = player:getX();
-	pModData.RespawnY = player:getY();
-	pModData.RespawnZ = player:getZ();
+    pModData.RespawnX = player:getX();
+    pModData.RespawnY = player:getY();
+    pModData.RespawnZ = player:getZ();
 end
 
 function removePlayerRespawn(player)
     local pModData = player:getModData();
-	pModData.RespawnX = nil;
-	pModData.RespawnY = nil;
-	pModData.RespawnZ = nil;
+    pModData.RespawnX = nil;
+    pModData.RespawnY = nil;
+    pModData.RespawnZ = nil;
 end
 
 function getPlayerRespawn(player)
@@ -498,8 +496,6 @@ function setRespawnRegion(player, region)
 
     if (spawn) then
         local randSpawnPoint = spawn[(ZombRand(#spawn) + 1)];
-        getWorld():setLuaSpawnCellX(randSpawnPoint.worldX);
-        getWorld():setLuaSpawnCellY(randSpawnPoint.worldY);
         getWorld():setLuaPosX(randSpawnPoint.posX);
         getWorld():setLuaPosY(randSpawnPoint.posY);
         getWorld():setLuaPosZ(randSpawnPoint.posZ or 0);
@@ -525,9 +521,9 @@ end
 
 function setHealth(player, health)
     local parts = player:getBodyDamage():getBodyParts();
-    local health = 80+(20*health/100);
+    local health = 80 + (20 * health / 100);
 
-    for i = 0, parts:size()-1 do
+    for i = 0, parts:size() - 1 do
         parts:get(i):SetHealth(health);
     end
 end

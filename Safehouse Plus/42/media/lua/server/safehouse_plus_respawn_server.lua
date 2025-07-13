@@ -113,24 +113,26 @@ end
 
 -- Check if player is enemy from that safehouse
 local function isEnemy(safehouse, player)
-    if not safehouse then
-        return true
-    end
+	if not safehouse then
+		return false;
+	end
 
-    local owner = safehouse:getOwner();
+	local owner = safehouse:getOwner();
 
-    if player:getUsername() == owner then
-        return false
-    end
+	-- Verify if the player is thhe owner
+	if player:getUsername() == owner then
+		return true;
+	end
 
-    local player_faction = getFaction(player:getUsername())
-    local owner_faction = getFaction(safehouse:getOwner())
+	-- Getting the faction owner username
+	local owner_faction = FactionsMain.getFaction(safehouse:getOwner())
 
-    if player_faction == owner_faction then
-        return false
-    else
-        return true
-    end
+	-- If the faction owner is the same as safehouse owner
+	if owner == owner_faction then
+		return true;
+	else
+		return false;
+	end
 end
 
 -- Verify if player can spawn in the bed
