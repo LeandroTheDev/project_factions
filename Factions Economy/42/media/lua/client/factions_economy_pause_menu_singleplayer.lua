@@ -1,4 +1,5 @@
----@diagnostic disable: undefined-global
+---@diagnostic disable: undefined-global, duplicate-set-field
+if not isClient() and not isServer() then return end;
 local ServerShopUI = require "factions_economy_shop_ui"
 local ServerTradeUI = require "factions_economy_trade_ui"
 

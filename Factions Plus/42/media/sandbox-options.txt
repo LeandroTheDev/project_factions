@@ -232,7 +232,7 @@ option FactionsPlus.HordeNightSpecialRareZombiesChance
 option FactionsPlus.SpecialHordeRareZombies
 {
 	type = string,
-	default = KATTAJ1_Army_Black/KATTAJ1_Army_Green/KATTAJ1_Army_Desert/KATTAJ1_Army_White/Stalker/Nomad/OminousNomad/Prepper/Headhunter/DeadlyHeadhunter/Amazona,
+	default = FiremanFullSuit/Police/PoliceState/Ghillie/PrisonGuard/PoliceRiot/ArmyCamoDesert/ArmyCamoGreen/ArmyServiceUniform,
 	page = FactionsPlus,
 	translation = FactionsPlus_SpecialHordeRareZombies,
 }

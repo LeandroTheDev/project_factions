@@ -9,8 +9,7 @@ require "ISUI/ISButton"
 FactionsGUI = ISPanel:derive("FactionsGUI");
 FactionsGUI.btnText = { getText("UI_Text_SafehouseClaim"), getText("UI_Text_SafehouseCapture"),
 	getText("UI_Text_SafehouseView") }
---FactionsGUI.captureTime = 50000; DEBUG
-FactionsGUI.captureTime = 5000;
+FactionsGUI.captureTime = 50000;
 FactionsGUI.updateTime = 500;
 FactionsGUI.minimized = true;
 FactionsGUI.finishedCapture = false;
@@ -593,7 +592,6 @@ local function OnServerCommand(module, command, arguments)
 	if module == "ServerSafehouse" and command == "syncCapturedOwnerSafehouse" then
 		local safehouse = SafeHouse.getSafeHouse(arguments.safehouseId);
 		if safehouse then
-			print("SAFEHOUSE UPDATED TO NEW OWNER: " .. arguments.owner);
 			safehouse:setOwner(arguments.owner);
 
 			getSoundManager():PlaySound("baseCaptureFinish", false, 1.0);
