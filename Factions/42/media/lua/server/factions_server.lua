@@ -211,7 +211,8 @@ function FactionsCommands.captureEmptySafehouse(module, command, player, args)
 		return;
 	end
 
-	sendServerCommand(player, "ServerSafehouse", "syncCapturedSafehouse", { validation = true });
+	-- Everthing is ok, we ask the player to sync the safehouse with the team
+	sendServerCommand(player, "ServerSafehouse", "syncCapturedSafehouse", { safehouseId = safehouse:getOnlineID() });
 
 	logger(player:getUsername() ..
 		" captured any empty safehouse in X: " .. safehouse:getX() .. " Y: " .. safehouse:getY());
@@ -252,14 +253,15 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 	end
 
 	-- Check if the faction has sufficient points for capture
-	if factionPoints - safehouseCost < 0 then
-		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation",
-			{ validation = false, reason = "nopoints" });
-		logger(player:getUsername() ..
-			" is trying to capture a safehouse but he doesn't have sufficient points: " ..
-			factionPoints .. " : " .. safehouseCost);
-		return;
-	end
+	-- Debug
+	-- if factionPoints - safehouseCost < 0 then
+	-- 	sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation",
+	-- 		{ validation = false, reason = "nopoints" });
+	-- 	logger(player:getUsername() ..
+	-- 		" is trying to capture a safehouse but he doesn't have sufficient points: " ..
+	-- 		factionPoints .. " : " .. safehouseCost);
+	-- 	return;
+	-- end
 
 	local safehouseBeenCaptureOwner = safehouseBeenCaptured:getOwner();
 	--Verify if tables exist
@@ -367,6 +369,7 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 				end
 			end
 		end
+
 		-- Alert capturers that hes are capturing
 		local playersFaction = playerFaction:getPlayers();
 		for _, playerUsername in ipairs(playersFaction) do
@@ -423,12 +426,58 @@ function FactionsCommands.onCaptureSafehouse(module, command, player, args)
 	local timeCapturePassed = os.time() -
 		ServerSafehouseData["SafehouseCaptureTimer"][safehouseLocation.X .. safehouseLocation.Y]
 
+	-- DEBUG
 	-- Limiar error
-	if timeCapturePassed > 110 or timeCapturePassed < 90 then
-		logger(player:getUsername() .. " tried to capture a safehouse but the timer doesnt match: " .. timeCapturePassed);
-		sendServerCommand(player, "ServerSafehouse", "safehouseCaptured", { validation = false });
-		return
+	-- if timeCapturePassed > 110 or timeCapturePassed < 90 then
+	-- 	logger(player:getUsername() .. " tried to capture a safehouse but the timer doesnt match: " .. timeCapturePassed);
+	-- 	sendServerCommand(player, "ServerSafehouse", "safehouseCaptured", { validation = false });
+	-- 	return
+	-- end
+
+	-- Alert enemies that the safehouse has been captured
+	local enemyPlayers = safehouseBeenCaptured:getPlayers();
+	for i = enemyPlayers:size() - 1, 0, -1 do
+		-- Get all online players
+		local onlinePlayers = getOnlinePlayers();
+		-- Swipe it
+		for j = 1, onlinePlayers:size() do
+			-- Get the actual player
+			local selectedPlayer = onlinePlayers:get(j - 1)
+			-- Check if safehouse player is the same as the swiped player
+			if selectedPlayer:getUsername() == enemyPlayers:get(i) then
+				logger("Requesting Enemy " .. selectedPlayer:getUsername() .. " to update safehouse")
+
+				-- Alert the player that the safehouse has been lost
+				sendServerCommand(selectedPlayer, "ServerSafehouse", "alert",
+					{
+						safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+						type = 2
+					});
+
+				sendServerCommand(selectedPlayer, "ServerSafehouse", "syncCapturedOwnerSafehouse",
+					{ safehouseId = safehouseBeenCaptured:getOnlineID(), owner = playerFaction:getOwner() });
+				break;
+			end
+		end
 	end
+	local enemySafehouseOwner = getPlayerFromUsername(safehouseBeenCaptured:getOwner());
+	if enemySafehouseOwner then
+		logger("Requesting Enemy Owner " .. enemySafehouseOwner:getUsername() .. " to update safehouse")
+
+		-- Alert the player that the safehouse has been lost
+		sendServerCommand(enemySafehouseOwner, "ServerSafehouse", "alert",
+			{
+				safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+				type = 2
+			});
+
+		sendServerCommand(enemySafehouseOwner, "ServerSafehouse", "syncCapturedOwnerSafehouse",
+			{ safehouseId = safehouseBeenCaptured:getOnlineID(), owner = playerFaction:getOwner() });
+	end
+
+	safehouseBeenCaptured:setOwner(playerFaction:getOwner()); -- Change owner to the faction owner
+	FactionsMain.safehouseRemoveMembers(safehouseBeenCaptured); -- Remove all users from safehouse
+	FactionsMain.syncFactionMembers(safehouseBeenCaptured);  -- Sync faction members to the safehouse
 
 	-- Send a message to the player started the capture
 	-- to finalize it, sad but its necessary
@@ -441,27 +490,6 @@ function FactionsCommands.onCaptureSafehouse(module, command, player, args)
 			owner = playerFaction:getOwner(),
 		});
 
-	-- Alert enemies that the safehouse has been captured
-	for i = safehouseBeenCaptured:getPlayers():size() - 1, 0, -1 do
-		-- Get all online players
-		local onlinePlayers = getOnlinePlayers();
-		-- Swipe it
-		for j = 1, onlinePlayers:size() do
-			-- Get the actual player
-			local selectedPlayer = onlinePlayers:get(j - 1)
-			-- Check if safehouse player is the same as the swiped player
-			if selectedPlayer:getUsername() == safehouseBeenCaptured:getPlayers():get(i) then
-				-- Alert the player that the safehouse has been lost
-				sendServerCommand(selectedPlayer, "ServerSafehouse", "alert",
-					{
-						safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
-						type = 2
-					});
-				break;
-			end
-		end
-	end
-
 	-- Get the faction usernames
 	local playersFaction = playerFaction:getPlayers();
 	for _, playerUsername in ipairs(playersFaction) do
@@ -473,44 +501,47 @@ function FactionsCommands.onCaptureSafehouse(module, command, player, args)
 			local selectedPlayer = onlinePlayers:get(j - 1)
 			-- Check if safehouse player is the same as the swiped player
 			if selectedPlayer:getUsername() == playerUsername then
+				logger("Requesting Ally " .. selectedPlayer:getUsername() .. " to update safehouse")
+
 				-- Alert the player that the safehouse has been captured
 				sendServerCommand(selectedPlayer, "ServerSafehouse", "alert",
 					{
 						safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
 						type = 4
 					});
-				--Finish
-				sendServerCommand(selectedPlayer, "ServerSafehouse", "safehouseCaptured",
-					{
-						X = safehouseBeenCaptured:getX(),
-						Y = safehouseBeenCaptured:getY(),
-						W = safehouseBeenCaptured:getW(),
-						H = safehouseBeenCaptured:getH(),
-						owner = playerFaction:getOwner(),
-					});
+
+				-- Update the safehouse owner
+				sendServerCommand(selectedPlayer, "ServerSafehouse", "syncCapturedOwnerSafehouse",
+					{ safehouseId = safehouseBeenCaptured:getOnlineID(), owner = playerFaction:getOwner() });
+
+				-- Tell the owner to refresh the members
+				if selectedPlayer:getUsername() == playerFaction:getOwner() then
+					sendServerCommand(selectedPlayer, "ServerSafehouse", "safehouseCaptured",
+						{
+							X = safehouseBeenCaptured:getX(),
+							Y = safehouseBeenCaptured:getY(),
+							W = safehouseBeenCaptured:getW(),
+							H = safehouseBeenCaptured:getH(),
+							owner = playerFaction:getOwner(),
+						});
+				end
 				break;
 			end
 		end
 	end
+	local friendFactionOwner = getPlayerFromUsername(playerFaction:getOwner());
+	if friendFactionOwner then
+		logger("Requesting Faction Owner " .. friendFactionOwner:getUsername() .. " to update safehouse")
 
-	-- Owner doesnt belong to playerFactions players so we need to send a message
-	-- to him manually
-	-- Get all online players
-	local onlinePlayers = getOnlinePlayers();
-	-- Swipe it
-	for i = 1, onlinePlayers:size() do
-		local selectedPlayer = onlinePlayers:get(i - 1)
-		if selectedPlayer:getUsername() == playerFaction:getOwner() then
-			--Finish
-			sendServerCommand(selectedPlayer, "ServerSafehouse", "safehouseCaptured",
-				{
-					X = safehouseBeenCaptured:getX(),
-					Y = safehouseBeenCaptured:getY(),
-					W = safehouseBeenCaptured:getW(),
-					H = safehouseBeenCaptured:getH(),
-					owner = playerFaction:getOwner(),
-				});
-		end
+		-- Alert the player that the safehouse has been lost
+		sendServerCommand(friendFactionOwner, "ServerSafehouse", "alert",
+			{
+				safehouseName = "X: " .. safehouseLocation.X .. " Y: " .. safehouseLocation.Y,
+				type = 2
+			});
+
+		sendServerCommand(friendFactionOwner, "ServerSafehouse", "syncCapturedOwnerSafehouse",
+			{ safehouseId = safehouseBeenCaptured:getOnlineID(), owner = playerFaction:getOwner() });
 	end
 
 	-- Server Log

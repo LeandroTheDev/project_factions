@@ -338,29 +338,6 @@ FactionsMain.isResidential = function(square)
 	return residential;
 end
 
--- Check if can be captured, return "valid" if is valid, and return a Language text is not
-FactionsMain.canBeCaptured = function(square)
-	-- Check if enemies is on the house or zombies
-	if FactionsMain.isSomeoneInside(square, faction) then
-		return getText("IGUI_Safehouse_SomeoneInside");
-	end
-
-	-- Checking if is spawnpoint
-	if FactionsMain.isSpawnPoint(square) then
-		return getText("IGUI_Safehouse_IsSpawnPoint");
-	end
-
-	-- Check if residential is allowed
-	local flag = getServerOptions():getBoolean("SafehouseAllowNonResidential");
-	if not flag then
-		if not FactionsMain.isResidential(square) then
-			return getText("IGUI_Safehouse_NotHouse");
-		end
-	end
-
-	return "valid";
-end
-
 -- Returns true if is your team, and false if not, also nil if not exist
 FactionsMain.isSafehouseFromTeam = function(square, player)
 	local safehouse = SafeHouse.getSafeHouse(square);
@@ -388,42 +365,34 @@ FactionsMain.isSafehouseFromTeam = function(square, player)
 end
 
 -- Sync all safehouse with the members of factions
-FactionsMain.syncFactionMembers = function(safehouse, player)
-	-- Function to send invitiations to the safehouse for all members of the faction
-	local function sendInvites(faction, username)
-		for j = 0, faction:getPlayers():size() - 1 do
-			local selectedPlayer = faction:getPlayers():get(j);
-			if selectedPlayer ~= username and not safehouse:playerAllowed(selectedPlayer) then
-				if getPlayerFromUsername(selectedPlayer) then
-					sendSafehouseInvite(safehouse, player, selectedPlayer);
-				end
+FactionsMain.syncFactionMembers = function(safehouse)
+	if not safehouse then return end;
+
+	local ownerPlayer = getPlayerFromUsername(safehouse:getOwner());
+	if not ownerPlayer then return end;
+
+	local faction = FactionsMain.getFaction(safehouse:getOwner());
+
+	-- Check if the faction exist
+	if not faction then return end;
+
+	for j = 0, faction:getPlayers():size() - 1 do
+		local selectedPlayer = faction:getPlayers():get(j);
+		if selectedPlayer and not safehouse:playerAllowed(selectedPlayer) then
+			if getPlayerFromUsername(selectedPlayer) then
+				sendSafehouseInvite(safehouse, ownerPlayer, selectedPlayer);
 			end
 		end
 	end
-	local username = player:getUsername();
-	local faction = FactionsMain.getFaction(username);
-	-- Check if the faction exist
-	if faction then
-		-- Check if safehouse exist
-		if safehouse then
-			-- Check if you are the owner of the safehouse
-			if safehouse:getOwner() == username then
-				-- Send invites to the players of your factions
-				sendInvites(faction, username)
-			end
-		else
-			-- Get all safehouses
-			local safehouses = SafeHouse.getSafehouseList();
-			-- Swipe all safehouses
-			for i = safehouses:size() - 1, 0, -1 do
-				-- Get by index
-				safehouse = safehouses:get(i)
-				-- Check if you are the owner
-				if safehouse:getOwner() == username then
-					-- Send invites to the players of your factions
-					sendInvites(faction, username);
-				end
-			end
+end
+
+-- Remove all members of safehouse
+FactionsMain.safehouseRemoveMembers = function(safehouse)
+	if safehouse then
+		local players = safehouse:getPlayers();
+		for i = 0, players:size() - 1 do
+			local playerName = players:get(i);
+			safehouse:removePlayer(playerName);
 		end
 	end
 end
@@ -439,7 +408,7 @@ if isClient() then
 		--Receive Points from Server
 		if module == "ServerFactionPoints" and command == "receivePoints" then
 			--FactionsMain.Points = arguments.points
-			FactionsMain.Points = 15
+			FactionsMain.Points = 15 -- DEBUG
 		end
 		-- Receives the new sandbox options
 		if module == "ServerSafehouse" and command == "updateSandbox" then

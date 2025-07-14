@@ -155,32 +155,35 @@ function FactionsGUI.OnSafehousesChanged()
     FactionsMain.unloadUI();
 end
 
--- Remove the default event to update safehouses
+-- Remove the default event to receive safehouse invite
 Events.OnSafehousesChanged.Remove(ISSafehouseUI.OnSafehousesChanged)
 -- Add your event
 Events.OnSafehousesChanged.Add(FactionsGUI.OnSafehousesChanged)
 
 -- Accept invites only from faction members (accept invitations to multiple safehouses)
 FactionsGUI.ReceiveSafehouseInvite = function(safehouse, host)
+    -- Is from the same faction, so he don't need any message
+    if FactionsMain.getFaction(getPlayer():getUsername()) == FactionsMain.getFaction(host) then
+        acceptSafehouseInvite(safehouse, host, getPlayer(), true);
+        print("Joined safehouse - " .. safehouse:getTitle());
+        return;
+    end
+
     if ISSafehouseUI.inviteDialogs[host] then
         if ISSafehouseUI.inviteDialogs[host]:isReallyVisible() then return end
         ISSafehouseUI.inviteDialogs[host] = nil
     end
 
-    if FactionsMain.getFaction(getPlayer():getUsername()) == FactionsMain.getFaction(host) then
-        safehouse:addPlayer(getPlayer():getUsername());
-        acceptSafehouseInvite(safehouse, host)
-        print("Joined safehouse - " .. safehouse:getTitle())
-    else
-        local modal = ISModalDialog:new(getCore():getScreenWidth() / 2 - 175, getCore():getScreenHeight() / 2 - 75, 350,
-            150, getText("IGUI_SafehouseUI_Invitation", host), true, nil, ISSafehouseUI.onAnswerSafehouseInvite);
-        modal:initialise()
-        modal:addToUIManager()
-        modal.safehouse = safehouse;
-        modal.host = host;
-        modal.moveWithMouse = true;
-        ISSafehouseUI.inviteDialogs[host] = modal
-    end
+
+    -- Another faction giving safehouse permission
+    local modal = ISModalDialog:new(getCore():getScreenWidth() / 2 - 175, getCore():getScreenHeight() / 2 - 75, 350,
+        150, getText("IGUI_SafehouseUI_Invitation", host), true, nil, ISSafehouseUI.onAnswerSafehouseInvite);
+    modal:initialise()
+    modal:addToUIManager()
+    modal.safehouse = safehouse;
+    modal.host = host;
+    modal.moveWithMouse = true;
+    ISSafehouseUI.inviteDialogs[host] = modal
 end
 
 -- Remove the default event for receiving safehouse invite
