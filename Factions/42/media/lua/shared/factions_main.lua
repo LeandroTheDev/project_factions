@@ -407,8 +407,7 @@ if isClient() then
 	local function OnServerCommand(module, command, arguments)
 		--Receive Points from Server
 		if module == "ServerFactionPoints" and command == "receivePoints" then
-			--FactionsMain.Points = arguments.points
-			FactionsMain.Points = 15 -- DEBUG
+			FactionsMain.Points = arguments.points
 		end
 		-- Receives the new sandbox options
 		if module == "ServerSafehouse" and command == "updateSandbox" then

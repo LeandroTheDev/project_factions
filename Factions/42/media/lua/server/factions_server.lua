@@ -253,15 +253,14 @@ function FactionsCommands.captureSafehouse(module, command, player, args)
 	end
 
 	-- Check if the faction has sufficient points for capture
-	-- Debug
-	-- if factionPoints - safehouseCost < 0 then
-	-- 	sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation",
-	-- 		{ validation = false, reason = "nopoints" });
-	-- 	logger(player:getUsername() ..
-	-- 		" is trying to capture a safehouse but he doesn't have sufficient points: " ..
-	-- 		factionPoints .. " : " .. safehouseCost);
-	-- 	return;
-	-- end
+	if factionPoints - safehouseCost < 0 then
+		sendServerCommand(player, "ServerSafehouse", "receiveCaptureConfirmation",
+			{ validation = false, reason = "nopoints" });
+		logger(player:getUsername() ..
+			" is trying to capture a safehouse but he doesn't have sufficient points: " ..
+			factionPoints .. " : " .. safehouseCost);
+		return;
+	end
 
 	local safehouseBeenCaptureOwner = safehouseBeenCaptured:getOwner();
 	--Verify if tables exist
@@ -426,13 +425,12 @@ function FactionsCommands.onCaptureSafehouse(module, command, player, args)
 	local timeCapturePassed = os.time() -
 		ServerSafehouseData["SafehouseCaptureTimer"][safehouseLocation.X .. safehouseLocation.Y]
 
-	-- DEBUG
 	-- Limiar error
-	-- if timeCapturePassed > 110 or timeCapturePassed < 90 then
-	-- 	logger(player:getUsername() .. " tried to capture a safehouse but the timer doesnt match: " .. timeCapturePassed);
-	-- 	sendServerCommand(player, "ServerSafehouse", "safehouseCaptured", { validation = false });
-	-- 	return
-	-- end
+	if timeCapturePassed > 110 or timeCapturePassed < 90 then
+		logger(player:getUsername() .. " tried to capture a safehouse but the timer doesnt match: " .. timeCapturePassed);
+		sendServerCommand(player, "ServerSafehouse", "safehouseCaptured", { validation = false });
+		return
+	end
 
 	-- Alert enemies that the safehouse has been captured
 	local enemyPlayers = safehouseBeenCaptured:getPlayers();
