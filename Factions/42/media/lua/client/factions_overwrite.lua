@@ -14,6 +14,21 @@ require "ui/factions"
 
 -- Override Functions
 
+-- Removing claim safehouse option
+local original_createMenuEntries = ISWorldObjectContextMenu.createMenuEntries
+ISWorldObjectContextMenu.createMenuEntries = function(fetch, context, player, playerObj, playerInv, pickedCorpse,
+                                                      worldobjects, x, y, test)
+    original_createMenuEntries(fetch, context, player, playerObj, playerInv, pickedCorpse, worldobjects, x, y, test)
+
+    local safehouseText = getText("ContextMenu_SafehouseClaim")
+    for i = #context.options, 1, -1 do
+        local option = context.options[i]
+        if option and option.name == safehouseText then
+            table.remove(context.options, i)
+        end
+    end
+end
+
 -- Default function to handle on click to create faction
 local onClickCreateFaction = ISCreateFactionUI.onClick;
 

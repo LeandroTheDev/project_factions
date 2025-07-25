@@ -46,6 +46,17 @@ option FactionsPlus.EnableReduceSeedDrop
 	translation = FactionsPlus_EnableReduceSeedDrop,
 }
 
+option FactionsPlus.ReduceSeedDropPercentage
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 0,
+
+    page = FactionsPlus,
+    translation = FactionsPlus_ReduceSeedDropPercentage,
+}
+
 option FactionsPlus.EnableReduceWaterNeed
 {
 	type = boolean,

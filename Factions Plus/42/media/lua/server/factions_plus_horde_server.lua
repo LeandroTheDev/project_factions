@@ -88,7 +88,8 @@ local function logger(log)
 	-- fileWriter:write("[" ..
 	-- 	time.tm_hour .. ":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "] " .. log .. "\n");
 	print("[" ..
-		time.tm_hour .. ":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "-FactionsPlus] " .. log .. "\n");
+		time.tm_hour ..
+		":" .. time.tm_min .. " " .. time.tm_mday .. "/" .. time.tm_mon .. "-FactionsPlus] " .. log .. "\n");
 end
 
 --#region lua utils
@@ -261,7 +262,10 @@ function SpawnOneZombie(player, isSingleHorde)
 			end
 		end
 		-- Adding the zombie
-		addZombiesInOutfit(zLocationX, zLocationY, 0, 1, outfit, 50, false, false, false, false, 1.5);
+		addZombiesInOutfit(zLocationX, zLocationY, 0, 1, outfit, 50, false, false, false, false, false, false, 100, false);
+
+		-- print("[Horde Server] Zombie spawned in: X:" .. zLocationX .. ", Z:" .. zLocationY);
+
 		-- Checking if is single horde spawn
 		if isSingleHorde then
 			-- Adding one more to the zombie table spawned

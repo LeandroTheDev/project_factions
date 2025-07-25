@@ -1,8 +1,5 @@
 ---@diagnostic disable: undefined-global, deprecated
 
---TODO
--- better singleplayer treatment
-
 -- Check if is not a single player game
 local isSingleplayer = false;
 if not (not isClient() and not isServer()) then
@@ -144,7 +141,7 @@ local function PointsTick()
             if not ServerShopData[username] then ServerShopData[username] = 0 end
             ServerShopData[username] = ServerShopData[username] + SandboxVars.FactionsEconomy.PointsPerTick
             logger(username ..
-                " ddreceived: " .. SandboxVars.FactionsEconomy.PointsPerTick .. " total: " .. ServerShopData[username]);
+                " received: " .. SandboxVars.FactionsEconomy.PointsPerTick .. " total: " .. ServerShopData[username]);
         end
     end
 end
