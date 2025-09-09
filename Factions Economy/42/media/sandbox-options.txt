@@ -1,16 +1,16 @@
 VERSION = 1,
 
-option FactionsEconomy.PointsFrequency
+option FactionsEconomy.CurrencyFrequency
 {
     type = enum,
     numValues = 4,
     default = 3,
 
     page = FactionsEconomy,
-    translation = FactionsEconomy_PointsFrequency
+    translation = FactionsEconomy_CurrencyFrequency
 }
 
-option FactionsEconomy.PointsPerTick
+option FactionsEconomy.CurrencyPerTick
 {
     type = integer,
     min = 0,
@@ -21,52 +21,96 @@ option FactionsEconomy.PointsPerTick
     translation = FactionsEconomy_PointsPerTick,
 }
 
-option FactionsEconomy.itemTable0
+option FactionsEconomy.SmallStackScrapValue
 {
-	type = string,
-    default = Base.Baseball/50/Base.Shovel/50,
-	page = FactionsEconomyLootBox,
-    translation = LootBox_itemTable0,
+    type = integer,
+    min = 0,
+    max = 2147483647,
+    default = 1,
+
+    page = FactionsEconomy,
+    translation = FactionsEconomy_SmallStackScrapValue,
 }
-option FactionsEconomy.itemTable1
+
+option FactionsEconomy.MediumStackScrapValue
 {
-	type = string,
-    default = Base.223Box/12/Base.308Box/12/Base.Bullets38Box/12/Base.Bullets44Box/12/Base.Bullets45Box/13/Base.556Box/13/Base.Bullets9mmBox/13/Base.ShotgunShellsBox/13,
-	page = FactionsEconomyLootBox,
-    translation = LootBox_itemTable1,
+    type = integer,
+    min = 0,
+    max = 2147483647,
+    default = 15,
+
+    page = FactionsEconomy,
+    translation = FactionsEconomy_MediumStackScrapValue,
 }
-option FactionsEconomy.itemTable2
+
+option FactionsEconomy.LargeStackScrapValue
 {
-	type = string,
-    default = Base.Baseball/50/Base.Shovel/50,
-	page = FactionsEconomyLootBox,
-    translation = LootBox_itemTable2,
+    type = integer,
+    min = 0,
+    max = 2147483647,
+    default = 200,
+
+    page = FactionsEconomy,
+    translation = FactionsEconomy_LargeStackScrapValue,
 }
-option FactionsEconomy.itemTable3
+
+option FactionsEconomy.VegetableValue
 {
-	type = string,
-    default = Base.Axe/5/Base.BallPeenHammer/5/Base.ClubHammer/5/Base.Crowbar/5/Base.Hammer/5/Base.HandAxe/5/Base.HandScythe/5/Base.PickAxe/5/Base.PickAxeHandle/5/Base.PipeWrench/5/Base.Screwdriver/5/Base.Sledgehammer/5/Base.Sledgehammer2/5/Base.SnowShovel/5/Base.AxeStone/5/Base.HammerStone/5/Base.WoodAxe/5/Base.WoodenMallet/5/Base.Wrench/5/Base.HandFork/5,
-	page = FactionsEconomyLootBox,
-    translation = LootBox_itemTable3,
+    type = integer,
+    min = 0,
+    max = 2147483647,
+    default = 10,
+
+    page = FactionsEconomy,
+    translation = FactionsEconomy_VegetableValue,
 }
-option FactionsEconomy.itemTable4
+
+option FactionsEconomy.LootBoxAmmo
 {
 	type = string,
-    default = Base.Pistol3/8/Base.DoubleBarrelShotgun/8/Base.Shotgun/8/Base.AssaultRifle2/8/Base.AssaultRifle/8/Base.Revolver_Short/8/Base.Revolver/8/Base.Pistol/8/Base.VarmintRifle/8/Base.HuntingRifle/7/Base.Revolver_Long/7/Base.DoubleBarrelShotgunSawnoff/7/Base.ShotgunSawnoff/7,
+    default = Base.223Box/12/Base.308Box/12/Base.Bullets38Box/12/Base.Bullets44Box/12/Base.Bullets45Box/13/Base.556Box/13/Base.Bullets9mmBox/13/Base.ShotgunShellsBox/13/,
 	page = FactionsEconomyLootBox,
-    translation = LootBox_itemTable4,
+    translation = LootBox_LootBoxAmmo,
 }
-option FactionsEconomy.itemTable5
+option FactionsEconomy.LootBoxClothes
 {
 	type = string,
-    default = Base.44Clip/14/Base.M14Clip/14/Base.556Clip/14/Base.45Clip/14/Base.9mmClip/14/Base.223Clip/15/Base.308Clip/15,
+    default = Base.Hat_BalaclavaFull/2/Base.BandanaTINT/2/Base.Hat_BaseballCap/2/Base.Hat_BaseballCapArmy/2/Base.Hat_BaseballCap_Police/2/Base.Hat_BaseballCap_Swat/2/Base.Hat_BaseballCap_Sheriff/2/Base.Belt2/2/Base.Hat_Beret/2/Base.Shoes_BlackBoots/2/Base.Shoes_RidingBoots/2/Base.Shoes_Wellies/2/Base.Vest_BulletCivilian/2/Base.Vest_BulletArmy/2/Base.Vest_BulletArmy/2/Base.Vest_BulletOliveDrab/2/Base.Vest_BulletPolice/2/Base.Vest_BulletSSWAT/2/Base.Bandeau_Burlap/2/Base.Shoes_BurlapWrap/2/Base.Gloves_BurlapWrap/2/Base.Hat_HeadSack_Burlap/2/Base.Hat_ShemaghFull_Burlap/2/Base.JacketLong_AngusCalfHide/2/Base.JacketLong_SimmentalCalfHide/2/Base.JacketLong_HolsteinCalfHide/2/Base.Jacket_AngusCalfHide/2/Base.Jacket_SimmentalCalfHide/2/Base.Jacket_HolsteinCalfHide/2/Base.Bag_ALICE_BeltSus_Camo/2/Base.Bag_ALICE_BeltSus_Green/2/Base.Bag_ALICE_BeltSus/2/Base.Bag_HikingBag/2/Base.Bag_ChestRig/2/Base.Bag_DuffelBag/2/Base.Base_GolfBag/2/Base.Bag_NormalHikingBag/2/Base.Bag_HydrationBackpack_Camo/2/Base.Bag_HydrationBackpack/2/Base.Bag_ALICEpack_DesertCamo/2/Base.Bag_ALICEpack_Army/2/Base.Bag_Satchel_Military/2/Base.Bag_Police/2/Base.Bag_SWAT/2/Base.Bag_Satchel/3/Base.Bag_SchoolBag/3/Base.Bag_Schoolbag_Kids/3/Base.Bag_CrudeLeatherBag/3/,
 	page = FactionsEconomyLootBox,
-    translation = LootBox_itemTable5,
+    translation = LootBox_LootBoxClothes,
 }
-option FactionsEconomy.itemTable6
+option FactionsEconomy.LootBoxMelee
 {
 	type = string,
-    default = Base.Pistol3/8/Base.DoubleBarrelShotgun/8/Base.Shotgun/8/Base.AssaultRifle2/8/Base.AssaultRifle/8/Base.Revolver_Short/8/Base.Revolver/8/Base.Pistol/8/Base.VarmintRifle/8/Base.HuntingRifle/7/Base.Revolver_Long/7/Base.DoubleBarrelShotgunSawnoff/7/Base.ShotgunSawnoff/7,
+    default = Base.Axe/5/Base.BallPeenHammer/5/Base.ClubHammer/5/Base.Crowbar/5/Base.Hammer/5/Base.HandAxe/5/Base.HandScythe/5/Base.PickAxe/5/Base.PickAxeHandle/5/Base.PipeWrench/5/Base.Screwdriver/5/Base.Sledgehammer/5/Base.Sledgehammer2/5/Base.SnowShovel/5/Base.AxeStone/5/Base.HammerStone/5/Base.WoodAxe/5/Base.WoodenMallet/5/Base.Wrench/5/Base.HandFork/5/,
 	page = FactionsEconomyLootBox,
-    translation = LootBox_itemTable6,
+    translation = LootBox_LootBoxMelee,
+}
+option FactionsEconomy.LootBoxWeapon
+{
+	type = string,
+    default = Base.Pistol3/8/Base.DoubleBarrelShotgun/8/Base.Shotgun/8/Base.AssaultRifle2/8/Base.AssaultRifle/8/Base.Revolver_Short/8/Base.Revolver/8/Base.Pistol/8/Base.VarmintRifle/8/Base.HuntingRifle/7/Base.Revolver_Long/7/Base.DoubleBarrelShotgunSawnoff/7/Base.ShotgunSawnoff/7/,
+	page = FactionsEconomyLootBox,
+    translation = LootBox_LootBoxWeapon,
+}
+option FactionsEconomy.LootBoxAttachment
+{
+	type = string,
+    default = Base.x2Scope/5/Base.x4Scope/5/Base.x8Scope/5/Base.AmmoStraps/5/Base.TritiumSights/5/Base.RecoilPad/5/Base.Laser/5/Base.RedDot/5/Base.GunLight/5/Base.ChokeTubeFull/5/Base.ChokeTubeImproved/5/,
+	page = FactionsEconomyLootBox,
+    translation = LootBox_LootBoxAttachment,
+}
+option FactionsEconomy.LootBoxClip
+{
+	type = string,
+    default = Base.44Clip/14/Base.M14Clip/14/Base.556Clip/14/Base.45Clip/14/Base.9mmClip/14/Base.223Clip/15/Base.308Clip/15/,
+	page = FactionsEconomyLootBox,
+    translation = LootBox_LootBoxClip,
+}
+option FactionsEconomy.LootBoxSpecialWeapon
+{
+	type = string,
+    default = Base.Pistol3/8/Base.DoubleBarrelShotgun/8/Base.Shotgun/8/Base.AssaultRifle2/8/Base.AssaultRifle/8/Base.Revolver_Short/8/Base.Revolver/8/Base.Pistol/8/Base.VarmintRifle/8/Base.HuntingRifle/7/Base.Revolver_Long/7/Base.DoubleBarrelShotgunSawnoff/7/Base.ShotgunSawnoff/7/,
+	page = FactionsEconomyLootBox,
+    translation = LootBox_LootBoxSpecialWeapon,
 }

@@ -1,0 +1,17 @@
+module Base
+{
+    craftRecipe ReturnCurrency {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.ReturnCurrency,		
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.FactionsEconomy_Currency],
+		}
+		outputs
+		{
+		}
+	}
+}

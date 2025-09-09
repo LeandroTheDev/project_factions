@@ -1,4 +1,0 @@
-Recipes_EN = {
-	MakeLongStick = "Make Long Sticks"
-	MakeStick = "Make Sticks"
-}

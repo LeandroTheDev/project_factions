@@ -1,0 +1,108 @@
+module Base
+{
+	model LootBoxAmmoModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/Lootbox_Ammo_Model,
+		scale = 0.5,
+	}
+	model LootBoxClothesModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/Lootbox_Clothes_Model,
+		scale = 0.5,
+	}
+	model LootBoxMeleeModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/Lootbox_Melee_Model,
+		scale = 0.5,
+	}
+	model LootBoxWeaponModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/Lootbox_Weapon_Model,
+		scale = 0.5,
+	}
+	model LootBoxAttachmentModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/Lootbox_Attachment_Model,
+		scale = 0.5,
+	}
+	model LootBoxClipModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/Lootbox_Clip_Model,
+		scale = 0.5,
+	}
+	model LootBoxSpecialWeaponModel
+	{
+		mesh = WorldItems/Cereal,
+		texture = WorldItems/Lootbox_Special_weapon_Model,
+		scale = 0.5,
+	}
+	item LootBoxAmmo
+    {
+		DisplayName = Loot Box Ammo,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = Lootbox_Ammo,
+        WorldStaticModel = Base.LootBoxAmmoModel,
+    }
+	item LootBoxClothes
+    {
+		DisplayName = Loot Box Clothes,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = Lootbox_Clothes,
+        WorldStaticModel = Base.LootBoxClothesModel,
+    }
+    item LootBoxMelee
+    {
+		DisplayName = Loot Box Melee,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = Lootbox_Melee,
+        WorldStaticModel = Base.LootBoxMeleeModel,
+    }
+	item LootBoxWeapon
+	{
+		DisplayName = Loot Box Weapon,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = Lootbox_Weapon,
+        WorldStaticModel = Base.LootBoxWeaponModel,
+    }
+	item LootBoxAttachment
+    {
+		DisplayName = Loot Box Attachment,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = Lootbox_Attachment,
+        WorldStaticModel = Base.LootBoxAttachmentModel,
+    }
+	item LootBoxClip
+	{
+		DisplayName = Loot Box Clip,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = Lootbox_Clip,
+        WorldStaticModel = Base.LootBoxClipModel,
+    }
+	item LootBoxSpecialWeapon
+	{
+		DisplayName = Loot Box Special Weapon,
+        DisplayCategory = Special,
+        Weight = 0.0,
+        Type	=	Normal,
+        Icon = Lootbox_special_Weapon,
+        WorldStaticModel = Base.LootBoxSpecialWeaponModel,
+    }
+}

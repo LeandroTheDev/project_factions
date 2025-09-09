@@ -7,7 +7,7 @@ Sandbox_EN = {
     Sandbox_FactionsPlus_SleepFatigueReducer = "Fast Sleep Fatigue Reducer",
     Sandbox_FactionsPlus_SleepFatigueReducer_tooltip = "How much fatigue reduce per ingame minute while sleeping",
 
-    Sandbox_FactionsPlus_SleepEnduranceReceive = "Fast Endurance Receive",
+    Sandbox_FactionsPlus_SleepEnduranceReceive = "Fast Sleep Endurance Receive",
     Sandbox_FactionsPlus_SleepEnduranceReceive_tooltip = "How much endurance receive per ingame minute while sleeping",
 
     Sandbox_FactionsPlus_EnableCalendarReset = "Enable Calendar Reset",
@@ -15,9 +15,15 @@ Sandbox_EN = {
 
     Sandbox_FactionsPlus_EnableReduceSeedDrop = "Enable Reduced Seed Drop",
     Sandbox_FactionsPlus_EnableReduceSeedDrop_tooltip = "Receive less seeds harvesting crops",
+
+    Sandbox_FactionsPlus_ReduceSeedDropPercentage = "Seed Drop Reduce Percentage",
+    Sandbox_FactionsPlus_ReduceSeedDropPercentage_tooltip = "How much seed drop will be reduced",
     
     Sandbox_FactionsPlus_EnableReduceWaterNeed = "Enable Reduced Crops Watering",
     Sandbox_FactionsPlus_EnableReduceWaterNeed_tooltip = "Crops will need much less water to be fully watered",
+
+    Sandbox_FactionsPlus_WaterLevelIncreasePerTick = "Water Level Increased per Tick",
+    Sandbox_FactionsPlus_WaterLevelIncreasePerTick_tooltip = "How much less water will be needed to be fully watered, vanilla = 10",
 
     Sandbox_FactionsPlus_EnableWaterLightCycle = "Enable Water Light Cycle",
     Sandbox_FactionsPlus_EnableWaterLightCycle_tooltip = "Water and Light will cycle between days of the week",
@@ -39,40 +45,4 @@ Sandbox_EN = {
 
     Sandbox_FactionsPlus_EnablePlayerDeathMessages = "Enable Death Messages",
     Sandbox_FactionsPlus_EnablePlayerDeathMessages_tooltip = "When a player dies in the server it will display a message with their username",
-
-    Sandbox_FactionsPlus_HordeNightBaseQuantity = "Base Zombies Quantity",
-    Sandbox_FactionsPlus_HordeNightBaseQuantity_tooltip = "How much zombies will spawn in any normal horde, the number is flex between +50% and -50%",
-
-    Sandbox_FactionsPlus_HordeNightFrequency = "Chance to Spawn Horde",
-    Sandbox_FactionsPlus_HordeNightFrequency_tooltip = "Each hour will roll this chance to check if it will spawn any horde in online players",
-
-    Sandbox_FactionsPlus_HordeZombieSpawnDistance = "Horde Spawn Distance",
-    Sandbox_FactionsPlus_HordeZombieSpawnDistance_tooltip = "Max distance to spawn zombies the horde from the player",
-
-    Sandbox_FactionsPlus_HordeCommonZombies = "Horde Common Zombies",
-    Sandbox_FactionsPlus_HordeCommonZombies_tooltip = "All zombies that will normaly spawn in any horde",
-
-    Sandbox_FactionsPlus_HordeNightRareZombiesChance = "Horde Rare Zombies Chance",
-    Sandbox_FactionsPlus_HordeNightRareZombiesChance_tooltip = "How often a rare zombie will spawn",
-
-    Sandbox_FactionsPlus_HordeRareZombies = "Horde Rare Zombies",
-    Sandbox_FactionsPlus_HordeRareZombies_tooltip = "Rare zombies that will spawn with 1% chance in any horde",
-
-    Sandbox_FactionsPlus_SpecialHordeNightBaseQuantity = "Special Base Zombies Quantity",
-    Sandbox_FactionsPlus_SpecialHordeNightBaseQuantity_tooltip = "How much zombies will spawn in any special horde, the number is flex between +50% and -50%",
-
-    Sandbox_FactionsPlus_SpecialHordeNightFrequency = "Special Chance to Spawn Horde",
-    Sandbox_FactionsPlus_SpecialHordeNightFrequency_tooltip = "Each hour will roll this chance to check if it will spawn any special horde in located players",
-
-    Sandbox_FactionsPlus_SpecialHordeZombieSpawnDistance = "Special Horde Spawn Distance",
-    Sandbox_FactionsPlus_SpecialHordeZombieSpawnDistance_tooltip = "Max distance to spawn zombies the special horde from the player",
-
-    Sandbox_FactionsPlus_SpecialHordeCommonZombies = "Special Horde Common Zombies",
-    Sandbox_FactionsPlus_SpecialHordeCommonZombies_tooltip = "All zombies that will normaly spawn in any special horde",
-
-    Sandbox_FactionsPlus_HordeNightSpecialRareZombiesChance = "Special Horde Rare Zombies Chance",
-    Sandbox_FactionsPlus_HordeNightSpecialRareZombiesChance_tooltip = "How often a rare zombie will spawn",
-
-    Sandbox_FactionsPlus_SpecialHordeRareZombies = "Special Horde Rare Zombies",
-    Sandbox_FactionsPlus_SpecialHordeRareZombies_tooltip = "Rare zombies that will spawn with 1% chance in any special horde",
 }

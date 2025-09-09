@@ -1,4 +1,0 @@
-Recipes_PTBR = {
-	MakeLongStick = "Fazer Gravetos Longos"
-	MakeStick = "Fazer Gravetos"
-}

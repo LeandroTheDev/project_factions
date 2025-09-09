@@ -7,15 +7,11 @@ ItemName_EN = {
 	ItemName_Base.LootBoxClip = "Loot Box(Clip)",
 	ItemName_Base.LootBoxSpecialWeapon = "Loot Box(Fire Weapon Premium)",
 
-	ItemName_Base.FacMoney = "Trade Money",
+	ItemName_Base.FactionsEconomy_Currency = "Currency",
 	ItemName_Base.ScrapMoney = "Valuable Scrap",
 	ItemName_Base.ScrapStack1 = "Small Stack of Valuable Scrap",
 	ItemName_Base.ScrapStack2 = "Medium Stack of Valuable Scrap",
 	ItemName_Base.ScrapStack3 = "Larger Stack of Valuable Scrap",
-
-	ItemName_Base.TradeOutpost = "Trading Post",
-
-	ItemName_Base.FacMoney = "Trade Money",
 
 	ItemName_Base.ScrapMoney = "Valuable Scrap",
 	ItemName_Base.ScrapStack1 = "Small Stack of Valuable Scrap",

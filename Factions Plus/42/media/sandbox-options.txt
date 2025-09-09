@@ -51,7 +51,7 @@ option FactionsPlus.ReduceSeedDropPercentage
     type = integer,
     min = 0,
     max = 100,
-    default = 0,
+    default = 50,
 
     page = FactionsPlus,
     translation = FactionsPlus_ReduceSeedDropPercentage,
@@ -63,6 +63,17 @@ option FactionsPlus.EnableReduceWaterNeed
 	default = true,
 	page = FactionsPlus,
 	translation = FactionsPlus_EnableReduceWaterNeed,
+}
+
+option FactionsPlus.WaterLevelIncreasePerTick
+{
+    type = integer,
+    min = 0,
+    max = 1000,
+    default = 50,
+
+    page = FactionsPlus,
+    translation = FactionsPlus_WaterLevelIncreasePerTick,
 }
 
 option FactionsPlus.EnableWaterLightCycle
@@ -125,125 +136,4 @@ option FactionsPlus.EnablePlayerDeathMessages
 	default = true,
 	page = FactionsPlus,
 	translation = FactionsPlus_EnablePlayerDeathMessages,
-}
-
-option FactionsPlus.HordeNightBaseQuantity
-{
-    type = integer,
-    min = 0,
-    max = 99999,
-    default = 50,
-
-    page = FactionsPlus,
-    translation = FactionsPlus_HordeNightBaseQuantity,
-}
-
-
-option FactionsPlus.HordeNightFrequency
-{
-    type = integer,
-    min = 0,
-    max = 100,
-    default = 5,
-
-    page = FactionsPlus,
-    translation = FactionsPlus_HordeNightFrequency,
-}
-
-option FactionsPlus.HordeZombieSpawnDistance
-{
-    type = integer,
-    min = 0,
-    max = 99999,
-    default = 50,
-
-    page = FactionsPlus,
-    translation = FactionsPlus_HordeZombieSpawnDistance,
-}
-
-option FactionsPlus.HordeCommonZombies
-{
-	type = string,
-	default = Generic_Skirt/Generic01/Generic02/Generic03/Generic04/Generic05/Cook_Generic/AmbulanceDriver/Bandit/BaseballFan_KY/BaseballFan_Rangers/BaseballFan_Z/BaseballPlayer_KY/BaseballPlayer_Rangers/BaseballPlayer_Z/Bathrobe/Bedroom/Biker/Bowling/BoxingBlue/BoxingRed/Camper/Chef/Classy/Cook_Generic/Cook_IceCream/Cook_Spiffos/Cyclist/Doctor/DressLong/DressNormal/DressShort/Farmer/Fireman/FitnessInstructor/Fossoil/Gas2Go/GigaMart_Employee/Golfer/HazardSuit/Hobbo/HospitalPatient/Jackie_Jaye/Joan/Jockey04/Jockey05/Kate/Kirsty_Kormick/Mannequin1/Mannequin2/Nurse/OfficeWorkerSkirt/Party/Pharmacist/Postal/PrivateMilitia/Punk/Ranger/Redneck/Rocker/ShellSuit_Black/ShellSuit_Blue/ShellSuit_Green/ShellSuit_Pink/ShellSuit_Teal/SkiSpiffo/SportsFan/StreetSports/StripperBlack/StripperPink/Student/Survivalist/Survivalist02/Survivalist03/Swimmer/Teacher/ThunderGas/TinFoilHat/Tourist/Trader/TutorialMom/Varsity/Waiter_Classy/Waiter_Diner/Waiter_Market/Waiter_PileOCrepe/Waiter_PizzaWhirled/Waiter_Restaurant/Waiter_Spiffo/Waiter_TachoDelPancho/WaiterStripper/Young/Bob/ConstructionWorker/Dean/Duke/Fisherman/Frank_Hemingway/Groom/HockeyPsycho/Hunter/Inmate/InmateEscaped/InmateKhaki/Jewelry/Jockey01/Jockey02/Jockey03/Jockey06/John/Judge_Matt_Hass/MallSecurity/Mayor_West_point/McCoys/Mechanic/MetalWorker/OfficeWorker/PokerDealer/Priest/Rev_Peter_Watts/Raider/Security/Sir_Twiggy/Thug/TutorialDad/Veteran/Waiter_TacoDelPancho/Woodcut,
-	page = FactionsPlus,
-	translation = FactionsPlus_HordeCommonZombies,
-}
-
-option FactionsPlus.HordeNightRareZombiesChance
-{
-    type = integer,
-    min = 0,
-    max = 100,
-    default = 5,
-
-    page = FactionsPlus,
-    translation = FactionsPlus_HordeNightRareZombiesChance,
-}
-
-option FactionsPlus.HordeRareZombies
-{
-	type = string,
-	default = FiremanFullSuit/Police/PoliceState/Ghillie/PrisonGuard/PoliceRiot/ArmyCamoDesert/ArmyCamoGreen/ArmyServiceUniform,
-	page = FactionsPlus,
-	translation = FactionsPlus_HordeRareZombies,
-}
-
-option FactionsPlus.SpecialHordeNightBaseQuantity
-{
-    type = integer,
-    min = 0,
-    max = 99999,
-    default = 75,
-
-    page = FactionsPlus,
-    translation = FactionsPlus_SpecialHordeNightBaseQuantity,
-}
-
-option FactionsPlus.SpecialHordeNightFrequency
-{
-    type = integer,
-    min = 0,
-    max = 100,
-    default = 5,
-
-    page = FactionsPlus,
-    translation = FactionsPlus_SpecialHordeNightFrequency,
-}
-
-option FactionsPlus.SpecialHordeZombieSpawnDistance
-{
-    type = integer,
-    min = 0,
-    max = 99999,
-    default = 50,
-
-    page = FactionsPlus,
-    translation = FactionsPlus_SpecialHordeZombieSpawnDistance,
-}
-
-option FactionsPlus.SpecialHordeCommonZombies
-{
-	type = string,
-	default = AirCrew/AmbulanceDriver/ArmyCamoDesert/ArmyCamoGreen/ArmyServiceUniform/Bandit/BaseballFan_KY/BaseballFan_Rangers/BaseballFan_Z/BaseballPlayer_KY/BaseballPlayer_Rangers/BaseballPlayer_Z/Bathrobe/Bedroom/Biker/Bowling/BoxingBlue/BoxingRed/Camper/Chef/Classy/Cook_Generic/Cook_IceCream/Cook_Spiffos/Cyclist/Doctor/DressLong/DressNormal/DressShort/Farmer/Fireman/FiremanFullSuit/FitnessInstructor/Fossoil/Gas2Go/Generic_Skirt/Generic01/Generic02/Generic03/Generic04/Generic05/GigaMart_Employee/Golfer/HazardSuit/Hobbo/HospitalPatient/Jackie_Jaye/Joan/Jockey04/Jockey05/Kate/Kirsty_Kormick/Mannequin1/Mannequin2/Nurse/OfficeWorkerSkirt/Party/Pharmacist/Police/PoliceState/Postal/PrivateMilitia/Punk/Ranger/Redneck/Rocker/Santa/SantaGreen/ShellSuit_Black/ShellSuit_Blue/ShellSuit_Green/ShellSuit_Pink/ShellSuit_Teal/SkiSpiffo/SportsFan/StreetSports/StripperBlack/StripperPink/Student/Survivalist/Survivalist02/Survivalist03/Swimmer/Teacher/ThunderGas/TinFoilHat/Tourist/Trader/TutorialMom/Varsity/Waiter_Classy/Waiter_Diner/Waiter_Market/Waiter_PileOCrepe/Waiter_PizzaWhirled/Waiter_Restaurant/Waiter_Spiffo/Waiter_TachoDelPancho/WaiterStripper/Young/Bob/ConstructionWorker/Dean/Duke/Fisherman/Frank_Hemingway/Ghillie/Groom/HockeyPsycho/Hunter/Inmate/InmateEscaped/InmateKhaki/Jewelry/Jockey01/Jockey02/Jockey03/Jockey06/John/Judge_Matt_Hass/MallSecurity/Mayor_West_point/McCoys/Mechanic/MetalWorker/OfficeWorker/PokerDealer/PoliceRiot/Priest/PrisonGuard/Rev_Peter_Watts/Raider/Security/Sir_Twiggy/Thug/TutorialDad/Veteran/Waiter_TacoDelPancho/Woodcut,
-	page = FactionsPlus,
-	translation = FactionsPlus_SpecialHordeCommonZombies,
-}
-
-option FactionsPlus.HordeNightSpecialRareZombiesChance
-{
-    type = integer,
-    min = 0,
-    max = 100,
-    default = 5,
-
-    page = FactionsPlus,
-    translation = FactionsPlus_HordeNightSpecialRareZombiesChance,
-}
-
-option FactionsPlus.SpecialHordeRareZombies
-{
-	type = string,
-	default = FiremanFullSuit/Police/PoliceState/Ghillie/PrisonGuard/PoliceRiot/ArmyCamoDesert/ArmyCamoGreen/ArmyServiceUniform,
-	page = FactionsPlus,
-	translation = FactionsPlus_SpecialHordeRareZombies,
 }

@@ -20,27 +20,25 @@ Consider downloading the safehouse limit remover in the folder [Server Configura
 # Factions Economy
 Singeplayer Compatibility: Yes
 
-Shop Forked from [Server Points](https://steamcommunity.com/sharedfiles/filedetails/?id=2823055977&searchtext=Server+Points), Trade system to the game, including Loot Boxes
+Add a new shop system, forked from [Server Points](https://steamcommunity.com/sharedfiles/filedetails/?id=2823055977&searchtext=Server+Points), and a Global Trade system, includes Loot Boxes and farm economy system by exploring and local farming vegetables/fruits.
 
 - Shop UI
-- Trade UI
+- Trade UI - To do
 - Lootboxes
-- Economy coin that can be returned to get points for the shop and trade
+- Economy currency that can be returned to get points for the shop and trade
 - Sell vegetables/fruits
-- Scrap Weapons to earn the stackable scrap (bigger the scrap the more economy coin you will earn)
+- Scrap Weapons to earn the stackable scrap (bigger the scrap the more economy currency you will earn)
 
 # Factions Plus
 Singeplayer Compatibility: Yes
 
-Add new features and adjustments for playing with Factions Mode, require the Factions Economy
+Add new features and adjustments for playing in any anarchy/infinite server.
 
-- Increase crop grow speed
 - Reduced seed drop by crops
-- Connections/Disconnections/Death player messages events
-- Random hordes
-- Special hordes for special locations (Lua/HordeSpecialPositions.ini)
-### UTILS
-- Craftable long sticks (with planks)
+- Reduced water need for fully crop
+- Connections/Disconnections/Death player messages events (Multiplayer only)
+- Weekly turn off and on water and electric
+- Reset world start age making food and itens not spawn as rotten or broken
 
 # Safehouse Plus
 Singeplayer Compatibility: No, the same reason as Factions doesn't have the singeplayer compatibility
@@ -68,7 +66,7 @@ respawn mechanics forked from [Keep Inventory](https://steamcommunity.com/shared
 External very useful mods to make the factions better
 - [Random Airdrops](https://github.com/LeandroTheDev/random_airdrops), add random airdrops to the server
 - [RA Smoke Flares](https://github.com/LeandroTheDev/ra_smoke_flares), add smoke flares to call any airdrop
-- [Factions Weapons](https://github.com/LeandroTheDev/factions_weapons), overhaul the weapons to make it more immersive and fun to play with
+- [Factions Weapons - TODO](https://github.com/LeandroTheDev/factions_weapons), overhaul the weapons to make it more immersive and fun to play with
 - [Factions Clothes - TODO](), add a set of military and factions friendly clothes to give more options for factions teams
 
 - > To download the submodules you can use ``git submodule init``, ``git submodule update`` in your terminal

@@ -1,0 +1,801 @@
+module Base
+{
+    craftRecipe SellAvocado {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Avocado],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellBellPepper {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.BellPepper],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellBlackbeans {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Blackbeans],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellBroccoli {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Broccoli],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellBrusselSprouts {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.BrusselSprouts],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellCarrots {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Carrots],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellCauliflower {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Cauliflower],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellCorn {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Corn],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellCornFrozen {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.CornFrozen],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellCucumber {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Cucumber],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellDaikon {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Daikon],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellEdamame {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Edamame],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellEggplant {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Eggplant],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellGarlic {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Garlic],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellGreenOnions {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.GreenOnions],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellGreenpeas {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Greenpeas],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellKale {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Kale],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellLeek {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Leek],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellLettuce {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Lettuce],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellMixedVegetables {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.MixedVegetables],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellOnion {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Onion],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellPeas {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Peas],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellPepperHabanero {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.PepperHabanero],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellPepperHabaneroDried {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.PepperHabaneroDried],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellPepperJalapeno {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.PepperJalapeno],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellPepperJalapenoDried {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.PepperJalapenoDried],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellPickles {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Pickles],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellPumpkin {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Pumpkin],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellPumpkinSliced {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.PumpkinSliced],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellPumpkinSmashed {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.PumpkinSmashed],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellSoybeans {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Soybeans],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellSpinach {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Spinach],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellSquash {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Squash],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellSugarBeet {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.SugarBeet],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellSweetPotato {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.SweetPotato],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellTurnip {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Turnip],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellZucchini {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Zucchini],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellRedRadish {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 150 [Base.RedRadish],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellStrewberrie {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 100 [Base.Strewberrie],
+		}
+		outputs
+		{
+		}
+	}
+    
+    craftRecipe SellTomato {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 100 [Base.Tomato],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellPotato {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 100 [Base.Potato],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellCabbage {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Cabbage],
+		}
+		outputs
+		{
+		}
+	}
+
+    /******* VEGETABLES - FORAGED *******/
+
+    craftRecipe SellMushroomGeneric1 {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.MushroomGeneric1],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellMushroomGeneric2 {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.MushroomGeneric2],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellMushroomGeneric3 {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.MushroomGeneric3],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellMushroomGeneric4 {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.MushroomGeneric4],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellMushroomGeneric5 {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.MushroomGeneric5],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellMushroomGeneric6 {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.MushroomGeneric6],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellMushroomGeneric7 {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.MushroomGeneric7],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellMushroomsButton {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.MushroomsButton],
+		}
+		outputs
+		{
+		}
+	}
+
+    /******* VEGETABLES - MISC. *******/
+
+    craftRecipe SellGingerPickled {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.GingerPickled],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellHalloweenPumpkin {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.HalloweenPumpkin],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe SellTofu {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyCurrencyRecipe.SellVegetable,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 50 [Base.Tofu],
+		}
+		outputs
+		{
+		}
+	}
+}

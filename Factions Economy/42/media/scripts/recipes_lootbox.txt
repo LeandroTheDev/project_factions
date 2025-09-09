@@ -1,0 +1,101 @@
+module Base
+{
+    craftRecipe OpenLootBoxAmmo {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyLootBoxRecipe.OpenLootBox,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxAmmo],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe OpenLootBoxClothes {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyLootBoxRecipe.OpenLootBox,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxClothes],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe OpenLootBoxMelee {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyLootBoxRecipe.OpenLootBox,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxMelee],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe OpenLootBoxWeapon {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyLootBoxRecipe.OpenLootBox,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxWeapon],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe OpenLootBoxAttachment {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyLootBoxRecipe.OpenLootBox,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxAttachment],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe OpenLootBoxClip {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyLootBoxRecipe.OpenLootBox,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxClip],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe OpenLootBoxSpecialWeapon {
+		timedAction = Making,
+		Time = 25,
+		OnCreate = FactionsEconomyLootBoxRecipe.OpenLootBox,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.LootBoxSpecialWeapon],
+		}
+		outputs
+		{
+		}
+	}
+}
