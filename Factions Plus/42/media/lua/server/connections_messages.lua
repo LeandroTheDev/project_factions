@@ -9,7 +9,7 @@ local function sendMessageToAllPlayers(message, _playerUsername)
     -- Swiping all online players
     for i = 0, onlinePlayers:size() - 1 do
         local selectedPlayer = onlinePlayers:get(i);
-        sendServerCommand(selectedPlayer, "ServerMessages", message, { playerUsername = _playerUsername });
+        sendServerCommand(selectedPlayer, "ConnectionMessages", message, { playerUsername = _playerUsername });
     end
 
     if message == "playerconnected" then

@@ -7,3 +7,6 @@
 [submodule "Factions Weapons"]
 	path = Factions Weapons
 	url = https://github.com/LeandroTheDev/factions_weapons
+[submodule "Random Hordes"]
+	path = Random Hordes
+	url = https://github.com/LeandroTheDev/random_hordes

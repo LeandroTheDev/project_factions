@@ -1,7 +1,7 @@
 Legacy b41 version: access [Last commit from B41](https://github.com/LeandroTheDev/project_factions/tree/25b168e77add44a12f5f35f02ec0fd80618451be)
 
 B42: currently
-# Factions
+# Factions (Reworking...) do not use it
 Singeplayer Compatibility: No, theres is no reason to add a capture system in singleplayer
 
 Forked from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/?id=1178772929&searchtext=Safehouse) to create a complete new system to safehouse claim and capture
@@ -23,7 +23,7 @@ Singeplayer Compatibility: Yes
 Add a new shop system, forked from [Server Points](https://steamcommunity.com/sharedfiles/filedetails/?id=2823055977&searchtext=Server+Points), and a Global Trade system, includes Loot Boxes and farm economy system by exploring and local farming vegetables/fruits.
 
 - Shop UI
-- Trade UI - To do
+- Trade UI (Reworking...)
 - Lootboxes
 - Economy currency that can be returned to get points for the shop and trade
 - Sell vegetables/fruits
@@ -41,16 +41,16 @@ Add new features and adjustments for playing in any anarchy/infinite server.
 - Reset world start age making food and itens not spawn as rotten or broken
 
 # Safehouse Plus
-Singeplayer Compatibility: No, the same reason as Factions doesn't have the singeplayer compatibility
+Singeplayer Compatibility: Yes
 
 Add several new mechanics to safehouses, with the upgrader you can increase the house level to gain more Points in the Server, you can easily create keys for your safehouse, and new
 respawn mechanics forked from [Keep Inventory](https://steamcommunity.com/sharedfiles/filedetails/?id=2879960829)
 
-- Create key in Safehouse (Need Factions Mod)
-- Upgrade Safehouse (Need Factions Economy Mod)
-- Reedem points (Need Factions Economy Mod)
-- Respawn in safehouse bed
-- Safehouse Protection Item (Need Factions Mod)
+- Create key in Safehouse (Need Factions Mod) (Reworking...)
+- Upgrade Safehouse (Need Factions Economy Mod) (Reworking...)
+- Reedem currency (Need Factions Economy Mod) (Reworking...)
+- Respawn in Safehouse bed
+- Safehouse Protection Item (Need Factions Mod) (Reworking...)
 
 #
 
@@ -64,8 +64,9 @@ respawn mechanics forked from [Keep Inventory](https://steamcommunity.com/shared
 
 ### Submodules
 External very useful mods to make the factions better
-- [Random Airdrops](https://github.com/LeandroTheDev/random_airdrops), add random airdrops to the server
+- [Random Airdrops](https://github.com/LeandroTheDev/random_airdrops_2), add random airdrops to the server
 - [RA Smoke Flares](https://github.com/LeandroTheDev/ra_smoke_flares), add smoke flares to call any airdrop
+- [Random Hordes](https://github.com/LeandroTheDev/random_hordes), add random hordes to the server
 - [Factions Weapons - TODO](https://github.com/LeandroTheDev/factions_weapons), overhaul the weapons to make it more immersive and fun to play with
 - [Factions Clothes - TODO](), add a set of military and factions friendly clothes to give more options for factions teams
 
@@ -87,6 +88,7 @@ Load Order:
 - Factions Economy
 - Factions Plus
 - Safehouse Plus
+- Random Hordes
 - Random Airdrops
 - RA Smoke Flares
 - Factions Weapons

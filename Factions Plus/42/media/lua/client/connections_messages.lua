@@ -56,19 +56,19 @@ end
 -- Called everytime the server send something to us
 local function OnServerCommand(module, command, arguments)
     -- Player connected
-    if module == "ServerMessages" and command == "playerconnected" then
+    if module == "ConnectionMessages" and command == "playerconnected" then
         -- Adding a message to it
         addLineToChat(
             arguments.playerUsername .. " " .. getText("IGUI_Player_Connected"), "<RGB:" .. "144,238,144" .. ">");
     end
     -- Player disconnected
-    if module == "ServerMessages" and command == "playerdisconnected" then
+    if module == "ConnectionMessages" and command == "playerdisconnected" then
         -- Adding a message to it
         addLineToChat(
             arguments.playerUsername .. " " .. getText("IGUI_Player_Disconnected"), "<RGB:" .. "255,255,0" .. ">");
     end
     -- Player died
-    if module == "ServerMessages" and command == "playerdead" then
+    if module == "ConnectionMessages" and command == "playerdead" then
         -- Adding a message to it
         addLineToChat(
             arguments.playerUsername .. " " .. getText("IGUI_Player_Dead"), "<RGB:" .. "255,0,0" .. ">");
