@@ -18,6 +18,7 @@ Events.EveryDays.Add(function()
     getSandboxOptions():set("StartMonth", actualMonth);
     getSandboxOptions():set("StartDay", actualDay);
     getSandboxOptions():set("StartYear", actualYear);
+    getSandboxOptions():set("TimeSinceApo", 0);
 
     if FactionsPlusIsSinglePlayer then
         local player = getPlayer();
