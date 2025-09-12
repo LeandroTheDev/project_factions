@@ -13,6 +13,7 @@ Events.EveryDays.Add(function()
     gameTime:setStartMonth(actualMonth);
     gameTime:setStartYear(actualYear);
     gameTime:setStartTimeOfDay(0.0);
+    gameTime:save();
 
     -- Updating also the sandbox option
     getSandboxOptions():set("StartMonth", actualMonth);

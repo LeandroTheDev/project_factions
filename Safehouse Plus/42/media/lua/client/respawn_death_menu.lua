@@ -3,7 +3,6 @@ local CoopMapSpawnSelect_clickNext = CoopMapSpawnSelect.clickNext;
 local ISPostDeathUI_render = ISPostDeathUI.render;
 local ISPostDeathUI_onRespawn = ISPostDeathUI.onRespawn;
 
-local allowRespawn = true;
 -- Spam server check
 local alreadyChecked = false;
 
@@ -18,21 +17,14 @@ function ISPostDeathUI:render(...)
     self.player = getSpecificPlayer(self.playerIndex);
     -- Ask the server if hes can spawn in the bed
     if (seconds <= 5 and not alreadyChecked) then
-        local coords = getPlayerRespawn(self.player);
         alreadyChecked = true;
         -- Disabled for now, need to rework factions first
+        -- local coords = getPlayerRespawn(self.player);
         -- sendClientCommand("ServerRespawn", "canSpawn", {
         --     x = coords.x,
         --     y = coords.y,
         --     z = coords.z,
         -- });
-    end
-    --If auto respawn then press respawn button
-    if ((seconds <= 0) and isAutoRespawn(self.player) and (not self.buttonQuit.AutoRespawn)) then
-        local activate = self.buttonQuit.sounds["activate"];
-        self.buttonQuit.sounds["activate"] = nil;
-        self.buttonQuit:forceClick();
-        self.buttonQuit.sounds["activate"] = activate;
     end
 end
 
@@ -54,27 +46,34 @@ function ISPostDeathUI:onQuitToDesktop(...)
     -- Rename "NEXT" button to "RESPAWN"
     CCC.mapSpawnSelect.nextButton:setTitle(getText("IGUI_Respawn_CCC_Respawn"));
 
-    -- Check if player can respawn
-    local coords = getPlayerRespawn(self.player);
-    local isRespawn = getSandboxOptions():getOptionByName("SafehousePlus.EnableSafehouseRespawn"):getValue() and
-        (coords.x ~= nil) and (coords.y ~= nil) and
-        (coords.z ~= nil);
+    -- Safehouse respawn is enabled
+    if getSandboxOptions():getOptionByName("SafehousePlus.EnableSafehouseRespawn"):getValue() then
+        local function receiveRespawn(module, command, arguments)
+            if module == "SafehousePlusRespawn" and command == "receiveRespawn" then
+                Events.OnServerCommand.Remove(receiveRespawn);
 
-    if (isRespawn and allowRespawn) then
-        -- Create respawn points
-        local item = {
-            name = getText("IGUI_Respawn_Bed"),
-            region = nil,
-            dir = "",
-            worldimage = nil,
-            desc = getText("IGUI_Respawn_In_Bed")
-        }
+                local coords = arguments;
+                local isRespawn = (coords.x ~= nil) and (coords.y ~= nil) and (coords.z ~= nil);
 
-        -- Add respawn in bed as new option
-        CCC.mapSpawnSelect.listbox:insertItem(0, item.name, item);
-        -- Disable zoom for the spawn in bed
-        CCC.mapSpawnSelect.listbox.items[1].item.zoomS = 0;
-    end;
+                if isRespawn then
+                    -- Create respawn points
+                    local item = {
+                        name = getText("IGUI_Respawn_Bed"),
+                        region = nil,
+                        dir = "",
+                        worldimage = nil,
+                        desc = getText("IGUI_Respawn_In_Bed")
+                    }
+
+                    -- Add respawn in bed as new option
+                    CCC.mapSpawnSelect.listbox:insertItem(0, item.name, item);
+                    -- Disable zoom for the spawn in bed
+                    CCC.mapSpawnSelect.listbox.items[1].item.zoomS = 0;
+                end;
+            end
+        end
+        Events.OnServerCommand.Add(receiveRespawn);
+    end
 end
 
 -- This will run when "NEXT" ("RESPAWN") is pressed inside spawn selection
@@ -100,8 +99,12 @@ function CoopMapSpawnSelect:clickNext(...)
 
     -- If selected respawn then update respawn location
     if (selected.name ~= getText("IGUI_Respawn_Bed")) then
-        removePlayerRespawn(getPlayer());
-        setRespawnRegion(getPlayer(), selected.region);
+        if SafehousePlusIsSinglePlayer then
+            RemovePlayerRespawn(getPlayer());
+            SetRespawnRegion(getPlayer(), selected.region);
+        else
+            sendClientCommand("SafehousePlusRespawn", "setRespawnRegion", selected);
+        end
     end
 
     -- Spawn player for mouse & keyboard
@@ -128,15 +131,20 @@ function CoopMapSpawnSelect:clickNext(...)
         self.joypadData.prevprevfocus = nil;
     end
 
-    -- Load player data
-    loadPlayer(getPlayer());
-    setHealth(getPlayer(), getSandboxOptions():getOptionByName("SafehousePlus.HealthOnRespawn"):getValue());
+    if SafehousePlusIsSinglePlayer then
+        -- Load player data
+        LoadPlayer(getPlayer());
+        SetHealth(getPlayer(), getSandboxOptions():getOptionByName("SafehousePlus.HealthOnRespawn"):getValue());
 
-    -- Teleport player to respawn location
-    if (selected.name == getText("IGUI_Respawn_Bed")) then
-        loadRespawnLocation(getPlayer());
+        -- Teleport player to respawn location
+        if (selected.name == getText("IGUI_Respawn_Bed")) then
+            LoadRespawnLocation(getPlayer());
+        end
+
+        -- Save player respawn location
+        SetPlayerRespawn(getPlayer());
+    else
+        sendClientCommand("SafehousePlusRespawn", "loadPlayer", nil);
+        -- triggerEvent("OnClothingUpdated", getPlayer());
     end
-
-    -- Save player respawn location
-    setPlayerRespawn(getPlayer());
 end

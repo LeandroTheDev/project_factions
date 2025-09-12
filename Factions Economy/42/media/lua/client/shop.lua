@@ -132,7 +132,8 @@ function ISShop.BuyType.ITEM(row)
         --price
         local item = category[index]
         if not item then
-            DebugPrintFactionsEconomy("Item not found on index: " .. tostring(index) .. ", for player: " .. player:getUsername());
+            DebugPrintFactionsEconomy("Item not found on index: " ..
+                tostring(index) .. ", for player: " .. player:getUsername());
             return
         end
 
@@ -247,12 +248,14 @@ function ISShop:onReload()
     for i, v in ipairs(self.tabPanel.viewList) do
         self.tabPanel:removeView(v.view)
     end
-    Events.OnServerCommand.Add(ReceiveShopItems);
-    sendClientCommand("FactionsEconomyShop", "getShopItems", nil);
 
     if isSingleplayer then
         ISShop.instance.currency = FactionsEconomyCurrencyData[getPlayer():getUsername()] or 0;
+        ReceiveShopItems("FactionsEconomyShop", "receiveShopItems", ShopItems);
     else
+        Events.OnServerCommand.Add(ReceiveShopItems);
+        sendClientCommand("FactionsEconomyShop", "getShopItems", nil);
+
         Events.OnServerCommand.Add(ReceiveCurrency);
         sendClientCommand("FactionsEconomyCurrency", "getCurrency", nil);
     end

@@ -13,8 +13,12 @@ function SpawnpointAction:stop()
 end
 
 function SpawnpointAction:perform()
-    setPlayerRespawn(self.character);
-    sendClientCommand("ServerRespawn", "enableSpawn", nil);
+    if SafehousePlusIsSinglePlayer then
+        SetPlayerRespawn(self.character);
+    else
+        sendClientCommand("SafehousePlusRespawn", "setPlayerRespawn", nil);
+    end
+
     self.character:Say(getText("IGUI_Respawn_SayRespawn"));
     ISBaseTimedAction.perform(self);
 end

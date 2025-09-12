@@ -1,5 +1,13 @@
 VERSION = 1,
 
+option FactionsPlus.DisablePlantRotten
+{
+	type = boolean,
+	default = true,
+	page = FactionsPlus,
+	translation = FactionsPlus_DisablePlantRotten,
+}
+
 option FactionsPlus.EnableFastSleep
 {
 	type = boolean,

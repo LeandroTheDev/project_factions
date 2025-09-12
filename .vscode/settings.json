@@ -70,9 +70,20 @@
         "CoopUserName",
         "setPlayerJoypad",
         "instanceof",
-        "ISContextMenu"
+        "ISContextMenu",
+        "PerkFactory",
+        "getAllItems",
+        "RecMedia",
+        "ProfessionFactory",
+        "SPlantGlobalObject",
+        "xpUpdate",
+        "addXp",
+        "sendHumanVisual",
+        "sendEquip",
+        "syncVisuals",
+        "triggerEvent"
     ],
     "Lua.diagnostics.disable": [
-        "deprecated",
+        "deprecated"
     ]
 }

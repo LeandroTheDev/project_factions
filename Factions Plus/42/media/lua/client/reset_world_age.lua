@@ -14,6 +14,7 @@ local function OnServerCommand(module, command, arguments)
 		gameTime:setStartMonth(actualMonth);
 		gameTime:setStartYear(actualYear);
 		gameTime:setStartTimeOfDay(0.0);
+		gameTime:save();
 
 		getSandboxOptions():set("StartMonth", actualMonth);
 		getSandboxOptions():set("StartDay", actualDay);

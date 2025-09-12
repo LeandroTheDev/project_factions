@@ -10,3 +10,6 @@
 [submodule "Random Hordes"]
 	path = Random Hordes
 	url = https://github.com/LeandroTheDev/random_hordes
+[submodule "No Pain No Gain"]
+	path = No Pain No Gain
+	url = https://github.com/LeandroTheDev/no_pain_no_game
