@@ -1,3 +1,5 @@
+if not getSandboxOptions():getOptionByName("SafehousePlus.EnableRespawnMechanic"):getValue() then return end
+
 -- Default Functions
 local CoopMapSpawnSelect_clickNext = CoopMapSpawnSelect.clickNext;
 local ISPostDeathUI_render = ISPostDeathUI.render;
@@ -72,7 +74,11 @@ function ISPostDeathUI:onQuitToDesktop(...)
                 end;
             end
         end
-        Events.OnServerCommand.Add(receiveRespawn);
+        if SafehousePlusIsSinglePlayer then
+            receiveRespawn("SafehousePlusRespawn", "receiveRespawn", GetPlayerRespawn(getPlayer()));
+        else
+            Events.OnServerCommand.Add(receiveRespawn);
+        end
     end
 end
 

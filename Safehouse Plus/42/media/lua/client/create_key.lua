@@ -1,7 +1,6 @@
-local doorlocksystem = {}
-
 if not getSandboxOptions():getOptionByName("SafehousePlus.EnableSafehouseCreateKey"):getValue() then return end
 
+local doorlocksystem = {}
 doorlocksystem.onFillWorldObjectContextMenu = function(playerId, context, worldobjects, test)
 	-- Receive the player
 	local player = getSpecificPlayer(playerId)

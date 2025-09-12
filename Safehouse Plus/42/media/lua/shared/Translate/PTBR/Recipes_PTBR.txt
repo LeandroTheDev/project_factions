@@ -1,4 +1,0 @@
-Recipes_PTBR = {
-	UpgradeSafehouse = "Melhorar Safehouse"
-	ProtectSafehouse = "Proteger Safehouse"
-}

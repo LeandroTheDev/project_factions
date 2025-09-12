@@ -1,4 +1,0 @@
-Recipes_EN = {
-	UpgradeSafehouse = "Upgrade the Safehouse"
-	ProtectSafehouse = "Protect Safehouse"
-}

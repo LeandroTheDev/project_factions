@@ -1,4 +1,0 @@
-ItemName_EN = {
-	ItemName_Base.UpgradeSafehouse = "Safehouse Upgrade",
-	ItemName_Base.ProtectSafehouse = "Safehouse Protection",
-}

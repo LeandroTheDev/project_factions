@@ -1,4 +1,0 @@
-ItemName_PTBR = {
-	ItemName_Base.UpgradeSafehouse = "Melhoria de Safehouse",
-	ItemName_Base.ProtectSafehouse = "Proteção de Safehouse",
-}

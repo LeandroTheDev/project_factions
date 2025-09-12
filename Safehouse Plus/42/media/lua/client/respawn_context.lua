@@ -1,3 +1,4 @@
+if not getSandboxOptions():getOptionByName("SafehousePlus.EnableRespawnMechanic"):getValue() then return end
 if not getSandboxOptions():getOptionByName("SafehousePlus.EnableSafehouseRespawn"):getValue() then return end
 
 --This contains all bed sprites from vanilla

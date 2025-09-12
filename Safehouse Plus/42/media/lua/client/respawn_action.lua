@@ -1,4 +1,6 @@
-SpawnpointAction = ISBaseTimedAction:derive("SpawnpointAction")
+if not getSandboxOptions():getOptionByName("SafehousePlus.EnableRespawnMechanic"):getValue() then return end
+
+SpawnpointAction = ISBaseTimedAction:derive("SpawnpointAction");
 
 function SpawnpointAction:isValid()
     return true;

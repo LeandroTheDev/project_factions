@@ -1,57 +1,19 @@
 VERSION = 1,
 
-option SafehousePlus.EnableSafehousePoints
-{
-	type = boolean,
-	default = true,
-	page = Safehouse,
-	translation = SafehousePlus_EnableSafehousePoints,
-}
-
-option SafehousePlus.SafehouseHoursPerPoints
-{
-	type = integer,
-	default = 3,
-	min = 1,
-	max = 999,
-	page = Safehouse,
-	translation = SafehousePlus_SafehouseHoursPerPoints,
-}
-
-option SafehousePlus.SafehouseBasePoints
-{
-	type = integer,
-	default = 1,
-	min = 1,
-	max = 999,
-	page = Safehouse,
-	translation = SafehousePlus_SafehouseBasePoints,
-}
-
-option SafehousePlus.SafehousePointsPerScore
-{
-	type = integer,
-	default = 1,
-	min = 1,
-	max = 999,
-	page = Safehouse,
-	translation = SafehousePlus_SafehousePointsPerScore,
-}
-
-option SafehousePlus.ResetPointsWhenNotClaimed
-{
-	type = boolean,
-	default = true,
-	page = Safehouse,
-	translation = SafehousePlus_ResetPointsWhenNotClaimed,
-}
-
 option SafehousePlus.EnableSafehouseCreateKey
 {
 	type = boolean,
 	default = true,
 	page = Safehouse,
 	translation = SafehousePlus_EnableSafehouseCreateKey,
+}
+
+option SafehousePlus.EnableRespawnMechanic
+{
+	type = boolean,
+	default = true,
+	page = Safehouse,
+	translation = SafehousePlus_EnableRespawnMechanic,
 }
 
 option SafehousePlus.EnableSafehouseRespawn
@@ -67,7 +29,7 @@ option SafehousePlus.SpawnpointTimer
 	type = integer,
 	default = 1000,
 	min = 0,
-	max = 999999999,
+	max = 2147483647,
 	page = Safehouse,
 	translation = SafehousePlus_SpawnpointTimer,
 }
@@ -77,7 +39,7 @@ option SafehousePlus.RespawnCooldown
 	type = integer,
 	default = 30,
 	min = -1,
-	max = 999999999,
+	max = 2147483647,
 	page = Safehouse,
 	translation = SafehousePlus_RespawnCooldown,
 }
@@ -100,20 +62,10 @@ option SafehousePlus.KeepInventory
 	translation = SafehousePlus_KeepInventory,
 }
 
-option SafehousePlus.EnableSafehouseProtection
+option SafehousePlus.KeepStats
 {
 	type = boolean,
 	default = true,
 	page = Safehouse,
-	translation = SafehousePlus_EnableSafehouseProtection,
-}
-
-option SafehousePlus.SafehouseProtectionLimit
-{
-	type = integer,
-	default = 1,
-	min = 0,
-	max = 99999,
-	page = Safehouse,
-	translation = SafehousePlus_SafehouseProtectionLimit,
+	translation = SafehousePlus_KeepStats,
 }

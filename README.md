@@ -48,10 +48,12 @@ Add several new mechanics to safehouses, with the upgrader you can increase the 
 respawn mechanics forked from [Keep Inventory](https://steamcommunity.com/sharedfiles/filedetails/?id=2879960829)
 
 - Create key in Safehouse (Need Factions Mod) (Reworking...)
+- Safehouse Passive Currency Give (Need Factions Economy Mod) (Reworking...)
 - Upgrade Safehouse (Need Factions Economy Mod) (Reworking...)
-- Reedem currency (Need Factions Economy Mod) (Reworking...)
-- Respawn in Safehouse bed
 - Safehouse Protection Item (Need Factions Mod) (Reworking...)
+- Respawn character keep stats
+- Respawn in Safehouse bed
+- Keep inventory
 
 #
 
@@ -65,9 +67,10 @@ respawn mechanics forked from [Keep Inventory](https://steamcommunity.com/shared
 
 ### Submodules
 External very useful mods to make the factions better
-- [Random Airdrops](https://github.com/LeandroTheDev/random_airdrops_2), add random airdrops to the server
+- [Random Airdrops 2](https://github.com/LeandroTheDev/random_airdrops_2), add random airdrops to the server
 - [RA Smoke Flares](https://github.com/LeandroTheDev/ra_smoke_flares), add smoke flares to call any airdrop
 - [Random Hordes](https://github.com/LeandroTheDev/random_hordes), add random hordes to the server
+- [No Pain No Gain](https://github.com/LeandroTheDev/random_hordes), better fitness and strength xp earn
 - [Factions Weapons - TODO](https://github.com/LeandroTheDev/factions_weapons), overhaul the weapons to make it more immersive and fun to play with
 - [Factions Clothes - TODO](), add a set of military and factions friendly clothes to give more options for factions teams
 
@@ -90,7 +93,7 @@ Load Order:
 - Factions Plus
 - Safehouse Plus
 - Random Hordes
-- Random Airdrops
+- Random Airdrops 2
 - RA Smoke Flares
 - Factions Weapons
 - Factions Clothes

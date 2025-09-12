@@ -4,18 +4,9 @@ IGUI_EN = {
 	IGUI_Door_Lock = "Doorlock",
 	IGUI_Door_Key_Not_Created = "I cant do that",
 
-	IGUI_Redeem_Safehouse_Points = "Redeem Safehouse Points"
-	IGUI_Redeem_Safehouse_Claimed = "Claimed: "
-	IGUI_Redeem_Safehouse_Not_In_Safehouse = "I am not in a Safehouse..."
-	IGUI_Redeem_Safehouse_Upgraded = "Safehouse Upgraded"
-
 	IGUI_Respawn_SayRespawn = "Respawn Point Set",
     IGUI_Respawn_DeathUI_Respawn = "RESPAWN",
     IGUI_Respawn_CCC_Respawn = "RESPAWN",
     IGUI_Respawn_Bed = "Bed"
     IGUI_Respawn_In_Bed = "Respawn in Bed",
-
-	IGUI_Safehouse_Protected = "Safehouse Protected",
-	IGUI_Safehouse_Protected_Not_Owner = "Only the Owner...",
-	IGUI_Safehouse_Protected_Invalid = "Cannot do that...",
 }

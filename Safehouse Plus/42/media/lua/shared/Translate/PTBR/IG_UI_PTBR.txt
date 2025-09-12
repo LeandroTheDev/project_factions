@@ -4,18 +4,9 @@ IGUI_PTBR = {
     IGUI_Door_Lock = "Fechadura",
     IGUI_Door_Key_Not_Created = "Não posso fazer isso",
 
-    IGUI_Redeem_Safehouse_Points = "Reivindicar Pontos da Safehouse"
-    IGUI_Redeem_Safehouse_Claimed = "Reinvidicado: "
-    IGUI_Redeem_Safehouse_Not_In_Safehouse = "Não estou em uma Safehouse..."
-    IGUI_Redeem_Safehouse_Upgraded = "Safehouse Melhorada"
-
     IGUI_Respawn_SayRespawn = "Ponto de Renascimento Definido",
     IGUI_Respawn_DeathUI_Respawn = "RENASCER",
     IGUI_Respawn_CCC_Respawn = "RENASCER",
     IGUI_Respawn_Bed = "Cama",
     IGUI_Respawn_In_Bed = "Renascer na Cama",
-
-    IGUI_Safehouse_Protected = "Safehouse Protegida",
-	IGUI_Safehouse_Protected_Not_Owner = "Apenas o dono...",
-	IGUI_Safehouse_Protected_Invalid = "Não posso fazer isso...",
 }
