@@ -132,7 +132,9 @@ end
 -- Returns the player unique id
 local function getUniqueId(player)
     if SafehousePlusIsSinglePlayer then
-        return tostring(player:getOnlineID());
+        -- I don't know how to detect split screen players 🤭
+        -- Split screen players cannot die at same time
+        return tostring(1);
     else
         if player:getSteamID() then
             return tostring(player:getSteamID());
@@ -469,8 +471,7 @@ local function loadPlayerInventory(player)
 
     --Restore hotbar UI order
     if (RespawnData[getUniqueId(player)].Hotbar ~= nil) then
-        player:getModData().hotbar = RespawnData
-            [player:getUsername()].Hotbar
+        player:getModData().hotbar = RespawnData[getUniqueId(player)].Hotbar
     end
 
     --Put item in hand/s
@@ -547,7 +548,7 @@ end
 local function loadPlayer(player)
     clearInventory(player);
 
-    if getSandboxOptions():getOptionByName("SafehousePlus.KeepInventory"):getValue() and RespawnData[getUniqueId(player)].Items then
+    if getSandboxOptions():getOptionByName("SafehousePlus.KeepInventory"):getValue() then
         loadPlayerInventory(player);
     end
 
@@ -607,7 +608,7 @@ if SafehousePlusIsSinglePlayer then
     end
 
     function GetPlayerRespawn(player)
-        getPlayerRespawn(player);
+        return getPlayerRespawn(player);
     end
 else -- If not create a server command
     Events.OnClientCommand.Add(function(module, command, player, args)

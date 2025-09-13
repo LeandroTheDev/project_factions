@@ -37,6 +37,8 @@ Add new features and adjustments for playing in any anarchy/infinite server.
 
 - Reduced seed drop by crops
 - Reduced water need for fully crop
+- Disable rotten crops mechanic
+- > I recommend changing vanilla sandbox ``Plant Resilience`` to ``Very Low`` to not lose water when player is offline or busy in crop final stage
 - Connections/Disconnections/Death player messages events (Multiplayer only)
 - Weekly turn off and on water and electric
 - Reset world start age making food and itens not spawn as rotten or broken

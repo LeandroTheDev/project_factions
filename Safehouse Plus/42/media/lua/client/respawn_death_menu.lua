@@ -54,6 +54,10 @@ function ISPostDeathUI:onQuitToDesktop(...)
             if module == "SafehousePlusRespawn" and command == "receiveRespawn" then
                 Events.OnServerCommand.Remove(receiveRespawn);
 
+                if not arguments then
+                    return;
+                end
+
                 local coords = arguments;
                 local isRespawn = (coords.x ~= nil) and (coords.y ~= nil) and (coords.z ~= nil);
 
