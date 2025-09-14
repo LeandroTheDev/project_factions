@@ -149,16 +149,24 @@ local function TimeCheck()
 	end
 
 	local stringDays = getSandboxOptions():getOptionByName("FactionsPlus.WaterLightCycle"):getValue();
+
+	local shouldEnable = false;
 	-- Swipe the days into a variable
 	for day in string.gmatch(stringDays, "%d+") do
 		-- Get the day number
-		local dayNumber = tonumber(day)
+		local dayNumber = tonumber(day);
+
 		-- Check if the dayNumber is equals the today number
 		if dayNumber == currentTime.tm_wday then
-			enable() -- Enable if is
-		else
-			disable()
-		end -- Disable if not
+			shouldEnable = true;
+			break;
+		end
+	end
+
+	if shouldEnable then
+		enable();
+	else
+		disable();
 	end
 end
 
