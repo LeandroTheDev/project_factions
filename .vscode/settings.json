@@ -81,7 +81,8 @@
         "sendHumanVisual",
         "sendEquip",
         "syncVisuals",
-        "triggerEvent"
+        "triggerEvent",
+        "GameTime"
     ],
     "Lua.diagnostics.disable": [
         "deprecated"

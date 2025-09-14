@@ -1,8 +1,8 @@
 Sandbox_EN = {
     Sandbox_FactionsPlus = "Factions Plus",
 
-    Sandbox_FactionsPlus_FactionsPlus_DisablePlantRotten = "Disable Rotten Plants",
-    Sandbox_FactionsPlus_FactionsPlus_DisablePlantRotten_tooltip = "Farming will no longer have a time limit to harvest after final stage",
+    Sandbox_FactionsPlus_DisablePlantRotten = "Disable Rotten Plants",
+    Sandbox_FactionsPlus_DisablePlantRotten_tooltip = "Farming will no longer have a time limit to harvest after final stage",
 
     Sandbox_FactionsPlus_EnableFastSleep = "Enable Fast Sleep",
     Sandbox_FactionsPlus_EnableFastSleep_tooltip = "Players will restore fatigue and endurance much more faster than in vanilla",
