@@ -82,7 +82,12 @@
         "sendEquip",
         "syncVisuals",
         "triggerEvent",
-        "GameTime"
+        "GameTime",
+        "getCell",
+        "DebugPrintRandomAidrops",
+        "RandomAidropsIsSinglePlayer",
+        "addVehicleDebug",
+        "IsoDirections"
     ],
     "Lua.diagnostics.disable": [
         "deprecated"
