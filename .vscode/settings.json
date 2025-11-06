@@ -87,9 +87,14 @@
         "DebugPrintRandomAidrops",
         "RandomAidropsIsSinglePlayer",
         "addVehicleDebug",
-        "IsoDirections"
+        "IsoDirections",
+        "Faction",
+        "getServerSpawnRegions",
+        "IsoFlagType",
+        "ISLayoutManager",
+        "getTimeInMillis"
     ],
     "Lua.diagnostics.disable": [
-        "deprecated"
+        "deprecated",
     ]
 }

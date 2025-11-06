@@ -2,7 +2,7 @@ Legacy b41 version: access [Last commit from B41](https://github.com/LeandroTheD
 
 B42: currently
 # Factions (Reworking...) do not use it
-Singeplayer Compatibility: No, theres is no reason to add a capture system in singleplayer
+Singleplayer Compatibility: No, theres is no reason to add a capture system in singleplayer
 
 Forked from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/?id=1178772929&searchtext=Safehouse) to create a complete new system to safehouse claim and capture
 
@@ -18,7 +18,7 @@ Forked from [SSR: Safehouse](https://steamcommunity.com/sharedfiles/filedetails/
 Consider downloading the safehouse limit remover in the folder [Server Configuration](https://github.com/LeandroTheDev/project_factions/tree/main/Server%20Configuration) and place it in the main project zomboid dedicated server folder
 
 # Factions Economy
-Singeplayer Compatibility: Yes
+Singleplayer Compatibility: Yes
 
 Add a new shop system, forked from [Server Points](https://steamcommunity.com/sharedfiles/filedetails/?id=2823055977&searchtext=Server+Points), and a Global Trade system, includes Loot Boxes and farm economy system by exploring and local farming vegetables/fruits.
 
@@ -31,7 +31,7 @@ Add a new shop system, forked from [Server Points](https://steamcommunity.com/sh
 - Scrap Weapons to earn the stackable scrap (bigger the scrap the more economy currency you will earn)
 
 # Factions Plus
-Singeplayer Compatibility: Yes
+Singleplayer Compatibility: Yes
 
 Add new features and adjustments for playing in any anarchy/infinite server.
 
@@ -44,7 +44,7 @@ Add new features and adjustments for playing in any anarchy/infinite server.
 - Reset world start age making food and itens not spawn as rotten or broken
 
 # Safehouse Plus
-Singeplayer Compatibility: Yes
+Singleplayer Compatibility: Yes
 
 Add several new mechanics to safehouses, with the upgrader you can increase the house level to gain more Points in the Server, you can easily create keys for your safehouse, and new
 respawn mechanics forked from [Keep Inventory](https://steamcommunity.com/sharedfiles/filedetails/?id=2879960829)

@@ -1,20 +1,13 @@
----@diagnostic disable: undefined-global
-require "ui/factions_label"
 require "ISUI/ISPanel"
 require "ISUI/ISButton"
 
--- Explanation about this file.
--- this file contains the UI for the safehouses
+local captureTimeInSeconds = 60
+local safehouseUI = nil;
 
 FactionsGUI = ISPanel:derive("FactionsGUI");
 FactionsGUI.btnText = { getText("UI_Text_SafehouseClaim"), getText("UI_Text_SafehouseCapture"),
 	getText("UI_Text_SafehouseView") }
-FactionsGUI.captureTime = 50000;
-FactionsGUI.updateTime = 500;
 FactionsGUI.minimized = true;
-FactionsGUI.finishedCapture = false;
-
-local safehouseUI = nil;
 
 local function getDeltaTimeInMillis(ts)
 	return getTimeInMillis() - ts;
@@ -569,7 +562,7 @@ local function OnServerCommand(module, command, arguments)
 
 		-- IMPORTANT
 		-- You cannot do this serverside, probably on the official release it will be different
-		safehouseBeenCaptured:setOwner(faction:getOwner());       -- Change owner to the faction owner
+		safehouseBeenCaptured:setOwner(faction:getOwner());   -- Change owner to the faction owner
 		FactionsMain.safehouseRemoveMembers(safehouseBeenCaptured); -- Remove all users from safehouse
 		FactionsMain.syncFactionMembers(safehouseBeenCaptured); -- Sync faction members to the safehouse
 
