@@ -79,9 +79,41 @@ function IsSafehouseFromPlayerFaction(player, safehouse)
 	return false
 end
 
-function GetSafehouseCost(safehouse, offset)
-	offset = offset or 0;
-	return math.ceil(((safehouse:getH() - offset) * (safehouse:getW() - offset)) / 100) - 1;
+function GetSafehouseCost(building)
+	if not building then
+		return 99999
+	end
+
+	local offset
+	if instanceof(building, "IsoBuilding") then
+		offset = 0
+
+		local definition = building:getDef()
+		if definition then
+			return math.ceil(((definition:getH() - offset) * (definition:getW() - offset)) / 100) - 1;
+		else
+			return 99999
+		end
+	elseif instanceof(building, "SafeHouse") then
+		offset = 4
+
+		return math.ceil(((building:getH() - offset) * (building:getW() - offset)) / 100) - 1;
+	end
+end
+
+function GetFactionUsedPoints(faction)
+	local owner = faction:getOwner()
+
+	local pointsUsed = 0
+	for i = 0, SafeHouse.getSafehouseList():size() - 1 do
+		local safehouse = SafeHouse.getSafehouseList():get(i);
+
+		if safehouse.getOwner() == owner then
+			pointsUsed = pointsUsed - GetSafehouseCost(safehouse)
+		end
+	end
+
+	return pointsUsed
 end
 
 function IsSpawnPoint(square)
@@ -143,21 +175,26 @@ function IsSpawnPoint(square)
 	return false
 end
 
-function GetFloorCount(def)
-	local level = 0;
+function GetFloorCount(building)
+	local def = building:getDef()
 	if def then
-		local rooms = def:getRooms();
-		if rooms then
-			for i = 0, rooms:size() - 1 do
-				local room = rooms:get(i);
-				local z = room:getZ();
-				if z > level then
-					level = z;
+		local level = 0;
+		if def then
+			local rooms = def:getRooms();
+			if rooms then
+				for i = 0, rooms:size() - 1 do
+					local room = rooms:get(i);
+					local z = room:getZ();
+					if z > level then
+						level = z;
+					end
 				end
 			end
 		end
+		return level;
+	else
+		return 0
 	end
-	return level;
 end
 
 function IsSomeoneInside(square, faction, level)

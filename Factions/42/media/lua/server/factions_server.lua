@@ -407,6 +407,7 @@ function FactionsCommands.onCaptureSafehouse(module, command, player, args)
 	-- Check if player doesnt have factions
 	if playerFaction == nil then
 		sendServerCommand(player, "ServerSafehouse", "safehouseCaptured", { validation = false });
+		return
 	end
 	-- Check if faction been captured is nill
 	if safehouseBeenCaptured == nil then

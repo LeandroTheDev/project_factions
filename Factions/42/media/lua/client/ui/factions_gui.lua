@@ -1,17 +1,12 @@
 require "ISUI/ISPanel"
 require "ISUI/ISButton"
 
-local captureTimeInSeconds = 60
 local safehouseUI = nil;
 
 FactionsGUI = ISPanel:derive("FactionsGUI");
-FactionsGUI.btnText = { getText("UI_Text_SafehouseClaim"), getText("UI_Text_SafehouseCapture"),
-	getText("UI_Text_SafehouseView") }
 FactionsGUI.minimized = true;
-
-local function getDeltaTimeInMillis(ts)
-	return getTimeInMillis() - ts;
-end
+-- FactionsGUI.btnText = { getText("UI_Text_SafehouseClaim"), getText("UI_Text_SafehouseCapture"),
+-- 	getText("UI_Text_SafehouseView") }
 
 -- Creating the panel the right side of GUI
 
@@ -38,54 +33,9 @@ function Badge:initialise() -- Initialization Method
 end
 
 function Badge:update() -- Updates every ticks
-	-- If is capturing a enemy safehouse
-	if self.capture then
-		-- Above that we are creating a timer per second for reducing,
-		-- this is used to change the images in badge during the capture
-		local delta = getDeltaTimeInMillis(self.timestamp);
-		self.timestamp = getTimeInMillis()
-		if self.state == 0 then
-			self.timer = self.timer - delta;
-			if self.timer < 1 then
-				self.state = 1;
-			end
-		elseif self.state == 1 then
-			-- In the final of the capture
-			if self.timer > FactionsGUI.captureTime then
-				-- Spam check for not spamming the server with requisitions
-				if FactionsGUI.finishedCapture then return end
-				-- We communicate with the server saying you finish capturing,
-				-- the server will handle if makes sense the capture
-				FactionsGUI.finishedCapture = true;
-				sendClientCommand("ServerFactions", "onCaptureSafehouse", nil)
-			else
-				self.timer = self.timer + delta;
-			end
-		end
-	end
 end
 
 function Badge:prerender() -- Before updating the screen render
-	-- If is capturing
-	if self.capture then
-		-- Change the color based in the capture
-		if self.state == 0 then -- first part
-			self:drawTexture(self.texture_r[math.floor(self.timer / (FactionsGUI.captureTime / 20))], 0, 0, self.alpha, 1,
-				1, 1);
-		elseif self.state == 1 then -- second part
-			self:drawTexture(self.texture_b[math.floor(self.timer / (FactionsGUI.captureTime / 20))], 0, 0, self.alpha, 1,
-				1, 1);
-		end
-	else
-		-- Change the color based in enemy or friendly
-		if self.team == nil then -- empty
-			self:drawTexture(self.freeTex, 0, 0, self.alpha, 1, 1, 1);
-		elseif self.team then -- friendly
-			self:drawTexture(self.blueTex, 0, 0, self.alpha, 1, 1, 1);
-		else               -- enemy
-			self:drawTexture(self.redTex, 0, 0, self.alpha, 1, 1, 1);
-		end
-	end
 end
 
 function Badge:onMouseMove(dx, dy) -- Overwrite moving
@@ -181,7 +131,8 @@ function FactionsGUI:update() -- UI every tick overwrite
 	if not self.player then
 		self.player = getPlayer();
 		-- Disable UI
-		FactionsMain.unloadUI();
+		UnloadUI()
+		return
 	end
 
 	-- Minimization check
@@ -194,17 +145,7 @@ function FactionsGUI:update() -- UI every tick overwrite
 		self:onMouseMove();
 	end
 
-	-- Limiter tick for updating
-	if self.timer > 0 then
-		local delta = getDeltaTimeInMillis(self.timestamp);
-		self.timer = self.timer - delta
-	else
-		self.timer = FactionsGUI.updateTime;
-		self:updateButtons();
-	end
-
-	-- Timestamp update
-	self.timestamp = getTimeInMillis()
+	self:updateButtons();
 end
 
 function FactionsGUI:updateButtons() -- Update dynamically the buttons based in self parameters
@@ -215,12 +156,11 @@ function FactionsGUI:updateButtons() -- Update dynamically the buttons based in 
 		return;
 	end
 
-	-- If player is not in a faction simple do nothing,
-	-- if someoneInside is nil is because hes doesnt have a faction
-	if not self.faction then
+	local faction = Faction.getPlayerFaction(getPlayer())
+	if not faction then
 		self.button:setEnable(false);
 		self.button:setTooltip(getText("UI_Text_SafehouseWithoutFaction"))
-		self.internal = "";
+		self.internal = "Capture";
 		return;
 	end
 
@@ -246,10 +186,11 @@ function FactionsGUI:updateButtons() -- Update dynamically the buttons based in 
 	end
 
 	-- Update the self someone inside
-	self.someoneInside = FactionsMain.isSomeoneInside(self.player:getSquare(), self.faction, self.floors);
+	self.someoneInside = IsSomeoneInside(self.player:getSquare(), self.faction, self.floors);
 
 	-- Get available points
-	local available = FactionsMain.Points - FactionsMain.getUsedPoints(self.player:getUsername());
+	local available = FactionsGUI.points -
+		GetFactionUsedPoints(GetPlayerFaction(self.player:getUsername()));
 	local pointsEnough = tonumber(available) >= tonumber(self.price);
 	-- Check if someone is inside and is enabled
 	if self.someoneInside then
@@ -333,14 +274,9 @@ function FactionsGUI:createChildren() -- Overwrite the children creation method
 	-- Update visibility based in the button data
 	self.button:setVisible(self.buttonVisible);
 
-	-- Getting the price of the house of the player standing house
-	if FactionsMain.building then
-		if instanceof(FactionsMain.building, "IsoBuilding") then
-			self.price = FactionsMain.getCost(FactionsMain.building:getDef());
-		elseif instanceof(FactionsMain.building, "SafeHouse") then
-			self.price = FactionsMain.getCost(FactionsMain.building, 4);
-		end
-	end
+	-- Getting the price of the house the player is standing
+	self.price = GetSafehouseCost(self.player:getBuilding());
+
 	-- If the price is lower than one, set to one
 	if self.price < 1 then
 		self.price = 1;
@@ -361,26 +297,27 @@ function FactionsGUI:createChildren() -- Overwrite the children creation method
 end
 
 function FactionsGUI.onButtonClick() -- On the button click
-	local internal = FactionsMain.GUI.internal;
+	local internal = FactionsGUI.internal;
 	if internal == "View" then       -- View the safehouse button
 		if safehouseUI then
 			safehouseUI:removeFromUIManager()
 		end
+
+		local safehouse = SafeHouse.getSafeHouse(getPlayer():getSquare());
 		safehouseUI = ISSafehouseUI:new(getCore():getScreenWidth() / 2 - 250, getCore():getScreenHeight() / 2 - 225, 500,
-			450, FactionsMain.GUI.safehouse, getPlayer());
+			450, safehouse, getPlayer());
 		safehouseUI:initialise()
 		safehouseUI:addToUIManager()
 	elseif internal == "Capture" then -- Capture the enemy safehouse button
-		FactionsGUI.finishedCapture = false;
-		-- Ask the server that you are trying to capture the safehouse
-		sendClientCommand("ServerFactions", "captureSafehouse", nil);
+		-- TODO
+		getPlayer():Say("TO DO")
 	elseif internal == "Capture_Empty" then -- Capture Residential button
 		-- IMPORTANT
-		-- You cannot do that on the server side, the b42mp patch handle this in clientside, maybe in the official releases it will be different
+		-- You cannot do that on the server side FOR SOME ABNORMOUS REASON
 		sendSafehouseClaim(getPlayer():getSquare(), getPlayer(), getPlayer():getUsername());
 
 		-- Ask the server if is valid capturing the safehouse
-		sendClientCommand("ServerFactions", "captureEmptySafehouse", nil);
+		sendClientCommand("Factions", "claimSafehouseResponse", nil);
 	end
 end
 
@@ -476,8 +413,8 @@ function FactionsGUI:new(titleText, factionText, buttonText, faction, team) -- I
 	local square = player:getSquare();
 	if o.faction then
 		o.owner = o.faction:getOwner();
-		o.floors = FactionsMain.getFloorCount(def)
-		o.someoneInside = FactionsMain.isSomeoneInside(square, o.faction, o.floors);
+		o.floors = GetFloorCount(player:getBuilding())
+		o.someoneInside = IsSomeoneInside(square, o.faction, o.floors);
 	end
 
 	-- Button default text
@@ -507,91 +444,25 @@ function FactionsGUI:startCapture() -- Start the capturing system
 	-- Add the sound for the player
 	getSoundManager():PlaySound("baseCaptureStart", false, 1.0)
 
-	-- Add the timer for the capture
-	self.badge.timer = FactionsGUI.captureTime;
-	self.badge.timestamp = getTimeInMillis()
 	self.badge.capture = true;
 end
 
 local function OnServerCommand(module, command, arguments)
-	--Starting Gui Capture Safehouse
-	if module == "ServerSafehouse" and command == "receiveCaptureConfirmation" then
-		if arguments.validation then
-			FactionsMain.GUI:startCapture();
-			getPlayer():Say(getText("UI_Text_SafehouseCapturing"))
-		else
-			-- SafehousePlus compatibility
-			if arguments.reason == "cheat" then
-				getPlayer():Say(getText("UI_Text_SafehouseCheat"))
-			elseif arguments.reason == "nopoints" then
-				getPlayer():Say(getText("UI_Text_SafehouseNoPoints"))
-			elseif arguments.reason == "nottime" then
-				getPlayer():Say(getText("UI_Text_SafehouseNotTimeCapture"))
-			elseif arguments.reason == "protected" then
-				getPlayer():Say(getText("UI_Text_SafehouseProtected"))
-			else
-				getPlayer():Say(getText("UI_Text_SafehouseNotTimeCapture"));
-			end
+	if module == "Factions" and command == "claimSafehouseResponse" then
+		local result = arguments[1]
+
+		if result == "Success" then
+			UnloadUI()
+		elseif result == "Not enough points" then
+			getPlayer():Say(getText("UI_Text_SafehouseNoPoints"))
+		elseif result == "Safehouse already claimed" then
+			getPlayer():Say(getText("UI_Text_SafehouseEmpty"))
 		end
-	end
-	-- Safehouse Captured Sync
-	if module == "ServerSafehouse" and command == "safehouseCaptured" then
-		-- Add the sound for the player that capture finish
-		getSoundManager():PlaySound("baseCaptureFinish", false, 1.0)
-	end
+	elseif module == "Factions" and command == "receivePoints" then
+		local result = arguments[1]
 
-	-- Changing safehouse owner
-	if module == "ServerSafehouse" and command == "safehouseCaptureFinish" then
-		local player = getPlayer();
-		local safehouseBeenCaptured = SafeHouse.getSafeHouse(arguments.X, arguments.Y, arguments.W, arguments.H);
-
-		if not safehouseBeenCaptured then return; end
-		local faction = FactionsMain.getFaction(player:getUsername());
-
-		-- Check if player has a faction
-		if faction == nil then
-			FactionsMain.unloadUI();
-			return;
-		end;
-
-		-- Check if player is in a safehouse
-		if safehouseBeenCaptured == nil then
-			FactionsMain.unloadUI();
-			return;
-		end
-
-		-- IMPORTANT
-		-- You cannot do this serverside, probably on the official release it will be different
-		safehouseBeenCaptured:setOwner(faction:getOwner());   -- Change owner to the faction owner
-		FactionsMain.safehouseRemoveMembers(safehouseBeenCaptured); -- Remove all users from safehouse
-		FactionsMain.syncFactionMembers(safehouseBeenCaptured); -- Sync faction members to the safehouse
-
-		-- Update UI
-		FactionsMain.unloadUI();
-	end
-
-	-- Sync faction members
-	if module == "ServerSafehouse" and command == "syncCapturedSafehouse" then
-		local safehouse = SafeHouse.getSafeHouse(arguments.safehouseId);
-		if safehouse then
-			FactionsMain.syncFactionMembers(safehouse);
-		end
-
-		-- Reload UI
-		FactionsMain.unloadUI()
-	end
-
-	-- Update client safehouse owner
-	if module == "ServerSafehouse" and command == "syncCapturedOwnerSafehouse" then
-		local safehouse = SafeHouse.getSafeHouse(arguments.safehouseId);
-		if safehouse then
-			safehouse:setOwner(arguments.owner);
-
-			getSoundManager():PlaySound("baseCaptureFinish", false, 1.0);
-		end
-
-		-- Reload UI
-		FactionsMain.unloadUI()
+		FactionsGUI.points = result
 	end
 end
+
 Events.OnServerCommand.Add(OnServerCommand)

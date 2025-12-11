@@ -92,7 +92,12 @@
         "getServerSpawnRegions",
         "IsoFlagType",
         "ISLayoutManager",
-        "getTimeInMillis"
+        "getTimeInMillis",
+        "Safehouse",
+        "ISSafehouseUI",
+        "sendSafehouseClaim",
+        "ISMouseDrag",
+        "getTextOrNull"
     ],
     "Lua.diagnostics.disable": [
         "deprecated",
