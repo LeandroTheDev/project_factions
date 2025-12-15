@@ -1,3 +1,5 @@
+if isClient() or not FactionsIsSinglePlayer then return end;
+
 FactionsEconomyLootBoxRecipe = FactionsEconomyLootBoxRecipe or {};
 
 FactionsEconomyLootBoxRecipe.OpenLootBox = function(craftRecipeData, player)

@@ -1,3 +1,5 @@
+if isClient() or not FactionsIsSinglePlayer then return end;
+
 --#region Client Requests
 
 local function claimSafehouse(module, command, player, args)

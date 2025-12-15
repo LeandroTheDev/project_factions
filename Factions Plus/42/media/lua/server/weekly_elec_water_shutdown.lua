@@ -1,3 +1,4 @@
+if isClient() or not FactionsIsSinglePlayer then return end;
 if not getSandboxOptions():getOptionByName("FactionsPlus.EnableWaterLightCycle"):getValue() then return end;
 
 local function getCurrentTime(timezone, timestamp)

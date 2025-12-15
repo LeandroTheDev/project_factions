@@ -1,3 +1,5 @@
+if isClient() or not FactionsIsSinglePlayer then return end;
+
 ShopItems = {};
 
 local function LoadShopItems()

@@ -1,3 +1,5 @@
+if isClient() or not FactionsIsSinglePlayer then return end;
+
 FactionsEconomyCurrencyData = {};
 FactionsEconomyCurrencyRecipe = FactionsEconomyCurrencyRecipe or {};
 local currencyPertick = getSandboxOptions():getOptionByName("FactionsEconomy.CurrencyPerTick"):getValue();

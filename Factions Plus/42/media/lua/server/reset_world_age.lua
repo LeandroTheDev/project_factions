@@ -1,3 +1,4 @@
+if isClient() or not FactionsIsSinglePlayer then return end;
 if not getSandboxOptions():getOptionByName("FactionsPlus.EnableCalendarReset"):getValue() then return end
 
 Events.EveryDays.Add(function()

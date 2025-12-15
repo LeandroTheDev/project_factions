@@ -1,3 +1,4 @@
+if isClient() or not FactionsIsSinglePlayer then return end;
 if not getSandboxOptions():getOptionByName("SafehousePlus.EnableRespawnMechanic"):getValue() then return end
 
 local RespawnData = {};

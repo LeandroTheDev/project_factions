@@ -1,3 +1,5 @@
+if isClient() or not FactionsIsSinglePlayer then return end;
+
 -- {
 --      "FactionName1": {
 --          "points": 123,
