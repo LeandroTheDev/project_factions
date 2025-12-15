@@ -89,7 +89,7 @@ end
 
 -- Set the player respawn based on the Menu Regions from map selector
 local function setRespawnRegion(player, region)
-    local spawn = region.points[player:getDescriptor():getProfession()];
+    local spawn = region.points[player:getDescriptor():getCharacterProfession()];
     if (not spawn) then spawn = region.points["unemployed"] end
 
     if (spawn) then
@@ -178,11 +178,14 @@ local function savePlayerBooks(player)
 
     -- For each item check if is a literature item and the player readed it
     for i = 0, items:size() - 1 do
-        if (items:get(i):getTypeString() == "Literature") then
-            local item = items:get(i):InstanceItem(items:get(i):getName());
-            if (item ~= nil and item:IsLiterature() and item:getNumberOfPages() > 0) then
-                RespawnData[getUniqueId(player)].SkillBooks[item:getFullType()] = player:getAlreadyReadPages(item
-                    :getFullType());
+        local itemData = items:get(i)
+        if itemData then
+            if itemData:getTypeString() == "Literature" then
+                local item = itemData:InstanceItem(itemData:getName());
+                if (item ~= nil and item:IsLiterature() and item:getNumberOfPages() > 0) then
+                    RespawnData[getUniqueId(player)].SkillBooks[item:getFullType()] = player:getAlreadyReadPages(item
+                        :getFullType());
+                end
             end
         end
     end
@@ -426,8 +429,10 @@ local function loadPlayerMultipliers(player)
 end
 
 local function loadPlayerRecipes(player)
-    for i = 0, RespawnData[getUniqueId(player)].Recipes:size() - 1 do
-        player:learnRecipe(RespawnData[getUniqueId(player)].Recipes:get(i));
+    if RespawnData[getUniqueId(player)].Recipes then
+        for i = 0, RespawnData[getUniqueId(player)].Recipes:size() - 1 do
+            player:learnRecipe(RespawnData[getUniqueId(player)].Recipes:get(i));
+        end
     end
 end
 
