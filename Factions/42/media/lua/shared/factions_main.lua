@@ -223,8 +223,7 @@ function IsSomeoneInside(square, faction, level)
 						if _square then
 							for i = 0, _square:getMovingObjects():size() - 1 do
 								local o = _square:getMovingObjects():get(i);
-
-								if not o:getSquare():getProperties():Is(IsoFlagType.exterior) and o:getBuilding() then
+								if not o:getSquare():getProperties():has(IsoFlagType.exterior) and o:getBuilding() then
 									if instanceof(o, "IsoPlayer") then
 										local member = false;
 
