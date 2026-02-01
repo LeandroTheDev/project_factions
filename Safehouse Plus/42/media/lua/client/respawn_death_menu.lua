@@ -142,6 +142,8 @@ function CoopMapSpawnSelect:clickNext(...)
     end
 
     if SafehousePlusIsSinglePlayer then
+        DebugPrintSafehousePlus("Loading player...");
+
         -- Load player data
         LoadPlayer(getPlayer());
         SetHealth(getPlayer(), getSandboxOptions():getOptionByName("SafehousePlus.HealthOnRespawn"):getValue());
@@ -154,6 +156,20 @@ function CoopMapSpawnSelect:clickNext(...)
         -- Save player respawn location
         SetPlayerRespawn(getPlayer());
     else
+        local function receiveRespawnStats(module, command, arguments)
+            if module == "SafehousePlusRespawn" and command == "receiveRespawnStats" then
+                Events.OnServerCommand.Remove(receiveRespawnStats);
+
+                if not arguments then
+                    return;
+                end
+
+                UnsafeLocallyUpdate(arguments);
+            end
+        end
+        Events.OnServerCommand.Add(receiveRespawnStats);
+
+        DebugPrintSafehousePlus("Request player load...");
         sendClientCommand("SafehousePlusRespawn", "loadPlayer", nil);
         -- triggerEvent("OnClothingUpdated", getPlayer());
     end

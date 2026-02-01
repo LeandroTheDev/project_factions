@@ -1,4 +1,4 @@
-if isClient() or not FactionsIsSinglePlayer then return end;
+if isClient() and not FactionsIsSinglePlayer then return end;
 
 ShopItems = {};
 

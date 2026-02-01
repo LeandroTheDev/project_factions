@@ -1,4 +1,4 @@
-if isClient() or not FactionsIsSinglePlayer then return end;
+if isClient() and not FactionsIsSinglePlayer then return end;
 if not getSandboxOptions():getOptionByName("FactionsPlus.DisablePlantRotten"):getValue() then return end
 
 function SPlantGlobalObject:rottenThis()

@@ -1,4 +1,3 @@
-if isClient() or not FactionsIsSinglePlayer then return end;
 if not getSandboxOptions():getOptionByName("SafehousePlus.EnableRespawnMechanic"):getValue() then return end
 
 local RespawnData = {};
@@ -174,21 +173,22 @@ local function savePlayerBoosts(player)
 end
 
 local function savePlayerBooks(player)
-    RespawnData[getUniqueId(player)].SkillBooks = {};
-    local items = getAllItems(); -- Get all loaded items in the game
+    local id = getUniqueId(player)
+    RespawnData[id].SkillBooks = {}
 
-    -- For each item check if is a literature item and the player readed it
-    for i = 0, items:size() - 1 do
-        local itemData = items:get(i)
-        if itemData then
-            if itemData:getTypeString() == "Literature" then
-                local item = itemData:InstanceItem(itemData:getName());
-                if (item ~= nil and item:IsLiterature() and item:getNumberOfPages() > 0) then
-                    RespawnData[getUniqueId(player)].SkillBooks[item:getFullType()] = player:getAlreadyReadPages(item
-                        :getFullType());
-                end
-            end
-        end
+    local literatures = player:getReadLiterature()
+    if not literatures then return end
+
+    if literatures:isEmpty() then return end
+
+    local iterator = literatures:entrySet():iterator()
+
+    while iterator:hasNext() do
+        local entry = iterator:next()
+        local fullType = entry:getKey()
+        local pages = entry:getValue():intValue()
+
+        RespawnData[id].SkillBooks[fullType] = pages
     end
 end
 
@@ -296,18 +296,31 @@ local function savePlayerFitness(player)
 end
 
 local function savePlayerStats(player)
+    local playerStatus = player:getStats();
+
     RespawnData[getUniqueId(player)].Stats = {};
-    RespawnData[getUniqueId(player)].Stats.Anger = player:getStats():getAnger();
-    RespawnData[getUniqueId(player)].Stats.Boredom = player:getStats():getBoredom();
-    RespawnData[getUniqueId(player)].Stats.Morale = player:getStats():getMorale();
-    RespawnData[getUniqueId(player)].Stats.Fatigue = player:getStats():getFatigue();
-    RespawnData[getUniqueId(player)].Stats.Fitness = player:getStats():getFitness();
-    RespawnData[getUniqueId(player)].Stats.Stress = player:getStats():getStress();
-    RespawnData[getUniqueId(player)].Stats.StressFromCigarettes = player:getStats():getStressFromCigarettes();
-    RespawnData[getUniqueId(player)].Stats.Fear = player:getStats():getFear();
-    RespawnData[getUniqueId(player)].Stats.Panic = player:getStats():getPanic();
-    RespawnData[getUniqueId(player)].Stats.Sanity = player:getStats():getSanity();
-    RespawnData[getUniqueId(player)].Stats.Drunkenness = player:getStats():getDrunkenness();
+    RespawnData[getUniqueId(player)].Stats.ANGER = playerStatus:get(CharacterStat.ANGER);
+    RespawnData[getUniqueId(player)].Stats.BOREDOM = playerStatus:get(CharacterStat.BOREDOM);
+    RespawnData[getUniqueId(player)].Stats.DISCOMFORT = playerStatus:get(CharacterStat.DISCOMFORT);
+    RespawnData[getUniqueId(player)].Stats.ENDURANCE = playerStatus:get(CharacterStat.ENDURANCE);
+    RespawnData[getUniqueId(player)].Stats.FATIGUE = playerStatus:get(CharacterStat.FATIGUE);
+    RespawnData[getUniqueId(player)].Stats.FITNESS = playerStatus:get(CharacterStat.FITNESS);
+    -- RespawnData[getUniqueId(player)].Stats.FOOD_SICKNESS = playerStatus:get(CharacterStat.FOOD_SICKNESS);
+    RespawnData[getUniqueId(player)].Stats.HUNGER = playerStatus:get(CharacterStat.HUNGER);
+    RespawnData[getUniqueId(player)].Stats.IDLENESS = playerStatus:get(CharacterStat.IDLENESS);
+    -- RespawnData[getUniqueId(player)].Stats.INTOXICATION = playerStatus:get(CharacterStat.INTOXICATION);
+    RespawnData[getUniqueId(player)].Stats.MORALE = playerStatus:get(CharacterStat.MORALE);
+    -- RespawnData[getUniqueId(player)].Stats.NICOTINE_WITHDRAWAL = playerStatus:get(CharacterStat.NICOTINE_WITHDRAWAL);
+    RespawnData[getUniqueId(player)].Stats.PAIN = playerStatus:get(CharacterStat.PAIN);
+    RespawnData[getUniqueId(player)].Stats.PANIC = playerStatus:get(CharacterStat.PANIC);
+    -- RespawnData[getUniqueId(player)].Stats.POISON = playerStatus:get(CharacterStat.POISON);
+    RespawnData[getUniqueId(player)].Stats.SANITY = playerStatus:get(CharacterStat.SANITY);
+    -- RespawnData[getUniqueId(player)].Stats.SICKNESS = playerStatus:get(CharacterStat.SICKNESS);s
+    RespawnData[getUniqueId(player)].Stats.STRESS = playerStatus:get(CharacterStat.STRESS);
+    RespawnData[getUniqueId(player)].Stats.TEMPERATURE = playerStatus:get(CharacterStat.TEMPERATURE);
+    RespawnData[getUniqueId(player)].Stats.THIRST = playerStatus:get(CharacterStat.THIRST);
+    RespawnData[getUniqueId(player)].Stats.UNHAPPINESS = playerStatus:get(CharacterStat.UNHAPPINESS);
+    -- RespawnData[getUniqueId(player)].Stats.WETNESS = playerStatus:get(CharacterStat.WETNESS);
 end
 
 local function savePlayerFavoriteRecipes(player)
@@ -331,6 +344,8 @@ local function savePlayer(player)
 
         savePlayerInventory(player);
         DebugPrintSafehousePlus("[Respawn] Inventoy items saved: " .. player:getUsername());
+
+        clearInventory(player);
     end
 
     saveRespawnBaseLocation(player);
@@ -350,8 +365,8 @@ local function savePlayer(player)
 
     savePlayerFavoriteRecipes(player);
 
-    RespawnData[getUniqueId(player)].Traits = player:getTraits();
-    RespawnData[getUniqueId(player)].Profession = player:getDescriptor():getProfession();
+    RespawnData[getUniqueId(player)].Traits = player:getCharacterTraits():getTraits();
+    RespawnData[getUniqueId(player)].Profession = player:getDescriptor():getCharacterProfession();
     RespawnData[getUniqueId(player)].Recipes = player:getKnownRecipes();
     RespawnData[getUniqueId(player)].ZombieKills = player:getZombieKills();
     RespawnData[getUniqueId(player)].SurvivorKills = player:getSurvivorKills();
@@ -360,26 +375,6 @@ local function savePlayer(player)
 
     DebugPrintSafehousePlus("[Respawn] Player Saved");
 end
-
--- On death we need to save player data
-Events.OnCharacterDeath.Add(function(player)
-    if (not instanceof(player, "IsoPlayer")) then return end
-
-    DebugPrintSafehousePlus("[Respawn] Saving iso player: " .. player:getUsername());
-
-    -- Save player data
-    savePlayer(player);
-
-    -- Clear inventory for our and other players if keep inventory is true
-    if getSandboxOptions():getOptionByName("SafehousePlus.KeepInventory"):getValue() then
-        clearInventory(player);
-        DebugPrintSafehousePlus("[Respawn] Dead body cleared: " .. player:getUsername());
-
-        -- Tell client the corpse is dead
-        player:setOnDeathDone(true);
-    end
-end);
-
 --#endregion
 
 --#region Load Player
@@ -393,27 +388,27 @@ local function loadPlayerLevels(player)
             perkLevel = perkLevel - 1;
         end
 
-        player:getXp():setXPToLevel(perk, 0);
+        player:getXp():setXPToLevel(perk, level);
         player:getXp():AddXP(perk, RespawnData[getUniqueId(player)].Xp[perk], true, false, false);
     end
 end
 
 local function loadPlayerBoosts(player)
-    local prof = ProfessionFactory.getProfession(RespawnData[getUniqueId(player)].Profession);
-
+    local prof =
+        CharacterProfessionDefinition.getCharacterProfessionDefinition(RespawnData[getUniqueId(player)].Profession);
     for perk, boost in pairs(RespawnData[getUniqueId(player)].Boosts or {}) do
         prof:addXPBoost(perk, boost);
     end
 
     player:getDescriptor():setProfessionSkills(prof);
-    player:getDescriptor():setProfession(RespawnData[getUniqueId(player)].Profession);
+    player:getDescriptor():setCharacterProfession(RespawnData[getUniqueId(player)].Profession);
 end
 
 local function loadPlayerTraits(player)
-    player:getTraits():clear();
+    player:getCharacterTraits():getTraits():clear();
 
     for i = 0, RespawnData[getUniqueId(player)].Traits:size() - 1 do
-        player:getTraits():add(RespawnData[getUniqueId(player)].Traits:get(i));
+        player:getCharacterTraits():getTraits():add(RespawnData[getUniqueId(player)].Traits:get(i));
     end
 end
 
@@ -538,17 +533,30 @@ local function loadPlayerFitness(player)
 end
 
 local function loadPlayerStats(player)
-    player:getStats():setAnger(RespawnData[getUniqueId(player)].Stats.Anger);
-    player:getStats():setBoredom(RespawnData[getUniqueId(player)].Stats.Boredom);
-    player:getStats():setMorale(RespawnData[getUniqueId(player)].Stats.Morale);
-    player:getStats():setFatigue(RespawnData[getUniqueId(player)].Stats.Fatigue);
-    player:getStats():setFitness(RespawnData[getUniqueId(player)].Stats.Fitness);
-    player:getStats():setStress(RespawnData[getUniqueId(player)].Stats.Stress);
-    player:getStats():setStressFromCigarettes(RespawnData[getUniqueId(player)].Stats.StressFromCigarettes);
-    player:getStats():setFear(RespawnData[getUniqueId(player)].Stats.Fear);
-    player:getStats():setPanic(RespawnData[getUniqueId(player)].Stats.Panic);
-    player:getStats():setSanity(RespawnData[getUniqueId(player)].Stats.Sanity);
-    player:getStats():setDrunkenness(RespawnData[getUniqueId(player)].Stats.Drunkenness);
+    local playerStatus = player:getStats();
+
+    playerStatus:set(CharacterStat.ANGER, RespawnData[getUniqueId(player)].Stats.ANGER or 0.0);
+    playerStatus:set(CharacterStat.BOREDOM, RespawnData[getUniqueId(player)].Stats.BOREDOM or 0.0);
+    playerStatus:set(CharacterStat.DISCOMFORT, RespawnData[getUniqueId(player)].Stats.DISCOMFORT or 0.0);
+    playerStatus:set(CharacterStat.ENDURANCE, RespawnData[getUniqueId(player)].Stats.ENDURANCE or 0.0);
+    playerStatus:set(CharacterStat.FATIGUE, RespawnData[getUniqueId(player)].Stats.FATIGUE or 0.0);
+    playerStatus:set(CharacterStat.FITNESS, RespawnData[getUniqueId(player)].Stats.FITNESS or 0.0);
+    -- playerStatus:set(CharacterStat.FOOD_SICKNESS, RespawnData[getUniqueId(player)].Stats.FOOD_SICKNESS or 0.0);
+    playerStatus:set(CharacterStat.HUNGER, RespawnData[getUniqueId(player)].Stats.HUNGER or 0.0);
+    playerStatus:set(CharacterStat.IDLENESS, RespawnData[getUniqueId(player)].Stats.IDLENESS or 0.0);
+    -- playerStatus:set(CharacterStat.INTOXICATION, RespawnData[getUniqueId(player)].Stats.INTOXICATION or 0.0);
+    playerStatus:set(CharacterStat.MORALE, RespawnData[getUniqueId(player)].Stats.MORALE or 0.0);
+    -- playerStatus:set(CharacterStat.NICOTINE_WITHDRAWAL, RespawnData[getUniqueId(player)].Stats.NICOTINE_WITHDRAWAL or 0.0);
+    playerStatus:set(CharacterStat.PAIN, RespawnData[getUniqueId(player)].Stats.PAIN or 0.0);
+    playerStatus:set(CharacterStat.PANIC, RespawnData[getUniqueId(player)].Stats.PANIC or 0.0);
+    -- playerStatus:set(CharacterStat.POISON, RespawnData[getUniqueId(player)].Stats.POISON or 0.0);
+    playerStatus:set(CharacterStat.SANITY, RespawnData[getUniqueId(player)].Stats.SANITY or 0.0);
+    -- playerStatus:set(CharacterStat.SICKNESS, RespawnData[getUniqueId(player)].Stats.SICKNESS or 0.0);s
+    playerStatus:set(CharacterStat.STRESS, RespawnData[getUniqueId(player)].Stats.STRESS or 0.0);
+    playerStatus:set(CharacterStat.TEMPERATURE, RespawnData[getUniqueId(player)].Stats.TEMPERATURE or 0.0);
+    playerStatus:set(CharacterStat.THIRST, RespawnData[getUniqueId(player)].Stats.THIRST or 0.0);
+    playerStatus:set(CharacterStat.UNHAPPINESS, RespawnData[getUniqueId(player)].Stats.UNHAPPINESS or 0.0);
+    -- playerStatus:set(CharacterStat.WETNESS, RespawnData[getUniqueId(player)].Stats.WETNESS or 0.0);
 end
 
 local function loadPlayer(player)
@@ -557,6 +565,9 @@ local function loadPlayer(player)
     if getSandboxOptions():getOptionByName("SafehousePlus.KeepInventory"):getValue() then
         loadPlayerInventory(player);
     end
+
+    -- Requires to be done on client side too
+    sendServerCommand(player, "SafehousePlusRespawn", "receiveRespawnStats", RespawnData[getUniqueId(player)]);
 
     loadPlayerLevels(player);
     loadPlayerBooks(player);
@@ -586,6 +597,23 @@ end
 --#endregion
 
 --#region Server Communication
+
+-- On death we need to save player data
+Events.OnCharacterDeath.Add(function(player)
+    DebugPrintSafehousePlus("[Respawn] Saving iso player: " .. player:getUsername());
+
+    -- Save player data
+    savePlayer(player);
+
+    -- Clear inventory for our and other players if keep inventory is true
+    if getSandboxOptions():getOptionByName("SafehousePlus.KeepInventory"):getValue() then
+        clearInventory(player);
+        DebugPrintSafehousePlus("[Respawn] Dead body cleared: " .. player:getUsername());
+
+        -- Tell client the corpse is dead
+        player:setOnDeathDone(true);
+    end
+end);
 
 -- Create a global function to load from clientside
 if SafehousePlusIsSinglePlayer then
@@ -617,11 +645,30 @@ if SafehousePlusIsSinglePlayer then
         return getPlayerRespawn(player);
     end
 else -- If not create a server command
+    -- For some reason some stats requires to be updated on client side
+    -- call this only in client side
+    function UnsafeLocallyUpdate(playerData)
+        DebugPrintSafehousePlus("Data received!");
+        local player = getPlayer();
+        RespawnData[getUniqueId(player)] = playerData;
+        loadPlayerLevels(player);
+        loadPlayerBooks(player);
+        loadPlayerMultipliers(player);
+        loadPlayerRecipes(player);
+        loadPlayerFavoriteRecipes(player);
+        loadPlayerMedia(player);
+        loadPlayerNutrition(player);
+        loadPlayerFitness(player);
+        DebugPrintSafehousePlus("All necessary loades finished!");
+    end
+
     Events.OnClientCommand.Add(function(module, command, player, args)
         if module == "SafehousePlusRespawn" and command == "setRespawnRegion" then
             removePlayerRespawn(player);
             setRespawnRegion(player, args.region);
         elseif module == "SafehousePlusRespawn" and command == "loadPlayer" then
+            DebugPrintSafehousePlus("Player requested load: " .. player:getUsername());
+
             loadPlayer(player);
 
             setHealth(player, getSandboxOptions():getOptionByName("SafehousePlus.HealthOnRespawn"):getValue());
@@ -633,7 +680,6 @@ else -- If not create a server command
             sendHumanVisual(player);
             sendEquip(player);
             syncVisuals(player);
-            player:update();
         elseif module == "SafehousePlusRespawn" and command == "getRespawn" then
             local coords = getPlayerRespawn(player);
             sendServerCommand(player, "SafehousePlusRespawn", "receiveRespawn", coords);

@@ -72,7 +72,6 @@ External very useful mods to make the factions better
 - [Random Airdrops 2](https://github.com/LeandroTheDev/random_airdrops_2), add random airdrops to the server
 - [RA Smoke Flares](https://github.com/LeandroTheDev/ra_smoke_flares), add smoke flares to call any airdrop
 - [Random Hordes](https://github.com/LeandroTheDev/random_hordes), add random hordes to the server
-- [No Pain No Gain](https://github.com/LeandroTheDev/random_hordes), better fitness and strength xp earn
 - [Factions Weapons - TODO](https://github.com/LeandroTheDev/factions_weapons), overhaul the weapons to make it more immersive and fun to play with
 - [Factions Clothes - TODO](), add a set of military and factions friendly clothes to give more options for factions teams
 

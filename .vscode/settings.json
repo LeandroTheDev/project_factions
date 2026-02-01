@@ -97,7 +97,9 @@
         "ISSafehouseUI",
         "sendSafehouseClaim",
         "ISMouseDrag",
-        "getTextOrNull"
+        "getTextOrNull",
+        "CharacterStat",
+        "CharacterProfessionDefinition"
     ],
     "Lua.diagnostics.disable": [
         "deprecated",
